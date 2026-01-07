@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+title: Certifications - Marwan Ayman Shawky
+description: AWS, Linux Foundation, and Huawei cloud certifications
+---
+
+<div class="container">
+  <section class="section">
+    <p style="margin-bottom: 3rem;">
+      <a href="/">← Back</a>
+    </p>
+    
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Certifications</h2>
+    
+    <div>
+      {% for cert in certifications %}
+      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {% if not loop.last %}border-bottom: 1px solid var(--color-border);{% endif %}">
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">{{ cert.title }}</h3>
+        
+        <p style="color: var(--color-text-secondary); margin-bottom: 0.5rem;">{{ cert.issuer }}</p>
+        
+        <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 0;">
+          Issued: {{ cert.date }}
+          {% if cert.expiryDate %}
+          · Expires: {{ cert.expiryDate }}
+          {% endif %}
+          {% if cert.credentialId %}
+          <br>Credential ID: {{ cert.credentialId }}
+          {% endif %}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>

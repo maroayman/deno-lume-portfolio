@@ -1,0 +1,55 @@
+[
+    {
+        "category": "Cloud Platforms",
+        "skills": [
+            "AWS",
+            "Azure",
+            "GCP",
+            "Huawei Cloud"
+        ]
+    },
+    {
+        "category": "DevOps & CI/CD",
+        "skills": [
+            "Docker",
+            "Kubernetes",
+            "Jenkins",
+            "GitHub Actions",
+            "ArgoCD"
+        ]
+    },
+    {
+        "category": "Infrastructure as Code",
+        "skills": [
+            "Terraform",
+            "Ansible",
+            "Helm"
+        ]
+    },
+    {
+        "category": "Programming",
+        "skills": [
+            "Python",
+            "Go",
+            "Java",
+            "Bash"
+        ]
+    },
+    {
+        "category": "Databases",
+        "skills": [
+            "MySQL",
+            "MariaDB",
+            "SQLite",
+            "SQL Server"
+        ]
+    },
+    {
+        "category": "Monitoring & Observability",
+        "skills": [
+            "Prometheus",
+            "Grafana",
+            "ELK Stack"
+        ]
+    }
+]

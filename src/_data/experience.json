@@ -1,0 +1,45 @@
+[
+    {
+        "title": "DevOps Trainee",
+        "company": "Digital Egypt Pioneers Initiative",
+        "companyUrl": "https://depi.gov.eg",
+        "location": "Cairo, Egypt",
+        "period": "Jun 2025 – Dec 2025",
+        "description": "Undergoing structured training in DevOps, cloud computing, and Linux administration.",
+        "responsibilities": [
+            "Designing and implementing CI/CD pipelines with Jenkins and GitHub Actions",
+            "Managing Kubernetes clusters for container orchestration",
+            "Automating infrastructure provisioning using Terraform",
+            "Configuring and maintaining Linux servers"
+        ],
+        "tags": [
+            "Linux",
+            "Kubernetes",
+            "Terraform",
+            "Ansible",
+            "Docker",
+            "Jenkins"
+        ]
+    },
+    {
+        "title": "DevOps Intern",
+        "company": "Ghaymah Cloud Solutions",
+        "companyUrl": "https://ghaymah.systems",
+        "location": "Remote, Saudi Arabia",
+        "period": "Sep 2025 – Oct 2025",
+        "description": "Working on cloud automation, CI/CD pipelines, and infrastructure provisioning.",
+        "responsibilities": [
+            "Building and maintaining CI/CD pipelines for automated deployments",
+            "Containerizing applications using Docker",
+            "Automating cloud infrastructure provisioning",
+            "Integrating APIs for cloud service automation"
+        ],
+        "tags": [
+            "Docker",
+            "CI/CD",
+            "Cloud Automation",
+            "API",
+            "Cloud Deployment"
+        ]
+    }
+]

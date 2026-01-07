@@ -1,0 +1,56 @@
+---
+layout: layouts/base.njk
+title: Experience - Marwan Ayman Shawky
+description: DevOps training and internships focused on cloud automation
+---
+
+<div class="container">
+  <section class="section">
+    <p style="margin-bottom: 3rem;">
+      <a href="/">← Back</a>
+    </p>
+    
+    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Experience</h2>
+    
+    <div>
+      {% for job in experience %}
+      <div style="margin-bottom: 3rem; padding-bottom: 3rem; {% if not loop.last %}border-bottom: 1px solid #e0e0e0;{% endif %}">
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">{{ job.title }}</h3>
+        
+        <p style="margin-bottom: 0.5rem;">
+          <a href="{{ job.companyUrl }}" target="_blank" rel="noopener noreferrer">{{ job.company }}</a>
+        </p>
+        
+        <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">
+          {{ job.period }} · {{ job.location }}
+        </p>
+        
+        <p style="margin-bottom: 1.5rem;">{{ job.description }}</p>
+        
+        {% if job.responsibilities %}
+        <p style="font-weight: 600; margin-bottom: 0.75rem;">Key Responsibilities:</p>
+        <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+          {% for responsibility in job.responsibilities %}
+          <li style="margin-bottom: 0.5rem; color: var(--color-text-secondary);">{{ responsibility }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          {% for tag in job.tags %}
+          <span style="font-size: 0.875rem; color: var(--color-text-secondary);">{{ tag }}</span>{% if not loop.last %}<span style="color: var(--color-text-secondary);">·</span>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<style>
+  @media (prefers-color-scheme: dark) {
+    div[style*="border-bottom"] {
+      border-bottom-color: #333333 !important;
+    }
+  }
+</style>

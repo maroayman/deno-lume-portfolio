@@ -1,0 +1,10 @@
+{
+    "buildCommand": "deno task build",
+    "outputDirectory": "dist",
+    "installCommand": "curl -fsSL https://deno.land/install.sh | sh",
+    "devCommand": "deno task serve",
+    "framework": null,
+    "regions": [
+        "iad1"
+    ]
+}
