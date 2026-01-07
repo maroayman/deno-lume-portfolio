@@ -1,3 +1,29 @@
+/* View Transitions for smooth page navigation */
+@view-transition {
+  navigation: auto;
+}
+
+/* Customize transition animations */
+::view-transition-old(root) {
+  animation: fade-out 0.2s ease-out;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.2s ease-in;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 :root {
   /* Light Mode (Default) - Lighter colors */
   --color-text: #1a1a1a;
