@@ -20,5 +20,6 @@ site.use(minifyHTML());
 site.copy("assets");
 site.copy("public", ".");
 site.copy([".pdf"]);
+site.copy("sw.js");
 
 export default site;
