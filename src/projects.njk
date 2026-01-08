@@ -12,12 +12,9 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
     
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Projects</h2>
     
-    <!-- Personal Projects -->
-    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--color-text-secondary);">Personal</h3>
-    
-    <div style="margin-bottom: 3rem;">
-      {% for project in projects.personal %}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--color-border);">
+    <div>
+      {% for project in projects %}
+      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {% if not loop.last %}border-bottom: 1px solid var(--color-border);{% endif %}">
         <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
           {% if project.link %}
           <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
@@ -48,37 +45,6 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
       </div>
       {% endfor %}
     </div>
-    
-    <!-- Academic Projects -->
-    {% if projects.academic.length > 0 %}
-    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--color-text-secondary);">Academic</h3>
-    
-    <div>
-      {% for project in projects.academic %}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {% if not loop.last %}border-bottom: 1px solid var(--color-border);{% endif %}">
-        <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
-          {% if project.link %}
-          <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
-          {% else %}
-          {{ project.title }}
-          {% endif %}
-        </h4>
-        
-        <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
-          {{ project.role }} · {{ project.period }}
-        </p>
-        
-        <p style="margin-bottom: 1rem;">{{ project.summary }}</p>
-        
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-          {% for tech in project.tech %}
-          <span style="font-size: 0.875rem; color: var(--color-text-secondary);">{{ tech }}</span>{% if not loop.last %}<span style="color: var(--color-text-secondary);">·</span>{% endif %}
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
   </section>
 </div>
 

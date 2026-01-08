@@ -1,146 +1,175 @@
-{
-    "personal": [
-        {
-            "title": "3-Tier GitOps App on EKS",
-            "slug": "gitops-eks",
-            "summary": "A complete 3-tier notes application with GitOps CI/CD pipeline using GitHub Actions, Terraform, Ansible, Helm, and ArgoCD on AWS EKS",
-            "description": "A complete 3-tier notes application with GitOps CI/CD pipeline using GitHub Actions, Terraform, Ansible, Helm, and ArgoCD on AWS EKS.",
-            "tech": [
-                "GitHub Actions",
-                "Terraform",
-                "Ansible",
-                "Helm",
-                "ArgoCD",
-                "AWS EKS",
-                "Kubernetes"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "highlights": [
-                "Complete GitOps workflow with 4 separate pipelines",
-                "Infrastructure as Code with Terraform for EKS cluster provisioning",
-                "ArgoCD for continuous deployment and GitOps monitoring",
-                "3-tier architecture: Nginx reverse proxy, Flask API, MySQL database"
-            ],
-            "link": "https://github.com/maroayman/depi-notes-app-gitops"
-        },
-        {
-            "title": "Highly Available AWS Infrastructure",
-            "slug": "aws-ha-infrastructure",
-            "summary": "A highly available, scalable web application infrastructure on AWS with ALB, Auto Scaling Group, and secure multi-AZ network architecture",
-            "description": "A highly available, scalable web application infrastructure on AWS with ALB, Auto Scaling Group, and secure multi-AZ network architecture.",
-            "tech": [
-                "AWS",
-                "Terraform",
-                "ALB",
-                "Auto Scaling",
-                "VPC",
-                "EC2"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "highlights": [
-                "Multi-AZ deployment across us-east-1a and us-east-1b",
-                "Application Load Balancer with health checks",
-                "Auto Scaling Group (1-3 instances) based on demand",
-                "Secure bastion host for SSH access to private instances"
-            ],
-            "link": "https://github.com/maroayman/depi-project-5"
-        },
-        {
-            "title": "Terraform EC2 Monitoring Stack",
-            "slug": "terraform-monitoring",
-            "summary": "A production-ready Terraform project that automates the deployment of secure EC2 instances on AWS with real-time monitoring",
-            "description": "A production-ready Terraform project that automates the deployment of secure EC2 instances on AWS with real-time monitoring.",
-            "tech": [
-                "Terraform",
-                "AWS EC2",
-                "Monitoring",
-                "SSH"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "link": "https://github.com/maroayman/depi-project-4"
-        },
-        {
-            "title": "Dockerized Flask Production Stack",
-            "slug": "dockerized-flask",
-            "summary": "A complete end-to-end web application deployed on AWS EC2 with production-ready features and monitoring",
-            "description": "A complete end-to-end web application deployed on AWS EC2 with production-ready features and monitoring.",
-            "tech": [
-                "Docker",
-                "Flask",
-                "Nginx",
-                "MySQL",
-                "SQLAlchemy",
-                "AWS EC2"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "link": "https://github.com/maroayman/depi-project-3"
-        },
-        {
-            "title": "Ansible-Managed Go Web App",
-            "slug": "ansible-go-app",
-            "summary": "A Go-based web application for note management with Ansible automation and scheduled tasks",
-            "description": "A Go-based web application for note management with Ansible automation and scheduled tasks.",
-            "tech": [
-                "Go",
-                "Ansible",
-                "SQLite",
-                "Cron"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "link": "https://github.com/maroayman/depi-project-2/"
-        },
-        {
-            "title": "Flask App with Persistent AWS Storage",
-            "slug": "flask-aws-storage",
-            "summary": "A full-stack web application for note-taking deployed on AWS infrastructure with EBS backup",
-            "description": "A full-stack web application for note-taking deployed on AWS infrastructure with EBS backup.",
-            "tech": [
-                "Flask",
-                "AWS EC2",
-                "AWS EBS",
-                "MariaDB",
-                "SQLAlchemy"
-            ],
-            "role": "DevOps Engineer",
-            "period": "2025",
-            "link": "https://github.com/maroayman/depi-project-1/"
-        }
-    ],
-    "academic": [
-        {
-            "title": "2D Platformer Game",
-            "slug": "unity-game",
-            "summary": "A 2D platformer game built with Unity and C#, featuring collaborative development and asset integration",
-            "description": "A 2D platformer game built with Unity and C#, featuring collaborative development and asset integration.",
-            "tech": [
-                "Unity",
-                "C#",
-                "Game Development"
-            ],
-            "role": "Developer",
-            "period": "2024",
-            "link": "https://github.com/maroayman/unity-game"
-        },
-        {
-            "title": "E-Commerce Platform",
-            "slug": "ecommerce-platform",
-            "summary": "Graduation project - A comprehensive e-commerce platform with YouTube integration for product recommendations",
-            "description": "Graduation project - A comprehensive e-commerce platform with YouTube integration for product recommendations.",
-            "tech": [
-                "Angular",
-                "ASP.NET",
-                "Bootstrap",
-                "SQL Server",
-                "YouTube API"
-            ],
-            "role": "Developer",
-            "period": "2024",
-            "link": ""
-        }
-    ]
-}
+[
+    {
+        "title": "3-Tier GitOps App on EKS",
+        "slug": "gitops-eks",
+        "summary": "A complete 3-tier notes application with GitOps CI/CD pipeline using GitHub Actions, Terraform, Ansible, Helm, and ArgoCD on AWS EKS",
+        "tech": ["GitHub Actions", "Terraform", "Ansible", "Helm", "ArgoCD", "AWS EKS", "Kubernetes"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Complete GitOps workflow with 4 separate pipelines",
+            "Infrastructure as Code with Terraform for EKS cluster provisioning",
+            "ArgoCD for continuous deployment and GitOps monitoring",
+            "3-tier architecture: Nginx reverse proxy, Flask API, MySQL database"
+        ],
+        "link": "https://github.com/maroayman/depi-notes-app-gitops"
+    },
+    {
+        "title": "Highly Available AWS Infrastructure",
+        "slug": "aws-ha-infrastructure",
+        "summary": "A highly available, scalable web application infrastructure on AWS with ALB, Auto Scaling Group, and secure multi-AZ network architecture",
+        "tech": ["AWS", "Terraform", "ALB", "Auto Scaling", "VPC", "EC2"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Multi-AZ deployment across us-east-1a and us-east-1b",
+            "Application Load Balancer with health checks",
+            "Auto Scaling Group (1-3 instances) based on demand",
+            "Secure bastion host for SSH access to private instances"
+        ],
+        "link": "https://github.com/maroayman/depi-project-5"
+    },
+    {
+        "title": "Terraform EC2 Monitoring Stack",
+        "slug": "terraform-monitoring",
+        "summary": "A production-ready Terraform project that automates the deployment of secure EC2 instances on AWS with real-time monitoring",
+        "tech": ["Terraform", "AWS EC2", "Monitoring", "SSH"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Automated EC2 instance provisioning with Terraform",
+            "SSH key generation and secure access configuration",
+            "Real-time monitoring dashboard for instance performance",
+            "5-minute quick deployment with terraform apply"
+        ],
+        "link": "https://github.com/maroayman/depi-project-4"
+    },
+    {
+        "title": "Dockerized Flask Production Stack",
+        "slug": "dockerized-flask",
+        "summary": "A complete end-to-end web application deployed on AWS EC2 with production-ready features and monitoring",
+        "tech": ["Docker", "Flask", "Nginx", "MySQL", "SQLAlchemy", "AWS EC2"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Flask-based notes app with full CRUD operations",
+            "Nginx reverse proxy for production traffic",
+            "MySQL database with SQLAlchemy ORM",
+            "Multi-stage Docker builds for optimization"
+        ],
+        "link": "https://github.com/maroayman/depi-project-3"
+    },
+    {
+        "title": "Ansible-Managed Go Web App",
+        "slug": "ansible-go-app",
+        "summary": "A Go-based web application for note management with Ansible automation and scheduled tasks",
+        "tech": ["Go", "Ansible", "SQLite", "Cron"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Built with Go for high performance",
+            "SQLite database for lightweight storage",
+            "Cron jobs for scheduled tasks",
+            "Ansible automation for deployment"
+        ],
+        "link": "https://github.com/maroayman/depi-project-2/"
+    },
+    {
+        "title": "Flask App with Persistent AWS Storage",
+        "slug": "flask-aws-storage",
+        "summary": "A full-stack web application for note-taking deployed on AWS infrastructure with EBS backup",
+        "tech": ["Flask", "AWS EC2", "AWS EBS", "MariaDB", "SQLAlchemy"],
+        "role": "DevOps Engineer",
+        "period": "2025",
+        "highlights": [
+            "Deployed on AWS EC2 with scalable infrastructure",
+            "Backup system using AWS EBS mounted volumes",
+            "MariaDB database integration through SQLAlchemy ORM",
+            "Full CRUD operations for note management"
+        ],
+        "link": "https://github.com/maroayman/depi-project-1/"
+    },
+    {
+        "title": "2D Platformer Game",
+        "slug": "unity-game",
+        "summary": "A 2D platformer game built with Unity and C#, featuring collaborative development and asset integration",
+        "tech": ["Unity", "C#", "Game Development"],
+        "role": "Developer",
+        "period": "2024",
+        "highlights": [
+            "Built with Unity game engine and C# scripting",
+            "Collaborative team development",
+            "Integrated free licensed sounds and assets",
+            "Game physics, player controls, and level design"
+        ],
+        "link": "https://github.com/maroayman/unity-game"
+    },
+    {
+        "title": "E-Commerce Platform",
+        "slug": "ecommerce-platform",
+        "summary": "Graduation project - A comprehensive e-commerce platform with YouTube integration for product recommendations",
+        "tech": ["Angular", "ASP.NET", "Bootstrap", "SQL Server", "YouTube API"],
+        "role": "Developer",
+        "period": "2024",
+        "highlights": [
+            "Full shopping functionality",
+            "YouTube video recommendations for products",
+            "Responsive UI with Bootstrap",
+            "SQL Server database management"
+        ]
+    },
+    {
+        "title": "File Encryption Tool",
+        "slug": "file-encryption",
+        "summary": "A Python-based security application implementing encryption and decryption techniques",
+        "tech": ["Python", "Encryption", "Security"],
+        "role": "Developer",
+        "period": "2024",
+        "highlights": [
+            "Robust encryption using hashing algorithms",
+            "Data integrity and protection",
+            "User-friendly interface for file security"
+        ]
+    },
+    {
+        "title": "Football Analytics Dashboard",
+        "slug": "football-analytics",
+        "summary": "Interactive data visualization dashboard built with Microsoft Power BI for football analytics",
+        "tech": ["Power BI", "Data Visualization", "Kaggle"],
+        "role": "Data Analyst",
+        "period": "2024",
+        "highlights": [
+            "Comprehensive data visualization from Kaggle dataset",
+            "Team history including goals scored and conceded",
+            "Interactive filters and drill-down capabilities"
+        ]
+    },
+    {
+        "title": "Learning Management System",
+        "slug": "learning-system",
+        "summary": "A Java-based LMS with role-based access control for educational institutions",
+        "tech": ["Java", "Java Swing", "SQLite", "Role-Based Access Control"],
+        "role": "Developer",
+        "period": "2024",
+        "highlights": [
+            "Teachers can log in and update student grades",
+            "Students have read-only access to records",
+            "Role-based access control for security"
+        ],
+        "link": "https://github.com/maroayman/Learning-System"
+    },
+    {
+        "title": "Linux File Link Utility",
+        "slug": "linux-link-utility",
+        "summary": "A C-based terminal utility for creating and managing file links in Linux environments",
+        "tech": ["C", "Linux", "Ubuntu"],
+        "role": "Developer",
+        "period": "2024",
+        "highlights": [
+            "Creation of symbolic and hard links",
+            "Linux environment compatibility (Ubuntu)",
+            "Proper error handling and user feedback"
+        ],
+        "link": "https://github.com/maroayman/Operating-System-FCIH-College-Task-"
+    }
+]
