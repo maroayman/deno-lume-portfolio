@@ -3,5 +3,24 @@
     "outputDirectory": "dist",
     "installCommand": "curl -fsSL https://deno.land/install.sh | sh && export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\"",
     "devCommand": "deno task serve",
-    "framework": null
+    "framework": null,
+    "headers": [
+        {
+            "source": "/sw.js",
+            "headers": [
+                { "key": "Access-Control-Allow-Origin", "value": "https://maroayman.vercel.app" },
+                { "key": "X-Content-Type-Options", "value": "nosniff" },
+                { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+            ]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                { "key": "X-Content-Type-Options", "value": "nosniff" },
+                { "key": "X-Frame-Options", "value": "DENY" },
+                { "key": "X-XSS-Protection", "value": "1; mode=block" },
+                { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+            ]
+        }
+    ]
 }
