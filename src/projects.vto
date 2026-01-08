@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: layouts/base.vto
 title: Projects - Marwan Ayman Shawky
 description: Cloud & DevOps projects showcasing infrastructure automation and CI/CD pipelines
 ---
@@ -13,14 +13,16 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Projects</h2>
     
     <div>
-      {% for project in projects %}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {% if not loop.last %}border-bottom: 1px solid var(--color-border);{% endif %}">
+      {{ for index, project of projects }}
+      {{ set isLast = index === projects.length - 1 }}
+      {{ set borderStyle = isLast ? "" : "border-bottom: 1px solid var(--color-border);" }}
+      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {{ borderStyle }}">
         <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
-          {% if project.link %}
+          {{ if project.link }}
           <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
-          {% else %}
+          {{ else }}
           {{ project.title }}
-          {% endif %}
+          {{ /if }}
         </h4>
         
         <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
@@ -29,21 +31,22 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         
         <p style="margin-bottom: 1rem;">{{ project.summary }}</p>
         
-        {% if project.highlights %}
+        {{ if project.highlights }}
         <ul style="margin-bottom: 1rem; padding-left: 1.5rem;">
-          {% for highlight in project.highlights %}
+          {{ for highlight of project.highlights }}
           <li style="margin-bottom: 0.5rem; color: var(--color-text-secondary);">{{ highlight }}</li>
-          {% endfor %}
+          {{ /for }}
         </ul>
-        {% endif %}
+        {{ /if }}
         
         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-          {% for tech in project.tech %}
-          <span style="font-size: 0.875rem; color: var(--color-text-secondary);">{{ tech }}</span>{% if not loop.last %}<span style="color: var(--color-text-secondary);">·</span>{% endif %}
-          {% endfor %}
+          {{ for techIndex, tech of project.tech }}
+          {{ set isLastTech = techIndex === project.tech.length - 1 }}
+          <span style="font-size: 0.875rem; color: var(--color-text-secondary);">{{ tech }}</span>{{ if isLastTech === false }}<span style="color: var(--color-text-secondary);">·</span>{{ /if }}
+          {{ /for }}
         </div>
       </div>
-      {% endfor %}
+      {{ /for }}
     </div>
   </section>
 </div>

@@ -1,5 +1,5 @@
 import lume from "lume/mod.ts";
-import nunjucks from "lume/plugins/nunjucks.ts";
+import vento from "lume/plugins/vento.ts";
 import postcss from "lume/plugins/postcss.ts";
 import terser from "lume/plugins/terser.ts";
 import sitemap from "lume/plugins/sitemap.ts";
@@ -11,7 +11,7 @@ const site = lume({
     location: new URL("https://yourportfolio.com"),
 });
 
-site.use(nunjucks());
+site.use(vento());
 site.use(postcss());
 site.use(terser());
 site.use(sitemap());

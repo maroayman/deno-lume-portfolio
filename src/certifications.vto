@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: layouts/base.vto
 title: Certifications - Marwan Ayman Shawky
 description: AWS, Linux Foundation, and Huawei cloud certifications
 ---
@@ -13,23 +13,25 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
     <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Certifications</h2>
     
     <div>
-      {% for cert in certifications %}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {% if not loop.last %}border-bottom: 1px solid var(--color-border);{% endif %}">
+      {{ for index, cert of certifications }}
+      {{ set isLast = index === certifications.length - 1 }}
+      {{ set borderStyle = isLast ? "" : "border-bottom: 1px solid var(--color-border);" }}
+      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {{ borderStyle }}">
         <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">{{ cert.title }}</h3>
         
         <p style="color: var(--color-text-secondary); margin-bottom: 0.5rem;">{{ cert.issuer }}</p>
         
         <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 0;">
           Issued: {{ cert.date }}
-          {% if cert.expiryDate %}
+          {{ if cert.expiryDate }}
           · Expires: {{ cert.expiryDate }}
-          {% endif %}
-          {% if cert.credentialId %}
+          {{ /if }}
+          {{ if cert.credentialId }}
           <br>Credential ID: {{ cert.credentialId }}
-          {% endif %}
+          {{ /if }}
         </p>
       </div>
-      {% endfor %}
+      {{ /for }}
     </div>
   </section>
 </div>
