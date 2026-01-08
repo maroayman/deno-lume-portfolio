@@ -17,8 +17,41 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/styles/main.css">
   
-  <!-- Instant Page for faster navigation -->
-  <script src="https://instant.page/5.2.0" type="module"></script>
+  <!-- Speculation Rules for faster navigation (Chrome/Edge 109+) -->
+  <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "document",
+          "where": {
+            "and": [
+              { "href_matches": "/*" },
+              { "not": { "href_matches": "/*\\?*" } },
+              { "not": { "selector_matches": "[rel~=external]" } },
+              { "not": { "selector_matches": "[target=_blank]" } }
+            ]
+          },
+          "eagerness": "moderate"
+        }
+      ],
+      "prefetch": [
+        {
+          "source": "document",
+          "where": {
+            "href_matches": "/*"
+          },
+          "eagerness": "moderate"
+        }
+      ]
+    }
+  </script>
+  
+  <!-- Fallback to instant.page for browsers without Speculation Rules API -->
+  <script type="module">
+    if (!HTMLScriptElement.supports?.('speculationrules')) {
+      import('https://instant.page/5.2.0');
+    }
+  </script>
 </head>
 <body>
   <!-- Theme Toggle -->
