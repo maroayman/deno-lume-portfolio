@@ -2,7 +2,7 @@
     "tasks": {
         "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable-ffi -A -",
         "build": "deno task lume",
-        "build:sw": "npx workbox-cli injectManifest scripts/workbox-config.js",
+        "build:sw": "npx workbox-cli generateSW scripts/workbox-config.js",
         "build:all": "deno task build && deno task build:sw",
         "serve": "deno task lume -s",
         "dev": "deno task serve"
