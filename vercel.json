@@ -1,5 +1,5 @@
 {
-    "buildCommand": "export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\" && deno task build",
+    "buildCommand": "export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\" && deno task build && npx -y workbox-cli injectManifest scripts/workbox-config.js",
     "outputDirectory": "dist",
     "installCommand": "curl -fsSL https://deno.land/install.sh | sh && export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\"",
     "devCommand": "deno task serve",
