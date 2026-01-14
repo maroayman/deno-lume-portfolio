@@ -6,43 +6,39 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
 
 <div class="container">
   <section class="section">
-    <p style="margin-bottom: 2rem;">
+    <p class="back-link">
       <a href="/">← Back</a>
     </p>
     
-    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Projects</h2>
+    <h2 class="page-title">Projects</h2>
     
-    <div>
-      {{ for index, project of projects }}
-      {{ set isLast = index === projects.length - 1 }}
-      {{ set borderStyle = isLast ? "" : "border-bottom: 1px solid var(--color-border);" }}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {{ borderStyle }}">
-        <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
-          {{ if project.link }}
-          <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
-          {{ else }}
-          {{ project.title }}
-          {{ /if }}
-        </h4>
+    <div class="projects-grid">
+      {{ for project of projects }}
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">
+            {{ if project.link }}
+            <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+            {{ else }}
+            {{ project.title }}
+            {{ /if }}
+          </h3>
+          <span class="project-meta">{{ project.role }} · {{ project.period }}</span>
+        </div>
         
-        <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
-          {{ project.role }} · {{ project.period }}
-        </p>
-        
-        <p style="margin-bottom: 1rem;">{{ project.summary }}</p>
+        <p class="project-summary">{{ project.summary }}</p>
         
         {{ if project.highlights }}
-        <ul style="margin-bottom: 1rem; padding-left: 1.5rem;">
+        <ul class="project-highlights">
           {{ for highlight of project.highlights }}
-          <li style="margin-bottom: 0.5rem; color: var(--color-text-secondary);">{{ highlight }}</li>
+          <li>{{ highlight }}</li>
           {{ /for }}
         </ul>
         {{ /if }}
         
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-          {{ for techIndex, tech of project.tech }}
-          {{ set isLastTech = techIndex === project.tech.length - 1 }}
-          <span style="font-size: 0.875rem; color: var(--color-text-secondary);">{{ tech }}</span>{{ if isLastTech === false }}<span style="color: var(--color-text-secondary);">·</span>{{ /if }}
+        <div class="tech-tags">
+          {{ for tech of project.tech }}
+          <span class="tech-tag">{{ tech }}</span>
           {{ /for }}
         </div>
       </div>
@@ -50,11 +46,3 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
     </div>
   </section>
 </div>
-
-<style>
-  @media (prefers-color-scheme: dark) {
-    div[style*="border-bottom"] {
-      border-bottom-color: #333333 !important;
-    }
-  }
-</style>

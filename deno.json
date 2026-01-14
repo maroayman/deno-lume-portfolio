@@ -8,8 +8,7 @@
     "dev": "deno task serve"
   },
   "imports": {
-    "lume/": "https://deno.land/x/lume@v3.1.4/",
-    "lume_markdown_plugins/": "https://deno.land/x/lume_markdown_plugins/"
+    "lume/": "https://deno.land/x/lume@v3.1.4/"
   },
   "compilerOptions": {
     "types": [

@@ -6,30 +6,28 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
 
 <div class="container">
   <section class="section">
-    <p style="margin-bottom: 3rem;">
+    <p class="back-link">
       <a href="/">← Back</a>
     </p>
     
-    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;">Certifications</h2>
+    <h2 class="page-title">Certifications</h2>
     
-    <div>
-      {{ for index, cert of certifications }}
-      {{ set isLast = index === certifications.length - 1 }}
-      {{ set borderStyle = isLast ? "" : "border-bottom: 1px solid var(--color-border);" }}
-      <div style="margin-bottom: 2.5rem; padding-bottom: 2.5rem; {{ borderStyle }}">
-        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">{{ cert.title }}</h3>
-        
-        <p style="color: var(--color-text-secondary); margin-bottom: 0.5rem;">{{ cert.issuer }}</p>
-        
-        <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: 0;">
-          Issued: {{ cert.date }}
-          {{ if cert.expiryDate }}
-          · Expires: {{ cert.expiryDate }}
-          {{ /if }}
+    <div class="certifications-grid">
+      {{ for cert of certifications }}
+      <div class="cert-card">
+        <div class="cert-content">
+          <h3 class="cert-title">{{ cert.title }}</h3>
+          <p class="cert-issuer">{{ cert.issuer }}</p>
+          <div class="cert-meta">
+            <span>Issued: {{ cert.date }}</span>
+            {{ if cert.expiryDate }}
+            <span>Expires: {{ cert.expiryDate }}</span>
+            {{ /if }}
+          </div>
           {{ if cert.credentialId }}
-          <br>Credential ID: {{ cert.credentialId }}
+          <p class="cert-credential">ID: {{ cert.credentialId }}</p>
           {{ /if }}
-        </p>
+        </div>
       </div>
       {{ /for }}
     </div>
