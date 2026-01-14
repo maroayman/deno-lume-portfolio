@@ -1,13 +1,19 @@
 {
-    "tasks": {
-        "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable-ffi -A -",
-        "build": "deno task lume",
-        "build:sw": "npx workbox-cli generateSW scripts/workbox-config.js",
-        "build:all": "deno task build && deno task build:sw",
-        "serve": "deno task lume -s",
-        "dev": "deno task serve"
-    },
-    "imports": {
-        "lume/": "https://deno.land/x/lume@v2.1.4/"
-    }
+  "tasks": {
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable-ffi -A -",
+    "build": "deno task lume",
+    "build:sw": "npx workbox-cli generateSW scripts/workbox-config.js",
+    "build:all": "deno task build && deno task build:sw",
+    "serve": "deno task lume -s",
+    "dev": "deno task serve"
+  },
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v3.1.4/",
+    "lume_markdown_plugins/": "https://deno.land/x/lume_markdown_plugins/"
+  },
+  "compilerOptions": {
+    "types": [
+      "lume/types.ts"
+    ]
+  }
 }
