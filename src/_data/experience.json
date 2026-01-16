@@ -41,5 +41,25 @@
             "API",
             "Cloud Deployment"
         ]
+    },
+    {
+        "title": "System Administrator",
+        "company": "IP-Protocol INC",
+        "companyUrl": "https://ipprotocolinc.com",
+        "location": "Cairo, Egypt",
+        "period": "Jan 2026 – Present",
+        "description": "Working on cloud automation, CI/CD pipelines, and infrastructure provisioning.",
+        "responsibilities": [
+            "Managing and maintaining on-premises infrastructure",
+            "Implementing infrastructure as code using Terraform and Ansible",
+            "Setting up monitoring and alerting systems for infrastructure health",
+            "Collaborating with development teams to streamline deployment processes"
+        ],
+        "tags": [
+            "System Administration",
+            "Linux",
+            "Infrastructure as Code",
+            "Kubernetes"
+        ]
     }
 ]
