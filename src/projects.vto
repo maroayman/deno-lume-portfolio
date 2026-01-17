@@ -12,9 +12,9 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
     
     <h2 class="page-title">Projects</h2>
     
-    <div class="projects-grid">
+    <div class="projects-grid" id="pagination-container">
       {{ for project of projects }}
-      <div class="project-card">
+      <div class="project-card" data-pagination-item>
         <div class="project-header">
           <h3 class="project-title">
             {{ if project.link }}
@@ -44,5 +44,11 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
       </div>
       {{ /for }}
     </div>
+    
+    {{ if projects.length > 6 }}
+    <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
+    {{ /if }}
   </section>
 </div>
+
+{{ include "pagination.vto" }}

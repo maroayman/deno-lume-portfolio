@@ -441,6 +441,62 @@ body.dark-mode .tech-tag:hover {
   background: rgba(77, 159, 255, 0.2);
 }
 
+/* ==================== PAGINATION ==================== */
+
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.pagination-btn {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-link);
+  background: rgba(0, 102, 204, 0.08);
+  border-radius: 100px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body.dark-mode .pagination-btn {
+  background: rgba(77, 159, 255, 0.12);
+}
+
+.pagination-btn:hover {
+  background: rgba(0, 102, 204, 0.15);
+  transform: translateY(-1px);
+}
+
+body.dark-mode .pagination-btn:hover {
+  background: rgba(77, 159, 255, 0.2);
+}
+
+.pagination-active {
+  background: rgba(0, 102, 204, 0.2) !important;
+  color: var(--color-link);
+  cursor: default;
+  pointer-events: none;
+}
+
+body.dark-mode .pagination-active {
+  background: rgba(77, 159, 255, 0.25) !important;
+}
+
+.pagination-active:hover {
+  transform: none;
+  background: rgba(0, 102, 204, 0.2) !important;
+}
+
+body.dark-mode .pagination-active:hover {
+  background: rgba(77, 159, 255, 0.25) !important;
+}
+
 /* ==================== CERTIFICATIONS ==================== */
 
 .certifications-grid {

@@ -12,9 +12,9 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
     
     <h2 class="page-title">Certifications</h2>
     
-    <div class="certifications-grid">
+    <div class="certifications-grid" id="pagination-container">
       {{ for cert of certifications }}
-      <div class="cert-card">
+      <div class="cert-card" data-pagination-item>
         <div class="cert-content">
           <h3 class="cert-title">{{ cert.title }}</h3>
           <p class="cert-issuer">{{ cert.issuer }}</p>
@@ -31,5 +31,11 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
       </div>
       {{ /for }}
     </div>
+    
+    {{ if certifications.length > 6 }}
+    <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
+    {{ /if }}
   </section>
 </div>
+
+{{ include "pagination.vto" }}

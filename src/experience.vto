@@ -12,9 +12,9 @@ description: DevOps training and internships focused on cloud automation
     
     <h2 class="page-title">Experience</h2>
     
-    <div class="experience-list">
+    <div class="experience-list" id="pagination-container">
       {{ for index, job of experience }}
-      <div class="experience-item">
+      <div class="experience-item" data-pagination-item>
         <h3 class="job-title">{{ job.title }}</h3>
         
         <p class="job-company">
@@ -44,5 +44,11 @@ description: DevOps training and internships focused on cloud automation
       </div>
       {{ /for }}
     </div>
+    
+    {{ if experience.length > 6 }}
+    <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
+    {{ /if }}
   </section>
 </div>
+
+{{ include "pagination.vto" }}

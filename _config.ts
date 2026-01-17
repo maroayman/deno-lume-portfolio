@@ -20,6 +20,7 @@ site.use(date());
 
 // Assets
 site.add("styles");
+site.add("scripts");
 site.add("assets");
 site.add("public", ".");
 site.add([".pdf"]);
