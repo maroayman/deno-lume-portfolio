@@ -1,74 +1,41 @@
 <script>
 (function() {
-  function initPagination() {
-    const itemsPerPage = 6, maxVisible = 10;
-    const container = document.getElementById('pagination-container');
-    const controls = document.getElementById('pagination-controls');
-    if (!container || !controls) return;
+  const PER_PAGE = 6, MAX_BTNS = 10;
+  const container = document.getElementById('pagination-container');
+  const controls = document.getElementById('pagination-controls');
+  if (!container || !controls) return;
+
+  const items = [...container.querySelectorAll('[data-pagination-item]')];
+  const total = Math.ceil(items.length / PER_PAGE);
+  if (items.length <= PER_PAGE) return;
+
+  let page = parseInt(new URLSearchParams(location.search).get('page')) || 1;
+
+  const show = () => {
+    const start = (page - 1) * PER_PAGE;
+    items.forEach((el, i) => el.style.display = i >= start && i < start + PER_PAGE ? '' : 'none');
+    history.pushState({ page }, '', page === 1 ? location.pathname : `${location.pathname}?page=${page}`);
+  };
+
+  const render = () => {
+    const s = Math.max(1, Math.min(page - Math.floor(MAX_BTNS / 2), total - MAX_BTNS + 1));
+    const pages = total <= MAX_BTNS ? [...Array(total).keys()].map(i => i + 1) : [...Array(MAX_BTNS).keys()].map(i => s + i);
     
-    const items = Array.from(container.querySelectorAll('[data-pagination-item]'));
-    if (items.length <= itemsPerPage) return;
-    
-    let currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
-    const totalPages = Math.ceil(items.length / itemsPerPage);
-    
-    const showPage = (page) => {
-      const start = (page - 1) * itemsPerPage;
-      items.forEach((item, i) => item.style.display = (i >= start && i < start + itemsPerPage) ? '' : 'none');
-      window.history.pushState({ page }, '', page === 1 ? window.location.pathname : `${window.location.pathname}?page=${page}`);
-    };
-    
-    const createBtn = (text, page, isActive = false) => {
-      const btn = document.createElement(isActive ? 'span' : 'a');
-      if (!isActive) {
-        btn.href = page === 1 ? window.location.pathname : `?page=${page}`;
-        btn.addEventListener('click', (e) => { e.preventDefault(); currentPage = page; showPage(currentPage); createControls(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-      }
-      btn.className = `tech-tag pagination-btn${isActive ? ' pagination-active' : ''}`;
-      btn.textContent = text;
-      return btn;
-    };
-    
-    const getPages = () => {
-      // If 10 or fewer pages, show all
-      if (totalPages <= maxVisible) {
-        return Array.from({ length: totalPages }, (_, i) => i + 1);
-      }
-      
-      // Sliding window: center current page in the window
-      // Try to show 5 pages before and 4 after (or adjust to fit)
-      let start = Math.max(1, currentPage - 5);
-      let end = Math.min(totalPages, start + maxVisible - 1);
-      
-      // If we're near the end, adjust start to show maxVisible pages
-      if (end - start + 1 < maxVisible) {
-        start = Math.max(1, end - maxVisible + 1);
-      }
-      
-      // If we're near the beginning, adjust end to show maxVisible pages
-      if (end - start + 1 < maxVisible) {
-        end = Math.min(totalPages, start + maxVisible - 1);
-      }
-      
-      return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-    };
-    
-    const createControls = () => {
-      controls.innerHTML = '';
-      if (currentPage > 1) controls.appendChild(createBtn('← Back', currentPage - 1));
-      getPages().forEach(p => controls.appendChild(createBtn(p, p, p === currentPage)));
-      if (currentPage < totalPages) controls.appendChild(createBtn('Next →', currentPage + 1));
-      controls.style.display = 'flex';
-    };
-    
-    showPage(currentPage);
-    createControls();
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPagination);
-  } else {
-    initPagination();
-  }
+    controls.innerHTML = '';
+    if (page > 1) controls.append(btn('← Back', page - 1));
+    pages.forEach(p => controls.append(btn(p, p, p === page)));
+    if (page < total) controls.append(btn('Next →', page + 1));
+    controls.style.display = 'flex';
+  };
+
+  const btn = (text, p, active) => Object.assign(document.createElement(active ? 'span' : 'a'), {
+    className: `tech-tag pagination-btn${active ? ' pagination-active' : ''}`,
+    textContent: text,
+    href: active ? null : (p === 1 ? location.pathname : `?page=${p}`),
+    onclick: active ? null : (e) => { e.preventDefault(); page = p; show(); render(); scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
+
+  addEventListener('popstate', (e) => { page = e.state?.page || 1; show(); render(); });
+  show(); render();
 })();
 </script>
