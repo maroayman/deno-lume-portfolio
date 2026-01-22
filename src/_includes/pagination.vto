@@ -1,41 +1,13 @@
 <script>
 (function() {
-  const PER_PAGE = 6, MAX_BTNS = 10;
-  const container = document.getElementById('pagination-container');
-  const controls = document.getElementById('pagination-controls');
-  if (!container || !controls) return;
-
-  const items = [...container.querySelectorAll('[data-pagination-item]')];
-  const total = Math.ceil(items.length / PER_PAGE);
-  if (items.length <= PER_PAGE) return;
-
-  let page = parseInt(new URLSearchParams(location.search).get('page')) || 1;
-
-  const show = () => {
-    const start = (page - 1) * PER_PAGE;
-    items.forEach((el, i) => el.style.display = i >= start && i < start + PER_PAGE ? '' : 'none');
-    history.pushState({ page }, '', page === 1 ? location.pathname : `${location.pathname}?page=${page}`);
-  };
-
-  const render = () => {
-    const s = Math.max(1, Math.min(page - Math.floor(MAX_BTNS / 2), total - MAX_BTNS + 1));
-    const pages = total <= MAX_BTNS ? [...Array(total).keys()].map(i => i + 1) : [...Array(MAX_BTNS).keys()].map(i => s + i);
-    
-    controls.innerHTML = '';
-    if (page > 1) controls.append(btn('← Back', page - 1));
-    pages.forEach(p => controls.append(btn(p, p, p === page)));
-    if (page < total) controls.append(btn('Next →', page + 1));
-    controls.style.display = 'flex';
-  };
-
-  const btn = (text, p, active) => Object.assign(document.createElement(active ? 'span' : 'a'), {
-    className: `tech-tag pagination-btn${active ? ' pagination-active' : ''}`,
-    textContent: text,
-    href: active ? null : (p === 1 ? location.pathname : `?page=${p}`),
-    onclick: active ? null : (e) => { e.preventDefault(); page = p; show(); render(); scrollTo({ top: 0, behavior: 'smooth' }); }
-  });
-
-  addEventListener('popstate', (e) => { page = e.state?.page || 1; show(); render(); });
-  show(); render();
+  const N = 6, M = 10, c = document.getElementById('pagination-container'), x = document.getElementById('pagination-controls');
+  if (!c || !x) return;
+  const items = [...c.querySelectorAll('[data-pagination-item]')], T = Math.ceil(items.length / N);
+  if (items.length <= N) return;
+  let p = +new URLSearchParams(location.search).get('page') || 1;
+  const show = () => { items.forEach((e, i) => e.style.display = i >= (p-1)*N && i < p*N ? '' : 'none'); history.pushState({p}, '', p === 1 ? location.pathname : `?page=${p}`); };
+  const btn = (t, n, a) => Object.assign(document.createElement(a ? 'span' : 'a'), { className: `tech-tag pagination-btn${a ? ' pagination-active' : ''}`, textContent: t, href: a ? null : n === 1 ? location.pathname : `?page=${n}`, onclick: a ? null : e => { e.preventDefault(); p = n; show(); render(); scrollTo({top: 0, behavior: 'smooth'}); } });
+  const render = () => { const s = Math.max(1, Math.min(p - M/2|0, T - M + 1)); x.innerHTML = ''; if (p > 1) x.append(btn('← Back', p-1)); for (let i = 0; i < Math.min(M, T); i++) x.append(btn(s+i, s+i, s+i === p)); if (p < T) x.append(btn('Next →', p+1)); x.style.display = 'flex'; };
+  addEventListener('popstate', e => { p = e.state?.p || 1; show(); render(); }); show(); render();
 })();
 </script>
