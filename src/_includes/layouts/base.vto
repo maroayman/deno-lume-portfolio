@@ -133,6 +133,12 @@
         }
       });
     });
+
+    // Security: Ensure rel="noopener noreferrer" for all target="_blank" links
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      if (!link.rel.includes('noopener')) link.rel += (link.rel ? ' ' : '') + 'noopener';
+      if (!link.rel.includes('noreferrer')) link.rel += (link.rel ? ' ' : '') + 'noreferrer';
+    });
     
     // Back to Top
     const backToTop = document.getElementById('backToTop');
