@@ -47,7 +47,7 @@ The built site will be in the `dist` directory.
 
 ### Update Your Information
 
-1. Edit `src/index.njk` to update:
+1. Edit `src/index.vto` to update:
    - Your name
    - Your title/role
    - About section
@@ -55,7 +55,7 @@ The built site will be in the `dist` directory.
    - Projects
    - Contact information
 
-2. Update social media links in `src/_includes/layouts/base.njk`
+2. Update social media links in `src/_includes/layouts/base.vto`
 
 ### Styling
 
@@ -68,7 +68,7 @@ All styles are in `src/styles/main.css`. The design system uses CSS custom prope
 
 ### Adding Pages
 
-Create new `.njk` files in the `src` directory. They will automatically use the base layout.
+Create new `.vto` files in the `src` directory. They will automatically use the base layout.
 
 ## Project Structure
 
@@ -79,11 +79,18 @@ deno-lume-portfolio/
 ├── src/
 │   ├── _includes/
 │   │   └── layouts/
-│   │       └── base.njk    # Base layout template
+│   │       └── base.vto    # Base layout template
 │   ├── styles/
 │   │   └── main.css        # Main stylesheet
-│   ├── index.njk           # Homepage
-│   └── 404.njk             # 404 error page
+│   ├── index.vto           # Homepage
+│   └── 404.vto             # 404 error page
+## Contributing
+
+Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
+
+## Reporting Issues
+
+If you encounter any problems, please [open an issue](https://github.com/maroayman/deno-lume-portfolio/issues) with details and steps to reproduce.
 └── dist/                   # Built site (generated)
 ```
 
@@ -91,7 +98,7 @@ deno-lume-portfolio/
 
 - [Deno](https://deno.land/) - Modern JavaScript/TypeScript runtime
 - [Lume](https://lume.land/) - Static site generator for Deno
-- [Nunjucks](https://mozilla.github.io/nunjucks/) - Templating engine
+- [Vento (.vto)](https://lume.land/plugins/vento/) - Templating engine for Lume
 - CSS3 with modern features (Grid, Flexbox, Custom Properties)
 - Vanilla JavaScript for interactions
 
