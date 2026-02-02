@@ -1,0 +1,467 @@
+---
+layout: layouts/base.vto
+title: Blog - Marwan Ayman Shawky
+description: Technical articles about Cloud, DevOps, Infrastructure, and Software Engineering
+---
+
+<div class="container">
+  <section class="section">
+    <p class="back-link">
+      <a href="/">← Back</a>
+    </p>
+    
+    <h2 class="page-title">Blog</h2>
+    
+    <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
+      Technical articles about cloud infrastructure, DevOps practices, and lessons learned.
+    </p>
+    
+    <!-- Search and Filter -->
+    <div class="blog-search-container">
+      <div class="blog-search-wrapper">
+        <svg class="blog-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input 
+          type="text" 
+          id="blogSearch" 
+          class="blog-search-input" 
+          placeholder="Search posts... (try 'linux: docker' to filter by tag)"
+          autocomplete="off"
+        >
+        <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- View Tabs: All Posts / Bookmarks / History -->
+      <div class="blog-view-tabs">
+        <button class="view-tab active" data-view="all">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          All Posts
+        </button>
+        <button class="view-tab" data-view="bookmarks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+          Bookmarks <span class="bookmark-count" id="bookmarkCount"></span>
+        </button>
+        <button class="view-tab" data-view="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          History
+        </button>
+      </div>
+      
+      <!-- Tag Filters -->
+      <div class="blog-tags-filter" id="tagFiltersContainer">
+        <span class="filter-label">Filter by tag:</span>
+        <div class="filter-tags" id="filterTags">
+          {{ set allTags = [] }}
+          {{ for post of search.pages("type=post") }}
+            {{ if post.tags }}
+              {{ for tag of post.tags }}
+                {{ set allTags = allTags.concat([tag]) }}
+              {{ /for }}
+            {{ /if }}
+          {{ /for }}
+          {{ set uniqueTags = [...new Set(allTags)].sort() }}
+          <button class="filter-tag active" data-tag="all">All</button>
+          {{ for tag of uniqueTags }}
+          <button class="filter-tag" data-tag="{{ tag }}">{{ tag }}</button>
+          {{ /for }}
+        </div>
+      </div>
+    </div>
+    
+    <!-- No Results Message -->
+    <div class="blog-no-results" id="noResults" style="display: none;">
+      <p>No posts found matching your search.</p>
+    </div>
+    
+    <div class="blog-grid" id="pagination-container">
+      {{ for post of search.pages("type=post", "date=desc") }}
+      <article class="blog-card" data-pagination-item data-url="{{ post.url }}" data-title="{{ post.title }}" data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}" data-description="{{ post.description }}">
+        {{ if post.cover }}
+        <div class="blog-card-cover">
+          <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
+        </div>
+        {{ /if }}
+        <div class="blog-card-content">
+          <div class="blog-card-header">
+            <h3 class="blog-card-title">
+              <a href="{{ post.url }}">{{ post.title }}</a>
+            </h3>
+            <button class="bookmark-btn" data-url="{{ post.url }}" aria-label="Bookmark article" title="Bookmark">
+              <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="blog-card-meta">
+            <time datetime="{{ post.date |> date('DATE') }}">{{ post.date |> date('HUMAN_DATE') }}</time>
+          </div>
+          <p class="blog-card-excerpt">{{ post.description }}</p>
+          {{ if post.tags }}
+          <div class="tech-tags">
+            {{ for tag of post.tags }}
+            <span class="tech-tag" data-tag="{{ tag }}">{{ tag }}</span>
+            {{ /for }}
+          </div>
+          {{ /if }}
+        </div>
+      </article>
+      {{ /for }}
+    </div>
+    
+    <!-- Pagination Controls -->
+    <div id="pagination-controls" class="pagination"></div>
+  </section>
+</div>
+
+<script>
+(function() {
+  const POSTS_PER_PAGE = 6;
+  const BLOG_STATE_KEY = 'blog_pagination_state';
+  const searchInput = document.getElementById('blogSearch');
+  const searchClear = document.getElementById('searchClear');
+  const filterTags = document.querySelectorAll('.filter-tag');
+  const viewTabs = document.querySelectorAll('.view-tab');
+  const tagFiltersContainer = document.getElementById('tagFiltersContainer');
+  const bookmarkCountEl = document.getElementById('bookmarkCount');
+  const allCards = [...document.querySelectorAll('.blog-card')];
+  const noResults = document.getElementById('noResults');
+  const blogGrid = document.getElementById('pagination-container');
+  const paginationControls = document.getElementById('pagination-controls');
+  
+  if (!searchInput || !blogGrid) return;
+  
+  let activeTag = 'all';
+  let activeView = 'all'; // 'all', 'bookmarks', 'history'
+  let currentPage = 1;
+  let filteredCards = allCards;
+  
+  // ========== STATE PERSISTENCE (sessionStorage) ==========
+  function saveState() {
+    const state = {
+      page: currentPage,
+      view: activeView,
+      tag: activeTag,
+      search: searchInput.value,
+      scrollY: window.scrollY
+    };
+    sessionStorage.setItem(BLOG_STATE_KEY, JSON.stringify(state));
+  }
+  
+  function restoreState() {
+    try {
+      const state = JSON.parse(sessionStorage.getItem(BLOG_STATE_KEY));
+      if (!state) return false;
+      
+      // Only restore if coming back (user navigated away and returned)
+      const nav = performance.getEntriesByType('navigation')[0];
+      const isBackNavigation = nav && (nav.type === 'back_forward' || nav.type === 'navigate');
+      
+      // Check if page was stored recently (within 30 minutes)
+      // We'll always restore for simplicity
+      
+      currentPage = state.page || 1;
+      activeView = state.view || 'all';
+      activeTag = state.tag || 'all';
+      searchInput.value = state.search || '';
+      
+      // Update UI to match restored state
+      viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === activeView));
+      filterTags.forEach(b => b.classList.toggle('active', b.dataset.tag === activeTag));
+      tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
+      
+      // Restore scroll position after a small delay to let content render
+      if (state.scrollY > 0) {
+        setTimeout(() => window.scrollTo(0, state.scrollY), 50);
+      }
+      
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  
+  // Save state when clicking on article links
+  allCards.forEach(card => {
+    const link = card.querySelector('a');
+    if (link) {
+      link.addEventListener('click', saveState);
+    }
+  });
+  
+  // ========== BOOKMARKS (localStorage) ==========
+  const BOOKMARKS_KEY = 'blog_bookmarks';
+  
+  function getBookmarks() {
+    try {
+      return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || [];
+    } catch { return []; }
+  }
+  
+  function toggleBookmark(url) {
+    const bookmarks = getBookmarks();
+    const index = bookmarks.indexOf(url);
+    if (index > -1) {
+      bookmarks.splice(index, 1);
+    } else {
+      bookmarks.push(url);
+    }
+    localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+    updateBookmarkButtons();
+    updateBookmarkCount();
+    if (activeView === 'bookmarks') resetAndFilter();
+  }
+  
+  function updateBookmarkButtons() {
+    const bookmarks = getBookmarks();
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+      const url = btn.dataset.url;
+      const isBookmarked = bookmarks.includes(url);
+      btn.classList.toggle('bookmarked', isBookmarked);
+      btn.title = isBookmarked ? 'Remove bookmark' : 'Bookmark';
+    });
+  }
+  
+  function updateBookmarkCount() {
+    const count = getBookmarks().length;
+    bookmarkCountEl.textContent = count > 0 ? `(${count})` : '';
+  }
+  
+  // Initialize bookmarks
+  document.querySelectorAll('.bookmark-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleBookmark(btn.dataset.url);
+    });
+  });
+  updateBookmarkButtons();
+  updateBookmarkCount();
+  
+  // ========== READING HISTORY (localStorage) ==========
+  const HISTORY_KEY = 'blog_reading_history';
+  
+  function getReadHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    } catch { return []; }
+  }
+  
+  function updateReadIndicators() {
+    const history = getReadHistory().map(h => typeof h === 'string' ? h : h.url);
+    allCards.forEach(card => {
+      const url = card.dataset.url;
+      if (history.includes(url)) {
+        card.classList.add('read');
+      }
+    });
+  }
+  updateReadIndicators();
+  
+  // Parse search query - supports "tag: search term" format
+  function parseQuery(query) {
+    const colonIndex = query.indexOf(':');
+    if (colonIndex > 0) {
+      const tag = query.substring(0, colonIndex).trim().toLowerCase();
+      const term = query.substring(colonIndex + 1).trim().toLowerCase();
+      return { tag, term };
+    }
+    return { tag: null, term: query.toLowerCase() };
+  }
+  
+  function getFilteredCards() {
+    const rawQuery = searchInput.value.trim();
+    const { tag: searchTag, term: searchTerm } = parseQuery(rawQuery);
+    const bookmarks = getBookmarks();
+    const history = getReadHistory().map(h => typeof h === 'string' ? h : h.url);
+    
+    return allCards.filter(card => {
+      const url = card.dataset.url;
+      const title = (card.dataset.title || '').toLowerCase();
+      const tags = (card.dataset.tags || '').toLowerCase();
+      
+      // Check view filter (bookmarks/history)
+      if (activeView === 'bookmarks' && !bookmarks.includes(url)) return false;
+      if (activeView === 'history' && !history.includes(url)) return false;
+      
+      // Check tag filter (from buttons or search query like "aws:")
+      const effectiveTag = searchTag || (activeTag !== 'all' ? activeTag.toLowerCase() : null);
+      const tagMatch = !effectiveTag || tags.includes(effectiveTag);
+      
+      // Check search term - ONLY title and tags, not description
+      const termMatch = !searchTerm || title.includes(searchTerm) || tags.includes(searchTerm);
+      
+      return tagMatch && termMatch;
+    });
+  }
+  
+  function renderPagination() {
+    const totalPages = Math.ceil(filteredCards.length / POSTS_PER_PAGE);
+    paginationControls.innerHTML = '';
+    
+    if (totalPages <= 1) {
+      paginationControls.style.display = 'none';
+      return;
+    }
+    
+    paginationControls.style.display = 'flex';
+    
+    // Previous button
+    if (currentPage > 1) {
+      const prev = document.createElement('a');
+      prev.className = 'tech-tag pagination-btn';
+      prev.textContent = '← Back';
+      prev.href = '#';
+      prev.onclick = (e) => { e.preventDefault(); currentPage--; updateDisplay(); scrollTo({top: 0, behavior: 'smooth'}); };
+      paginationControls.appendChild(prev);
+    }
+    
+    // Page numbers
+    const maxButtons = 10;
+    let start = Math.max(1, Math.min(currentPage - Math.floor(maxButtons / 2), totalPages - maxButtons + 1));
+    let end = Math.min(totalPages, start + maxButtons - 1);
+    
+    for (let i = start; i <= end; i++) {
+      const btn = document.createElement(i === currentPage ? 'span' : 'a');
+      btn.className = `tech-tag pagination-btn${i === currentPage ? ' pagination-active' : ''}`;
+      btn.textContent = i;
+      if (i !== currentPage) {
+        btn.href = '#';
+        btn.onclick = (e) => { e.preventDefault(); currentPage = i; updateDisplay(); scrollTo({top: 0, behavior: 'smooth'}); };
+      }
+      paginationControls.appendChild(btn);
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+      const next = document.createElement('a');
+      next.className = 'tech-tag pagination-btn';
+      next.textContent = 'Next →';
+      next.href = '#';
+      next.onclick = (e) => { e.preventDefault(); currentPage++; updateDisplay(); scrollTo({top: 0, behavior: 'smooth'}); };
+      paginationControls.appendChild(next);
+    }
+  }
+  
+  function updateDisplay() {
+    filteredCards = getFilteredCards();
+    const totalPages = Math.ceil(filteredCards.length / POSTS_PER_PAGE);
+    
+    // Ensure current page is valid
+    if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+    
+    // Hide all cards first
+    allCards.forEach(card => card.style.display = 'none');
+    
+    // Show only cards for current page
+    const start = (currentPage - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+    filteredCards.slice(start, end).forEach(card => card.style.display = '');
+    
+    // Update UI
+    const isEmpty = filteredCards.length === 0;
+    noResults.style.display = isEmpty ? 'block' : 'none';
+    blogGrid.style.display = isEmpty ? 'none' : '';
+    searchClear.style.display = searchInput.value.trim() ? 'flex' : 'none';
+    
+    // Update empty message based on view
+    if (isEmpty) {
+      if (activeView === 'bookmarks') {
+        noResults.innerHTML = '<p>No bookmarked articles yet. Click the bookmark icon on any article to save it.</p>';
+      } else if (activeView === 'history') {
+        noResults.innerHTML = '<p>No reading history yet. Start reading articles to build your history.</p>';
+      } else {
+        noResults.innerHTML = '<p>No posts found matching your search.</p>';
+      }
+    }
+    
+    renderPagination();
+  }
+  
+  function resetAndFilter() {
+    currentPage = 1;
+    updateDisplay();
+  }
+  
+  searchInput.addEventListener('input', resetAndFilter);
+  searchInput.addEventListener('search', resetAndFilter);
+  
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    activeTag = 'all';
+    filterTags.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === 'all'));
+    resetAndFilter();
+    searchInput.focus();
+  });
+  
+  // View tabs (All Posts / Bookmarks / History)
+  viewTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeView = tab.dataset.view;
+      viewTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show/hide tag filters (only for "all" view)
+      tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
+      
+      resetAndFilter();
+    });
+  });
+  
+  // Tag filter buttons
+  filterTags.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTag = btn.dataset.tag;
+      filterTags.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      resetAndFilter();
+    });
+  });
+  
+  // Clickable tags on cards
+  document.querySelectorAll('.blog-card .tech-tag').forEach(tag => {
+    tag.style.cursor = 'pointer';
+    tag.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const tagName = tag.dataset.tag;
+      
+      // Switch to "all" view and filter by tag
+      activeView = 'all';
+      viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === 'all'));
+      tagFiltersContainer.style.display = '';
+      
+      activeTag = tagName;
+      filterTags.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === tagName));
+      resetAndFilter();
+      document.querySelector('.blog-search-container').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+  
+  // Keyboard shortcut: "/" to focus search
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    if (e.key === 'Escape' && document.activeElement === searchInput) {
+      searchInput.blur();
+    }
+  });
+  
+  // Try to restore state (from back navigation), then update display
+  restoreState();
+  updateDisplay();
+})();
+</script>
