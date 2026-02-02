@@ -17,6 +17,16 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/styles/main.css">
   
+  <!-- Apply theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
+  
   <!-- Speculation Rules for faster navigation (Chrome/Edge 109+) -->
   <script type="speculationrules">
     {
@@ -92,36 +102,40 @@
   </footer>
   
   <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const sunIcon = document.querySelector('.sun-icon');
-    const moonIcon = document.querySelector('.moon-icon');
-    const body = document.body;
-    
-    // Check for saved theme preference or default to light
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    if (currentTheme === 'dark') {
-      body.classList.add('dark-mode');
-      sunIcon.style.display = 'none';
-      moonIcon.style.display = 'block';
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
+    // ========== THEME TOGGLE ==========
+    (function() {
+      const themeToggle = document.getElementById('themeToggle');
+      const sunIcon = document.querySelector('.sun-icon');
+      const moonIcon = document.querySelector('.moon-icon');
       
-      if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      } else {
-        localStorage.setItem('theme', 'light');
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
+      if (!themeToggle || !sunIcon || !moonIcon) {
+        console.warn('Theme toggle elements not found');
+        return;
       }
-    });
+      
+      function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        document.body.classList.toggle('dark-mode', isDark);
+        document.documentElement.classList.toggle('dark-mode', isDark);
+        sunIcon.style.display = isDark ? 'none' : 'block';
+        moonIcon.style.display = isDark ? 'block' : 'none';
+      }
+      
+      // Apply current theme
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
+      
+      // Toggle handler
+      themeToggle.addEventListener('click', function() {
+        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+      });
+    })();
     
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
     
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
