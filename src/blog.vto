@@ -60,7 +60,7 @@ requestAnimationFrame(() => {
           type="text" 
           id="blogSearch" 
           class="blog-search-input" 
-          placeholder="Search posts... (Ctrl+Click tags to multi-select)"
+          placeholder="Search... (e.g. aws,linux:deploy)"
           autocomplete="off"
           aria-label="Search blog posts"
         >
@@ -610,20 +610,23 @@ requestAnimationFrame(() => {
   }
   updateReadIndicators();
   
-  // Parse search query - supports "tag: search term" format
+  // Parse search query - supports multi-tag filtering
+  // Formats: "aws,linux:search term" or "aws,linux" or just "search term"
   function parseQuery(query) {
     const colonIndex = query.indexOf(':');
     if (colonIndex > 0) {
-      const tag = query.substring(0, colonIndex).trim().toLowerCase();
+      const tagsPart = query.substring(0, colonIndex).trim().toLowerCase();
       const term = query.substring(colonIndex + 1).trim().toLowerCase();
-      return { tag, term };
+      // Support comma-separated tags: "aws,linux:term"
+      const tags = tagsPart.split(',').map(t => t.trim()).filter(t => t);
+      return { tags, term };
     }
-    return { tag: null, term: query.toLowerCase() };
+    return { tags: [], term: query.toLowerCase() };
   }
   
   function getFilteredCards() {
     const rawQuery = searchInput.value.trim();
-    const { tag: searchTag, term: searchTerm } = parseQuery(rawQuery);
+    const { tags: searchTags, term: searchTerm } = parseQuery(rawQuery);
     const bookmarks = getBookmarks();
     const history = getReadHistory().map(h => typeof h === 'string' ? h : h.url);
     
@@ -638,8 +641,9 @@ requestAnimationFrame(() => {
       
       // Check tag filter - multi-tag support (AND logic)
       let tagMatch = true;
-      if (searchTag) {
-        tagMatch = tags.includes(searchTag);
+      if (searchTags.length > 0) {
+        // All search tags must be present (AND logic)
+        tagMatch = searchTags.every(t => tags.includes(t));
       } else if (activeTags.length > 0 && !activeTags.includes('all')) {
         // All selected tags must be present (AND logic)
         tagMatch = activeTags.every(t => tags.includes(t.toLowerCase()));
