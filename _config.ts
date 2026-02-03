@@ -47,6 +47,45 @@ site.add([".pdf"]);
 site.data("layout", "layouts/blog.vto", "/blog");
 site.data("type", "post", "/blog");
 
+// Approved tags list - add new tags here
+const APPROVED_TAGS = [
+    "linux",
+    "docker",
+    "aws",
+    "automation",
+    "wsl",
+    "storage",
+    "security",
+    "python",
+    "networking",
+    "go",
+    "containers",
+    "ansible",
+    "kubernetes",
+    "devops",
+    "ci-cd",
+    "git",
+];
+
+// Tag validation and normalization processor
+site.preprocess([".md"], (pages) => {
+    for (const page of pages) {
+        if (page.data.tags && Array.isArray(page.data.tags)) {
+            // Normalize tags to lowercase
+            page.data.tags = page.data.tags.map((tag: string) => tag.toLowerCase());
+
+            // Validate tags
+            for (const tag of page.data.tags) {
+                if (tag !== "post" && !APPROVED_TAGS.includes(tag)) {
+                    console.warn(
+                        `\x1b[33m[Tag Warning]\x1b[0m Unknown tag "${tag}" in: ${page.src.path}${page.src.ext}. Consider adding it to APPROVED_TAGS in _config.ts`
+                    );
+                }
+            }
+        }
+    }
+});
+
 // Optimizations
 site.use(postcss());
 site.use(sitemap());

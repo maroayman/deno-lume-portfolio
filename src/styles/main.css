@@ -700,25 +700,318 @@ body.dark-mode .blog-search-clear:hover {
 /* Tag Filters */
 .blog-tags-filter {
   display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Quick tags row */
+.quick-tags {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
 }
 
-.filter-label {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  margin-right: 0.25rem;
+/* Tag Dropdown */
+.tag-dropdown {
+  position: relative;
 }
 
-.filter-tags {
+.tag-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--color-link);
+  background: transparent;
+  border: 1px dashed var(--color-border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tag-dropdown-trigger:hover {
+  border-color: var(--color-link);
+  background: rgba(0, 102, 204, 0.05);
+}
+
+body.dark-mode .tag-dropdown-trigger:hover {
+  background: rgba(77, 159, 255, 0.1);
+}
+
+.tag-dropdown-trigger svg {
+  transition: transform 0.2s ease;
+}
+
+.tag-dropdown-trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.tag-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 220px;
+  max-width: 280px;
+  max-height: 320px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+body.dark-mode .tag-dropdown-panel {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.tag-dropdown.open .tag-dropdown-panel {
   display: flex;
+  animation: dropdownFadeIn 0.15s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tag-dropdown-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tag-dropdown-search-icon {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.tag-dropdown-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  outline: none;
+}
+
+.tag-dropdown-search-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.tag-dropdown-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.tag-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  text-align: left;
+}
+
+.tag-dropdown-item:hover,
+.tag-dropdown-item.focused {
+  background: rgba(0, 102, 204, 0.08);
+}
+
+body.dark-mode .tag-dropdown-item:hover,
+body.dark-mode .tag-dropdown-item.focused {
+  background: rgba(77, 159, 255, 0.12);
+}
+
+.tag-dropdown-item.selected {
+  background: var(--color-link);
+  color: white;
+}
+
+.tag-dropdown-item-name {
+  flex: 1;
+}
+
+.tag-dropdown-item-count {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+}
+
+body.dark-mode .tag-dropdown-item-count {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tag-dropdown-item.selected .tag-dropdown-item-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.tag-dropdown-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Card animations */
+.blog-card {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-grid .blog-card[style*="display: block"],
+.blog-grid .blog-card:not([style*="display: none"]) {
+  animation: cardFadeIn 0.3s ease forwards;
+}
+
+/* Search term highlighting */
+.blog-card-title mark {
+  background: rgba(255, 213, 0, 0.35);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+}
+
+body.dark-mode .blog-card-title mark {
+  background: rgba(255, 213, 0, 0.25);
+}
+
+/* Suggestion buttons in empty state */
+.suggest-tag {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  margin: 0.2rem;
+  font-size: 0.85rem;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.suggest-tag:hover {
+  background: var(--color-link);
+  color: white;
+  border-color: var(--color-link);
+}
+
+/* Active filters indicator */
+.active-filters {
+  display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 8px;
+}
+
+body.dark-mode .active-filters {
+  background: rgba(77, 159, 255, 0.1);
+}
+
+.active-filters-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.active-filters-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  background: var(--color-link);
+  border-radius: 100px;
+}
+
+.active-filter-tag button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.1s;
+}
+
+.active-filter-tag button:hover {
+  opacity: 1;
+}
+
+.active-filters-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+
+.active-filters-clear:hover {
+  color: #ef4444;
+  border-color: #ef4444;
 }
 
 .filter-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 0.3rem 0.85rem;
   font-size: 0.8rem;
   font-weight: 500;
@@ -728,19 +1021,68 @@ body.dark-mode .blog-search-clear:hover {
   border: 1px solid var(--color-border);
   border-radius: 100px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
+}
+
+/* Tag count styling */
+.filter-tag .tag-count {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* Visual hierarchy - weight classes based on post count */
+.filter-tag.weight-1 {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.filter-tag.weight-2 {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.filter-tag.weight-3 {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.filter-tag.weight-4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-color: var(--color-link);
+  color: var(--color-text);
+}
+
+.filter-tag.weight-5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-color: var(--color-link);
+  color: var(--color-link);
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.15);
+}
+
+body.dark-mode .filter-tag.weight-5 {
+  box-shadow: 0 0 8px rgba(77, 159, 255, 0.2);
 }
 
 .filter-tag:hover {
   border-color: var(--color-link);
   color: var(--color-link);
+  transform: translateY(-1px);
+}
+
+.filter-tag:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
 }
 
 .filter-tag.active {
   background: var(--color-link);
   border-color: var(--color-link);
   color: white;
+  opacity: 1;
+  font-weight: 600;
 }
 
 .filter-tag.active:hover {
@@ -772,7 +1114,24 @@ body.dark-mode .blog-search-clear:hover {
   border-radius: 8px;
   overflow: hidden;
   background: var(--color-bg);
-  transition: all 0.2s ease;
+  transition: all 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Smooth filter transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-card[style*="display: none"] {
+  animation: none;
 }
 
 .blog-card.featured {
