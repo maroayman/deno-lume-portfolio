@@ -35,23 +35,15 @@ Tags are validated at build time against an approved list in `_config.ts`. Unkno
 ### Prerequisites
 
 - [Deno](https://deno.land/) installed on your system
-- Access to the private blog content repository (for full functionality)
 
 ### Installation
 
-1. Clone this repository with submodules:
+1. Clone this repository:
    ```bash
-   git clone --recurse-submodules git@github.com:maroayman/deno-lume-portfolio.git
+   git clone git@github.com:maroayman/deno-lume-portfolio.git
    ```
 
-2. If you already cloned without submodules, initialize them:
-   ```bash
-   git submodule update --init --recursive
-   ```
-
-3. Navigate to the project directory
-
-> **Note:** The blog content is stored in a private submodule (`src/blog`). If you don't have access to the private repository, the blog section will be empty.
+2. Navigate to the project directory
 
 ### Development
 
@@ -130,7 +122,6 @@ All styles are in `src/styles/main.css`. The design system uses CSS custom prope
 deno-lume-portfolio/
 ├── _config.ts              # Lume configuration + tag validation
 ├── deno.json               # Deno configuration and tasks
-├── .gitmodules             # Git submodules configuration
 ├── src/
 │   ├── _data.ts            # Global site data
 │   ├── _includes/
@@ -142,9 +133,9 @@ deno-lume-portfolio/
 │   │   ├── projects.json
 │   │   ├── certifications.json
 │   │   └── skills.json
-│   ├── blog/               # 🔒 Private submodule (maroayman/portfolio-blog-content)
+│   ├── blog/
 │   │   ├── _data.yml       # Blog post defaults
-│   │   └── *.md            # Blog posts
+│   │   └── *.md            # Blog posts (Markdown)
 │   ├── styles/
 │   │   └── main.css        # Main stylesheet
 │   ├── index.vto           # Homepage
@@ -153,26 +144,6 @@ deno-lume-portfolio/
 │   ├── projects.vto        # Projects page
 │   └── certifications.vto  # Certifications page
 └── dist/                   # Built site (generated)
-```
-
-## Blog Content (Private Submodule)
-
-The blog content is stored in a separate private repository to protect intellectual property while keeping the portfolio code open source.
-
-- **Public repository:** This portfolio codebase (templates, styles, configuration)
-- **Private submodule:** `src/blog/` → [maroayman/portfolio-blog-content](https://github.com/maroayman/portfolio-blog-content) (private)
-
-### Working with Submodules
-
-```bash
-# Pull latest blog content
-git submodule update --remote
-
-# After cloning, initialize submodules
-git submodule update --init --recursive
-
-# Check submodule status
-git submodule status
 ```
 
 ## Technologies Used
