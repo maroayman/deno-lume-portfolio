@@ -4,6 +4,40 @@ title: Blog - Marwan Ayman Shawky
 description: Technical articles about Cloud, DevOps, Infrastructure, and Software Engineering
 ---
 
+<!-- Instant read indicator - injects CSS into head synchronously -->
+<script>
+(function() {
+  try {
+    const history = JSON.parse(localStorage.getItem('blog_reading_history') || '[]');
+    const readUrls = history.map(h => typeof h === 'string' ? h : h.url);
+    if (readUrls.length > 0) {
+      window.__readUrls = new Set(readUrls);
+      // Inject CSS directly into <head> for immediate application
+      const style = document.createElement('style');
+      style.id = 'read-indicator-styles';
+      style.textContent = readUrls.map(url => 
+        `.blog-card[data-url="${url}"] .blog-card-cover::after{content:'✓ Read';position:absolute;bottom:0.5rem;left:0.5rem;padding:0.25rem 0.6rem;font-size:0.7rem;font-weight:600;color:#fff;background:rgba(34,197,94,0.85);border-radius:100px;z-index:10;pointer-events:none}`
+      ).join('');
+      // Insert at start of head for highest priority
+      document.head.insertBefore(style, document.head.firstChild);
+    }
+  } catch(e) {}
+})();
+</script>
+
+<!-- Hide cards until read status is applied, then reveal -->
+<style>
+.blog-card { opacity: 0; }
+</style>
+<script>
+// Immediately reveal cards after read indicator CSS is in place
+requestAnimationFrame(() => {
+  const style = document.createElement('style');
+  style.textContent = '.blog-card { opacity: 1; transition: opacity 0.15s ease; }';
+  document.head.appendChild(style);
+});
+</script>
+
 <div class="container">
   <section class="section">
     <p class="back-link">
@@ -26,8 +60,9 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           type="text" 
           id="blogSearch" 
           class="blog-search-input" 
-          placeholder="Search posts... (try 'linux: docker' to filter by tag)"
+          placeholder="Search posts... (Ctrl+Click tags to multi-select)"
           autocomplete="off"
+          aria-label="Search blog posts"
         >
         <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,22 +95,97 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
       </div>
       
       <!-- Tag Filters -->
-      <div class="blog-tags-filter" id="tagFiltersContainer">
-        <span class="filter-label">Filter by tag:</span>
-        <div class="filter-tags" id="filterTags">
-          {{ set allTags = [] }}
-          {{ for post of search.pages("type=post") }}
-            {{ if post.tags }}
-              {{ for tag of post.tags }}
-                {{ set allTags = allTags.concat([tag]) }}
-              {{ /for }}
-            {{ /if }}
+      {{ set allTags = [] }}
+      {{ for post of search.pages("type=post") }}
+        {{ if post.tags }}
+          {{ for tag of post.tags }}
+            {{ set allTags = allTags.concat([tag]) }}
           {{ /for }}
-          {{ set uniqueTags = [...new Set(allTags)].sort() }}
-          <button class="filter-tag active" data-tag="all">All</button>
-          {{ for tag of uniqueTags }}
-          <button class="filter-tag" data-tag="{{ tag }}">{{ tag }}</button>
+        {{ /if }}
+      {{ /for }}
+      {{ set uniqueTags = [...new Set(allTags)] }}
+      {{ set totalPosts = search.pages("type=post").length }}
+      
+      {{# Build tag counts and sort by count descending using reduce #}}
+      {{ set tagCountPairs = uniqueTags.reduce((acc, tag) => { acc.push({ tag, count: allTags.filter(x => x === tag).length }); return acc; }, []).sort((a, b) => b.count - a.count) }}
+      
+      <div class="blog-tags-filter" id="tagFiltersContainer" role="group" aria-label="Filter posts by tag">
+        <!-- Quick filter: Top tags + dropdown for more -->
+        <div class="quick-tags">
+          <button 
+            class="filter-tag active" 
+            data-tag="all" 
+            role="option" 
+            aria-selected="true"
+          >All <span class="tag-count">({{ totalPosts }})</span></button>
+          
+          <!-- Show top 5 most used tags inline -->
+          {{ for item of tagCountPairs.slice(0, 5) }}
+          {{ set weight = Math.min(5, Math.max(1, Math.ceil(item.count / 3))) }}
+          <button 
+            class="filter-tag weight-{{ weight }}" 
+            data-tag="{{ item.tag }}" 
+            data-count="{{ item.count }}"
+            role="option" 
+            aria-selected="false"
+          >{{ item.tag }} <span class="tag-count">({{ item.count }})</span></button>
           {{ /for }}
+          
+          <!-- Dropdown for all tags -->
+          {{ if uniqueTags.length > 5 }}
+          <div class="tag-dropdown" id="tagDropdown">
+            <button class="tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox">
+              <span>More tags</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="tag-dropdown-panel" id="tagDropdownPanel" role="listbox" aria-label="All tags">
+              <div class="tag-dropdown-search">
+                <svg class="tag-dropdown-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input 
+                  type="text" 
+                  id="tagDropdownSearch" 
+                  class="tag-dropdown-search-input" 
+                  placeholder="Search {{ uniqueTags.length }} tags..."
+                  autocomplete="off"
+                >
+              </div>
+              <div class="tag-dropdown-list" id="tagDropdownList" role="listbox" tabindex="-1">
+                {{ for item of tagCountPairs }}
+                <button 
+                  class="tag-dropdown-item" 
+                  data-tag="{{ item.tag }}"
+                  data-count="{{ item.count }}"
+                  role="option"
+                  aria-selected="false"
+                >
+                  <span class="tag-dropdown-item-name">{{ item.tag }}</span>
+                  <span class="tag-dropdown-item-count">{{ item.count }} posts</span>
+                </button>
+                {{ /for }}
+              </div>
+              <div class="tag-dropdown-empty" id="tagDropdownEmpty" style="display: none;">
+                No tags found
+              </div>
+            </div>
+          </div>
+          {{ /if }}
+        </div>
+        
+        <!-- Active filters indicator -->
+        <div class="active-filters" id="activeFilters" style="display: none;">
+          <span class="active-filters-label">Filtering by:</span>
+          <div class="active-filters-tags" id="activeFiltersTags"></div>
+          <button class="active-filters-clear" id="clearFilters" aria-label="Clear all filters">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+            Clear
+          </button>
         </div>
       </div>
     </div>
@@ -131,7 +241,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
   const BLOG_STATE_KEY = 'blog_pagination_state';
   const searchInput = document.getElementById('blogSearch');
   const searchClear = document.getElementById('searchClear');
-  const filterTags = document.querySelectorAll('.filter-tag');
+  const filterTags = document.querySelectorAll('.quick-tags .filter-tag');
   const viewTabs = document.querySelectorAll('.view-tab');
   const tagFiltersContainer = document.getElementById('tagFiltersContainer');
   const bookmarkCountEl = document.getElementById('bookmarkCount');
@@ -140,19 +250,246 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
   const blogGrid = document.getElementById('pagination-container');
   const paginationControls = document.getElementById('pagination-controls');
   
+  // Dropdown elements
+  const tagDropdown = document.getElementById('tagDropdown');
+  const tagDropdownTrigger = document.getElementById('tagDropdownTrigger');
+  const tagDropdownPanel = document.getElementById('tagDropdownPanel');
+  const tagDropdownSearch = document.getElementById('tagDropdownSearch');
+  const tagDropdownList = document.getElementById('tagDropdownList');
+  const tagDropdownEmpty = document.getElementById('tagDropdownEmpty');
+  const tagDropdownItems = document.querySelectorAll('.tag-dropdown-item');
+  
+  // Active filters elements
+  const activeFiltersEl = document.getElementById('activeFilters');
+  const activeFiltersTagsEl = document.getElementById('activeFiltersTags');
+  const clearFiltersBtn = document.getElementById('clearFilters');
+  
   if (!searchInput || !blogGrid) return;
   
-  let activeTag = 'all';
-  let activeView = 'all'; // 'all', 'bookmarks', 'history'
+  let activeTags = [];
+  let activeView = 'all';
   let currentPage = 1;
   let filteredCards = allCards;
+
+  // ========== TAG DROPDOWN ==========
+  let dropdownFocusIndex = -1;
+  
+  function getVisibleDropdownItems() {
+    return [...tagDropdownItems].filter(item => item.style.display !== 'none');
+  }
+  
+  function setDropdownFocus(index) {
+    const visible = getVisibleDropdownItems();
+    if (visible.length === 0) return;
+    
+    dropdownFocusIndex = Math.max(0, Math.min(index, visible.length - 1));
+    visible.forEach((item, i) => {
+      item.classList.toggle('focused', i === dropdownFocusIndex);
+    });
+    visible[dropdownFocusIndex]?.scrollIntoView({ block: 'nearest' });
+  }
+  
+  if (tagDropdownTrigger && tagDropdown) {
+    // Toggle dropdown
+    tagDropdownTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = tagDropdown.classList.toggle('open');
+      tagDropdownTrigger.setAttribute('aria-expanded', isOpen);
+      if (isOpen && tagDropdownSearch) {
+        dropdownFocusIndex = -1;
+        setTimeout(() => tagDropdownSearch.focus(), 50);
+      }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!tagDropdown.contains(e.target)) {
+        tagDropdown.classList.remove('open');
+        tagDropdownTrigger.setAttribute('aria-expanded', 'false');
+        dropdownFocusIndex = -1;
+      }
+    });
+    
+    // Keyboard navigation
+    tagDropdown.addEventListener('keydown', (e) => {
+      const visible = getVisibleDropdownItems();
+      
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setDropdownFocus(dropdownFocusIndex + 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setDropdownFocus(dropdownFocusIndex - 1);
+      } else if (e.key === 'Enter' && dropdownFocusIndex >= 0) {
+        e.preventDefault();
+        visible[dropdownFocusIndex]?.click();
+      } else if (e.key === 'Escape') {
+        tagDropdown.classList.remove('open');
+        tagDropdownTrigger.setAttribute('aria-expanded', 'false');
+        tagDropdownTrigger.focus();
+        dropdownFocusIndex = -1;
+      }
+    });
+    
+    // Search within dropdown
+    if (tagDropdownSearch) {
+      tagDropdownSearch.addEventListener('input', () => {
+        const query = tagDropdownSearch.value.toLowerCase().trim();
+        let visibleCount = 0;
+        tagDropdownItems.forEach(item => {
+          const tag = item.dataset.tag.toLowerCase();
+          const isVisible = tag.includes(query);
+          item.style.display = isVisible ? '' : 'none';
+          item.classList.remove('focused');
+          if (isVisible) visibleCount++;
+        });
+        dropdownFocusIndex = -1;
+        if (tagDropdownEmpty) {
+          tagDropdownEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      });
+    }
+    
+    // Select from dropdown
+    tagDropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const tag = item.dataset.tag;
+        toggleTagSelection(tag);
+        tagDropdown.classList.remove('open');
+        tagDropdownTrigger.setAttribute('aria-expanded', 'false');
+        if (tagDropdownSearch) tagDropdownSearch.value = '';
+        tagDropdownItems.forEach(i => {
+          i.style.display = '';
+          i.classList.remove('focused');
+        });
+        dropdownFocusIndex = -1;
+        if (tagDropdownEmpty) tagDropdownEmpty.style.display = 'none';
+      });
+      
+      // Hover sets focus
+      item.addEventListener('mouseenter', () => {
+        const visible = getVisibleDropdownItems();
+        dropdownFocusIndex = visible.indexOf(item);
+        visible.forEach((el, i) => el.classList.toggle('focused', i === dropdownFocusIndex));
+      });
+    });
+  }
+  
+  // Toggle tag selection (for multi-tag)
+  function toggleTagSelection(tag) {
+    if (tag === 'all') {
+      activeTags = [];
+    } else {
+      const idx = activeTags.indexOf(tag);
+      if (idx > -1) {
+        activeTags.splice(idx, 1);
+      } else {
+        activeTags.push(tag);
+      }
+    }
+    updateAllTagUI();
+    resetAndFilter();
+  }
+  
+  // Update all tag-related UI
+  function updateAllTagUI() {
+    updateQuickTagsUI();
+    updateDropdownUI();
+    updateActiveFiltersUI();
+    updateUrlHash();
+  }
+  
+  function updateQuickTagsUI() {
+    filterTags.forEach(btn => {
+      const tag = btn.dataset.tag;
+      const isActive = (tag === 'all' && activeTags.length === 0) || activeTags.includes(tag);
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive);
+    });
+  }
+  
+  function updateDropdownUI() {
+    tagDropdownItems.forEach(item => {
+      const tag = item.dataset.tag;
+      item.classList.toggle('selected', activeTags.includes(tag));
+    });
+  }
+  
+  function updateActiveFiltersUI() {
+    if (!activeFiltersEl || !activeFiltersTagsEl) return;
+    
+    if (activeTags.length === 0) {
+      activeFiltersEl.style.display = 'none';
+      return;
+    }
+    
+    activeFiltersEl.style.display = 'flex';
+    activeFiltersTagsEl.innerHTML = activeTags.map(tag => `
+      <span class="active-filter-tag">
+        ${tag}
+        <button data-remove-tag="${tag}" aria-label="Remove ${tag} filter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </span>
+    `).join('');
+    
+    // Add remove handlers
+    activeFiltersTagsEl.querySelectorAll('[data-remove-tag]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.dataset.removeTag;
+        const idx = activeTags.indexOf(tag);
+        if (idx > -1) activeTags.splice(idx, 1);
+        updateAllTagUI();
+        resetAndFilter();
+      });
+    });
+  }
+  
+  // Clear all filters
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', () => {
+      activeTags = [];
+      updateAllTagUI();
+      resetAndFilter();
+    });
+  }
+
+  // ========== URL HASH SYNC ==========
+  function updateUrlHash() {
+    const params = new URLSearchParams();
+    if (activeTags.length > 0) {
+      params.set('tags', activeTags.join(','));
+    }
+    if (activeView !== 'all') {
+      params.set('view', activeView);
+    }
+    const hash = params.toString();
+    const newUrl = hash ? `${window.location.pathname}#${hash}` : window.location.pathname;
+    history.replaceState(null, '', newUrl);
+  }
+  
+  function parseUrlHash() {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return { tags: [], view: 'all' };
+    
+    const params = new URLSearchParams(hash);
+    const tagsParam = params.get('tags');
+    const viewParam = params.get('view');
+    
+    return {
+      tags: tagsParam ? tagsParam.split(',').map(t => t.trim().toLowerCase()) : [],
+      view: viewParam || 'all'
+    };
+  }
   
   // ========== STATE PERSISTENCE (sessionStorage) ==========
   function saveState() {
     const state = {
       page: currentPage,
       view: activeView,
-      tag: activeTag,
+      tags: activeTags,
       search: searchInput.value,
       scrollY: window.scrollY
     };
@@ -160,25 +497,29 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
   }
   
   function restoreState() {
+    // First check URL hash (takes priority for shareability)
+    const hashState = parseUrlHash();
+    if (hashState.tags.length > 0 || hashState.view !== 'all') {
+      activeTags = hashState.tags;
+      activeView = hashState.view;
+      updateAllTagUI();
+      viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === activeView));
+      tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
+      return true;
+    }
+    
     try {
       const state = JSON.parse(sessionStorage.getItem(BLOG_STATE_KEY));
       if (!state) return false;
       
-      // Only restore if coming back (user navigated away and returned)
-      const nav = performance.getEntriesByType('navigation')[0];
-      const isBackNavigation = nav && (nav.type === 'back_forward' || nav.type === 'navigate');
-      
-      // Check if page was stored recently (within 30 minutes)
-      // We'll always restore for simplicity
-      
       currentPage = state.page || 1;
       activeView = state.view || 'all';
-      activeTag = state.tag || 'all';
+      activeTags = state.tags || [];
       searchInput.value = state.search || '';
       
       // Update UI to match restored state
       viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === activeView));
-      filterTags.forEach(b => b.classList.toggle('active', b.dataset.tag === activeTag));
+      updateAllTagUI();
       tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
       
       // Restore scroll position after a small delay to let content render
@@ -289,18 +630,23 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     return allCards.filter(card => {
       const url = card.dataset.url;
       const title = (card.dataset.title || '').toLowerCase();
-      const tags = (card.dataset.tags || '').toLowerCase();
+      const tags = (card.dataset.tags || '').toLowerCase().split(',').filter(t => t);
       
       // Check view filter (bookmarks/history)
       if (activeView === 'bookmarks' && !bookmarks.includes(url)) return false;
       if (activeView === 'history' && !history.includes(url)) return false;
       
-      // Check tag filter (from buttons or search query like "aws:")
-      const effectiveTag = searchTag || (activeTag !== 'all' ? activeTag.toLowerCase() : null);
-      const tagMatch = !effectiveTag || tags.includes(effectiveTag);
+      // Check tag filter - multi-tag support (AND logic)
+      let tagMatch = true;
+      if (searchTag) {
+        tagMatch = tags.includes(searchTag);
+      } else if (activeTags.length > 0 && !activeTags.includes('all')) {
+        // All selected tags must be present (AND logic)
+        tagMatch = activeTags.every(t => tags.includes(t.toLowerCase()));
+      }
       
       // Check search term - ONLY title and tags, not description
-      const termMatch = !searchTerm || title.includes(searchTerm) || tags.includes(searchTerm);
+      const termMatch = !searchTerm || title.includes(searchTerm) || tags.some(t => t.includes(searchTerm));
       
       return tagMatch && termMatch;
     });
@@ -354,20 +700,52 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     }
   }
   
+  // Highlight search terms in text
+  function highlightText(element, term) {
+    const titleLink = element.querySelector('.blog-card-title a');
+    if (!titleLink) return;
+    
+    const originalTitle = element.dataset.title;
+    if (!term) {
+      titleLink.innerHTML = originalTitle;
+      return;
+    }
+    
+    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    titleLink.innerHTML = originalTitle.replace(regex, '<mark>$1</mark>');
+  }
+  
   function updateDisplay() {
     filteredCards = getFilteredCards();
     const totalPages = Math.ceil(filteredCards.length / POSTS_PER_PAGE);
+    const searchTerm = parseQuery(searchInput.value.trim()).term;
     
     // Ensure current page is valid
     if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
     
-    // Hide all cards first
-    allCards.forEach(card => card.style.display = 'none');
+    // Hide all cards first and remove highlights
+    allCards.forEach(card => {
+      card.style.display = 'none';
+      card.style.opacity = '0';
+      card.style.animationDelay = '';
+      highlightText(card, '');
+    });
     
-    // Show only cards for current page
+    // Show only cards for current page with staggered animation
     const start = (currentPage - 1) * POSTS_PER_PAGE;
     const end = start + POSTS_PER_PAGE;
-    filteredCards.slice(start, end).forEach(card => card.style.display = '');
+    filteredCards.slice(start, end).forEach((card, index) => {
+      card.style.display = '';
+      card.style.animationDelay = `${index * 50}ms`;
+      // Trigger reflow for animation
+      void card.offsetWidth;
+      card.style.opacity = '1';
+      
+      // Apply search highlighting
+      if (searchTerm) {
+        highlightText(card, searchTerm);
+      }
+    });
     
     // Update UI
     const isEmpty = filteredCards.length === 0;
@@ -375,18 +753,36 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     blogGrid.style.display = isEmpty ? 'none' : '';
     searchClear.style.display = searchInput.value.trim() ? 'flex' : 'none';
     
-    // Update empty message based on view
+    // Update empty message based on view with suggestions
     if (isEmpty) {
       if (activeView === 'bookmarks') {
         noResults.innerHTML = '<p>No bookmarked articles yet. Click the bookmark icon on any article to save it.</p>';
       } else if (activeView === 'history') {
         noResults.innerHTML = '<p>No reading history yet. Start reading articles to build your history.</p>';
+      } else if (activeTags.length > 0) {
+        const otherTags = [...document.querySelectorAll('.quick-tags .filter-tag:not([data-tag="all"])')]
+          .map(btn => btn.dataset.tag)
+          .filter(t => !activeTags.includes(t))
+          .slice(0, 3);
+        const suggestions = otherTags.length > 0 
+          ? `<p style="margin-top: 0.5rem; font-size: 0.9rem;">Try: ${otherTags.map(t => `<button class="suggest-tag" data-tag="${t}">${t}</button>`).join(' ')}</p>` 
+          : '';
+        noResults.innerHTML = `<p>No posts found with ${activeTags.length > 1 ? 'all these tags' : 'this tag'}.</p>${suggestions}`;
+        // Add click handlers for suggestions
+        noResults.querySelectorAll('.suggest-tag').forEach(btn => {
+          btn.addEventListener('click', () => {
+            activeTags = [btn.dataset.tag];
+            updateAllTagUI();
+            resetAndFilter();
+          });
+        });
       } else {
         noResults.innerHTML = '<p>No posts found matching your search.</p>';
       }
     }
     
     renderPagination();
+    updateUrlHash();
   }
   
   function resetAndFilter() {
@@ -399,8 +795,8 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
   
   searchClear.addEventListener('click', () => {
     searchInput.value = '';
-    activeTag = 'all';
-    filterTags.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === 'all'));
+    activeTags = [];
+    updateAllTagUI();
     resetAndFilter();
     searchInput.focus();
   });
@@ -415,16 +811,32 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
       // Show/hide tag filters (only for "all" view)
       tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
       
+      updateUrlHash();
       resetAndFilter();
     });
   });
   
-  // Tag filter buttons
+  // Tag filter buttons (quick tags) - multi-select with Ctrl/Cmd key
   filterTags.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeTag = btn.dataset.tag;
-      filterTags.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    btn.addEventListener('click', (e) => {
+      const tag = btn.dataset.tag;
+      
+      if (tag === 'all') {
+        activeTags = [];
+      } else if (e.ctrlKey || e.metaKey) {
+        // Multi-select: toggle this tag
+        const idx = activeTags.indexOf(tag);
+        if (idx > -1) {
+          activeTags.splice(idx, 1);
+        } else {
+          activeTags.push(tag);
+        }
+      } else {
+        // Single select: replace with just this tag
+        activeTags = [tag];
+      }
+      
+      updateAllTagUI();
       resetAndFilter();
     });
   });
@@ -435,18 +847,36 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     tag.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const tagName = tag.dataset.tag;
+      const tagName = tag.dataset.tag.toLowerCase();
       
       // Switch to "all" view and filter by tag
       activeView = 'all';
       viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === 'all'));
       tagFiltersContainer.style.display = '';
       
-      activeTag = tagName;
-      filterTags.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === tagName));
+      if (e.ctrlKey || e.metaKey) {
+        if (!activeTags.includes(tagName)) {
+          activeTags.push(tagName);
+        }
+      } else {
+        activeTags = [tagName];
+      }
+      
+      updateAllTagUI();
       resetAndFilter();
       document.querySelector('.blog-search-container').scrollIntoView({ behavior: 'smooth' });
     });
+  });
+  
+  // Handle browser back/forward navigation
+  window.addEventListener('hashchange', () => {
+    const hashState = parseUrlHash();
+    activeTags = hashState.tags;
+    activeView = hashState.view;
+    updateAllTagUI();
+    viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === activeView));
+    tagFiltersContainer.style.display = activeView === 'all' ? '' : 'none';
+    resetAndFilter();
   });
   
   // Keyboard shortcut: "/" to focus search
