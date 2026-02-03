@@ -24,7 +24,7 @@ Docker brings many benefits to developers and teams:
 
 Here is a diagram showing the difference between Docker and virtual machines.
 
-![Generated image](https://sdmntpritalynorth.oaiusercontent.com/files/00000000-9a88-6246-8f90-947707afc3d1/raw?se=2025-09-28T07%3A00%3A29Z&sp=r&sv=2024-08-04&sr=b&scid=71adfe07-1b3f-546e-82ec-6ea9d9e47847&skoid=b928fb90-500a-412f-a661-1ece57a7c318&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-28T05%3A20%3A31Z&ske=2025-09-29T05%3A20%3A31Z&sks=b&skv=2024-08-04&sig=Oyt3T6W9QKxgoLZlD2c4bO2n6inhiix4ENC3ft0C6PY%3D align="left")
+![Docker vs Virtual Machines](https://www.c-sharpcorner.com/article/docker-vs-virtual-machines-vms/Images/Docker-.jpg)
 
 ## Installing Docker
 
