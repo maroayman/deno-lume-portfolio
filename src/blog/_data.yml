@@ -1,4 +1,0 @@
-# Blog post defaults
-# Tags are normalized to lowercase for consistency
-layout: layouts/blog.vto
-type: post
