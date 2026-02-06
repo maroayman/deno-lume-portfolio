@@ -208,6 +208,15 @@ footer {
   transform: translateY(-1px);
 }
 
+/* Dark mode: Use darker background for better contrast */
+body.dark-mode .resume-button {
+  background: #0052a3;
+}
+
+body.dark-mode .resume-button:hover {
+  background: #003d7a;
+}
+
 /* Back to Top Button */
 .back-to-top {
   position: fixed;
@@ -916,20 +925,36 @@ body.dark-mode .blog-card-title mark {
 /* Suggestion buttons in empty state */
 .suggest-tag {
   display: inline-block;
-  padding: 0.25rem 0.65rem;
+  padding: 0.3rem 0.85rem;
   margin: 0.2rem;
-  font-size: 0.85rem;
-  background: var(--color-surface-elevated);
-  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-link);
+  background: rgba(0, 102, 204, 0.08);
+  border: 1.5px solid var(--color-link);
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.15s ease;
+  box-shadow: 0 1px 4px rgba(0,102,204,0.07);
 }
 
 .suggest-tag:hover {
   background: var(--color-link);
-  color: white;
+  color: #fff;
   border-color: var(--color-link);
+}
+
+body.dark-mode .suggest-tag {
+  background: rgba(77, 159, 255, 0.12);
+  border-color: #4d9fff;
+  color: #4d9fff;
+  box-shadow: 0 1px 4px rgba(77,159,255,0.1);
+}
+
+body.dark-mode .suggest-tag:hover {
+  background: #4d9fff;
+  color: white;
+  border-color: #4d9fff;
 }
 
 /* Active filters indicator */
