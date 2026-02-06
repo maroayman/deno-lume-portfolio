@@ -6,6 +6,7 @@ import minifyHTML from "lume/plugins/minify_html.ts";
 import date from "lume/plugins/date.ts";
 import markdown from "lume/plugins/markdown.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
+import inline from "lume/plugins/inline.ts";
 
 const isProduction = Deno.env.get("DENO_ENV") === "production";
 
@@ -111,44 +112,18 @@ site.process("*", (pages) => {
     }
 });
 
-// Approved tags list - add new tags here
-const APPROVED_TAGS = [
-    "linux",
-    "docker",
-    "aws",
-    "automation",
-    "wsl",
-    "storage",
-    "security",
-    "python",
-    "networking",
-    "go",
-    "containers",
-    "ansible",
-    "kubernetes",
-    "devops",
-    "ci-cd",
-    "git",
-];
-
-// Tag validation and normalization processor
+// Tag normalization processor
 site.preprocess([".md"], (pages) => {
     for (const page of pages) {
         if (page.data.tags && Array.isArray(page.data.tags)) {
             // Normalize tags to lowercase
             page.data.tags = page.data.tags.map((tag: string) => tag.toLowerCase());
-
-            // Validate tags
-            for (const tag of page.data.tags) {
-                if (tag !== "post" && !APPROVED_TAGS.includes(tag)) {
-                    console.warn(
-                        `\x1b[33m[Tag Warning]\x1b[0m Unknown tag "${tag}" in: ${page.src.path}${page.src.ext}. Consider adding it to APPROVED_TAGS in _config.ts`
-                    );
-                }
-            }
         }
     }
 });
+
+// Inline plugin for critical CSS
+site.use(inline());
 
 // Optimizations
 site.use(postcss());

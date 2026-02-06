@@ -1,6 +1,6 @@
 ---
 title: "Beginner's Guide to Networking Essentials in Linux"
-description: "Networking is at the heart of Linux system administration and DevOps. Whether you’re managing servers, debugging applications, or configuring firewalls, understanding Linux networking is essential. In"
+description: "Networking is at the heart of Linux system administration and DevOps. Whether you’re managing servers, debugging applications, or configuring firewalls, understanding Linux networking is essential"
 date: 2025-09-22
 tags:
   - Linux
