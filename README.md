@@ -1,10 +1,12 @@
 # Deno Lume Portfolio
 
-A modern, minimal portfolio website built with Deno and Lume static site generator.
+A modern, minimal portfolio website built with Deno and Lume static site
+generator.
 
 ## Features
 
 ### Core
+
 - 🎨 Clean, minimal design with light/dark mode
 - 📱 Fully responsive design
 - ⚡ Fast performance with static site generation
@@ -12,6 +14,7 @@ A modern, minimal portfolio website built with Deno and Lume static site generat
 - ♿ Accessible (ARIA attributes, keyboard navigation)
 
 ### Blog System
+
 - 📝 Markdown-based blog posts
 - 🏷️ **Advanced tag filtering system**
   - Multi-tag filtering with AND logic (Ctrl/Cmd+click)
@@ -28,7 +31,9 @@ A modern, minimal portfolio website built with Deno and Lume static site generat
 - 📊 Reading progress bar
 
 ### Tag Validation
-Tags are validated at build time against an approved list in `_config.ts`. Unknown tags trigger a warning to maintain consistency.
+
+Tags are validated at build time against an approved list in `_config.ts`.
+Unknown tags trigger a warning to maintain consistency.
 
 ## Getting Started
 
@@ -103,14 +108,18 @@ Add new tags to the `APPROVED_TAGS` array in `_config.ts`:
 
 ```typescript
 const APPROVED_TAGS = [
-  "linux", "docker", "aws", "automation",
+  "linux",
+  "docker",
+  "aws",
+  "automation",
   // Add your new tags here
 ];
 ```
 
 ### Styling
 
-All styles are in `src/styles/main.css`. The design system uses CSS custom properties (variables) for easy customization:
+All styles are in `src/styles/main.css`. The design system uses CSS custom
+properties (variables) for easy customization:
 
 - Colors: Update the `:root` variables for your color scheme
 - Typography: Change font families and sizes
@@ -156,11 +165,14 @@ deno-lume-portfolio/
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
+Contributions are welcome! If you find a bug or have a feature request, please
+open an issue or submit a pull request.
 
 ## Reporting Issues
 
-If you encounter any problems, please [open an issue](https://github.com/maroayman/deno-lume-portfolio/issues) with details and steps to reproduce.
+If you encounter any problems, please
+[open an issue](https://github.com/maroayman/deno-lume-portfolio/issues) with
+details and steps to reproduce.
 
 ## License
 

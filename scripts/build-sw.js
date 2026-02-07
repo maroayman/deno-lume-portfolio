@@ -186,12 +186,12 @@ self.addEventListener('message', (event) => {
 });
 `;
 
-const destPath = './dist/sw.js';
+const destPath = "./dist/sw.js";
 
 try {
   await Deno.writeTextFile(destPath, SW_SOURCE);
-  console.log('Service worker generated successfully at', destPath);
+  console.log("Service worker generated successfully at", destPath);
 } catch (error) {
-  console.error('Failed to generate service worker:', error);
+  console.error("Failed to generate service worker:", error);
   Deno.exit(1);
 }

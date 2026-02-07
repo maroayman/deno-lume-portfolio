@@ -7,45 +7,49 @@ tags:
   - Automation
 ---
 
-Shell scripting is one of the most powerful skills you can learn in Linux. It allows you to **automate repetitive tasks**, build simple tools, and combine commands into workflows. Whether you’re an aspiring system administrator or DevOps engineer, shell scripting is a must-have skill.
+Shell scripting is one of the most powerful skills you can learn in Linux. It
+allows you to **automate repetitive tasks**, build simple tools, and combine
+commands into workflows. Whether you’re an aspiring system administrator or
+DevOps engineer, shell scripting is a must-have skill.
 
 ## What is a Shell Script?
 
-A **shell script** is simply a text file that contains Linux commands executed in sequence by a shell (like `bash`, `zsh`, or `sh`).
+A **shell script** is simply a text file that contains Linux commands executed
+in sequence by a shell (like `bash`, `zsh`, or `sh`).
 
-Think of it as saving a series of terminal commands into a file so you can run them all at once.
+Think of it as saving a series of terminal commands into a file so you can run
+them all at once.
 
 ## Creating Your First Script
 
 1. Create a new file:
-    
-    ```bash
-    nano hello.sh
-    ```
-    
+
+   ```bash
+   nano hello.sh
+   ```
+
 2. Add the following content:
-    
-    ```bash
-    #!/bin/bash
-    echo "Hello, World!"
-    ```
-    
-    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521710888/8171c72b-f741-4701-a91a-94463d036566.png)
-    
+
+   ```bash
+   #!/bin/bash
+   echo "Hello, World!"
+   ```
+
+   ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521710888/8171c72b-f741-4701-a91a-94463d036566.png)
+
 3. Save and exit.
-    
+
 4. Make it executable:
-    
-    ```bash
-    chmod +x hello.sh
-    ```
-    
+
+   ```bash
+   chmod +x hello.sh
+   ```
+
 5. Run it:
-    
-    ```bash
-    ./hello.sh
-    ```
-    
+
+   ```bash
+   ./hello.sh
+   ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521771838/d6faf2d2-de2d-46e9-a367-51dbdb0a1a1a.png)
 
@@ -138,16 +142,15 @@ greet "Linux User"
 
 ## Useful Commands in Scripts
 
-* `date` → Print current date and time
-    
-* `uptime` → Show system uptime
-    
-* `df -h` → Disk usage
-    
-* `free -m` → Memory usage
-    
-* `ps aux` → Running processes
-    
+- `date` → Print current date and time
+
+- `uptime` → Show system uptime
+
+- `df -h` → Disk usage
+
+- `free -m` → Memory usage
+
+- `ps aux` → Running processes
 
 These can all be combined into scripts for automation.
 
@@ -159,105 +162,99 @@ Here are **9 labs** to practice, sorted by difficulty.
 
 **Lab 1: Greeting Script**
 
-* Ask for the user’s name (`read name`) and print:
-    
-    ```bash
-    Hello, <name>! Welcome to Linux.
-    ```
-    
+- Ask for the user’s name (`read name`) and print:
+
+  ```bash
+  Hello, <name>! Welcome to Linux.
+  ```
 
 ✅ Goal: Learn input, variables, and echo.
 
 **Lab 2: Simple Calculator**
 
-* Write a script that takes two numbers as input and prints their sum.  
-    Hint: Use `read` and arithmetic `$(( ))`.  
-    ✅ Goal: Practice input and basic math.
-    
+- Write a script that takes two numbers as input and prints their sum.\
+  Hint: Use `read` and arithmetic `$(( ))`.\
+  ✅ Goal: Practice input and basic math.
 
 **Lab 3: Even or Odd Checker**
 
-* Ask for a number.
-    
-* Print whether it’s even or odd.  
-    Hint: Use modulus operator `%`.  
-    ✅ Goal: Practice conditionals.
-    
+- Ask for a number.
+
+- Print whether it’s even or odd.\
+  Hint: Use modulus operator `%`.\
+  ✅ Goal: Practice conditionals.
 
 ### 🟡 Intermediate Labs (Automation & File Handling)
 
 **Lab 4: Backup a Directory**
 
-* Takes a directory as input.
-    
-* Creates a `.tar.gz` backup with today’s date.
-    
-* Saves it in `/tmp/backups/`.  
-    ✅ Goal: Automate backups.
-    
+- Takes a directory as input.
+
+- Creates a `.tar.gz` backup with today’s date.
+
+- Saves it in `/tmp/backups/`.\
+  ✅ Goal: Automate backups.
 
 **Lab 5: Log File Cleaner**
 
-* Find and delete all `.log` files older than 7 days in `/var/log/`.  
-    Hint: Use `find /var/log -name "*.log" -mtime +7 -delete`.  
-    ✅ Goal: Automate system housekeeping.
-    
+- Find and delete all `.log` files older than 7 days in `/var/log/`.\
+  Hint: Use `find /var/log -name "*.log" -mtime +7 -delete`.\
+  ✅ Goal: Automate system housekeeping.
 
 **Lab 6: User Creation Script**
 
-* Ask for a username.
-    
-* Create the user and set a default password.
-    
-* Add them to the `developers` group.  
-    ✅ Goal: Automate sysadmin tasks.
-    
+- Ask for a username.
+
+- Create the user and set a default password.
+
+- Add them to the `developers` group.\
+  ✅ Goal: Automate sysadmin tasks.
 
 ### 🔴 Advanced Labs (Reusable Tools & System Monitoring)
 
 **Lab 7: System Health Report**
 
-* Print:
-    
-    * Current date & time (`date`)
-        
-    * Uptime (`uptime`)
-        
-    * Disk usage (`df -h`)
-        
-    * Memory usage (`free -m`)
-        
-    * Top 5 processes (`ps aux --sort=-%mem | head -n 6`)  
-        ✅ Goal: Build a reusable admin tool.
-        
+- Print:
+
+  - Current date & time (`date`)
+
+  - Uptime (`uptime`)
+
+  - Disk usage (`df -h`)
+
+  - Memory usage (`free -m`)
+
+  - Top 5 processes (`ps aux --sort=-%mem | head -n 6`)\
+    ✅ Goal: Build a reusable admin tool.
 
 **Lab 8: Network Connectivity Checker**
 
-* Read a list of hostnames from a file.
-    
-* Loop through and `ping` each one.
-    
-* Print which hosts are up and which are down.  
-    ✅ Goal: Practice loops + conditionals with real networking.
-    
+- Read a list of hostnames from a file.
+
+- Loop through and `ping` each one.
+
+- Print which hosts are up and which are down.\
+  ✅ Goal: Practice loops + conditionals with real networking.
 
 **Lab 9: Automated Service Monitor**
 
-* Check if `nginx` or `apache2` is running.
-    
-* If not, restart it and log the event to `/var/log/service_monitor.log`.  
-    ✅ Goal: Automate monitoring & recovery.
-    
+- Check if `nginx` or `apache2` is running.
+
+- If not, restart it and log the event to `/var/log/service_monitor.log`.\
+  ✅ Goal: Automate monitoring & recovery.
 
 ## Conclusion
 
-With these labs, you’ll progress from simple **echo scripts** to building **real-world automation tools**. Shell scripting is a skill that grows with you: the more you practice, the more powerful your Linux workflows become.
+With these labs, you’ll progress from simple **echo scripts** to building
+**real-world automation tools**. Shell scripting is a skill that grows with you:
+the more you practice, the more powerful your Linux workflows become.
 
 ---
 
 # Practice Pack Script
 
-Here’s the [`linux-shell-labs.sh`](http://linux-shell-labs.sh) file (all 9 labs with comments):
+Here’s the [`linux-shell-labs.sh`](http://linux-shell-labs.sh) file (all 9 labs
+with comments):
 
 ```bash
 #!/bin/bash

@@ -9,6 +9,7 @@ description: How to update content and deploy the Lume portfolio
 ### 1. Make your content changes
 
 Edit files in `src/`:
+
 - `src/_data/*.json` - Data files (experiences, projects, certifications)
 - `src/*.vto` - Page templates
 - `src/styles/main.css` - Styles
@@ -28,6 +29,7 @@ deno task build:all
 ```
 
 This runs:
+
 - Lume build → generates HTML/CSS to `dist/`
 - Workbox → generates `sw.js` with precache manifest
 
