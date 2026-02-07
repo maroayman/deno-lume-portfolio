@@ -52,9 +52,12 @@ Manage replicas, rolling updates, and self‑healing.
 
 ### Services
 
-![Service Networking](https://cdn.shopaccino.com/igmguru/articles/kubernetes-architecture-3528463276791325_l.jpg?v=546)
-
 Expose applications and provide stable networking.
+
+
+![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-node-port-diagram.41bb0147.webp)
+
+![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-l-b-diagram.f1e36310.webp)
 
 ## Configuration & Secrets
 
