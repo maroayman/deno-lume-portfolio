@@ -5,7 +5,10 @@
     "build:sw": "deno run --allow-read --allow-write scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
     "serve": "deno task build:sw && deno task lume -s",
-    "dev": "deno task serve"
+    "dev": "deno task serve",
+    "lint": "deno lint src/ _config.ts",
+    "fmt": "deno fmt src/ _config.ts",
+    "check": "deno check _config.ts"
   },
   "imports": {
     "lume/": "https://deno.land/x/lume@v3.1.4/"

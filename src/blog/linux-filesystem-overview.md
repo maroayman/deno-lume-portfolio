@@ -8,15 +8,22 @@ tags:
 
 # Brief
 
-If you’re new to Linux, opening the terminal and running `ls /` can feel like stepping into a maze. There’s a `/bin`, `/etc`, `/home`, `/var`, `/usr` — but what do these mysterious folders mean?
+If you’re new to Linux, opening the terminal and running `ls /` can feel like
+stepping into a maze. There’s a `/bin`, `/etc`, `/home`, `/var`, `/usr` — but
+what do these mysterious folders mean?
 
-The Linux filesystem is **organized like a tree**. Once you understand its structure, navigating Linux becomes simple and logical. In this guide, we’ll explore what lives where, why it’s structured this way, and how you can find what you need quickly.
+The Linux filesystem is **organized like a tree**. Once you understand its
+structure, navigating Linux becomes simple and logical. In this guide, we’ll
+explore what lives where, why it’s structured this way, and how you can find
+what you need quickly.
 
 ---
 
 ## The Filesystem Tree
 
-**Linux** uses a **single-root directory structure**. Everything starts at `/` (root). All files, programs, devices, and even drives are located under this root.
+**Linux** uses a **single-root directory structure**. Everything starts at `/`
+(root). All files, programs, devices, and even drives are located under this
+root.
 
 ![Filesystem – Source: FutureLearn](https://cdn-wordpress-info.futurelearn.com/info/wp-content/uploads/a2794f8f-b0c1-468d-89c6-bcf29d2d6517-1.png)
 
@@ -44,7 +51,8 @@ The Linux filesystem is **organized like a tree**. Once you understand its struc
 ## Challenge: Navigate and Explore Your Linux Filesystem
 
 If you haven’t set up Linux in WSL2 yet, start with
-[**Part 1: Installing Linux on WSL2**](/blog/linux-wsl-beginners/) so you can follow along.
+[**Part 1: Installing Linux on WSL2**](/blog/linux-wsl-beginners/) so you can
+follow along.
 
 Once you’re ready, open your terminal and try these steps:
 
@@ -65,10 +73,10 @@ cd /home && ls
 
 You should notice how:
 
-* `/bin` is full of executable files (commands)
-* `/etc` has configuration files
-* `/home` may only show your username
-* `/var` has subdirectories like `log` or `cache`
+- `/bin` is full of executable files (commands)
+- `/etc` has configuration files
+- `/home` may only show your username
+- `/var` has subdirectories like `log` or `cache`
 
 ### 3. Check Directory Details
 
@@ -76,8 +84,8 @@ You should notice how:
 ls -lh /
 ```
 
-* This shows file sizes, permissions, and ownership
-* Question: Which folders are owned by `root`? Which ones are writable?
+- This shows file sizes, permissions, and ownership
+- Question: Which folders are owned by `root`? Which ones are writable?
 
 ### 4. Find Where You Are
 
@@ -85,15 +93,17 @@ ls -lh /
 pwd
 ```
 
-* `pwd` (“print working directory”) shows your current location
-* Move around using `cd` and observe how `pwd` changes
+- `pwd` (“print working directory”) shows your current location
+- Move around using `cd` and observe how `pwd` changes
 
 ---
 
 ## Reflection
 
-* Which directory looks most important for **system configuration**?
-* Which one seems meant for **users** like you?
-* Did you find any folders that are **empty**?
+- Which directory looks most important for **system configuration**?
+- Which one seems meant for **users** like you?
+- Did you find any folders that are **empty**?
 
-> The goal here is to get comfortable moving around and start recognizing patterns. Keep exploring step by step — Linux mastery is closer than you think!
+> The goal here is to get comfortable moving around and start recognizing
+> patterns. Keep exploring step by step — Linux mastery is closer than you
+> think!

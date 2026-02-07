@@ -13,17 +13,17 @@ tags:
 
 1. [Part 1: A Brief Overview of Linux](#part-1-a-brief-overview-of-linux)
 
-   * [What Is Linux?](#what-is-linux)
-   * [Why Learn Linux?](#why-learn-linux)
-   * [Popular Linux Distributions](#popular-linux-distributions)
+   - [What Is Linux?](#what-is-linux)
+   - [Why Learn Linux?](#why-learn-linux)
+   - [Popular Linux Distributions](#popular-linux-distributions)
 2. [Part 2: Practicing Linux on Windows with WSL](#part-2-practicing-linux-on-windows-with-wsl)
 
-   * [Introduction to WSL](#introduction-to-wsl)
-   * [Step-by-Step Installation (Windows 11)](#step-by-step-installation-windows-11)
-   * [Choosing a Distribution](#choosing-a-distribution)
-   * [Installing Distributions](#installing-distributions)
-   * [Manual Installation (CentOS Stream)](#manual-installation-centos-stream)
-   * [Switching Between WSL Distributions](#switching-between-wsl-distributions)
+   - [Introduction to WSL](#introduction-to-wsl)
+   - [Step-by-Step Installation (Windows 11)](#step-by-step-installation-windows-11)
+   - [Choosing a Distribution](#choosing-a-distribution)
+   - [Installing Distributions](#installing-distributions)
+   - [Manual Installation (CentOS Stream)](#manual-installation-centos-stream)
+   - [Switching Between WSL Distributions](#switching-between-wsl-distributions)
 3. [Part 3: Integrating with VS Code and Windows](#part-3-integrating-with-vs-code-and-windows)
 4. [Part 4: What’s Next?](#part-4-whats-next)
 
@@ -33,9 +33,15 @@ tags:
 
 ### What Is Linux?
 
-Linux is an **open-source operating system** and a free alternative to Windows and macOS. Created in **1991 by Linus Torvalds**, Linux is based on Unix principles.
+Linux is an **open-source operating system** and a free alternative to Windows
+and macOS. Created in **1991 by Linus Torvalds**, Linux is based on Unix
+principles.
 
-Technically, *Linux* refers to the **kernel**—the core component that manages hardware and system resources. In everyday usage, however, it usually means a complete operating system known as a **Linux distribution (distro)**, which bundles the kernel with system utilities, libraries, and often a desktop environment.
+Technically, _Linux_ refers to the **kernel**—the core component that manages
+hardware and system resources. In everyday usage, however, it usually means a
+complete operating system known as a **Linux distribution (distro)**, which
+bundles the kernel with system utilities, libraries, and often a desktop
+environment.
 
 ---
 
@@ -43,27 +49,38 @@ Technically, *Linux* refers to the **kernel**—the core component that manages 
 
 #### Server and Cloud Dominance
 
-Most web servers, databases, and cloud platforms—**AWS**, **Azure**, and **GCP**—run on Linux. If you work in backend, DevOps, or cloud engineering, Linux is not optional; it’s essential.
+Most web servers, databases, and cloud platforms—**AWS**, **Azure**, and
+**GCP**—run on Linux. If you work in backend, DevOps, or cloud engineering,
+Linux is not optional; it’s essential.
 
 #### The Power of the Command Line
 
-Linux provides a powerful **command-line interface (CLI)** that enables scripting and automation. This allows developers and system administrators to manage systems efficiently and at scale—often faster and more precisely than with a GUI.
+Linux provides a powerful **command-line interface (CLI)** that enables
+scripting and automation. This allows developers and system administrators to
+manage systems efficiently and at scale—often faster and more precisely than
+with a GUI.
 
 #### Open Source and Customization
 
-Linux is open-source, meaning its code is freely available to inspect and modify. This encourages community-driven innovation, strong security practices, and deep **customization**, letting users tailor systems to their exact needs.
+Linux is open-source, meaning its code is freely available to inspect and
+modify. This encourages community-driven innovation, strong security practices,
+and deep **customization**, letting users tailor systems to their exact needs.
 
 ---
 
 ### Popular Linux Distributions
 
-* **Red Hat Enterprise Linux (RHEL)** – Enterprise-grade stability, security, and long-term support (subscription-based).
-* **CentOS (Legacy)** – Previously a free RHEL clone; now replaced by **CentOS Stream** and community forks like **Rocky Linux** and **AlmaLinux**.
-* **Ubuntu** – User-friendly, widely adopted, and backed by a massive community.
-* **Debian** – Extremely stable and community-focused; the foundation for many other distros.
-* **Fedora** – Cutting-edge features and technologies, sponsored by Red Hat.
-* **Linux Mint** – Desktop-focused, Windows-friendly UX based on Ubuntu.
-* **Kali Linux** – Debian-based distro for penetration testing and digital forensics, maintained by Offensive Security.
+- **Red Hat Enterprise Linux (RHEL)** – Enterprise-grade stability, security,
+  and long-term support (subscription-based).
+- **CentOS (Legacy)** – Previously a free RHEL clone; now replaced by **CentOS
+  Stream** and community forks like **Rocky Linux** and **AlmaLinux**.
+- **Ubuntu** – User-friendly, widely adopted, and backed by a massive community.
+- **Debian** – Extremely stable and community-focused; the foundation for many
+  other distros.
+- **Fedora** – Cutting-edge features and technologies, sponsored by Red Hat.
+- **Linux Mint** – Desktop-focused, Windows-friendly UX based on Ubuntu.
+- **Kali Linux** – Debian-based distro for penetration testing and digital
+  forensics, maintained by Offensive Security.
 
 ---
 
@@ -71,15 +88,17 @@ Linux is open-source, meaning its code is freely available to inspect and modify
 
 ### Introduction to WSL
 
-The **Windows Subsystem for Linux (WSL)** allows you to run a real Linux environment directly on Windows—without dual booting or heavy virtual machines.
+The **Windows Subsystem for Linux (WSL)** allows you to run a real Linux
+environment directly on Windows—without dual booting or heavy virtual machines.
 
 WSL is lightweight and deeply integrated with Windows:
 
-* Access Windows files from Linux
-* Launch Windows apps from Linux
-* Near-native performance
+- Access Windows files from Linux
+- Launch Windows apps from Linux
+- Near-native performance
 
-**WSL 2** is the recommended version, using a real Linux kernel inside a lightweight VM for full system call compatibility.
+**WSL 2** is the recommended version, using a real Linux kernel inside a
+lightweight VM for full system call compatibility.
 
 ---
 
@@ -99,12 +118,12 @@ Ensure you’re running **Windows 11**:
 
 #### Official Microsoft Store Options
 
-* **Ubuntu (LTS)** – Best for beginners and the default WSL distro
-* **Debian** – Stable and minimal
-* **Kali Linux** – Security and pentesting
-* **openSUSE** – Available as **Leap** (stable) or **Tumbleweed** (rolling)
-* **Oracle Linux** – Enterprise-focused, RHEL-compatible
-* **AlmaLinux** – Community-driven RHEL clone
+- **Ubuntu (LTS)** – Best for beginners and the default WSL distro
+- **Debian** – Stable and minimal
+- **Kali Linux** – Security and pentesting
+- **openSUSE** – Available as **Leap** (stable) or **Tumbleweed** (rolling)
+- **Oracle Linux** – Enterprise-focused, RHEL-compatible
+- **AlmaLinux** – Community-driven RHEL clone
 
 ---
 
@@ -136,12 +155,13 @@ wsl --install -d <DistroName>
 
 ### Manual Installation: CentOS Stream
 
-CentOS Stream is not available directly from the Microsoft Store and must be installed manually.
+CentOS Stream is not available directly from the Microsoft Store and must be
+installed manually.
 
 #### Prerequisites
 
-* WSL 2 enabled
-* A dedicated directory (e.g., `C:\WSL\CentOS-Stream`)
+- WSL 2 enabled
+- A dedicated directory (e.g., `C:\WSL\CentOS-Stream`)
 
 #### Import Method
 
@@ -155,10 +175,10 @@ wsl --import CentOS-Stream C:\WSL\CentOS-Stream C:\path\CentOS-Stream.tar.xz --v
 
 #### Initial Setup
 
-* Launch with: `wsl -d CentOS-Stream`
-* Create a non-root user
-* Add user to the `wheel` group
-* Configure `/etc/wsl.conf` to set the default user
+- Launch with: `wsl -d CentOS-Stream`
+- Create a non-root user
+- Add user to the `wheel` group
+- Configure `/etc/wsl.conf` to set the default user
 
 ---
 
@@ -180,9 +200,9 @@ wsl --set-default kali-linux
 
 #### Method 3: Windows Terminal (GUI)
 
-* Open **Windows Terminal**
-* Click the dropdown arrow next to `+`
-* Select your distro
+- Open **Windows Terminal**
+- Click the dropdown arrow next to `+`
+- Select your distro
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756520591467/edce4a58-1679-47ca-9319-7df23504b6ec.png)
 
@@ -203,8 +223,8 @@ VS Code will open connected directly to your Linux filesystem.
 
 ### Navigating Files
 
-* **Windows → Linux:** `\wsl.localhost`
-* **Linux → Windows:** `/mnt/c`, `/mnt/d`, etc.
+- **Windows → Linux:** `\wsl.localhost`
+- **Linux → Windows:** `/mnt/c`, `/mnt/d`, etc.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756520788375/67ce884d-72ff-48bc-90cf-d1ac7eecdc84.png)
 
@@ -216,26 +236,27 @@ VS Code will open connected directly to your Linux filesystem.
 
 ### Learn Shell Scripting
 
-* Bash variables
-* Conditionals (`if`)
-* Loops (`for`, `while`)
+- Bash variables
+- Conditionals (`if`)
+- Loops (`for`, `while`)
 
 ### Explore More Distros
 
-* Kali Linux for security
-* Debian for stability
-* Fedora for cutting-edge tech
+- Kali Linux for security
+- Debian for stability
+- Fedora for cutting-edge tech
 
 ### Join the Community
 
-* Forums, Discord, Reddit (`r/linux`)
+- Forums, Discord, Reddit (`r/linux`)
 
 ### Hands-on Projects
 
-* Configure **Nginx** or **Apache**
-* Build a **Flask/Django** app
-* Manage code with **Git**
+- Configure **Nginx** or **Apache**
+- Build a **Flask/Django** app
+- Manage code with **Git**
 
 ---
 
-Your WSL environment is a powerful learning sandbox. Experiment, break things, fix them—and enjoy the Linux journey 🚀
+Your WSL environment is a powerful learning sandbox. Experiment, break things,
+fix them—and enjoy the Linux journey 🚀

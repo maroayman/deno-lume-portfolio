@@ -7,11 +7,13 @@ tags:
   - Cloud-Native
   - Linux
 ---
+
 # Kubernetes Starter Guide
 
 ## What is Kubernetes?
 
-Kubernetes (K8s) is an open‑source container orchestration platform that automates deployment, scaling, and management of containerized applications.
+Kubernetes (K8s) is an open‑source container orchestration platform that
+automates deployment, scaling, and management of containerized applications.
 
 ## Kubernetes Architecture
 
@@ -25,10 +27,10 @@ A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 
 ![Control Plane Components](https://www.cherryservers.com/v3/assets/blog/2025-05-19/img-01.png)
 
-- API Server  
-- etcd  
-- Scheduler  
-- Controller Manager  
+- API Server
+- etcd
+- Scheduler
+- Controller Manager
 
 ## Worker Nodes & Pods
 
@@ -41,9 +43,11 @@ A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 ## Core Kubernetes Objects
 
 ### Pods
+
 Run containers with shared networking and storage.
 
 ### Deployments
+
 Manage replicas, rolling updates, and self‑healing.
 
 ### Services
@@ -76,20 +80,21 @@ kubectl expose deployment nginx --port=80 --type=LoadBalancer
 
 ## Beginner Learning Path
 
-1. Learn Docker basics  
-2. Run Minikube or k3s  
-3. Practice Pods & Deployments  
-4. Understand Services & Ingress  
-5. Explore Helm & GitOps  
+1. Learn Docker basics
+2. Run Minikube or k3s
+3. Practice Pods & Deployments
+4. Understand Services & Ingress
+5. Explore Helm & GitOps
 
 ## Kubernetes vs Alternatives
 
-| Feature | Kubernetes | Docker Swarm | Docker Compose |
-|------|-----------|--------------|----------------|
-| Scaling | High | Medium | Low |
-| Self‑Healing | Yes | Limited | No |
-| Production Ready | Yes | Partial | No |
+| Feature          | Kubernetes | Docker Swarm | Docker Compose |
+| ---------------- | ---------- | ------------ | -------------- |
+| Scaling          | High       | Medium       | Low            |
+| Self‑Healing     | Yes        | Limited      | No             |
+| Production Ready | Yes        | Partial      | No             |
 
 ## Conclusion
 
-Kubernetes provides a robust platform for running distributed applications reliably and at scale.
+Kubernetes provides a robust platform for running distributed applications
+reliably and at scale.

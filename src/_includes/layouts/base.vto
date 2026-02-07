@@ -5,14 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="https://maroayman.vercel.app{{ url }}">
   
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:url" content="https://maroayman.vercel.app{{ url }}">
+  <meta property="og:image" content="https://maroayman.vercel.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Marwan Ayman Shawky">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="https://maroayman.vercel.app/og-image.png">
+  <meta name="author" content="Marwan Ayman Shawky">
+  
+  <!-- JSON-LD Structured Data - Website -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Marwan Ayman Shawky",
+    "url": "https://maroayman.vercel.app",
+    "description": "{{ description }}",
+    "author": {
+      "@type": "Person",
+      "name": "Marwan Ayman Shawky",
+      "url": "https://maroayman.vercel.app",
+      "jobTitle": "Cloud & DevOps Engineer"
+    }
+  }
+  </script>
   
   <!-- Styles (inlined for performance) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
@@ -64,6 +90,9 @@
   </script>
 </head>
 <body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <!-- Theme Toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
     <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +119,7 @@
   </header>
   
   <!-- Main Content -->
-  <main>
+  <main id="main-content" tabindex="-1">
     {{ content }}
   </main>
   

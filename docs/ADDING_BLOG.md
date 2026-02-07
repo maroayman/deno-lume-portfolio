@@ -14,10 +14,10 @@ Add the markdown plugins for TOC support:
 
 ```json
 {
-    "imports": {
-        "lume/": "https://deno.land/x/lume@v3.1.4/",
-        "lume_markdown_plugins/": "https://deno.land/x/lume_markdown_plugins@v0.10.0/"
-    }
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v3.1.4/",
+    "lume_markdown_plugins/": "https://deno.land/x/lume_markdown_plugins@v0.10.0/"
+  }
 }
 ```
 
@@ -40,16 +40,16 @@ import readingInfo from "lume/plugins/reading_info.ts";
 import toc from "lume_markdown_plugins/toc.ts";
 
 const site = lume({
-    src: "./src",
-    dest: "./dist",
-    location: new URL("https://yourportfolio.com"),
+  src: "./src",
+  dest: "./dist",
+  location: new URL("https://yourportfolio.com"),
 });
 
 site.use(vento());
 site.use(date());
-site.use(readingInfo());    // Auto reading time
-site.use(codeHighlight());   // Syntax highlighting
-site.use(toc());             // Table of contents
+site.use(readingInfo()); // Auto reading time
+site.use(codeHighlight()); // Syntax highlighting
+site.use(toc()); // Table of contents
 
 site.add("styles");
 site.add("assets");
@@ -78,10 +78,7 @@ type: post
 ### 3.2 Create `src/blog.vto` (Blog listing page)
 
 ```html
----
-layout: layouts/base.vto
-title: Blog
----
+--- layout: layouts/base.vto title: Blog ---
 
 <h2>Blog</h2>
 <p>Articles on DevOps, Cloud, and Infrastructure.</p>
@@ -103,28 +100,25 @@ title: Blog
 ### 3.3 Create `src/_includes/layouts/post.vto`
 
 ```html
----
-layout: layouts/base.vto
----
+--- layout: layouts/base.vto ---
 
 <article class="blog-post">
   <a href="/blog/" class="back-link">← Back to Blog</a>
-  
+
   <h1 class="post-title">{{ title }}</h1>
-  
+
   <p class="post-meta">
-    {{ date |> date('HUMAN_DATE') }} · {{ readingInfo?.minutes || "5" }} min read
+    {{ date |> date('HUMAN_DATE') }} · {{ readingInfo?.minutes || "5" }} min
+    read
   </p>
-  
+
   {{ if tags }}
   <div class="post-tags">
     {{ for tag of tags }}
     <span class="tag">{{ tag }}</span>
     {{ /for }}
   </div>
-  {{ /if }}
-  
-  {{ if toc && toc.length > 1 }}
+  {{ /if }} {{ if toc && toc.length > 1 }}
   <nav class="toc">
     <p class="toc-title">Contents</p>
     <ul>
@@ -134,11 +128,11 @@ layout: layouts/base.vto
     </ul>
   </nav>
   {{ /if }}
-  
+
   <div class="post-content">
     {{ content }}
   </div>
-  
+
   <div class="post-footer">
     <a href="/blog/">← Back to Blog</a>
   </div>
@@ -295,7 +289,7 @@ Add to `src/styles/main.css`:
 }
 
 .post-content code {
-  font-family: 'SF Mono', monospace;
+  font-family: "SF Mono", monospace;
   font-size: 0.85em;
   background: var(--color-border);
   padding: 0.15em 0.4em;
@@ -345,11 +339,13 @@ In `src/index.vto`, add to the section-links:
 ### Reading Progress Bar
 
 Add to post template:
+
 ```html
 <div class="reading-progress" id="readingProgress"></div>
 ```
 
 Add CSS:
+
 ```css
 .reading-progress {
   position: fixed;
@@ -363,29 +359,36 @@ Add CSS:
 ```
 
 Add JS:
+
 ```javascript
-const progressBar = document.getElementById('readingProgress');
-window.addEventListener('scroll', () => {
-  const article = document.querySelector('.post-content');
-  const progress = Math.min(Math.max((window.scrollY - article.offsetTop) / article.offsetHeight, 0), 1);
-  progressBar.style.width = (progress * 100) + '%';
+const progressBar = document.getElementById("readingProgress");
+window.addEventListener("scroll", () => {
+  const article = document.querySelector(".post-content");
+  const progress = Math.min(
+    Math.max((window.scrollY - article.offsetTop) / article.offsetHeight, 0),
+    1,
+  );
+  progressBar.style.width = (progress * 100) + "%";
 });
 ```
 
 ### Copy Code Button
 
 Add JS:
+
 ```javascript
-document.querySelectorAll('pre').forEach(pre => {
-  const button = document.createElement('button');
-  button.className = 'copy-btn';
-  button.textContent = 'Copy';
-  button.addEventListener('click', async () => {
-    await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || pre.textContent);
-    button.textContent = 'Copied!';
-    setTimeout(() => button.textContent = 'Copy', 2000);
+document.querySelectorAll("pre").forEach((pre) => {
+  const button = document.createElement("button");
+  button.className = "copy-btn";
+  button.textContent = "Copy";
+  button.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(
+      pre.querySelector("code")?.textContent || pre.textContent,
+    );
+    button.textContent = "Copied!";
+    setTimeout(() => button.textContent = "Copy", 2000);
   });
-  pre.style.position = 'relative';
+  pre.style.position = "relative";
   pre.appendChild(button);
 });
 ```

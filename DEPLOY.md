@@ -3,21 +3,25 @@
 ## Quick Deploy
 
 1. **Install Vercel CLI** (if not already installed):
+
 ```bash
 npm i -g vercel
 ```
 
 2. **Login to Vercel**:
+
 ```bash
 vercel login
 ```
 
 3. **Deploy**:
+
 ```bash
 vercel
 ```
 
 Follow the prompts:
+
 - Set up and deploy? **Y**
 - Which scope? Select your account
 - Link to existing project? **N**
@@ -26,6 +30,7 @@ Follow the prompts:
 - Override settings? **N**
 
 4. **Production Deploy**:
+
 ```bash
 vercel --prod
 ```
@@ -41,6 +46,7 @@ vercel --prod
 ## Configuration
 
 The `vercel.json` file is already configured with:
+
 - **Build Command**: `deno task build`
 - **Output Directory**: `dist`
 - **Install Command**: Installs Deno automatically
@@ -52,6 +58,7 @@ No environment variables are required for this static site.
 ## Custom Domain
 
 After deployment, you can add a custom domain:
+
 1. Go to your project settings on Vercel
 2. Navigate to "Domains"
 3. Add your custom domain

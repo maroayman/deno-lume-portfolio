@@ -11,33 +11,35 @@ tags:
 
 # From Code to Cloud: Deploying a Go Note App on EC2 with Ansible and Daily Backups
 
-In this guide, we'll walk through deploying a simple Go-based note-taking web app on AWS EC2, with a local SQLite database and daily backup automation using Ansible and cron. You'll learn how to automate infrastructure, deploy cleanly with roles, and ensure your data is safely backed up using an attached EBS volume.
+In this guide, we'll walk through deploying a simple Go-based note-taking web
+app on AWS EC2, with a local SQLite database and daily backup automation using
+Ansible and cron. You'll learn how to automate infrastructure, deploy cleanly
+with roles, and ensure your data is safely backed up using an attached EBS
+volume.
 
 ---
 
 ## 🚀 What You'll Learn
 
-* How to deploy a Go web app using Ansible on AWS EC2
-    
-* Managing deployments with Ansible roles
-    
-* Automating backups using `cron`
-    
-* Mounting and using an EBS volume for SQLite backups
-    
+- How to deploy a Go web app using Ansible on AWS EC2
+
+- Managing deployments with Ansible roles
+
+- Automating backups using `cron`
+
+- Mounting and using an EBS volume for SQLite backups
 
 ---
 
 ## 🔧 Project Goals
 
-* Launch a web app written in Go
-    
-* Use SQLite as the backend database
-    
-* Automate app deployment with Ansible
-    
-* Store daily database backups on an EBS volume mounted to the instance
-    
+- Launch a web app written in Go
+
+- Use SQLite as the backend database
+
+- Automate app deployment with Ansible
+
+- Store daily database backups on an EBS volume mounted to the instance
 
 ---
 
@@ -45,22 +47,21 @@ In this guide, we'll walk through deploying a simple Go-based note-taking web ap
 
 ### EC2 Setup
 
-* **Controller Instance**:
-    
-    * Has Ansible installed
-        
-    * Stores the source code and roles
-        
-    * Executes deployment tasks remotely on the node
-        
-* **Node Instance**:
-    
-    * Receives source code from controller
-        
-    * Runs the Go app
-        
-    * Hosts a mounted volume for backups (`/mnt/backup`)
-        
+- **Controller Instance**:
+
+  - Has Ansible installed
+
+  - Stores the source code and roles
+
+  - Executes deployment tasks remotely on the node
+
+- **Node Instance**:
+
+  - Receives source code from controller
+
+  - Runs the Go app
+
+  - Hosts a mounted volume for backups (`/mnt/backup`)
 
 ---
 
@@ -96,7 +97,7 @@ note-app/
     state: directory
     owner: ec2-user
     group: ec2-user
-    mode: '0755'
+    mode: "0755"
 
 - name: Upload Go app source
   copy:
@@ -104,7 +105,7 @@ note-app/
     dest: "}/"
     owner: ec2-user
     group: ec2-user
-    mode: '0644'
+    mode: "0644"
 
 - name: Initialize Go module
   command: go mod init noteapp
@@ -132,7 +133,7 @@ note-app/
     state: directory
     owner: ec2-user
     group: ec2-user
-    mode: '0755'
+    mode: "0755"
 
 - name: Add daily SQLite backup cron job
   cron:
@@ -178,14 +179,13 @@ ansible-playbook -i inventory.ini deploy-noteapp.yml
 
 ### After Deployment
 
-* App is compiled and running in the background
-    
-* Accessible on port 80 of the node instance
-    
-* SQLite DB is saved in the app directory
-    
-* Cron job for backup is scheduled daily at 1:00 AM
-    
+- App is compiled and running in the background
+
+- Accessible on port 80 of the node instance
+
+- SQLite DB is saved in the app directory
+
+- Cron job for backup is scheduled daily at 1:00 AM
 
 ---
 
@@ -209,10 +209,10 @@ tail -f app.log
 http://<public-ip>       # or private IP if using a VPC and tunnel
 ```
 
-* We used private ip method better because we dont need to change public ip everytime
-    
-* Make sure controller and node are both in same vpc and security group
-    
+- We used private ip method better because we dont need to change public ip
+  everytime
+
+- Make sure controller and node are both in same vpc and security group
 
 ---
 
@@ -224,8 +224,7 @@ http://<public-ip>       # or private IP if using a VPC and tunnel
 crontab -l
 ```
 
-* Make sure its in sudo mode , because we use become:true in ansible playbook
-    
+- Make sure its in sudo mode , because we use become:true in ansible playbook
 
 ### Check the backup files
 
@@ -243,39 +242,38 @@ notes_2025-08-05.db
 
 ## Troubleshooting :
 
-* **Go not found?** → Ensure Go is installed and in `$PATH`.
-    
-* **Cron not working?** → Install `cronie` and ensure cron service is running.
-    
-* **Mount not persisting?** → Double-check `/etc/fstab`.
-    
+- **Go not found?** → Ensure Go is installed and in `$PATH`.
+
+- **Cron not working?** → Install `cronie` and ensure cron service is running.
+
+- **Mount not persisting?** → Double-check `/etc/fstab`.
 
 ## Conclusion
 
-By combining Go, Ansible, and AWS EC2, you’ve built a simple but powerful infrastructure:
+By combining Go, Ansible, and AWS EC2, you’ve built a simple but powerful
+infrastructure:
 
-* Clean deployment via Ansible roles
-    
-* SQLite for local storage
-    
-* Daily backups to EBS volume
-    
-* Scalable and reproducible setup
-    
+- Clean deployment via Ansible roles
+
+- SQLite for local storage
+
+- Daily backups to EBS volume
+
+- Scalable and reproducible setup
 
 ---
 
 ## Resources:
 
-* [Go Programming Language](https://golang.org/)
-    
-* [Ansible Documentation](https://docs.ansible.com/)
-    
-* [AWS EC2](https://aws.amazon.com/ec2/)
-    
-* [SQLite](https://www.sqlite.org/index.html)
-    
-* [Cronie](https://fedoraproject.org/wiki/Features/Cronie)
+- [Go Programming Language](https://golang.org/)
+
+- [Ansible Documentation](https://docs.ansible.com/)
+
+- [AWS EC2](https://aws.amazon.com/ec2/)
+
+- [SQLite](https://www.sqlite.org/index.html)
+
+- [Cronie](https://fedoraproject.org/wiki/Features/Cronie)
 
 ---
 
