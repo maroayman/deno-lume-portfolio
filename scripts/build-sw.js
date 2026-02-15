@@ -1,5 +1,5 @@
 // Simple service worker generator
-// Copies/sw.js template to dist folder during build
+// Copies/sw.js template to _site folder during build
 
 const SW_SOURCE = `const CACHE_VERSION = 'v1';
 const PRECACHE_ASSETS = [
@@ -186,9 +186,10 @@ self.addEventListener('message', (event) => {
 });
 `;
 
-const destPath = "./dist/sw.js";
+const destPath = "./_site/sw.js";
 
 try {
+  await Deno.mkdir("./_site", { recursive: true });
   await Deno.writeTextFile(destPath, SW_SOURCE);
   console.log("Service worker generated successfully at", destPath);
 } catch (error) {
