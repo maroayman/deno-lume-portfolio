@@ -1,5 +1,5 @@
 module.exports = {
-  globDirectory: "dist/",
+  globDirectory: "_site/",
   globPatterns: [
     "**/*.{html,css,js,pdf,png,jpg,jpeg,svg,webp,woff,woff2}",
   ],
@@ -8,7 +8,7 @@ module.exports = {
     "sw-src.js",
     "workbox-*.js",
   ],
-  swDest: "dist/sw.js",
+  swDest: "_site/sw.js",
   // Don't cache files larger than 2MB
   maximumFileSizeToCacheInBytes: 2 * 1024 * 1024,
   // Runtime caching rules
