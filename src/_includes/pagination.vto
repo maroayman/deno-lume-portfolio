@@ -1,6 +1,6 @@
 <script>
 (function() {
-  const N = 6, M = 10, c = document.getElementById('pagination-container'), x = document.getElementById('pagination-controls');
+  const N = 4, M = 10, c = document.getElementById('pagination-container'), x = document.getElementById('pagination-controls');
   if (!c || !x) return;
   const items = [...c.querySelectorAll('[data-pagination-item]')], T = Math.ceil(items.length / N);
   if (items.length <= N) return;

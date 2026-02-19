@@ -30,10 +30,17 @@ description: DevOps training and internships focused on cloud automation
         {{ if job.responsibilities }}
         <p class="responsibilities-title">Key Responsibilities:</p>
         <ul class="responsibilities-list">
-          {{ for responsibility of job.responsibilities }}
-          <li>{{ responsibility }}</li>
+          {{ for i, responsibility of job.responsibilities }}
+          {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
+          {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
+          <li class="{{ hiddenClass }}" style="{{ hiddenStyle }}">{{ responsibility }}</li>
           {{ /for }}
         </ul>
+        {{ if job.responsibilities.length > 4 }}
+        <button class="show-more-btn" onclick="toggleShowMore(this)">
+          Show more ({{ job.responsibilities.length - 4 }})
+        </button>
+        {{ /if }}
         {{ /if }}
         
         <div class="tech-tags">
@@ -45,10 +52,28 @@ description: DevOps training and internships focused on cloud automation
       {{ /for }}
     </div>
     
-    {{ if experience.length > 6 }}
+    {{ if experience.length > 4 }}
     <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
     {{ /if }}
   </section>
 </div>
+
+<script>
+function toggleShowMore(btn) {
+  const list = btn.previousElementSibling;
+  const items = list.querySelectorAll('.show-more-item');
+  const isExpanded = list.classList.contains('expanded');
+  
+  if (isExpanded) {
+    items.forEach(item => item.style.display = 'none');
+    btn.textContent = `Show more (${items.length})`;
+    list.classList.remove('expanded');
+  } else {
+    items.forEach(item => item.style.display = 'list-item');
+    btn.textContent = 'Show less';
+    list.classList.add('expanded');
+  }
+}
+</script>
 
 {{ include "pagination.vto" }}

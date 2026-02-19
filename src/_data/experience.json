@@ -7,16 +7,22 @@
         "period": "Jan 2026 – Present",
         "description": "Working on cloud automation, CI/CD pipelines, and infrastructure provisioning.",
         "responsibilities": [
-            "Managing and maintaining on-premises infrastructure",
-            "Implementing infrastructure as code using Terraform and Ansible",
-            "Setting up monitoring and alerting systems for infrastructure health",
-            "Collaborating with development teams to streamline deployment processes"
+            "Designed and deployed a production-grade, multi-node Kubernetes cluster with high availability on on-premises infrastructure",
+            "Implemented end-to-end GitOps workflows using Flux CD for automated infrastructure synchronization and application delivery",
+            "Built and maintained a private Docker registry with MinIO S3-compatible storage for secure artifact management",
+            "Set up Gitea as the internal Git solution, enabling automated GitOps pipelines and version-controlled infrastructure",
+            "Provisioned and managed Rocky Linux VMs on Proxmox VE, optimizing resource utilization for containerized workloads",
+            "Customized and adapted cloud-native GitOps patterns to meet specific on-premises infrastructure requirements"
         ],
         "tags": [
-            "System Administration",
-            "Linux",
-            "Infrastructure as Code",
-            "Kubernetes"
+            "Kubernetes",
+            "GitOps",
+            "Flux CD",
+            "Proxmox VE",
+            "Gitea",
+            "MinIO",
+            "Docker",
+            "Rocky Linux"
         ]
     },
     {
