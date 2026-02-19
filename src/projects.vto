@@ -30,10 +30,17 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         
         {{ if project.highlights }}
         <ul class="project-highlights">
-          {{ for highlight of project.highlights }}
-          <li>{{ highlight }}</li>
+          {{ for i, highlight of project.highlights }}
+          {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
+          {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
+          <li class="{{ hiddenClass }}" style="{{ hiddenStyle }}">{{ highlight }}</li>
           {{ /for }}
         </ul>
+        {{ if project.highlights.length > 4 }}
+        <button class="show-more-btn" onclick="toggleShowMore(this)">
+          Show more ({{ project.highlights.length - 4 }})
+        </button>
+        {{ /if }}
         {{ /if }}
         
         <div class="tech-tags">
@@ -45,10 +52,28 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
       {{ /for }}
     </div>
     
-    {{ if projects.length > 6 }}
+    {{ if projects.length > 4 }}
     <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
     {{ /if }}
   </section>
 </div>
+
+<script>
+function toggleShowMore(btn) {
+  const list = btn.previousElementSibling;
+  const items = list.querySelectorAll('.show-more-item');
+  const isExpanded = list.classList.contains('expanded');
+  
+  if (isExpanded) {
+    items.forEach(item => item.style.display = 'none');
+    btn.textContent = `Show more (${items.length})`;
+    list.classList.remove('expanded');
+  } else {
+    items.forEach(item => item.style.display = 'list-item');
+    btn.textContent = 'Show less';
+    list.classList.add('expanded');
+  }
+}
+</script>
 
 {{ include "pagination.vto" }}

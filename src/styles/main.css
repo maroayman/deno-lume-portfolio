@@ -2424,3 +2424,19 @@ textarea:focus-visible,
     scroll-behavior: auto !important;
   }
 }
+
+/* Show More Button */
+.show-more-btn {
+  background: none;
+  border: none;
+  color: var(--color-link);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.show-more-btn:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
