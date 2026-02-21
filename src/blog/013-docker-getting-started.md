@@ -167,8 +167,9 @@ container!
 
 ## What’s Next?
 
-In the next article, we’ll dive deeper into **Docker basics**: exploring images,
-containers, and registries in detail.
+In the next article, we’ll dive deeper into
+[**Docker basics**](/blog/docker-images-guide/): exploring images, containers,
+and registries in detail.
 
 Stay tuned for **Part 2: Understanding Images, Containers, and Registries in
 Docker**.

@@ -244,18 +244,18 @@ permissions and ownership.
 
 ## Up Next: Mastering Linux Package Management
 
-Now that you understand **permissions and ownership**, you’re ready to take
-control of your system’s software.
+Now that you understand **permissions and ownership**, you're ready to take
+control of your system's software.
 
-In the next article, we’ll cover:
+In the next article, we'll cover:
 
-- How Linux installs and updates software
+- [How Linux installs and updates software](/blog/linux-package-management/)
 
 - Using `yum` (CentOS) and `apt` (Ubuntu)
 
 - Tips to manage packages like a pro
 
-By the end of the next article, you’ll be able to **customize and manage your
+By the end of the next article, you'll be able to **customize and manage your
 Linux environment with confidence**.
 
 📢 **Want to follow the full series?**\

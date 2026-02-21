@@ -144,9 +144,10 @@ can use **timers**.
 update, and manage packages — the building blocks of your Linux environment.
 Without package management, automation has nothing to run.
 
-That’s why in the next article, we’ll dive into: 📦 Linux Package Management —
-exploring apt, yum/dnf, rpm, repositories, and how to keep your system lean,
-secure, and up to date.
+That’s why in the next article, we’ll dive into:
+[**📦 Linux Package Management**](/blog/linux-package-management/) — exploring
+apt, yum/dnf, rpm, repositories, and how to keep your system lean, secure, and
+up to date.
 
 Stay tuned — because mastering package management is your next step toward
 becoming a confident Linux Admin. 🚀

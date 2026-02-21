@@ -385,8 +385,10 @@ File management is the **backbone of everyday Linux work**. You now know how to
 create, move, copy, and delete files, explore contents, and even use wildcards
 to handle many files at once.
 
-In the next article, we’ll go one step further: **Installing and Managing
-Software (apt, yum, dnf)** — the gateway to customizing your Linux system.
+In the next article, we’ll go one step further:
+[**Installing and Managing
+Software (apt, yum, dnf)**](/blog/linux-package-management/) — the gateway to
+customizing your Linux system.
 
 > _"Mastering files is mastering Linux. Every pro started here — and so have
 > you."_
