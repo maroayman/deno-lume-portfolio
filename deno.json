@@ -1,14 +1,17 @@
 {
+  "nodeModulesDir": "auto",
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable-ffi -A -",
-    "build": "DENO_ENV=production deno task lume",
+    "check": "deno check _config.ts",
+    "audit": "deno audit",
+    "build": "deno task audit; DENO_ENV=production deno task lume",
     "build:sw": "deno run --allow-read --allow-write scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
     "serve": "deno task build:sw && deno task lume -s",
     "dev": "deno task serve",
     "lint": "deno lint src/ _config.ts",
     "fmt": "deno fmt src/ _config.ts",
-    "check": "deno check _config.ts"
+    "deploy": "deno task build && deno deploy deploy --prod --app portfolio"
   },
   "imports": {
     "lume/": "https://deno.land/x/lume@v3.1.4/"
@@ -17,5 +20,14 @@
     "types": [
       "lume/types.ts"
     ]
+  },
+  "permissions": {
+    "allow-read": ["./src/**", "./_site/**"],
+    "allow-write": ["./_site/**"],
+    "allow-env": ["DENO_ENV"]
+  },
+  "deploy": {
+    "org": "maroayman",
+    "app": "deno-lume-portfolio"
   }
 }

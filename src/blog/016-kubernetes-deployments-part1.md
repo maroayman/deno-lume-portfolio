@@ -27,7 +27,8 @@ In this guide, we’ll cover:
 
 A Deployment is a Kubernetes controller that manages Pods and ReplicaSets.
 
-Instead of manually creating Pods, you define a desired state, and Kubernetes ensures that state is always maintained.
+Instead of manually creating Pods, you define a desired state, and Kubernetes
+ensures that state is always maintained.
 
 If a Pod crashes or a node fails, Kubernetes automatically recreates it.
 
@@ -57,7 +58,8 @@ Deployments solve all of these problems.
 3. The ReplicaSet creates the required number of Pods.
 4. If a Pod disappears, the ReplicaSet recreates it.
 
-This is called reconciliation — Kubernetes constantly ensures the desired state matches reality.
+This is called reconciliation — Kubernetes constantly ensures the desired state
+matches reality.
 
 ---
 
@@ -79,10 +81,10 @@ spec:
         app: web
     spec:
       containers:
-      - name: nginx-container
-        image: nginx:1.25
-        ports:
-        - containerPort: 80
+        - name: nginx-container
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
 ```
 
 Apply it:
@@ -103,12 +105,15 @@ kubectl get pods
 ## Important Fields Explained
 
 ### replicas
+
 Defines how many Pod replicas should run.
 
 ### selector
+
 Tells the Deployment which Pods it manages (must match labels).
 
 ### template
+
 Defines the Pod specification.
 
 ---
@@ -192,4 +197,5 @@ Observe automatic recreation.
 
 ---
 
-In Part 2, we’ll cover rolling updates, rollback strategies, probes, and production best practices.
+In Part 2, we’ll cover rolling updates, rollback strategies, probes, and
+production best practices.

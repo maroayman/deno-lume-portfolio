@@ -54,7 +54,6 @@ Manage replicas, rolling updates, and self‑healing.
 
 Expose applications and provide stable networking.
 
-
 ![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-node-port-diagram.41bb0147.webp)
 
 ![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-l-b-diagram.f1e36310.webp)

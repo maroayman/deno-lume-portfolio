@@ -1,40 +1,40 @@
 [
-    {
-        "title": "Introduction to AWS Cloud: Builder Labs Learning Plan",
-        "issuer": "AWS Training & Certification",
-        "date": "Aug 2025",
-        "credentialId": ""
-    },
-    {
-        "title": "Introduction to Kubernetes",
-        "issuer": "The Linux Foundation",
-        "date": "May 2025",
-        "credentialId": "LF-bf9suctsic"
-    },
-    {
-        "title": "Introduction to Cloud Infrastructure Technologies",
-        "issuer": "The Linux Foundation",
-        "date": "May 2025",
-        "credentialId": "LF-y5lenp6vi7"
-    },
-    {
-        "title": "Introduction to Linux",
-        "issuer": "The Linux Foundation",
-        "date": "May 2025",
-        "credentialId": "LF-bqjbi9w04l"
-    },
-    {
-        "title": "HCCDA - AI",
-        "issuer": "Huawei",
-        "date": "Mar 2025",
-        "expiryDate": "Mar 2028",
-        "credentialId": "HWENDCAIDA304070"
-    },
-    {
-        "title": "HCCDA - Tech Essentials",
-        "issuer": "Huawei",
-        "date": "Jan 2025",
-        "expiryDate": "Jan 2028",
-        "credentialId": "HWDCTEDA695884"
-    }
+  {
+    "title": "Introduction to AWS Cloud: Builder Labs Learning Plan",
+    "issuer": "AWS Training & Certification",
+    "date": "Aug 2025",
+    "credentialId": ""
+  },
+  {
+    "title": "Introduction to Kubernetes",
+    "issuer": "The Linux Foundation",
+    "date": "May 2025",
+    "credentialId": "LF-bf9suctsic"
+  },
+  {
+    "title": "Introduction to Cloud Infrastructure Technologies",
+    "issuer": "The Linux Foundation",
+    "date": "May 2025",
+    "credentialId": "LF-y5lenp6vi7"
+  },
+  {
+    "title": "Introduction to Linux",
+    "issuer": "The Linux Foundation",
+    "date": "May 2025",
+    "credentialId": "LF-bqjbi9w04l"
+  },
+  {
+    "title": "HCCDA - AI",
+    "issuer": "Huawei",
+    "date": "Mar 2025",
+    "expiryDate": "Mar 2028",
+    "credentialId": "HWENDCAIDA304070"
+  },
+  {
+    "title": "HCCDA - Tech Essentials",
+    "issuer": "Huawei",
+    "date": "Jan 2025",
+    "expiryDate": "Jan 2028",
+    "credentialId": "HWDCTEDA695884"
+  }
 ]

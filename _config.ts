@@ -1,6 +1,6 @@
 import lume from "lume/mod.ts";
 import vento from "lume/plugins/vento.ts";
-import postcss from "lume/plugins/postcss.ts";
+import lightningcss from "lume/plugins/lightningcss.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import minifyHTML from "lume/plugins/minify_html.ts";
 import date from "lume/plugins/date.ts";
@@ -47,7 +47,7 @@ site.preprocess([".md"], (pages) => {
 });
 
 site.use(inline());
-site.use(postcss());
+site.use(lightningcss());
 site.use(sitemap());
 
 if (isProduction) {
