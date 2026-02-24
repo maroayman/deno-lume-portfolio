@@ -39,7 +39,7 @@ Instead of deleting all old Pods at once, Kubernetes:
 2.  Gradually terminates old Pods
 3.  Maintains availability during the process
 
-![Rolling Update Visualization](https://img-blog.csdnimg.cn/img_convert/cf305f5de011982c1be5fd3ece272724.png)
+![Rolling Update Visualization](https://velog.velcdn.com/images/salgu1998/post/a01256b0-5403-4c73-b41a-7cb71b3bae48/image.png)
 
 ------------------------------------------------------------------------
 
