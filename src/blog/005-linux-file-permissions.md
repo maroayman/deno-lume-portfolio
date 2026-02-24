@@ -9,7 +9,7 @@ tags:
 
 # Understanding Linux File Ownership and Permissions: A Beginner’s Guide
 
-In the [previous article](/blog/linux-filesystem-overview/) we explored the
+In the [previous article](/blog/005-linux-file-permissions) we explored the
 **Linux filesystem hierarchy** and got familiar with its structure.\
 Now, let’s unlock a powerful concept: **who can access what** in Linux.
 
@@ -242,14 +242,14 @@ revisit and build on this knowledge as you use Linux more.
 You’ve now unlocked a **key concept of Linux security** by learning file
 permissions and ownership.
 
-## Up Next: Mastering Linux Package Management
+## Up Next: Linux File Management
 
-Now that you understand **permissions and ownership**, you're ready to take
-control of your system's software.
+Now that you understand **permissions and ownership**, you're ready to learn
+how to work with files and directories.
 
 In the next article, we'll cover:
 
-- [How Linux installs and updates software](/blog/linux-package-management/)
+- [How to copy, move, delete, and organize files](/blog/linux-file-management)
 
 - Using `yum` (CentOS) and `apt` (Ubuntu)
 

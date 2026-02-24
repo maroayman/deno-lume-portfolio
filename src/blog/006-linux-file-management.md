@@ -10,9 +10,9 @@ tags:
 
 So far in this series, you’ve:
 
-- [Explored the Linux filesystem layout](/blog/linux-filesystem-overview/)
+- [Explored the Linux filesystem layout](/blog/004-linux-filesystem-overview)
 
-- [Learned about permissions and ownership](/blog/linux-file-permissions/)
+- [Learned about permissions and ownership](/blog/005-linux-file-permissions)
 
 Now it’s time to roll up your sleeves and actually **work with files and
 directories**. This is where Linux becomes fun — and powerful.
@@ -387,7 +387,7 @@ to handle many files at once.
 
 In the next article, we’ll go one step further:
 [**Installing and Managing
-Software (apt, yum, dnf)**](/blog/linux-package-management/) — the gateway to
+Software (apt, yum, dnf)**](/blog/007-linux-package-management) — the gateway to
 customizing your Linux system.
 
 > _"Mastering files is mastering Linux. Every pro started here — and so have

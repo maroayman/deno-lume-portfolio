@@ -269,3 +269,11 @@ manager.
 | **Remove**         | `sudo apt remove pkg`  | `sudo dnf remove pkg` / `yum remove pkg`   |
 | **Search**         | `apt search pkg`       | `dnf search pkg` / `yum search pkg`        |
 | **Cleanup**        | `sudo apt autoremove`  | `sudo dnf autoremove`                      |
+
+---
+
+## Up Next: Process Management
+
+Now that you can manage software, let's learn about **managing running programs**:
+
+→ [Linux Process Management](/blog/008-linux-process-management)
