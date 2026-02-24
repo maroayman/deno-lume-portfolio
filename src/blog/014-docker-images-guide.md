@@ -41,7 +41,7 @@ from an app store — but for infrastructure.
 
 **Example:**
 
-```abap
+```bash
 FROM python:3.9  
 COPY app/ /app  
 WORKDIR /app  
@@ -81,7 +81,7 @@ CMD ["python", "main.py"]
 
 Build and runtime environments separated → smaller, cleaner images.
 
-```abap
+```bash
 FROM golang:1.20 AS builder  
 WORKDIR /src  
 COPY . .  
@@ -179,10 +179,10 @@ containers.
 
 - **Export/Import**:
 
-  ```abap
-  docker save -o myimage.tar imagename:tag  
-  docker load -i myimage.tar
-  ```
+```bash
+docker save -o myimage.tar imagename:tag  
+docker load -i myimage.tar
+```
 
 - **Fun Fact**: The very first Docker image was based on **Ubuntu**; today,
   **Alpine** is the most common lightweight base (~5 MB).
@@ -199,34 +199,33 @@ optimization (multi-stage builds).
 
 1. **Run Hello World**
 
-   ```abap
-   docker run hello-world
-   ```
-
-   ✅ Confirms Docker is installed and working.
+```bash
+docker run hello-world
+```
+Confirms Docker is installed and working.
 
 2. **Run an Nginx Web Server**
 
-   ```abap
-   docker run -d -p 8080:80 nginx
-   ```
+```bash
+docker run -d -p 8080:80 nginx
+```
 
    ✅ Open [`http://localhost:8080`](http://localhost:8080) in your browser.
 
 3. **List, Stop, and Remove Containers**
 
-   ```abap
-   docker ps
-   docker stop <container_id>
-   docker rm <container_id>
-   ```
+```bash
+docker ps
+docker stop <container_id>
+docker rm <container_id>
+```
 
 4. **Explore Images**
 
-   ```abap
-   docker images
-   docker rmi <image_id>
-   ```
+```bash
+docker images
+docker rmi <image_id>
+```
 
 ## Intermediate Labs ⚡
 
@@ -234,39 +233,37 @@ optimization (multi-stage builds).
 multi-container apps.
 
 1. **Build a Custom Python App Image**\
-   [`app.py`](http://app.py)
+`app.py`
 
-   ```abap
-   print("Hello from Dockerized Python!")
-   ```
+```bash
+print("Hello from Dockerized Python!")
+```
 
-   `Dockerfile`
+`Dockerfile`
+```bash
+FROM python:3.9-slim
+COPY app.py /app/app.py
+WORKDIR /app
+CMD ["python", "app.py"]
+```
 
-   ```abap
-   FROM python:3.9-slim
-   COPY app.py /app/app.py
-   WORKDIR /app
-   CMD ["python", "app.py"]
-   ```
+Build & Run:
 
-   Build & Run:
-
-   ```abap
-   docker build -t my-python-app .
-   docker run --rm my-python-app
-   ```
+```bash
+docker build -t my-python-app .
+docker run --rm my-python-app
+```
 
 2. **Use Volumes for Persistence**
 
-   ```abap
-   docker run -d -v mydata:/data nginx
-   docker exec -it <container_id> ls /data
-   ```
+```bash
+docker run -d -v mydata:/data nginx
+docker exec -it <container_id> ls /data
+```
 
 3. **Run Multi-Container App with Docker Compose**\
-   `docker-compose.yml`
-
-   ```abap
+`docker-compose.yml`
+```bash
    version: '3'
    services:
      web:
@@ -281,7 +278,7 @@ multi-container apps.
 
    Run:
 
-   ```abap
+   ```bash
    docker-compose up -d
    ```
 
@@ -292,13 +289,13 @@ multi-container apps.
 1. **Multi-Stage Build (Go Example)**\
    `main.go`
 
-   ```go
+```go
    package main
    import "fmt"
    func main() {
        fmt.Println("Hello from Go!")
    }
-   ```
+```
 
    `Dockerfile`
 
@@ -317,7 +314,7 @@ multi-container apps.
 
    Build & Run:
 
-   ```abap
+   ```bash
    docker build -t my-go-app .
    docker run --rm my-go-app
    ```
@@ -327,9 +324,9 @@ multi-container apps.
 
 2. **Scan Image for Vulnerabilities**
 
-   ```abap
-   docker scout cves my-go-app
-   ```
+```bash
+docker scout cves my-go-app
+```
 
    ✅ Identifies security issues.
 
@@ -343,7 +340,7 @@ multi-container apps.
 
      - Deploy using `docker-compose` or Kubernetes
 
-## 4\. Stretch Labs (Optional) 🧩
+## 4. Stretch Labs (Optional) 🧩
 
 - Run **Fluentd + Nginx** with Docker Compose to simulate a CNCF logging stack.
 
@@ -357,15 +354,15 @@ multi-container apps.
 
 - **ENV** → set environment variables
 
-  ```abap
-  ENV APP_ENV=production
-  ```
+```bash
+ENV APP_ENV=production
+```
 
 - **EXPOSE** → define the port the container will use
 
-  ```abap
-  EXPOSE 5000
-  ```
+```bash
+EXPOSE 5000
+```
 
 - **ENTRYPOINT vs CMD** → explain the difference and when to use each
 
@@ -380,15 +377,15 @@ multi-container apps.
 
 - How to inspect image layers:
 
-  ```abap
-  docker history <image>
-  ```
+```bash
+docker history <image>
+```
 
 - How to run a container interactively for debugging:
 
-  ```abap
-  docker run -it <image> bash
-  ```
+```bash
+docker run -it <image> bash
+```
 
 ## Wrap-Up
 

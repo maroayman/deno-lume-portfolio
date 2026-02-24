@@ -51,7 +51,7 @@ root.
 ## Challenge: Navigate and Explore Your Linux Filesystem
 
 If you haven’t set up Linux in WSL2 yet, start with
-[**Part 1: Installing Linux on WSL2**](/blog/linux-wsl-beginners/) so you can
+[**Part 1: Installing Linux on WSL2**](/blog/003-linux-wsl-beginners) so you can
 follow along.
 
 Once you’re ready, open your terminal and try these steps:
@@ -107,3 +107,11 @@ pwd
 > The goal here is to get comfortable moving around and start recognizing
 > patterns. Keep exploring step by step — Linux mastery is closer than you
 > think!
+
+---
+
+## Up Next: Understanding Permissions
+
+Ready to learn about **file permissions and ownership**? Head to the next article:
+
+→ [Linux File Permissions](/blog/linux-file-permissions)

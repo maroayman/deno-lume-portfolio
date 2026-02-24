@@ -145,7 +145,7 @@ update, and manage packages — the building blocks of your Linux environment.
 Without package management, automation has nothing to run.
 
 That’s why in the next article, we’ll dive into:
-[**📦 Linux Package Management**](/blog/linux-package-management/) — exploring
+[**💾 Linux Disk Management**](/blog/010-linux-disk-management) — exploring
 apt, yum/dnf, rpm, repositories, and how to keep your system lean, secure, and
 up to date.
 

@@ -40,7 +40,7 @@ Let’s go through them:
 
 - After installation, open **PowerShell** or **Command Prompt** and test with:
 
-```abap
+```bash
 docker --version
 ```
 
@@ -54,7 +54,7 @@ docker --version
 
 - Verify installation:
 
-```abap
+```bash
 docker --version
 ```
 
@@ -62,7 +62,7 @@ docker --version
 
 #### (a) Ubuntu/Debian
 
-```abap
+```bash
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 
@@ -82,13 +82,13 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 Check version:
 
-```abap
+```bash
 docker --version
 ```
 
 #### (b) RHEL / CentOS
 
-```abap
+```bash
 # Remove old versions
 sudo yum remove docker \
                 docker-client \
@@ -113,7 +113,7 @@ sudo systemctl enable docker
 
 Check version:
 
-```abap
+```bash
 docker --version
 ```
 
@@ -122,13 +122,13 @@ docker --version
 By default, you’ll need `sudo` to run Docker commands. To avoid typing `sudo`
 every time, add your user to the **docker group**:
 
-```abap
+```bash
 sudo usermod -aG docker $USER
 ```
 
 Then log out and log back in (or restart your system). Verify by running:
 
-```abap
+```bash
 docker run hello-world
 ```
 
@@ -138,7 +138,7 @@ If it works without `sudo`, the setup is complete.
 
 Now that Docker is installed, let’s test it by running a simple container:
 
-```abap
+```bash
 docker run hello-world
 ```
 
@@ -168,7 +168,7 @@ container!
 ## What’s Next?
 
 In the next article, we’ll dive deeper into
-[**Docker basics**](/blog/docker-images-guide/): exploring images, containers,
+[**Docker basics**](/blog/014-docker-images-guide): exploring images, containers,
 and registries in detail.
 
 Stay tuned for **Part 2: Understanding Images, Containers, and Registries in

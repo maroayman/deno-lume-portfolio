@@ -340,3 +340,11 @@ over what’s running on your system. Monitoring tools like `ps`, `htop`, and
 `watch` help you stay proactive, ensuring that issues are spotted before they
 escalate. Master these, and you’ll move from simply running commands to truly
 orchestrating your system like a conductor leading an orchestra.
+
+---
+
+## Up Next: Automation with Cron
+
+Ready to automate? Learn how to schedule tasks:
+
+→ [Linux Cron & Automation](/blog/009-linux-cron-automation)
