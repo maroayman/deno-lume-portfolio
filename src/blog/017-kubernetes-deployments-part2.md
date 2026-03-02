@@ -69,9 +69,9 @@ during the update.
 
 ### Why it matters
 
--   Controls availability\
--   Protects against downtime\
--   Critical for production systems\
+-   Controls availability
+-   Protects against downtime
+-   Critical for production systems
 -   Important for SLA-based applications
 
 ### Production Use Case

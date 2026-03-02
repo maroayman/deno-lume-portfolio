@@ -1,0 +1,9 @@
+  <!-- Apply theme immediately to prevent flash of unstyled content -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>

@@ -6,7 +6,8 @@
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
   <link rel="canonical" href="https://maroayman.vercel.app{{ url }}">
-  
+  <link rel="alternate" type="application/rss+xml" title="Marwan Ayman Shawky — Blog" href="/feed.rss">
+
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
@@ -22,7 +23,7 @@
   <meta name="twitter:description" content="{{ description }}">
   <meta name="twitter:image" content="https://maroayman.vercel.app/og-image.png">
   <meta name="author" content="Marwan Ayman Shawky">
-  
+
   <!-- JSON-LD Structured Data - Website -->
   <script type="application/ld+json">
   {
@@ -39,60 +40,17 @@
     }
   }
   </script>
-  
+
   <!-- Styles (inlined for performance) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
-  
-  <!-- Apply theme immediately to prevent flash -->
-  <script>
-    (function() {
-      const theme = localStorage.getItem('theme') || 'light';
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark-mode');
-      }
-    })();
-  </script>
-  
-  <!-- Speculation Rules for faster navigation (Chrome/Edge 109+) -->
-  <script type="speculationrules">
-    {
-      "prerender": [
-        {
-          "source": "document",
-          "where": {
-            "and": [
-              { "href_matches": "/*" },
-              { "not": { "href_matches": "/*\\?*" } },
-              { "not": { "selector_matches": "[rel~=external]" } },
-              { "not": { "selector_matches": "[target=_blank]" } }
-            ]
-          },
-          "eagerness": "moderate"
-        }
-      ],
-      "prefetch": [
-        {
-          "source": "document",
-          "where": {
-            "href_matches": "/*"
-          },
-          "eagerness": "moderate"
-        }
-      ]
-    }
-  </script>
-  
-  <!-- Fallback to instant.page for browsers without Speculation Rules API (loaded async) -->
-  <script type="module" async>
-    if (!HTMLScriptElement.supports?.('speculationrules')) {
-      import('https://instant.page/5.2.0');
-    }
-  </script>
+
+  {{ include "partials/head-theme-flash.vto" }}
+  {{ include "partials/head-prefetch.vto" }}
 </head>
 <body>
   <!-- Skip to main content link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <!-- Theme Toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
     <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,14 +60,14 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
     </svg>
   </button>
-  
+
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
     </svg>
   </button>
-  
+
   <!-- Header -->
   <header>
     <div class="container">
@@ -117,114 +75,20 @@
       <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Cloud & DevOps Engineer</p>
     </div>
   </header>
-  
+
   <!-- Main Content -->
   <main id="main-content" tabindex="-1">
     {{ content }}
   </main>
-  
+
   <!-- Footer -->
   <footer>
     <div class="container">
       <p>© <span id="year"></span> Marwan Ayman Shawky</p>
     </div>
   </footer>
-  
-  <script>
-    // ========== THEME TOGGLE ==========
-    (function() {
-      const themeToggle = document.getElementById('themeToggle');
-      const sunIcon = document.querySelector('.sun-icon');
-      const moonIcon = document.querySelector('.moon-icon');
-      
-      if (!themeToggle || !sunIcon || !moonIcon) {
-        console.warn('Theme toggle elements not found');
-        return;
-      }
-      
-      function applyTheme(theme) {
-        const isDark = theme === 'dark';
-        document.body.classList.toggle('dark-mode', isDark);
-        document.documentElement.classList.toggle('dark-mode', isDark);
-        sunIcon.style.display = isDark ? 'none' : 'block';
-        moonIcon.style.display = isDark ? 'block' : 'none';
-      }
-      
-      // Apply current theme
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
-      
-      // Toggle handler
-      themeToggle.addEventListener('click', function() {
-        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-      });
-    })();
-    
-    // Year
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-    
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
 
-    // Security: Ensure rel="noopener noreferrer" for all target="_blank" links
-    document.querySelectorAll('a[target="_blank"]').forEach(link => {
-      if (!link.rel.includes('noopener')) link.rel += (link.rel ? ' ' : '') + 'noopener';
-      if (!link.rel.includes('noreferrer')) link.rel += (link.rel ? ' ' : '') + 'noreferrer';
-    });
-    
-    // Back to Top
-    const backToTop = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    });
-    
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    
-    // Register Service Worker with update handling (only in production)
-    if ('serviceWorker' in navigator && !location.hostname.match(/^(localhost|127\.0\.0\.1)$/)) {
-      window.addEventListener('load', async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('ServiceWorker registered:', registration.scope);
-          
-          // Check for updates
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // New content available, show refresh prompt
-                  if (confirm('New version available! Reload to update?')) {
-                    newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    window.location.reload();
-                  }
-                }
-              });
-            }
-          });
-        } catch (error) {
-          console.log('ServiceWorker registration failed:', error);
-        }
-      });
-    }
-  </script>
+  {{ include "partials/scripts-common.vto" }}
+  {{ include "partials/scripts-sw.vto" }}
 </body>
 </html>

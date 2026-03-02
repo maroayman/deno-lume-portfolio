@@ -51,7 +51,6 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name.includes(CACHE_VERSION) || name.startsWith('precache-'))
           .filter((name) => !name.includes(CACHE_VERSION) && !name.startsWith(\`precache-\${CACHE_VERSION}\`))
           .map((name) => caches.delete(name))
       );

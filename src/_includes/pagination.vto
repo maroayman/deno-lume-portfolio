@@ -1,13 +1,1 @@
-<script>
-(function() {
-  const N = 4, M = 10, c = document.getElementById('pagination-container'), x = document.getElementById('pagination-controls');
-  if (!c || !x) return;
-  const items = [...c.querySelectorAll('[data-pagination-item]')], T = Math.ceil(items.length / N);
-  if (items.length <= N) return;
-  let p = +new URLSearchParams(location.search).get('page') || 1;
-  const show = () => { items.forEach((e, i) => e.style.display = i >= (p-1)*N && i < p*N ? '' : 'none'); history.pushState({p}, '', p === 1 ? location.pathname : `?page=${p}`); };
-  const btn = (t, n, a) => Object.assign(document.createElement(a ? 'span' : 'a'), { className: `tech-tag pagination-btn${a ? ' pagination-active' : ''}`, textContent: t, href: a ? null : n === 1 ? location.pathname : `?page=${n}`, onclick: a ? null : e => { e.preventDefault(); p = n; show(); render(); scrollTo({top: 0, behavior: 'smooth'}); } });
-  const render = () => { const s = Math.max(1, Math.min(p - M/2|0, T - M + 1)); x.innerHTML = ''; if (p > 1) x.append(btn('← Back', p-1)); for (let i = 0; i < Math.min(M, T); i++) x.append(btn(s+i, s+i, s+i === p)); if (p < T) x.append(btn('Next →', p+1)); x.style.display = 'flex'; };
-  addEventListener('popstate', e => { p = e.state?.p || 1; show(); render(); }); show(); render();
-})();
-</script>
+<script src="/assets/pagination.js" inline></script>
