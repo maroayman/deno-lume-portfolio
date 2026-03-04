@@ -47,7 +47,7 @@ src/
   styles/
     main.css          # Single CSS file; processed by LightningCSS
   assets/images/      # Static images
-_site/                # Build output (committed to repo; Vercel reads it directly)
+  _site/                # Build output (ignored by git; Vercel builds from source)
 docs/
   ADDING_BLOG.md      # How to add a new blog post
 ```
@@ -212,10 +212,11 @@ State is synced to the URL via `?page=N` and `history.pushState`.
 | Lume (Deno SSG) over Next.js / Astro | Zero Node.js runtime in production; native Deno toolchain; fast cold-start on Deno Deploy |
 | Vento templates | Lume's first-class template engine; lighter than Nunjucks |
 | Single `main.css` | Portfolio is small; LightningCSS handles modern CSS nesting/variables; splitting not yet worth the complexity |
+| Modern Minimal theme | Near-black/near-white palette (`#111111` / `#fafafa`), single blue accent (`#2563eb` light / `#60a5fa` dark), Inter sans-serif throughout — replaced Paper/Print Minimal (warm serif) theme. Tech tags use accent-tinted bg + accent text (`--color-accent-light` / `--color-accent-border`) in both modes. |
 | Hardcoded SW via `build-sw.js` | Avoids Workbox CLI dependency; full control over cache strategies |
 | JSON data files (no CMS) | Static, version-controlled data; no database or API needed for a portfolio |
-| `_site/` committed to repo | Vercel reads build output directly; avoids re-running the build on Vercel's infrastructure |
+| `_site/` ignored from repo | Vercel builds from source on its own infrastructure; `_site/` is in `.gitignore` and not committed |
 
 ---
 
-_Last updated: 2026-03-04_
+_Last updated: 2026-03-04 — Tech tag accent-tinted style applied; spec-kit reflects current token set_

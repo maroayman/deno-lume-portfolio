@@ -17,34 +17,7 @@ layout: layouts/base.vto
 
     <div class="blog-grid">
       {{ for post of posts }}
-      <article class="blog-card" data-url="{{ post.url }}">
-        {{ if post.cover }}
-        <div class="blog-card-cover">
-          <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
-        </div>
-        {{ /if }}
-        <div class="blog-card-content">
-          <div class="blog-card-header">
-            <h3 class="blog-card-title">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </h3>
-          </div>
-          <div class="blog-card-meta">
-            <time datetime="{{ post.date |> date('DATE') }}">{{ post.date |> date('HUMAN_DATE') }}</time>
-            {{ if post.readingTime }}
-            <span>· {{ post.readingTime }} min read</span>
-            {{ /if }}
-          </div>
-          <p class="blog-card-excerpt">{{ post.description }}</p>
-          {{ if post.tags }}
-          <div class="tech-tags">
-            {{ for t of post.tags }}
-            <a href="/blog/tags/{{ t |> slug }}/" class="tech-tag">{{ t }}</a>
-            {{ /for }}
-          </div>
-          {{ /if }}
-        </div>
-      </article>
+      {{ include "partials/blog-card.vto" { post, showBookmark: false, paginationItem: false } }}
       {{ /for }}
     </div>
   </section>

@@ -5,41 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
-  <link rel="canonical" href="https://maroayman.vercel.app{{ url }}">
-  <link rel="alternate" type="application/rss+xml" title="Marwan Ayman Shawky — Blog" href="/feed.rss">
+  <link rel="canonical" href="{{ site.url }}{{ url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.author }} — Blog" href="/feed.rss">
 
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://maroayman.vercel.app{{ url }}">
-  <meta property="og:image" content="https://maroayman.vercel.app/og-image.png">
+  {{ if type === "post" }}
+  {{ set ogImage = cover || null }}
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ url }}">
+  <meta property="article:published_time" content="{{ date |> date('DATE') }}">
+  {{ if ogImage }}
+  <meta property="og:image" content="{{ ogImage }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Marwan Ayman Shawky">
+  {{ /if }}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  {{ if ogImage }}
+  <meta name="twitter:image" content="{{ ogImage }}">
+  {{ /if }}
+  {{ else }}
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ url }}">
+  <meta property="og:image" content="{{ site.url }}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="{{ site.author }}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
-  <meta name="twitter:image" content="https://maroayman.vercel.app/og-image.png">
-  <meta name="author" content="Marwan Ayman Shawky">
+  <meta name="twitter:image" content="{{ site.url }}/og-image.png">
+  {{ /if }}
+  <meta name="author" content="{{ site.author }}">
 
-  <!-- JSON-LD Structured Data - Website -->
+  <!-- JSON-LD Structured Data -->
+  {{ if type === "post" }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ title }}",
+    "description": "{{ description }}",
+    "url": "{{ site.url }}{{ url }}",
+    "datePublished": "{{ date |> date('DATE') }}",
+    "dateModified": "{{ date |> date('DATE') }}",
+    {{ if cover }}
+    "image": "{{ cover }}",
+    {{ /if }}
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ url }}"
+    }
+    {{ if tags }},
+    "keywords": "{{ tags.join(', ') }}"
+    {{ /if }}
+  }
+  </script>
+  {{ else }}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Marwan Ayman Shawky",
-    "url": "https://maroayman.vercel.app",
+    "name": "{{ site.author }}",
+    "url": "{{ site.url }}",
     "description": "{{ description }}",
     "author": {
       "@type": "Person",
-      "name": "Marwan Ayman Shawky",
-      "url": "https://maroayman.vercel.app",
-      "jobTitle": "Cloud & DevOps Engineer"
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}",
+      "jobTitle": "{{ site.tagline }}"
     }
   }
   </script>
+  {{ /if }}
 
   <!-- Styles (inlined for performance) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
@@ -50,6 +102,11 @@
 <body>
   <!-- Skip to main content link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  {{ if type === "post" }}
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+  {{ /if }}
 
   <!-- Theme Toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -68,11 +125,32 @@
     </svg>
   </button>
 
+  {{ if type === "post" }}
+  <!-- Image Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+  {{ /if }}
+
   <!-- Header -->
   <header>
     <div class="container">
-      <h1>Marwan Ayman Shawky</h1>
-      <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Cloud & DevOps Engineer</p>
+      <h1>{{ site.author }}</h1>
+      <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">{{ site.tagline }}</p>
     </div>
   </header>
 
@@ -84,7 +162,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>© <span id="year"></span> Marwan Ayman Shawky</p>
+      <p>© <span id="year"></span> {{ site.author }}</p>
     </div>
   </footer>
 

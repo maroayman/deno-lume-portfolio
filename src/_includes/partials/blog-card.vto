@@ -1,0 +1,35 @@
+<article class="blog-card"{{ if paginationItem }} data-pagination-item{{ /if }} data-url="{{ post.url }}"{{ if paginationItem }} data-title="{{ post.title }}" data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}" data-description="{{ post.description }}"{{ /if }}>
+  {{ if post.cover }}
+  <div class="blog-card-cover">
+    <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
+  </div>
+  {{ /if }}
+  <div class="blog-card-content">
+    <div class="blog-card-header">
+      <h3 class="blog-card-title">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </h3>
+      {{ if showBookmark }}
+      <button class="bookmark-btn" data-url="{{ post.url }}" aria-label="Bookmark article" title="Bookmark">
+        <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
+      </button>
+      {{ /if }}
+    </div>
+    <div class="blog-card-meta">
+      <time datetime="{{ post.date |> date('DATE') }}">{{ post.date |> date('HUMAN_DATE') }}</time>
+      {{ if post.readingTime }}
+      <span>· {{ post.readingTime }} min read</span>
+      {{ /if }}
+    </div>
+    <p class="blog-card-excerpt">{{ post.description }}</p>
+    {{ if post.tags }}
+    <div class="tech-tags">
+      {{ for tag of post.tags }}
+      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }}</a>
+      {{ /for }}
+    </div>
+    {{ /if }}
+  </div>
+</article>

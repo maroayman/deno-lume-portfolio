@@ -24,7 +24,11 @@
   "permissions": {
     "allow-read": ["./src/**", "./_site/**"],
     "allow-write": ["./_site/**"],
-    "allow-env": ["DENO_ENV"]
+    "allow-env": ["DENO_ENV"],
+    "allow-net": [
+      "fonts.googleapis.com:443",
+      "fonts.gstatic.com:443"
+    ]
   },
   "deploy": {
     "org": "maroayman",
