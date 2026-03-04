@@ -8,6 +8,8 @@ import markdown from "lume/plugins/markdown.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import inline from "lume/plugins/inline.ts";
 import feed from "lume/plugins/feed.ts";
+import googleFonts from "lume/plugins/google_fonts.ts";
+import purgecss from "lume/plugins/purgecss.ts";
 
 const isProduction = Deno.env.get("DENO_ENV") === "production";
 
@@ -21,6 +23,13 @@ site.use(vento());
 site.use(markdown());
 site.use(date());
 site.use(slugifyUrls());
+site.use(googleFonts({
+  cssFile: "styles/main.css",
+  placeholder: "/* google-fonts */",
+  subsets: ["latin"],
+  fonts:
+    "https://fonts.google.com/share?selection.family=Inter:wght@100..900",
+}));
 
 /**
  * Custom "slug" filter — available in all Vento templates as `|> slug`.
@@ -91,6 +100,15 @@ site.preprocess([".md"], (pages) => {
 
 site.use(inline());
 site.use(lightningcss());
+site.use(purgecss({
+  options: {
+    // Classes added dynamically by JS (not present in static HTML) must be
+    // safelisted so PurgeCSS does not strip the rules that reference them.
+    safelist: {
+      standard: [/^dark-mode$/, /^visible$/, /^read$/],
+    },
+  },
+}));
 
 site.use(sitemap());
 
