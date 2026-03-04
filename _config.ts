@@ -48,22 +48,50 @@ site.data("layout", "layouts/blog.vto", "/blog");
 site.data("type", "post", "/blog");
 
 /**
- * Tag-lowercasing preprocessor — runs on every Markdown page before build.
+ * Tag-lowercasing + reading-time preprocessor — runs on every Markdown page before build.
  *
- * Ensures tags are always stored in lowercase regardless of how they are
- * written in frontmatter (e.g. "DevOps" → "devops"). This keeps tag-based
- * filtering and the `|> slug` filter output consistent across all pages.
+ * 1. Tag lowercasing: ensures tags are always stored in lowercase regardless of
+ *    how they are written in frontmatter (e.g. "DevOps" → "devops"). Keeps
+ *    tag-based filtering and the `|> slug` filter output consistent.
+ *
+ * 2. Reading-time: strips Markdown syntax from the raw source, counts words at
+ *    200 wpm, and exposes the result as `page.data.readingTime` (number, minutes,
+ *    minimum 1). Templates can render it directly without any client-side JS.
  */
 site.preprocess([".md"], (pages) => {
   for (const page of pages) {
+    // --- tag lowercasing ---
     if (page.data.tags && Array.isArray(page.data.tags)) {
       page.data.tags = page.data.tags.map((tag: string) => tag.toLowerCase());
+    }
+
+    // --- reading time ---
+    // page.content holds the raw Markdown source string at preprocess time.
+    const rawContent = page.content;
+    if (typeof rawContent === "string") {
+      // Strip fenced code blocks, inline code, HTML tags, images, links,
+      // heading markers, blockquote markers, and horizontal rules so that
+      // non-prose tokens don't inflate the word count.
+      const plain = rawContent
+        .replace(/```[\s\S]*?```/g, "") // fenced code blocks
+        .replace(/`[^`]*`/g, "") // inline code
+        .replace(/!\[.*?\]\(.*?\)/g, "") // images
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links — keep label text
+        .replace(/<[^>]+>/g, "") // HTML tags
+        .replace(/^#{1,6}\s+/gm, "") // heading markers
+        .replace(/^>\s+/gm, "") // blockquote markers
+        .replace(/^[-*_]{3,}\s*$/gm, "") // horizontal rules
+        .replace(/[*_~`#>|]/g, ""); // remaining Markdown punctuation
+
+      const words = plain.trim().split(/\s+/).filter((w) => w.length > 0).length;
+      page.data.readingTime = Math.max(1, Math.ceil(words / 200));
     }
   }
 });
 
 site.use(inline());
 site.use(lightningcss());
+
 site.use(sitemap());
 
 // RSS feed — generates /feed.rss from all pages with type=post

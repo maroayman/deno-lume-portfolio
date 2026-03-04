@@ -4,6 +4,7 @@ import certifications from "./_data/certifications.json" with { type: "json" };
 
 const toTime = (s: string): number => {
   const raw = s.split("–").pop()!.trim();
+  if (/^present$/i.test(raw)) return Date.now();
   const ms = +new Date(raw);
   if (isNaN(ms)) {
     console.warn(`[_data.ts] toTime: could not parse date from "${s}" — entry will sort to the bottom.`);

@@ -11,7 +11,7 @@
     "dev": "deno task serve",
     "lint": "deno lint src/ _config.ts",
     "fmt": "deno fmt src/ _config.ts",
-    "deploy": "deno task build && deno deploy deploy --prod --app portfolio"
+    "deploy": "deno task lint && deno task check && deno task build && deno deploy deploy --prod --app portfolio"
   },
   "imports": {
     "lume/": "https://deno.land/x/lume@v3.1.4/"

@@ -62,7 +62,7 @@
       currentPage = page;
       showPage();
       renderControls();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      globalThis.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     return a;
@@ -101,7 +101,7 @@
   }
 
   // Restore state on browser back/forward
-  window.addEventListener("popstate", (e) => {
+  addEventListener("popstate", (e) => {
     currentPage = e.state?.page || 1;
     showPage();
     renderControls();

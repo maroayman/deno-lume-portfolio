@@ -18,15 +18,29 @@
         moonIcon.style.display = isDark ? 'block' : 'none';
       }
 
-      // Apply current theme
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
+      // Resolve effective theme: explicit user preference > OS preference > light
+      function resolveTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
 
-      // Toggle handler
+      // Apply on load
+      applyTheme(resolveTheme());
+
+      // Toggle handler — once the user clicks, their choice is persisted
       themeToggle.addEventListener('click', function() {
         const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
         localStorage.setItem('theme', newTheme);
         applyTheme(newTheme);
+      });
+
+      // Follow OS changes only when the user has NOT set an explicit preference
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
       });
     })();
 
