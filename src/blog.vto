@@ -216,12 +216,15 @@ requestAnimationFrame(() => {
           </div>
           <div class="blog-card-meta">
             <time datetime="{{ post.date |> date('DATE') }}">{{ post.date |> date('HUMAN_DATE') }}</time>
+            {{ if post.readingTime }}
+            <span>· {{ post.readingTime }} min read</span>
+            {{ /if }}
           </div>
           <p class="blog-card-excerpt">{{ post.description }}</p>
           {{ if post.tags }}
           <div class="tech-tags">
             {{ for tag of post.tags }}
-            <span class="tech-tag" data-tag="{{ tag }}">{{ tag }}</span>
+            <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag" data-tag="{{ tag }}">{{ tag }}</a>
             {{ /for }}
           </div>
           {{ /if }}

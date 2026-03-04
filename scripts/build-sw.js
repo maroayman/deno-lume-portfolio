@@ -1,7 +1,35 @@
 // Simple service worker generator
 // Copies/sw.js template to _site folder during build
+// CACHE_VERSION is derived from the current git SHA (first 8 chars) so that
+// every deploy automatically invalidates old caches without manual bumping.
 
-const SW_SOURCE = `const CACHE_VERSION = 'v1';
+/**
+ * Resolve a cache-busting version string.
+ * Priority: 1) git short SHA, 2) ISO date string (safe fallback).
+ */
+async function resolveCacheVersion() {
+  try {
+    const cmd = new Deno.Command("git", {
+      args: ["rev-parse", "--short=8", "HEAD"],
+      stdout: "piped",
+      stderr: "null",
+    });
+    const { code, stdout } = await cmd.output();
+    if (code === 0) {
+      const sha = new TextDecoder().decode(stdout).trim();
+      if (sha) return sha;
+    }
+  } catch {
+    // git not available — fall through to timestamp
+  }
+  // Fallback: compact UTC date, e.g. "20260304"
+  return new Date().toISOString().slice(0, 10).replace(/-/g, "");
+}
+
+const CACHE_VERSION = await resolveCacheVersion();
+console.log("SW cache version:", CACHE_VERSION);
+
+const SW_SOURCE = `const CACHE_VERSION = '${CACHE_VERSION}';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
