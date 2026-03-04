@@ -58,7 +58,7 @@ A **package manager** is your toolkit for handling software. It:
 
 ## Installing Software
 
-- ### Debian/Ubuntu
+### Debian/Ubuntu
 
 - _**I tested this on Ubuntu 24 LTS.**_
 
@@ -71,7 +71,7 @@ sudo apt install nginx     # install Nginx web server
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195310098/798203a5-bfca-4510-96e9-ba5bd9ce5f98.png)
 
-- ### Fedora / CentOS 8+ / RHEL 8+
+### Fedora / CentOS 8+ / RHEL 8+
 
 - _**Tested on (CentOS Stream 10)**_
 
@@ -81,13 +81,13 @@ sudo dnf install nginx
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195395366/4f6b90c3-868d-4b7c-ae61-0168528b526a.png)
 
-- ### CentOS 7 / RHEL 7
+### CentOS 7 / RHEL 7
 
 ```bash
 sudo yum update
 ```
 
-- ### Arch Linux
+### Arch Linux
 
 ```bash
 sudo pacman -Syu
@@ -95,7 +95,7 @@ sudo pacman -Syu
 
 ## Removing Software
 
-- ### Debian/Ubuntu
+### Debian/Ubuntu
 
 ```bash
 sudo apt remove nginx
@@ -104,13 +104,13 @@ sudo apt autoremove     # clean up unused dependencies
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195639864/b8e0082e-f02f-4834-8a4e-58fc5eef3629.png)
 
-- ### Fedora / CentOS / RHEL
+### Fedora / CentOS / RHEL
 
 ```bash
 sudo dnf remove nginx
 ```
 
-- ### Arch Linux
+### Arch Linux
 
 ```bash
 sudo pacman -R nginx

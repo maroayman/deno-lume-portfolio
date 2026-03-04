@@ -53,27 +53,9 @@ description: DevOps training and internships focused on cloud automation
     </div>
     
     {{ if experience.length > 4 }}
-    <div class="pagination-controls tech-tags" id="pagination-controls" style="display: none;"></div>
+    <div class="pagination-controls" id="pagination-controls" style="display: none;"></div>
     {{ /if }}
   </section>
 </div>
-
-<script>
-function toggleShowMore(btn) {
-  const list = btn.previousElementSibling;
-  const items = list.querySelectorAll('.show-more-item');
-  const isExpanded = list.classList.contains('expanded');
-  
-  if (isExpanded) {
-    items.forEach(item => item.style.display = 'none');
-    btn.textContent = `Show more (${items.length})`;
-    list.classList.remove('expanded');
-  } else {
-    items.forEach(item => item.style.display = 'list-item');
-    btn.textContent = 'Show less';
-    list.classList.add('expanded');
-  }
-}
-</script>
 
 {{ include "pagination.vto" }}

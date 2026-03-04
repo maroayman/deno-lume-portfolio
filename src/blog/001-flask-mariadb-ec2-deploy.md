@@ -162,7 +162,7 @@ noteapp/
   </html>
   ```
 
-  ## Step 4 : Creating the virtual environment and running the application
+## Step 4 : Creating the virtual environment and running the application
 
 We need to setup the virtual environment for the app for many useful reason:
 
@@ -209,9 +209,9 @@ Here is a screenshot of the app while its running.
 
 - Public IP + port 5000 = access from anywhere
 
-# Backing up the database on a mounted EBS Volume.
+## Backing up the Database on a Mounted EBS Volume
 
-- ## Attach & Mount EBS Volume.
+### Attach & Mount EBS Volume
 
 Important Note : You need to know the correct name of the attached volume by
 using `lsblk` command and replace it in the /dev/…
@@ -222,31 +222,31 @@ sudo mkdir /mariadb
 sudo mount /dev/nvme1n1 /mariadb
 ```
 
-- ## Persist Across reboots
+### Persist Across Reboots
 
 ```bash
 echo "/dev/nvme1n1 /mariadb xfs defaults,nofail 0 0" | sudo tee -a /etc/fstab
 ```
 
-- ## Stop MariaDB
+### Stop MariaDB
 
 ```bash
 sudo systemctl stop mariadb
 ```
 
-- ## Setting Permissions
+### Setting Permissions
 
 ```bash
 sudo chown -R mysql:mysql /mariadb/mysql
 ```
 
-- ## Restarting MariaDB
+### Restarting MariaDB
 
 ```bash
 sudo systemctl start mariadb
 ```
 
-- ## Backing up the DB
+### Backing up the DB
 
 ```bash
 sudo mysqldump -u root -p notesdb > /mariadb/notesdb_backup.sql
@@ -264,6 +264,6 @@ The output should be like this
 
 ---
 
-## 📂 GitHub Repository
+## GitHub Repository
 
 [View on GitHub: maroayman/depi-project-1](https://github.com/maroayman/depi-project-1)

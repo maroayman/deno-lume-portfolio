@@ -16,7 +16,7 @@ some pro tips.
 
 ## Beginner Level: The Foundation
 
-### 🔹 What is a Docker Image?
+### What is a Docker Image?
 
 A Docker **image** is like a **blueprint** for your containers. It includes:
 
@@ -31,7 +31,7 @@ A Docker **image** is like a **blueprint** for your containers. It includes:
 When you run an image, you get a **container**. Think of it as installing an app
 from an app store — but for infrastructure.
 
-### 🔹 How Images are Built
+### How Images are Built
 
 - **Dockerfile** → a recipe of instructions.
 
@@ -51,7 +51,7 @@ CMD ["python", "main.py"]
 
 ## Intermediate Level: Working with Images
 
-### 🔹 Image Tags & Versions
+### Image Tags & Versions
 
 - `nginx:latest` → latest stable version.
 
@@ -59,7 +59,7 @@ CMD ["python", "main.py"]
 
 - `nginx:alpine` → lightweight version.
 
-### 🔹 Optimizing Image Size
+### Optimizing Image Size
 
 - Use **Alpine Linux** as a base.
 
@@ -67,7 +67,7 @@ CMD ["python", "main.py"]
 
 - Combine commands to reduce layers.
 
-### 🔹 Security Best Practices
+### Security Best Practices
 
 - Use trusted base images.
 
@@ -77,7 +77,7 @@ CMD ["python", "main.py"]
 
 ## Advanced Level: Image Management & Customization
 
-### 🔹 Multi-Stage Builds
+### Multi-Stage Builds
 
 Build and runtime environments separated → smaller, cleaner images.
 
@@ -92,11 +92,11 @@ COPY --from=builder /src/app /app
 CMD ["/app"]
 ```
 
-### 🔹 Private Registries
+### Private Registries
 
 Companies often use private registries for internal security.
 
-### 🔹 Tagging Strategy
+### Tagging Strategy
 
 - Semantic (`1.0.0`)
 
@@ -135,7 +135,7 @@ Foundation (CNCF)**, the home of Kubernetes, Prometheus, Envoy, Helm, and dozens
 of other cloud-native projects. This partnership isn’t just symbolic — it brings
 a **real advantage to developers**.
 
-### 🔹 Key Advantages of the Collaboration
+### Key Advantages of the Collaboration
 
 - **Unlimited Pulls for CNCF Projects**\
   Before, Docker Hub enforced strict **pull rate limits** (100–200 pulls/6h for
@@ -187,7 +187,7 @@ docker load -i myimage.tar
 - **Fun Fact**: The very first Docker image was based on **Ubuntu**; today,
   **Alpine** is the most common lightweight base (~5 MB).
 
-# Docker Practice Labs
+## Docker Practice Labs
 
 These labs are designed to **strengthen your Docker experience**. Start with
 simple commands, then move to image building, and finally into advanced
@@ -350,7 +350,7 @@ docker scout cves my-go-app
 - Configure **a Docker Registry Mirror** locally using Harbor to bypass Docker
   Hub rate limits.
 
-### 🔹 Advanced Dockerfile Instructions
+### Advanced Dockerfile Instructions
 
 - **ENV** → set environment variables
 
@@ -366,14 +366,14 @@ EXPOSE 5000
 
 - **ENTRYPOINT vs CMD** → explain the difference and when to use each
 
-### 🔹 Optimizing Images
+### Optimizing Images
 
 - Using multi-stage builds for smaller images (e.g., build Node.js app, then
   copy only final artifacts into a slim image).
 
 - Caching strategies (ordering `RUN`, `COPY`, `ADD` steps wisely).
 
-### 🔹 Debugging and Testing
+### Debugging and Testing
 
 - How to inspect image layers:
 

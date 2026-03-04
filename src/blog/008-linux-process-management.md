@@ -6,8 +6,6 @@ tags:
   - Linux
 ---
 
-# Overview
-
 When you run a program in Linux, it becomes a **process** — a living entity
 inside the operating system with its own ID, state, and resources.\
 Whether you’re compiling code, running a web server, or streaming music, Linux
@@ -33,8 +31,6 @@ essential**. You’ll need to:
 This guide will walk you from the basics of **jobs in your shell** to the
 advanced topics of **daemonization, scheduling, and resource control** — with
 **hands-on exercises** so you can practice along the way.
-
-## Full Guide
 
 ### Understanding Processes
 

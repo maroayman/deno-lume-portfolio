@@ -13,7 +13,14 @@ const toTime = (s: string): number => {
   return ms;
 };
 
+export const site = {
+  author: "Marwan Ayman Shawky",
+  url: "https://maroayman.vercel.app",
+  tagline: "Cloud & DevOps Engineer",
+};
+
 export default {
+  site,
   projects: [...projects].sort((a, b) => toTime(b.period) - toTime(a.period)),
   experience: [...experience].sort((a, b) =>
     toTime(b.period) - toTime(a.period)

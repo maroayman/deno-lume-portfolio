@@ -251,7 +251,7 @@ the more you practice, the more powerful your Linux workflows become.
 
 ---
 
-# Practice Pack Script
+## Practice Pack Script
 
 Here’s the [`linux-shell-labs.sh`](http://linux-shell-labs.sh) file (all 9 labs
 with comments):

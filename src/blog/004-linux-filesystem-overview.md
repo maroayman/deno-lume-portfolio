@@ -6,8 +6,6 @@ tags:
   - Linux
 ---
 
-# Brief
-
 If you’re new to Linux, opening the terminal and running `ls /` can feel like
 stepping into a maze. There’s a `/bin`, `/etc`, `/home`, `/var`, `/usr` — but
 what do these mysterious folders mean?

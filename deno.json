@@ -11,6 +11,7 @@
     "dev": "deno task serve",
     "lint": "deno lint src/ _config.ts",
     "fmt": "deno fmt src/ _config.ts",
+    "resume": "$HOME/.local/bin/typst compile main.typ src/resume.pdf",
     "deploy": "deno task lint && deno task check && deno task build && deno deploy deploy --prod --app portfolio"
   },
   "imports": {
@@ -24,7 +25,11 @@
   "permissions": {
     "allow-read": ["./src/**", "./_site/**"],
     "allow-write": ["./_site/**"],
-    "allow-env": ["DENO_ENV"]
+    "allow-env": ["DENO_ENV"],
+    "allow-net": [
+      "fonts.googleapis.com:443",
+      "fonts.gstatic.com:443"
+    ]
   },
   "deploy": {
     "org": "maroayman",

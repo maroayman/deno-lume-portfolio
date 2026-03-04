@@ -7,26 +7,6 @@ tags:
   - WSL
 ---
 
-# Linux & WSL: A Beginner-Friendly Guide
-
-## Table of Contents
-
-1. [Part 1: A Brief Overview of Linux](#part-1-a-brief-overview-of-linux)
-
-   - [What Is Linux?](#what-is-linux)
-   - [Why Learn Linux?](#why-learn-linux)
-   - [Popular Linux Distributions](#popular-linux-distributions)
-2. [Part 2: Practicing Linux on Windows with WSL](#part-2-practicing-linux-on-windows-with-wsl)
-
-   - [Introduction to WSL](#introduction-to-wsl)
-   - [Step-by-Step Installation (Windows 11)](#step-by-step-installation-windows-11)
-   - [Choosing a Distribution](#choosing-a-distribution)
-   - [Installing Distributions](#installing-distributions)
-   - [Manual Installation (CentOS Stream)](#manual-installation-centos-stream)
-   - [Switching Between WSL Distributions](#switching-between-wsl-distributions)
-3. [Part 3: Integrating with VS Code and Windows](#part-3-integrating-with-vs-code-and-windows)
-4. [Part 4: What’s Next?](#part-4-whats-next)
-
 ---
 
 ## Part 1: A Brief Overview of Linux

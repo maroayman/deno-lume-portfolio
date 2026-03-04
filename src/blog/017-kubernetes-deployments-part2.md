@@ -13,8 +13,6 @@ title: "Kubernetes Deployments Part 2: Update Strategies &
   Production Practices"
 ---
 
-# Kubernetes Deployments — Part 2
-
 In [Part 1](/blog/016-kubernetes-deployments-part1), we covered Deployment fundamentals, scaling, and
 self-healing.
 
@@ -28,7 +26,7 @@ In Part 2, we go deeper into:
 
 ------------------------------------------------------------------------
 
-# 1 - Rolling Updates
+## Rolling Updates
 
 Rolling Updates allow you to update your application **without
 downtime**.
@@ -92,7 +90,7 @@ you can read more about maxsurge and maxunavailable use cases
 
 ------------------------------------------------------------------------
 
-## Example: Updating Image Version
+### Example: Updating Image Version
 
 ``` bash
 kubectl set image deployment/web-deployment nginx-container=nginx:1.26
@@ -106,7 +104,7 @@ kubectl rollout status deployment/web-deployment
 
 ------------------------------------------------------------------------
 
-# 2 - Rollbacks
+## Rollbacks
 
 If something goes wrong, Kubernetes allows instant rollback.
 
@@ -126,7 +124,7 @@ This restores the previous ReplicaSet.
 
 ------------------------------------------------------------------------
 
-# 3 - Blue/Green Deployment
+## Blue/Green Deployment
 
 Blue/Green means:
 
@@ -149,7 +147,7 @@ This provides zero-downtime and safe testing.
 
 ------------------------------------------------------------------------
 
-# 4 - Canary Deployment
+## Canary Deployment
 
 Canary releases send traffic to a small subset of users first.
 
@@ -169,7 +167,7 @@ Used when you want gradual risk reduction.
 
 ------------------------------------------------------------------------
 
-# 5️ - Production Best Practices
+## Production Best Practices
 
 ## Always Use Probes
 
@@ -224,7 +222,7 @@ Essential for Blue/Green & Canary strategies.
 
 ------------------------------------------------------------------------
 
-# What You Learned in Part 2
+## What You Learned in Part 2
 
 -   How Rolling Updates maintain availability
 -   How to rollback safely
