@@ -63,6 +63,8 @@ matches reality.
 
 ### Basic Deployment YAML Example
 
+:::tabs
+[YAML]
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -85,18 +87,17 @@ spec:
             - containerPort: 80
 ```
 
-Apply it:
-
+[Apply]
 ```bash
 kubectl apply -f deployment.yaml
 ```
 
-Verify:
-
+[Verify]
 ```bash
 kubectl get deployments
 kubectl get pods
 ```
+:::
 
 ---
 

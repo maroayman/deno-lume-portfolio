@@ -10,6 +10,7 @@ import inline from "lume/plugins/inline.ts";
 import feed from "lume/plugins/feed.ts";
 import googleFonts from "lume/plugins/google_fonts.ts";
 import purgecss from "lume/plugins/purgecss.ts";
+import markdownTabs from "./plugins/markdown-tabs.ts";
 
 const isProduction = Deno.env.get("DENO_ENV") === "production";
 
@@ -21,6 +22,22 @@ const site = lume({
 
 site.use(vento());
 site.use(markdown());
+site.hooks.addMarkdownItPlugin(markdownTabs);
+
+// Attach data-lang attribute to fenced code blocks so CSS can show the
+// language name in the pre::before bar instead of "· · ·".
+site.hooks.addMarkdownItPlugin((md: any) => {
+  const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules) ??
+    ((tokens: any, idx: any, options: any, env: any, self: any) =>
+      self.renderToken(tokens, idx, options));
+  md.renderer.rules.fence = function (tokens: any, idx: any, options: any, env: any, self: any) {
+    const token = tokens[idx];
+    const lang = token.info.trim().split(/\s+/)[0];
+    const html = defaultFence(tokens, idx, options, env, self);
+    if (!lang || lang === "tabs") return html;
+    return html.replace(/^<pre/, `<pre data-lang="${lang}"`);
+  };
+});
 site.use(date());
 site.use(slugifyUrls());
 site.use(googleFonts({
@@ -105,7 +122,24 @@ site.use(purgecss({
     // Classes added dynamically by JS (not present in static HTML) must be
     // safelisted so PurgeCSS does not strip the rules that reference them.
     safelist: {
-      standard: [/^dark-mode$/, /^visible$/, /^read$/],
+      standard: [
+        /^dark-mode$/,      // theme toggle — on <body> and <html>
+        /^visible$/,        // back-to-top, scroll-triggered visibility
+        /^read$/,           // blog card visited state (localStorage)
+        /^code-tab/,        // :::tabs component (code-tab-btn, code-tab-pane, active)
+        /^active$/,         // filter tags, view tabs, toc links, pagination
+        /^open$/,           // tag dropdown, ToC
+        /^copied$/,         // copy-code button feedback
+        /^expanded$/,       // show-more/show-less toggle
+        /^bookmarked$/,     // blog card bookmark state
+        /^focused$/,        // dropdown keyboard navigation
+        /^selected$/,       // dropdown items
+        /^pagination-active$/, // active page button in pagination
+        /^toc-active$/,     // active heading in ToC
+        /^toc-h2$/,         // ToC item injected by JS
+        /^toc-h3$/,         // ToC item injected by JS
+        /^weight-[1-5]$/,   // tag frequency weight classes
+      ],
     },
   },
 }));

@@ -55,7 +55,7 @@ strategy:
 
 Maximum number of Pods that can be unavailable during the update.
 
-### Example
+**Example:**
 
 ``` yaml
 replicas: 4
@@ -65,32 +65,24 @@ maxUnavailable: 1
 Kubernetes guarantees that **at least 3 Pods will always be available**
 during the update.
 
-### Why it matters
+**Why it matters:**
 
--   Controls availability\
--   Protects against downtime\
--   Critical for production systems\
+-   Controls availability
+-   Protects against downtime
+-   Critical for production systems
 -   Important for SLA-based applications
 
-### Production Use Case
-
-For high-availability systems (banking, checkout, auth services):
-
-``` yaml
-maxUnavailable: 0
-```
-
-This ensures **zero downtime rollout**.
+For high-availability systems (banking, checkout, auth services), set `maxUnavailable: 0` to ensure **zero downtime rollout**.
 
 ### maxSurge
 
 Maximum extra Pods created above desired replicas.
 
-you can read more about maxsurge and maxunavailable use cases
+You can read more about maxSurge and maxUnavailable use cases in the [official docs](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment).
 
 ------------------------------------------------------------------------
 
-### Example: Updating Image Version
+### Updating an Image Version
 
 ``` bash
 kubectl set image deployment/web-deployment nginx-container=nginx:1.26
@@ -169,7 +161,7 @@ Used when you want gradual risk reduction.
 
 ## Production Best Practices
 
-## Always Use Probes
+### Always Use Probes
 
 ``` yaml
 livenessProbe:
@@ -192,7 +184,7 @@ readinessProbe:
 
 ------------------------------------------------------------------------
 
-## Define Resource Limits
+### Define Resource Limits
 
 ``` yaml
 resources:
@@ -208,7 +200,7 @@ Prevents noisy neighbor problems.
 
 ------------------------------------------------------------------------
 
-## Use Proper Labels & Versioning
+### Use Proper Labels & Versioning
 
 Example:
 
