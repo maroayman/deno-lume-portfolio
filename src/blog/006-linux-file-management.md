@@ -31,7 +31,7 @@ directories**. This is where Linux becomes fun — and powerful.
 
 **Pro Tip:** Use `cd -` to jump back to your previous directory.
 
-## 3\. Creating Files and Folders
+## Creating Files and Folders
 
 - I created a folder called "practice" in the home directory using
   `mkdir practice` and then entered it to run all the commands for this section.
@@ -67,7 +67,7 @@ directories**. This is where Linux becomes fun — and powerful.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039423240/ed16efdc-5aa8-4044-8088-38bdcc2dbe1b.png)
 
-## 4\. Copying and Moving Files
+## Copying and Moving Files
 
 - Copy file:
 
@@ -101,7 +101,7 @@ directories**. This is where Linux becomes fun — and powerful.
 
     ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040499265/de37ae32-788a-44c4-b446-5c9c533643c0.png)
 
-    ## 5\. Deleting Files and Directories
+## Deleting Files and Directories
 
     - Delete file:
 
@@ -138,7 +138,7 @@ directories**. This is where Linux becomes fun — and powerful.
 
 > ⚠️ Warning: Be careful with rm -rf /. It can wipe your system.
 
-## 6\. Viewing File Contents
+## Viewing File Contents
 
 - Show whole file: `cat notes.txt`
 
@@ -163,14 +163,14 @@ directories**. This is where Linux becomes fun — and powerful.
   tail -f /var/log/syslog
   ```
 
-  ## 7.1 File Globbing & Wildcards
+## File Globbing & Wildcards
 
 I have prepared a directory to apply our new practices on file globbing and
 wildcards. Follow the steps in the next screenshots and instructions.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041740143/ed79af16-1a94-4cd2-965b-e35efbdbbdf9.png)
 
-### 1\. Copy all .txt files into a folder
+### Copy all .txt files into a folder
 
 ```bash
 mkdir texts
@@ -179,7 +179,7 @@ cp *.txt texts/
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041870168/a960d78a-3892-4c1a-9c46-9d5dbee5ce05.png)
 
-### 2\. Move only report1.pdf and report2.pdf
+### Move only report1.pdf and report2.pdf
 
 ```bash
 mkdir reports
@@ -188,7 +188,7 @@ mv report[1-2].pdf reports/
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757042029659/3ff7053f-3bdc-4fd9-82c0-0247c6053dbf.png)
 
-### 3\. Delete only January–June backups
+### Delete only January–June backups
 
 ```bash
 rm backup_2023-0[1-6]*.tar.gz
@@ -200,11 +200,11 @@ rm backup_2023-0[1-6]*.tar.gz
 > characters that might appear after** `2023-0[1-6]` **and before** `.tar.gz`
 > **.**
 
-### 4\. View only image files starting with "image"
+### View only image files starting with "image"
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043180942/a7c20aa4-69ce-44ed-9e51-02c803290ab6.png)
 
-### 5\. Concatenate text files into one
+### Concatenate text files into one
 
 ```bash
 cat file?.txt > combined.txt
@@ -212,7 +212,7 @@ cat file?.txt > combined.txt
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043405195/5b6d4405-e692-4623-bd6b-e87406a3e70b.png)
 
-### 6\. Tar archive all PDF reports
+### Tar archive all PDF reports
 
 ```bash
 tar -czf reports.tar.gz report*.pdf
@@ -220,40 +220,38 @@ tar -czf reports.tar.gz report*.pdf
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043492581/2e39992a-9370-4a9e-99bd-826f1ec681a8.png)
 
-- ## 7.2 File Globbing & Wildcards
-
-Once you’re comfortable with the basics, here are some **real-world use cases**
+Once you're comfortable with the basics, here are some **real-world use cases**
 where globbing saves tons of time:
 
 ```bash
-# 1. Filter files by extension
+# Filter files by extension
 ls *.pdf
 ls *.jpg
 
-# 2. Select files with a specific ending
+# Select files with a specific ending
 ls *final.jpg      # only matches image_final.jpg
 
-# 3. Exclude hidden files
+# Exclude hidden files
 ls *               # shows all files, but not dotfiles (like .bashrc)
 
-# 4. Batch rename files (prefix all .txt files)
+# Batch rename files (prefix all .txt files)
 for f in *.txt; do mv "$f" "old_$f"; done
 # file1.txt → old_file1.txt
 
-# 5. Copy multiple types at once
+# Copy multiple types at once
 cp *. media/
 
-# 6. Match files with character ranges
+# Match files with character ranges
 ls file[0-9].txt   # matches file1.txt, file2.txt (but not file10.txt)
 
-# 7. View rotated log files
+# View rotated log files
 ls /var/log/syslog*   # syslog, syslog.1, syslog.2.gz ...
 
-# 8. Backup important configs with brace expansion
+# Backup important configs with brace expansion
 cp /etc/ ~/configs/
 ```
 
-# **Real-World DevOps Examples**
+### Real-World DevOps Examples
 
 - Archive all logs:
 
@@ -283,7 +281,7 @@ Try these on your own:
 
 - Delete all backup files except the ones from July onward.
 
-## 8\. Hidden Files & Dotfiles
+## Hidden Files & Dotfiles
 
 - Files starting with `.` are hidden by default.
 
@@ -297,7 +295,7 @@ Try these on your own:
 
 > 💡 Hidden files usually store configurations.
 
-## 9\. Absolute vs Relative Paths
+## Absolute vs Relative Paths
 
 - **Absolute path** → starts from `/` (root) — replace the placeholder with your
   username
@@ -322,7 +320,7 @@ Try these on your own:
 cd ~/Downloads # Replace Downloads with any folder your have in username home folder.
 ```
 
-## 10\. Links
+## Links
 
 - **Hard link**: another name for the same file
 
@@ -363,7 +361,7 @@ cd ~/Downloads # Replace Downloads with any folder your have in username home fo
   ls -l
   ```
 
-## 11\. Practice Challenge
+## Practice Challenge
 
 - Create a `playground/` directory
 
@@ -393,7 +391,7 @@ customizing your Linux system.
 > _"Mastering files is mastering Linux. Every pro started here — and so have
 > you."_
 
-# Linux Globbing Cheat Sheet
+## Linux Globbing Cheat Sheet
 
 | Pattern           | Matches Example                                                  |
 | ----------------- | ---------------------------------------------------------------- |

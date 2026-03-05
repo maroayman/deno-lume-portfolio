@@ -1,6 +1,6 @@
 ---
 title: "Scheduling & Automation in Linux: Mastering Cron, At, and Systemd Timers"
-description: "One of the most powerful features of Linux is the ability to automate tasks. Whether it’s running a backup every night, sending reports every week, or cleaning up logs at boot, scheduling saves time alot"
+description: "One of the most powerful features of Linux is the ability to automate tasks. Whether it's running a backup every night, sending reports every week, or cleaning up logs at boot, scheduling saves time alot"
 date: 2025-09-16
 tags:
   - Linux
@@ -8,7 +8,7 @@ tags:
 ---
 
 One of the most powerful features of Linux is the ability to **automate tasks**.
-Whether it’s running a backup every night, sending reports every week, or
+Whether it's running a backup every night, sending reports every week, or
 cleaning up logs at boot, scheduling saves time and prevents human error.
 
 Linux offers multiple ways to schedule tasks:
@@ -24,7 +24,7 @@ Linux offers multiple ways to schedule tasks:
 This guide covers all four, with **examples, cheatsheets, and practice
 exercises**.
 
-## 1\. One-Time Jobs with `at`
+## One-Time Jobs with `at`
 
 The `at` command schedules a job to run **once in the future**.
 
@@ -67,7 +67,7 @@ online**.
 
   → Run once daily, wait 10 minutes after boot.
 
-## 4\. Modern Scheduling with systemd Timers
+## Modern Scheduling with systemd Timers
 
 Most modern distros (CentOS 7+, Ubuntu 16+) use `systemd`. Instead of cron, you
 can use **timers**.
@@ -105,49 +105,43 @@ can use **timers**.
    systemctl list-timers
    ```
 
-   ## Cheatsheet: Quick Scheduling Commands
+## Cheatsheet: Quick Scheduling Commands
 
-   | Tool               | Purpose                      | Key Commands                                        |
-   | ------------------ | ---------------------------- | --------------------------------------------------- |
-   | **at**             | One-time jobs                | `at TIME`, `atq`, `atrm <jobid>`                    |
-   | **cron**           | Recurring jobs               | `crontab -e`, `crontab -l`, `systemctl status cron` |
-   | **anacron**        | Recurring jobs, catch missed | Edit `/etc/anacrontab`, `anacron -T`                |
-   | **systemd timers** | Modern recurring jobs        | `systemctl list-timers`, `.timer` units             |
+| Tool               | Purpose                      | Key Commands                                        |
+| ------------------ | ---------------------------- | --------------------------------------------------- |
+| **at**             | One-time jobs                | `at TIME`, `atq`, `atrm <jobid>`                    |
+| **cron**           | Recurring jobs               | `crontab -e`, `crontab -l`, `systemctl status cron` |
+| **anacron**        | Recurring jobs, catch missed | Edit `/etc/anacrontab`, `anacron -T`                |
+| **systemd timers** | Modern recurring jobs        | `systemctl list-timers`, `.timer` units             |
 
-   ## Practice Exercises
+## Practice Exercises
 
-   ### 🟢 Beginner
+### Beginner
 
-   1. Schedule a job with `at` that writes "Take a break!" into
-      `/tmp/reminder.log` after 1 minute.
+1. Schedule a job with `at` that writes "Take a break!" into
+   `/tmp/reminder.log` after 1 minute.
 
-   2. Create a cron job that runs every 5 minutes and writes the current date
-      into `/tmp/date.log`.
+2. Create a cron job that runs every 5 minutes and writes the current date
+   into `/tmp/date.log`.
 
-   ### 🟡 Intermediate
+### Intermediate
 
-   3. Use `anacron` to run a cleanup script daily, but delay execution for 15
-      minutes after boot.
+3. Use `anacron` to run a cleanup script daily, but delay execution for 15
+   minutes after boot.
 
-   4. Write a cron job that runs only on Mondays at 9:30 AM.
+4. Write a cron job that runs only on Mondays at 9:30 AM.
 
-   ### 🔵 Advanced
+### Advanced
 
-   5. Create a systemd timer that runs `echo "Systemd Rocks"` into
-      `/tmp/systemd.log` every hour.
+5. Create a systemd timer that runs `echo "Systemd Rocks"` into
+   `/tmp/systemd.log` every hour.
 
-   6. Compare the execution of a cron job vs. a systemd timer — which one
-      provides better logging?
+6. Compare the execution of a cron job vs. a systemd timer — which one
+   provides better logging?
 
-### Close-up
+---
 
-update, and manage packages — the building blocks of your Linux environment.
-Without package management, automation has nothing to run.
-
-That’s why in the next article, we’ll dive into:
-[**💾 Linux Disk Management**](/blog/010-linux-disk-management) — exploring
-apt, yum/dnf, rpm, repositories, and how to keep your system lean, secure, and
-up to date.
-
-Stay tuned — because mastering package management is your next step toward
-becoming a confident Linux Admin. 🚀
+Now that you can schedule and automate tasks, the next step is understanding
+storage. In the next article, we dive into:
+[**Linux Disk Management**](/blog/010-linux-disk-management) — exploring
+partitions, filesystems, mounting, and how to monitor disk health.

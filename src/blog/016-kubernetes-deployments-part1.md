@@ -9,8 +9,6 @@ tags:
   - Linux
 ---
 
-# Kubernetes Deployments — Part 1
-
 Welcome to Part 1 of the Kubernetes Deployments series.
 
 In this guide, we’ll cover:
@@ -63,7 +61,7 @@ matches reality.
 
 ---
 
-## Basic Deployment YAML Example
+### Basic Deployment YAML Example
 
 ```yaml
 apiVersion: apps/v1
@@ -153,7 +151,7 @@ This proves the Deployment and ReplicaSet are working correctly.
 
 ---
 
-# Hands-On Lab
+## Hands-On Lab
 
 ### Objective
 

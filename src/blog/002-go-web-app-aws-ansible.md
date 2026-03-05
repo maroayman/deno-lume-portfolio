@@ -9,8 +9,6 @@ tags:
   - Go
 ---
 
-# From Code to Cloud: Deploying a Go Note App on EC2 with Ansible and Daily Backups
-
 In this guide, we'll walk through deploying a simple Go-based note-taking web
 app on AWS EC2, with a local SQLite database and daily backup automation using
 Ansible and cron. You'll learn how to automate infrastructure, deploy cleanly
@@ -19,7 +17,7 @@ volume.
 
 ---
 
-## 🚀 What You'll Learn
+## What You'll Learn
 
 - How to deploy a Go web app using Ansible on AWS EC2
 
@@ -31,7 +29,7 @@ volume.
 
 ---
 
-## 🔧 Project Goals
+## Project Goals
 
 - Launch a web app written in Go
 
@@ -43,7 +41,7 @@ volume.
 
 ---
 
-## 🧭 Infrastructure Overview
+## Infrastructure Overview
 
 ### EC2 Setup
 
@@ -65,7 +63,7 @@ volume.
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```bash
 note-app/
@@ -83,7 +81,7 @@ note-app/
 
 ---
 
-## ⚙️ Role Tasks (main.yml)
+## Role Tasks (main.yml)
 
 ```yaml
 - name: Ensure Go is installed
@@ -145,7 +143,7 @@ note-app/
 
 ---
 
-## 💾 Mounting the EBS Volume on Node
+## Mounting the EBS Volume on Node
 
 ### Format and Mount
 
@@ -169,7 +167,7 @@ sudo mount -a
 
 ---
 
-## 📦 Deploying the App with Ansible
+## Deploying the App with Ansible
 
 ### Run from controller
 
@@ -189,21 +187,21 @@ ansible-playbook -i inventory.ini deploy-noteapp.yml
 
 ---
 
-## 🔄 Verifying the Deployment
+## Verifying the Deployment
 
-### Check If app is running :
+### Check if the app is running
 
 ```bash
 sudo lsof -i :80
 ```
 
-## Check logs :
+### Check logs
 
 ```bash
 tail -f app.log
 ```
 
-## View in Browser :
+### View in browser
 
 ```bash
 http://<public-ip>       # or private IP if using a VPC and tunnel
@@ -216,9 +214,9 @@ http://<public-ip>       # or private IP if using a VPC and tunnel
 
 ---
 
-## Testing the backup :
+## Testing the Backup
 
-### Checking the cronjob :
+### Checking the cron job
 
 ```bash
 crontab -l
@@ -240,7 +238,7 @@ notes_2025-08-05.db
 
 ---
 
-## Troubleshooting :
+## Troubleshooting
 
 - **Go not found?** → Ensure Go is installed and in `$PATH`.
 
@@ -263,7 +261,7 @@ infrastructure:
 
 ---
 
-## Resources:
+## Resources
 
 - [Go Programming Language](https://golang.org/)
 
@@ -277,6 +275,6 @@ infrastructure:
 
 ---
 
-## 📂 GitHub Repository
+## GitHub Repository
 
 [View on GitHub: maroayman/depi-project-2](https://github.com/maroayman/depi-project-2)

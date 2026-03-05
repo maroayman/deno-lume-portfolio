@@ -165,7 +165,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
 
 - `smartctl`, `iostat`, `iotop` → monitor health and performance.
 
-# Disk Management Cheatsheet
+## Disk Management Cheatsheet
 
 | **Category**            | **Command**                      | **Description**                                              |
 | ----------------------- | -------------------------------- | ------------------------------------------------------------ |
@@ -196,7 +196,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
 
 - **iostat/iotop/smartctl** → Monitoring
 
-# Conclusion
+## Conclusion
 
 You’ve successfully completed the **Linux Fundamentals Series** 🚀.
 
@@ -221,7 +221,7 @@ So far, you’ve learned:
 With these skills, you can confidently manage a Linux system, automate tasks,
 configure networks, and handle storage.
 
-# Thank You!
+## Thank You!
 
 Thank you for following along this journey. Your consistency and curiosity are
 what will make you a great Linux administrator. 🐧

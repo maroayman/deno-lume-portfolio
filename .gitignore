@@ -1,5 +1,6 @@
 dist/
 _site/
+_cache/
 node_modules/
 .DS_Store
 .vercel
@@ -7,3 +8,7 @@ node_modules/
 
 # Windows metadata files
 *:Zone.Identifier
+
+# Resume source — managed locally via `deno task resume`, not tracked in repo
+resume.json
+main.typ

@@ -358,17 +358,37 @@ footer p {
 
 .contact-links a {
   font-size: 0.8125rem;
-  color: var(--color-text-faint);
+  color: var(--color-bg);
   text-decoration: none;
   padding: 0.25rem 0.6rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-accent);
   border-radius: var(--radius);
-  transition: color var(--t-fast), border-color var(--t-fast);
+  background-color: var(--color-accent);
 }
 
-.contact-links a:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
+/* ============================================================
+   STACK ROW (homepage tech stack)
+   ============================================================ */
+
+.stack-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+.stack-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  padding-top: 0.2rem;
+}
+
+.stack-row .tech-tags {
+  margin-top: 0;
 }
 
 /* ============================================================
@@ -1902,7 +1922,149 @@ body.dark-mode .terminal-404 {
 }
 
 /* ============================================================
-   PRINT
+   USES PAGE
+   ============================================================ */
+
+.uses-group {
+  margin-bottom: 2rem;
+}
+
+.uses-group-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-faint);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.uses-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.uses-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.uses-item:last-child {
+  border-bottom: none;
+}
+
+.uses-item-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.uses-item-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .uses-item {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .uses-item-name {
+    min-width: unset;
+  }
+}
+
+/* ============================================================
+   TABLE OF CONTENTS
+   ============================================================ */
+
+.toc {
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.toc-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-elevated);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: left;
+  transition: background-color var(--t-fast), color var(--t-fast);
+}
+
+.toc-toggle:hover {
+  color: var(--color-text);
+  background: var(--color-bg-code);
+}
+
+.toc-toggle-icon {
+  flex-shrink: 0;
+  transition: transform var(--t-base);
+}
+
+.toc.open .toc-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0.5rem 0;
+  background: var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border);
+}
+
+.toc-list li {
+  line-height: 1.4;
+}
+
+.toc-list a {
+  display: block;
+  padding: 0.3rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--t-fast), background-color var(--t-fast);
+  border-left: 2px solid transparent;
+}
+
+.toc-list a:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+.toc-list a.toc-active {
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+  background: var(--color-accent-light);
+  font-weight: 500;
+}
+
+.toc-list .toc-h3 a {
+  padding-left: 2rem;
+  font-size: 0.775rem;
+}
+
+/* ============================================================
+   PRINT (continued)
    ============================================================ */
 
 @media print {
@@ -1911,7 +2073,8 @@ body.dark-mode .terminal-404 {
   .reading-progress,
   .social-share,
   .related-posts,
-  .lightbox {
+  .lightbox,
+  .toc {
     display: none !important;
   }
 

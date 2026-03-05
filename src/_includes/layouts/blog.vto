@@ -56,6 +56,17 @@ layout: layouts/base.vto
         </div>
       </header>
 
+      <!-- Table of Contents (injected by JS if enough headings) -->
+      <nav class="toc" id="toc" aria-label="Table of contents" style="display:none;">
+        <button class="toc-toggle" id="tocToggle" aria-expanded="true" aria-controls="tocList">
+          <span>Table of Contents</span>
+          <svg class="toc-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <path d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <ul class="toc-list" id="tocList"></ul>
+      </nav>
+
       <div class="blog-content">
         {{ content }}
       </div>
@@ -258,7 +269,71 @@ layout: layouts/base.vto
     if (e.key === 'ArrowRight' && currentImageIndex < imageList.length - 1) openLightbox(currentImageIndex + 1);
   });
 
-  // ========== READING HISTORY ==========
+  // ========== TABLE OF CONTENTS ==========
+  (function() {
+    const toc = document.getElementById('toc');
+    const tocList = document.getElementById('tocList');
+    const tocToggle = document.getElementById('tocToggle');
+    const content = document.querySelector('.blog-content');
+    if (!toc || !tocList || !content) return;
+
+    const headings = Array.from(content.querySelectorAll('h2, h3'));
+    if (headings.length < 3) return;
+
+    // Ensure each heading has an id for linking
+    headings.forEach(h => {
+      if (!h.id) {
+        h.id = h.textContent.trim().toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
+    });
+
+    // Build list items
+    headings.forEach(h => {
+      const li = document.createElement('li');
+      li.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', '#' + h.id);
+      });
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    toc.style.display = '';
+
+    // Toggle open/close
+    let isOpen = true;
+    tocToggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+      tocList.style.display = isOpen ? '' : 'none';
+      tocToggle.setAttribute('aria-expanded', isOpen);
+      toc.classList.toggle('open', isOpen);
+    });
+    toc.classList.add('open');
+
+    // Active heading highlight on scroll
+    const links = Array.from(tocList.querySelectorAll('a'));
+    function onScroll() {
+      let current = headings[0];
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top <= 120) current = h;
+        else break;
+      }
+      links.forEach(a => {
+        a.classList.toggle('toc-active', a.getAttribute('href') === '#' + current.id);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+
   (function() {
     const url = '{{ url }}';
     try {

@@ -1,11 +1,11 @@
 [
   {
-    "title": "System Administrator",
+    "title": "DevOps Engineer",
     "company": "IP-Protocol INC",
     "companyUrl": "https://ipprotocolinc.com",
     "location": "Cairo, Egypt",
     "period": "Jan 2026 – Present",
-    "description": "Working on cloud automation, CI/CD pipelines, and infrastructure provisioning.",
+    "description": "Building and maintaining on-premises infrastructure for a cybersecurity company — no cloud, all bare-metal and self-hosted.",
     "responsibilities": [
       "Designed and deployed a production-grade, multi-node Kubernetes cluster with high availability on on-premises infrastructure",
       "Implemented end-to-end GitOps workflows using Flux CD for automated infrastructure synchronization and application delivery",
@@ -35,6 +35,7 @@
     "responsibilities": [
       "Designing and implementing CI/CD pipelines with Jenkins and GitHub Actions",
       "Managing Kubernetes clusters for container orchestration",
+      "Implementing GitOps workflows using ArgoCD for automated application delivery",
       "Automating infrastructure provisioning using Terraform",
       "Configuring and maintaining Linux servers"
     ],
@@ -44,7 +45,8 @@
       "Terraform",
       "Ansible",
       "Docker",
-      "Jenkins"
+      "Jenkins",
+      "ArgoCD"
     ]
   },
   {
