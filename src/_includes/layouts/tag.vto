@@ -12,13 +12,100 @@ layout: layouts/base.vto
     </h2>
 
     <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
-      {{ posts.length }} article{{ posts.length === 1 ? "" : "s" }}
+      <span id="tagResultCount">{{ posts.length }}</span> article{{ posts.length === 1 ? "" : "s" }}
     </p>
 
-    <div class="blog-grid">
+    <!-- Search -->
+    <div class="blog-search-container" style="margin-bottom: 1.5rem;">
+      <div class="blog-search-wrapper">
+        <svg class="blog-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="search"
+          id="tagSearch"
+          class="blog-search-input"
+          placeholder="Filter articles…"
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+    </div>
+
+    <div class="blog-grid" id="tagGrid">
       {{ for post of posts }}
       {{ include "partials/blog-card.vto" { post, showBookmark: false, paginationItem: false } }}
       {{ /for }}
     </div>
+
+    <p id="tagNoResults" style="display:none; color: var(--color-text-secondary); margin-top: 1.5rem;">
+      No articles match your search.
+    </p>
+
+    <div class="pagination" id="tagPagination"></div>
   </section>
 </div>
+
+<script>
+  (function () {
+    const PER_PAGE  = 6;
+    const input     = document.getElementById('tagSearch');
+    const grid      = document.getElementById('tagGrid');
+    const noResults = document.getElementById('tagNoResults');
+    const countEl   = document.getElementById('tagResultCount');
+    const pagination = document.getElementById('tagPagination');
+    const allCards  = Array.from(grid.querySelectorAll('.blog-card'));
+
+    let filtered    = allCards.slice();
+    let currentPage = 1;
+
+    function render() {
+      const totalPages = Math.ceil(filtered.length / PER_PAGE);
+      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+      const start = (currentPage - 1) * PER_PAGE;
+      const end   = start + PER_PAGE;
+
+      allCards.forEach(c => c.style.display = 'none');
+      filtered.forEach((c, i) => { c.style.display = (i >= start && i < end) ? '' : 'none'; });
+
+      countEl.textContent = String(filtered.length);
+      noResults.style.display = filtered.length === 0 ? '' : 'none';
+
+      pagination.innerHTML = '';
+      if (totalPages <= 1) return;
+
+      const mkBtn = (label, page, active, disabled) => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        btn.className = 'pagination-btn tech-tag' + (active ? ' pagination-active' : '');
+        btn.disabled = disabled;
+        if (!disabled) btn.addEventListener('click', () => {
+          currentPage = page;
+          render();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        return btn;
+      };
+
+      pagination.appendChild(mkBtn('←', currentPage - 1, false, currentPage === 1));
+      for (let p = 1; p <= totalPages; p++) {
+        pagination.appendChild(mkBtn(String(p), p, p === currentPage, false));
+      }
+      pagination.appendChild(mkBtn('→', currentPage + 1, false, currentPage === totalPages));
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      filtered = allCards.filter(card => {
+        if (!q) return true;
+        const title = (card.querySelector('.blog-card-title')?.textContent || '').toLowerCase();
+        const tags  = (card.dataset.tags || '').toLowerCase();
+        return title.includes(q) || tags.includes(q);
+      });
+      currentPage = 1;
+      render();
+    });
+
+    render();
+  })();
+</script>

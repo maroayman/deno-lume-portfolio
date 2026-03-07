@@ -58,7 +58,7 @@ layout: layouts/base.vto
 
       <!-- Table of Contents (injected by JS if enough headings) -->
       <nav class="toc" id="toc" aria-label="Table of contents" style="display:none;">
-        <button class="toc-toggle" id="tocToggle" aria-expanded="true" aria-controls="tocList">
+        <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocList">
           <span>Table of Contents</span>
           <svg class="toc-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
             <path d="M19 9l-7 7-7-7"/>
@@ -159,10 +159,6 @@ layout: layouts/base.vto
     if (!blogContent) return;
     const text = blogContent.innerText || blogContent.textContent || '';
     const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    const readingTimeEl = document.getElementById('readingTime');
-    if (readingTimeEl && readingTimeEl.textContent === '') {
-      readingTimeEl.textContent = Math.max(1, Math.ceil(words / 200)) + ' min read';
-    }
     if (wordCountEl) wordCountEl.textContent = words.toLocaleString() + ' words';
   })();
 
@@ -298,6 +294,7 @@ layout: layouts/base.vto
       a.textContent = h.textContent;
       a.addEventListener('click', e => {
         e.preventDefault();
+        e.stopPropagation();
         h.scrollIntoView({ behavior: 'smooth', block: 'start' });
         history.pushState(null, '', '#' + h.id);
       });
@@ -307,15 +304,16 @@ layout: layouts/base.vto
 
     toc.style.display = '';
 
-    // Toggle open/close
-    let isOpen = true;
+    // Toggle open/close — start collapsed
+    let isOpen = false;
+    tocList.style.display = 'none';
+    tocToggle.setAttribute('aria-expanded', 'false');
     tocToggle.addEventListener('click', () => {
       isOpen = !isOpen;
       tocList.style.display = isOpen ? '' : 'none';
       tocToggle.setAttribute('aria-expanded', isOpen);
       toc.classList.toggle('open', isOpen);
     });
-    toc.classList.add('open');
 
     // Active heading highlight on scroll
     const links = Array.from(tocList.querySelectorAll('a'));
@@ -334,15 +332,28 @@ layout: layouts/base.vto
   })();
 
 
+  // ========== CODE TABS ==========
+  document.querySelectorAll('.code-tabs').forEach(tabs => {
+    const buttons = tabs.querySelectorAll('.code-tab-btn');
+    const panes = tabs.querySelectorAll('.code-tab-pane');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        buttons.forEach(b => b.classList.toggle('active', b.dataset.tab === target));
+        panes.forEach(p => p.classList.toggle('active', p.dataset.tab === target));
+      });
+    });
+  });
+
   (function() {
-    const url = '{{ url }}';
     try {
-      const history = JSON.parse(localStorage.getItem('blog_reading_history') || '[]');
-      const idx = history.findIndex(i => i.url === url);
-      if (idx > -1) history.splice(idx, 1);
-      history.unshift({ url, title: `{{ title }}`, readAt: new Date().toISOString() });
-      if (history.length > 50) history.pop();
-      localStorage.setItem('blog_reading_history', JSON.stringify(history));
+      const pageHref = window.location.pathname;
+      const readingHistory = JSON.parse(localStorage.getItem('blog_reading_history') || '[]');
+      const idx = readingHistory.findIndex(i => i.url === pageHref);
+      if (idx > -1) readingHistory.splice(idx, 1);
+      readingHistory.unshift({ url: pageHref, title: `{{ title }}`, readAt: new Date().toISOString() });
+      if (readingHistory.length > 50) readingHistory.pop();
+      localStorage.setItem('blog_reading_history', JSON.stringify(readingHistory));
     } catch (e) { console.warn('Could not save reading history:', e); }
   })();
 </script>

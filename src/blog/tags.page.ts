@@ -2,7 +2,8 @@
  * Tag index generator — produces one page per unique tag at /blog/tags/[tag]/.
  *
  * Each generated page lists all blog posts that carry that tag, sorted by
- * date descending.  The layout is `layouts/tag.vto`.
+ * date descending. Pagination is handled client-side in layouts/tag.vto.
+ * The layout is `layouts/tag.vto`.
  */
 
 export const layout = "layouts/tag.vto";
