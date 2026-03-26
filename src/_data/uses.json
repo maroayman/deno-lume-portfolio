@@ -1,0 +1,70 @@
+[
+  {
+    "group": "Hardware",
+    "items": [
+      { "name": "Laptop", "desc": "Lenovo Yoga Slim 6 — my primary machine for everything" },
+      { "name": "On-Prem Cluster", "desc": "Multi-node Kubernetes cluster running on Proxmox VE at work" }
+    ]
+  },
+  {
+    "group": "OS & Shell",
+    "items": [
+      { "name": "Linux", "desc": "Rocky Linux on servers, Ubuntu/Debian for local VMs" },
+      { "name": "Windows + WSL2", "desc": "Daily driver with WSL2 for a native Linux shell experience" },
+      { "name": "Bash / Zsh", "desc": "Bash for scripts, Zsh with Starship for a fast interactive shell" }
+    ]
+  },
+  {
+    "group": "Editor & Terminal",
+    "items": [
+      { "name": "VS Code", "desc": "Primary editor — extensions for Kubernetes, Terraform, Docker, and YAML" },
+      { "name": "Vim", "desc": "For quick server-side edits over SSH" },
+      { "name": "Termora", "desc": "Cross-platform terminal with built-in SSH management and a clean UI" },
+      { "name": "Starship", "desc": "Minimal, fast, and customizable shell prompt written in Rust" }
+    ]
+  },
+  {
+    "group": "Infrastructure & DevOps",
+    "items": [
+      { "name": "Kubernetes", "desc": "Container orchestration — both managed and bare-metal" },
+      { "name": "Terraform", "desc": "Infrastructure as code across cloud and on-prem" },
+      { "name": "Ansible", "desc": "Configuration management and server provisioning" },
+      { "name": "Helm", "desc": "Kubernetes package management and release templating" },
+      { "name": "ArgoCD / Flux CD", "desc": "GitOps controllers for automated cluster reconciliation" },
+      { "name": "Docker", "desc": "Containerization and local development environments" },
+      { "name": "Proxmox VE", "desc": "Hypervisor for on-premises VM and container workloads" }
+    ]
+  },
+  {
+    "group": "CI/CD",
+    "items": [
+      { "name": "GitHub Actions", "desc": "Primary pipeline for open-source and personal projects" },
+      { "name": "Jenkins", "desc": "Self-hosted pipelines for enterprise workloads" },
+      { "name": "Gitea", "desc": "Internal Git hosting with integrated CI at work" }
+    ]
+  },
+  {
+    "group": "Cloud",
+    "items": [
+      { "name": "AWS", "desc": "EC2, EKS, S3, VPC, ALB, IAM — primary cloud platform alongside GCP" },
+      { "name": "GCP", "desc": "GKE, Cloud Run, GCS, VPC, IAM — heavily used alongside AWS" },
+      { "name": "Azure", "desc": "AKS, Azure DevOps, Storage — familiar with the full ecosystem" }
+    ]
+  },
+  {
+    "group": "Monitoring & Storage",
+    "items": [
+      { "name": "Prometheus + Grafana", "desc": "Metrics collection and dashboarding for cluster observability" },
+      { "name": "MinIO", "desc": "S3-compatible object storage for on-prem artifact management" }
+    ]
+  },
+  {
+    "group": "This Site",
+    "items": [
+      { "name": "Deno + Lume", "desc": "Static site generator — fast builds, zero JS framework overhead" },
+      { "name": "Vercel", "desc": "Production hosting with edge CDN, automatic deployments from GitHub" },
+      { "name": "Deno Deploy", "desc": "Dev/preview deployments for this site — runs on Deno's global edge network" },
+      { "name": "Cloudflare Pages", "desc": "Dev/preview deployments for this site — fast builds with Cloudflare's CDN" }
+    ]
+  }
+]

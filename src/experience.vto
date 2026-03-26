@@ -29,7 +29,7 @@ description: DevOps training and internships focused on cloud automation
         
         {{ if job.responsibilities }}
         <p class="responsibilities-title">Key Responsibilities:</p>
-        <ul class="responsibilities-list">
+        <ul class="dash-list responsibilities-list">
           {{ for i, responsibility of job.responsibilities }}
           {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
           {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}

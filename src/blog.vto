@@ -86,7 +86,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
         <!-- Quick filter: Top tags + dropdown for more -->
         <div class="quick-tags">
           <button 
-            class="filter-tag active" 
+            class="filter-btn filter-tag active" 
             data-tag="all" 
             role="option" 
             aria-selected="true"
@@ -96,7 +96,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           {{ for item of tagCountPairs.slice(0, 5) }}
           {{ set weight = Math.min(5, Math.max(1, Math.ceil(item.count / 3))) }}
           <button 
-            class="filter-tag weight-{{ weight }}" 
+            class="filter-btn filter-tag weight-{{ weight }}" 
             data-tag="{{ item.tag }}" 
             data-count="{{ item.count }}"
             role="option" 
@@ -107,7 +107,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           <!-- Dropdown for all tags -->
           {{ if uniqueTags.length > 5 }}
           <div class="tag-dropdown" id="tagDropdown">
-            <button class="tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox">
+            <button class="filter-btn tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox">
               <span>More tags</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                 <path d="M19 9l-7 7-7-7"/>

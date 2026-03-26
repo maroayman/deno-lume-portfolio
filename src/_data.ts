@@ -1,6 +1,7 @@
 import projects from "./_data/projects.json" with { type: "json" };
 import experience from "./_data/experience.json" with { type: "json" };
 import certifications from "./_data/certifications.json" with { type: "json" };
+import uses from "./_data/uses.json" with { type: "json" };
 
 const toTime = (s: string): number => {
   const raw = s.split("–").pop()!.trim();
@@ -28,4 +29,5 @@ export default {
   certifications: [...certifications].sort((a, b) =>
     toTime(b.date) - toTime(a.date)
   ),
+  uses,
 };
