@@ -14,7 +14,7 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
     
     <div class="projects-grid" id="pagination-container">
       {{ for project of projects }}
-      <div class="project-card" data-pagination-item>
+      <div class="card project-card" data-pagination-item>
         <div class="project-header">
           <h3 class="project-title">
             {{ if project.link }}
@@ -29,7 +29,7 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         <p class="project-summary">{{ project.summary }}</p>
         
         {{ if project.highlights }}
-        <ul class="project-highlights">
+        <ul class="dash-list project-highlights">
           {{ for i, highlight of project.highlights }}
           {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
           {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
