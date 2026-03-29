@@ -57,19 +57,94 @@
     });
 
     // ========== BACK TO TOP ==========
-    const backToTop = document.getElementById('backToTop');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
+    (function() {
+      const backToTop = document.getElementById('backToTop');
+      if (!backToTop) {
+        console.warn('Back-to-top button not found');
+        return;
       }
-    });
 
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+      // Performance: requestAnimationFrame throttling
+      let ticking = false;
+      let lastScrollY = 0;
+
+      // Accessibility: detect reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // UX: viewport-relative threshold (show after scrolling 40% of viewport)
+      const getThreshold = () => Math.max(window.innerHeight * 0.4, 300);
+
+      // Performance & UX: Show on scroll-up only
+      function handleScroll() {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const currentScrollY = window.scrollY;
+            const threshold = getThreshold();
+            const isScrollingUp = currentScrollY < lastScrollY;
+            
+            // Show if: scrolled past threshold AND scrolling up
+            const shouldShow = currentScrollY > threshold && (isScrollingUp || currentScrollY < threshold + 100);
+            
+            backToTop.classList.toggle('visible', shouldShow);
+            backToTop.setAttribute('aria-hidden', String(!shouldShow));
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      // Performance: passive scroll listener
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // Smooth scroll with Safari fallback and reduced motion support
+      function smoothScrollTo(target) {
+        // Feature detection for smooth scroll support
+        const supportsSmooth = 'scrollBehavior' in document.documentElement.style;
+        
+        if (prefersReducedMotion) {
+          // Instant scroll for reduced motion
+          window.scrollTo(0, target);
+        } else if (supportsSmooth) {
+          // Native smooth scroll
+          window.scrollTo({ top: target, behavior: 'smooth' });
+        } else {
+          // Polyfill for Safari <15.4
+          const start = window.scrollY;
+          const distance = target - start;
+          const duration = 500;
+          const startTime = performance.now();
+          
+          function animation(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease-out cubic for smooth deceleration
+            const ease = 1 - Math.pow(1 - progress, 3);
+            
+            window.scrollTo(0, start + distance * ease);
+            
+            if (progress < 1) {
+              requestAnimationFrame(animation);
+            }
+          }
+          
+          requestAnimationFrame(animation);
+        }
+      }
+
+      // Click handler with visual feedback
+      backToTop.addEventListener('click', () => {
+        backToTop.classList.add('scrolling');
+        smoothScrollTo(0);
+        
+        // Remove feedback class after animation
+        setTimeout(() => {
+          backToTop.classList.remove('scrolling');
+        }, 600);
+      });
+    })();
 
     // ========== SHOW MORE / SHOW LESS ==========
     function toggleShowMore(btn) {

@@ -4,7 +4,7 @@
     "company": "IP-Protocol INC",
     "companyUrl": "https://ipprotocolinc.com",
     "location": "Cairo, Egypt",
-    "period": "Jan 2026 – Present",
+    "period": "Jan 2026 – Apr 2026",
     "description": "Building and maintaining on-premises infrastructure for a cybersecurity company — no cloud, all bare-metal and self-hosted.",
     "responsibilities": [
       "Designed and deployed a production-grade, multi-node Kubernetes cluster with high availability on on-premises infrastructure",

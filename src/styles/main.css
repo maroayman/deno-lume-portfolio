@@ -1,9 +1,3 @@
-/* ============================================================
-   DESIGN SYSTEM — Modern Minimal / Clean Grid
-   Near-white / near-black palette, single blue accent,
-   Inter sans-serif throughout. No warm tones, no serifs.
-   ============================================================ */
-
 /* google-fonts */
 
 :root {
@@ -12,7 +6,7 @@
   --color-bg-code:       #f4f4f4;
   --color-text:          #111111;
   --color-text-secondary:#555555;
-  --color-text-faint:    #999999;
+  --color-text-faint:    #aaaaaa;
   --color-border:        #e4e4e4;
   --color-border-subtle: #eeeeee;
   --color-link:          #111111;
@@ -43,10 +37,6 @@
   --t-base: 0.15s ease;
 }
 
-/* ============================================================
-   ACCESSIBILITY — Reduced Motion Support
-   ============================================================ */
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -57,10 +47,6 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* ============================================================
-   VIEW TRANSITIONS — Smooth Page Navigation
-   ============================================================ */
 
 @view-transition {
   navigation: auto;
@@ -95,7 +81,7 @@ html.dark-mode {
   --color-bg-code:       #1e1e1e;
   --color-text:          #f5f5f5;
   --color-text-secondary:#a3a3a3;
-  --color-text-faint:    #666666;
+  --color-text-faint:    #888888;
   --color-border:        #2a2a2a;
   --color-border-subtle: #222222;
   --color-link:          #f5f5f5;
@@ -106,10 +92,6 @@ html.dark-mode {
   --color-accent-border:      rgba(96, 165, 250, 0.30);
   --color-accent-underline:   rgba(96, 165, 250, 0.35);
 }
-
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -170,10 +152,6 @@ ul {
   padding-left: 0;
 }
 
-/* ============================================================
-   LAYOUT — container / header / footer / main
-   ============================================================ */
-
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -185,8 +163,6 @@ header {
   padding: 2rem 0 1.5rem;
   background: var(--color-bg);
   transition: background-color var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
-  
-  /* Sticky header */
   position: sticky;
   top: 0;
   z-index: 100;
@@ -225,10 +201,6 @@ footer p {
   margin: 0;
 }
 
-/* ============================================================
-   SKIP LINK
-   ============================================================ */
-
 .skip-link {
   position: absolute;
   top: -100%;
@@ -247,10 +219,6 @@ footer p {
   top: 0.5rem;
   color: #fff;
 }
-
-/* ============================================================
-   FLOATING BUTTONS (shared base)
-   ============================================================ */
 
 .floating-btn {
   position: fixed;
@@ -275,10 +243,6 @@ footer p {
   height: 18px;
 }
 
-/* ============================================================
-   THEME TOGGLE
-   ============================================================ */
-
 .theme-toggle {
   top: 1rem;
   right: 1rem;
@@ -294,10 +258,6 @@ footer p {
   height: 16px;
 }
 
-/* ============================================================
-   BACK TO TOP
-   ============================================================ */
-
 .back-to-top {
   right: 1.5rem;
   bottom: 1.5rem;
@@ -310,7 +270,6 @@ footer p {
               border-color var(--t-fast),
               background-color var(--t-fast);
   will-change: opacity, transform;
-  /* Force GPU acceleration for smooth animations */
   backface-visibility: hidden;
 }
 
@@ -339,10 +298,6 @@ footer p {
   }
 }
 
-/* ============================================================
-   PAGE TITLE & BACK LINK
-   ============================================================ */
-
 .page-title {
   font-size: 1.375rem;
   font-weight: 700;
@@ -365,10 +320,6 @@ footer p {
 .back-link a:hover {
   color: var(--color-accent);
 }
-
-/* ============================================================
-   INDEX — section links & contact links
-   ============================================================ */
 
 .section-links {
   display: flex;
@@ -439,10 +390,6 @@ footer p {
   background-color: var(--color-accent);
 }
 
-/* ============================================================
-   STACK ROW (homepage tech stack)
-   ============================================================ */
-
 .stack-row {
   margin-bottom: calc(var(--spacing) * 2);
 }
@@ -456,7 +403,6 @@ footer p {
   margin-bottom: 0.5rem;
 }
 
-/* CSS Carousel — tech stack horizontal scroller */
 .stack-carousel {
   position: relative;
   display: flex;
@@ -541,7 +487,6 @@ footer p {
   }
 }
 
-/* carousel scroll buttons (::scroll-button) — Chrome 135+ */
 @supports selector(::scroll-button(inline-start)) {
   .stack-carousel::before,
   .stack-carousel::after {
@@ -586,7 +531,6 @@ footer p {
   }
 }
 
-/* scroll marker group — Chrome 135+ */
 @supports selector(::scroll-marker-group) {
   .stack-carousel {
     flex-wrap: wrap;
@@ -615,10 +559,6 @@ footer p {
   }
 }
 
-/* ============================================================
-   RESUME BUTTON
-   ============================================================ */
-
 .resume-button {
   display: inline-flex;
   align-items: center;
@@ -638,10 +578,6 @@ footer p {
   color: var(--color-bg);
   background-color: var(--color-accent);
 }
-
-/* ============================================================
-   TECH TAGS
-   ============================================================ */
 
 .tech-tags {
   display: flex;
@@ -663,23 +599,17 @@ footer p {
   transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
 }
 
-/* span tags: slightly brighter on hover */
 span.tech-tag:hover {
   background: var(--color-accent-light-hover);
   border-color: var(--color-accent);
 }
 
-/* link tags: stronger accent on hover */
 a.tech-tag:hover,
 a.tech-tag:focus {
   background: var(--color-accent-light-hover);
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
-
-/* ============================================================
-   SHOW MORE BUTTON
-   ============================================================ */
 
 .show-more-btn {
   font-size: 0.8125rem;
@@ -697,10 +627,6 @@ a.tech-tag:focus {
 .show-more-btn:hover {
   opacity: 0.75;
 }
-
-/* ============================================================
-   PROJECTS
-   ============================================================ */
 
 .projects-grid {
   display: flex;
@@ -786,10 +712,6 @@ a.tech-tag:focus {
   color: var(--color-text-faint);
 }
 
-/* ============================================================
-   SCROLL-TRIGGERED ANIMATIONS — Project Cards
-   ============================================================ */
-
 @supports (timeline-trigger-name: --project-enter) {
   .project-card {
     timeline-trigger-name: --project-enter;
@@ -812,17 +734,12 @@ a.tech-tag:focus {
     }
   }
   
-  /* Stagger with sibling-index */
   @supports (animation-delay: calc(sibling-index() * 1s)) {
     .project-card {
       animation-delay: calc(sibling-index() * 0.04s);
     }
   }
 }
-
-/* ============================================================
-   EXPERIENCE
-   ============================================================ */
 
 .experience-list {
   display: flex;
@@ -899,10 +816,6 @@ a.tech-tag:focus {
 
 
 
-/* ============================================================
-   CERTIFICATIONS
-   ============================================================ */
-
 .certifications-grid {
   display: flex;
   flex-direction: column;
@@ -939,11 +852,6 @@ a.tech-tag:focus {
   font-family: var(--font-mono);
 }
 
-/* ============================================================
-   BLOG LIST PAGE
-   ============================================================ */
-
-/* Search bar */
 .blog-search-container {
   margin-bottom: 1.5rem;
   display: flex;
@@ -1011,7 +919,6 @@ a.tech-tag:focus {
   color: var(--color-text);
 }
 
-/* View tabs */
 .blog-view-tabs {
   display: flex;
   gap: 0.25rem;
@@ -1050,7 +957,6 @@ a.tech-tag:focus {
   color: var(--color-text-faint);
 }
 
-/* Tag filters */
 .blog-tags-filter {
   display: flex;
   flex-direction: column;
@@ -1092,14 +998,12 @@ a.tech-tag:focus {
   font-size: 0.7rem;
 }
 
-/* Tag weight variants — subtle opacity difference */
 .filter-tag.weight-1 { opacity: 0.7; }
 .filter-tag.weight-2 { opacity: 0.8; }
 .filter-tag.weight-3 { opacity: 0.9; }
 .filter-tag.weight-4 { opacity: 1; }
 .filter-tag.weight-5 { opacity: 1; font-weight: 500; }
 
-/* Tag dropdown */
 .tag-dropdown {
   position: relative;
   display: inline-flex;
@@ -1206,7 +1110,6 @@ a.tech-tag:focus {
   text-align: center;
 }
 
-/* Active filters */
 .active-filters {
   display: flex;
   align-items: center;
@@ -1270,11 +1173,36 @@ a.tech-tag:focus {
   color: var(--color-text);
 }
 
-/* No results */
 .blog-no-results {
-  padding: 2rem 0;
-  font-size: 0.9375rem;
+  padding: 3rem 0;
+  text-align: center;
   color: var(--color-text-secondary);
+}
+
+.blog-no-results p {
+  margin: 0.5rem 0;
+}
+
+.blog-no-results p:first-child {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-top: 0;
+}
+
+.blog-no-results p:first-child::before {
+  content: "🔍";
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.blog-result-count {
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .suggest-tag {
@@ -1296,7 +1224,6 @@ a.tech-tag:focus {
   color: var(--color-bg);
 }
 
-/* Blog grid */
 .blog-grid {
   display: flex;
   flex-direction: column;
@@ -1404,7 +1331,6 @@ a.tech-tag:focus {
   overflow: hidden;
 }
 
-/* Bookmark button */
 .bookmark-btn {
   flex-shrink: 0;
   background: none;
@@ -1434,19 +1360,13 @@ a.tech-tag:focus {
   fill: currentColor;
 }
 
-/* Read indicator */
 .blog-card.read .blog-card-title a {
   color: var(--color-text-secondary);
 }
 
-/* Hover title color — placed after .read rule so it wins on equal specificity */
 .blog-card:hover .blog-card-title a {
   color: var(--color-accent);
 }
-
-/* ============================================================
-   SCROLL-TRIGGERED ANIMATIONS — Blog Cards
-   ============================================================ */
 
 @supports (timeline-trigger-name: --card-enter) {
   .blog-card {
@@ -1470,7 +1390,6 @@ a.tech-tag:focus {
     }
   }
   
-  /* Stagger with sibling-index */
   @supports (animation-delay: calc(sibling-index() * 1s)) {
     .blog-card {
       animation-delay: calc(sibling-index() * 0.03s);
@@ -1478,7 +1397,6 @@ a.tech-tag:focus {
   }
 }
 
-/* Pagination */
 .pagination {
   display: flex;
   flex-wrap: wrap;
@@ -1504,7 +1422,6 @@ a.tech-tag:focus {
   font-weight: 600;
 }
 
-/* Pagination controls (projects/experience/certs) */
 .pagination-controls {
   display: flex;
   flex-wrap: wrap;
@@ -1512,10 +1429,6 @@ a.tech-tag:focus {
   margin-top: 1.25rem;
   justify-content: center;
 }
-
-/* ============================================================
-   BLOG POST (article)
-   ============================================================ */
 
 .reading-progress {
   position: fixed;
@@ -1540,7 +1453,6 @@ a.tech-tag:focus {
   }
 }
 
-/* Fallback: JS-driven width for older browsers */
 @supports not (animation-timeline: scroll()) {
   .reading-progress {
     transition: width 0.1s linear;
@@ -1657,11 +1569,6 @@ a.tech-tag:focus {
   line-height: 1;
 }
 
-/* Blog article body prose */
-/* ============================================================
-   BLOG POST ARTICLE — Scoped Content Styles
-   ============================================================ */
-
 /* Scope blog content styles to prevent leakage to other pages */
 @scope (.blog-content) {
   :scope {
@@ -1761,7 +1668,6 @@ a.tech-tag:focus {
     cursor: pointer;
   }
 
-  /* GitHub source links */
   a[href*="github.com/"] {
     display: inline-flex;
     align-items: center;
@@ -2038,17 +1944,21 @@ body.dark-mode mark {
 
 /* Lightbox */
 .lightbox {
-  display: none;
   position: fixed;
   inset: 0;
   z-index: 500;
   background: rgba(0, 0, 0, 0.9);
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  display: flex;
 }
 
 .lightbox.active {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .lightbox-content {
@@ -2067,6 +1977,12 @@ body.dark-mode mark {
   object-fit: contain;
   border: none;
   border-radius: var(--radius);
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+}
+
+.lightbox.active .lightbox-image {
+  transform: scale(1);
 }
 
 .lightbox-caption {

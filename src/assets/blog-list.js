@@ -19,7 +19,9 @@
     S = document.querySelectorAll(".tag-dropdown-item"),
     B = document.getElementById("activeFilters"),
     D = document.getElementById("activeFiltersTags"),
-    q = document.getElementById("clearFilters");
+    q = document.getElementById("clearFilters"),
+    resultCountEl = document.getElementById("resultCount"),
+    resultCountText = document.getElementById("resultCountText");
   if (!c || !N) return;
   let s = [], i = "all", r = 1, T = b, d = -1;
   function P() {
@@ -373,12 +375,13 @@
         $.style.display = c.value.trim() ? "flex" : "none",
         o
     ) {
+      resultCountEl && (resultCountEl.style.display = "none");
       if (i === "bookmarks") {
         k.innerHTML =
-          "<p>No bookmarked articles yet. Click the bookmark icon on any article to save it.</p>";
+          "<p>No Bookmarks Yet</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Click the bookmark icon on any article to save it for later.</p>";
       } else if (i === "history") {
         k.innerHTML =
-          "<p>No reading history yet. Start reading articles to build your history.</p>";
+          "<p>No Reading History</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Start reading articles to build your history.</p>";
       } else if (s.length > 0) {
         const n = [
             ...document.querySelectorAll(
@@ -386,13 +389,13 @@
             ),
           ].map((u) => u.dataset.tag).filter((u) => !s.includes(u)).slice(0, 3),
           p = n.length > 0
-            ? `<p style="margin-top: 0.5rem; font-size: 0.9rem;">Try: ${
+            ? `<p style="margin-top: 1rem; font-size: 0.875rem;">Try these tags: ${
               n.map((u) =>
                 `<button class="suggest-tag" data-tag="${u}">${u}</button>`
               ).join(" ")
             }</p>`
             : "";
-        k.innerHTML = `<p>No posts found with ${
+        k.innerHTML = `<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>No posts match ${
           s.length > 1 ? "all these tags" : "this tag"
         }.</p>${p}`,
           k.querySelectorAll(".suggest-tag").forEach((u) => {
@@ -400,7 +403,18 @@
               s = [u.dataset.tag], f(), g();
             });
           });
-      } else k.innerHTML = "<p>No posts found matching your search.</p>";
+      } else k.innerHTML = "<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Try adjusting your search query.</p>";
+    } else {
+      if (resultCountEl && resultCountText) {
+        const totalPosts = b.length;
+        const filteredPosts = T.length;
+        if (s.length > 0 || c.value.trim() || i !== "all") {
+          resultCountText.textContent = `Showing ${filteredPosts} of ${totalPosts} post${totalPosts !== 1 ? 's' : ''}`;
+          resultCountEl.style.display = "block";
+        } else {
+          resultCountEl.style.display = "none";
+        }
+      }
     }
     st(), A();
   }
