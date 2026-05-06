@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if ! tty -s; then
+  printf "No TTY available; allowing non-interactive push.\n" >&2
+  exit 0
+fi
+
+printf "Confirm git push? [y/N] " > /dev/tty
+read -r answer < /dev/tty || exit 1
+
+case "$answer" in
+  y|Y|yes|YES)
+    deno task check
+    deno task build
+    exit 0
+    ;;
+  *)
+    printf "Push aborted.\n" > /dev/tty
+    exit 1
+    ;;
+esac

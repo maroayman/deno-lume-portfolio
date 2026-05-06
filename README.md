@@ -60,6 +60,20 @@ deno task serve
 
 The site will be available at `http://localhost:3000`
 
+### Git Hooks
+
+This repo includes shared hooks in `scripts/githooks/`. To enable them:
+
+```bash
+git config core.hooksPath scripts/githooks
+```
+
+Hooks included:
+- `pre-commit`: blocks `resume.json`, `main.typ`, `_cache/` and runs `deno fmt` + `deno lint` on staged files
+- `commit-msg`: enforces conventional commit prefixes (feat, fix, docs, style, refactor, perf, test, chore)
+- `pre-push`: confirms push and runs `deno task check` + `deno task build`
+- `post-merge`: regenerates the service worker with `deno task build:sw`
+
 ### Build
 
 Build the site for production:

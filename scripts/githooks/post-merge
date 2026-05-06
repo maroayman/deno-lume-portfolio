@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ -f "scripts/build-sw.js" ]; then
+  deno task build:sw
+fi
