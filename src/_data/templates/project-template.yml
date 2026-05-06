@@ -1,0 +1,17 @@
+# Template for adding new project entries
+# Copy this block and add to projects.yml.
+
+- title: Project Title
+  slug: project-slug
+  summary: Brief description of the project.
+  tech:
+    - Tech1
+    - Tech2
+    - Tech3
+  role: DevOps Engineer # or "Developer", "Data Analyst", etc.
+  period: "2026" # or "2024 – 2025"
+  highlights:
+    - Highlight one
+    - Highlight two
+    - Highlight three
+  link: https://github.com/username/repo # Optional - remove if no link
