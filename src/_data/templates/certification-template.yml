@@ -1,0 +1,8 @@
+# Template for adding new certification entries
+# Copy this block and add to certifications.yml
+
+- title: Certification Name
+  issuer: Issuer Name
+  date: Jan 2026 # or "Mar 2025"
+  expiryDate: Jan 2029 # Optional - remove if no expiry
+  credentialId: ABC123 # Optional - use null or remove if none

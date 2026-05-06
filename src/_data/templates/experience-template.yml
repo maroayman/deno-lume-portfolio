@@ -1,0 +1,17 @@
+# Template for adding new experience entries
+# Copy this block and add to experience.yml
+
+- title: Job Title
+  company: Company Name
+  companyUrl: https://company.com
+  location: City, Country
+  period: Jan 2024 – Present # or "Jan 2024 – Dec 2024"
+  description: Brief description of the role.
+  responsibilities:
+    - Responsibility one
+    - Responsibility two
+    - Responsibility three
+  tags:
+    - Tag1
+    - Tag2
+    - Tag3
