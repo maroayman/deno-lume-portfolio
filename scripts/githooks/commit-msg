@@ -1,0 +1,24 @@
+#!/bin/sh
+
+message_file="$1"
+
+if [ ! -f "$message_file" ]; then
+  exit 0
+fi
+
+first_line=$(head -n 1 "$message_file")
+
+if [ -z "$first_line" ]; then
+  printf "Commit message cannot be empty.\n" >&2
+  exit 1
+fi
+
+case "$first_line" in
+  feat:*|fix:*|docs:*|style:*|refactor:*|perf:*|test:*|chore:*)
+    exit 0
+    ;;
+  *)
+    printf "Commit message must start with one of: feat:, fix:, docs:, style:, refactor:, perf:, test:, chore:\n" >&2
+    exit 1
+    ;;
+esac
