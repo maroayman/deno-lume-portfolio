@@ -429,10 +429,52 @@ footer p {
   font-size: 0.8125rem;
   color: var(--color-bg);
   text-decoration: none;
-  padding: 0.25rem 0.6rem;
+  padding: 0.35rem 0.5rem;
   border: 1px solid var(--color-accent);
   border-radius: var(--radius);
   background-color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.contact-box .contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-box .contact-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.contact-box .contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-box .contact-items a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.contact-box .contact-items a:hover {
+  color: var(--color-accent);
 }
 
 .stack-row {
