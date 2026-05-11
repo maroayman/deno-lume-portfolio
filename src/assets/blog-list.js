@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-var no-unused-vars prefer-const no-window no-window-prefix
 (function () {
   const _ = "blog_pagination_state",
     c = document.getElementById("blogSearch"),
@@ -12,9 +13,9 @@
     w = document.getElementById("pagination-controls"),
     m = document.getElementById("tagDropdown"),
     h = document.getElementById("tagDropdownTrigger"),
-    rt = document.getElementById("tagDropdownPanel"),
+    _rt = document.getElementById("tagDropdownPanel"),
     y = document.getElementById("tagDropdownSearch"),
-    ct = document.getElementById("tagDropdownList"),
+    _ct = document.getElementById("tagDropdownList"),
     x = document.getElementById("tagDropdownEmpty"),
     S = document.querySelectorAll(".tag-dropdown-item"),
     B = document.getElementById("activeFilters"),
@@ -395,21 +396,26 @@
               ).join(" ")
             }</p>`
             : "";
-        k.innerHTML = `<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>No posts match ${
-          s.length > 1 ? "all these tags" : "this tag"
-        }.</p>${p}`,
+        k.innerHTML =
+          `<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>No posts match ${
+            s.length > 1 ? "all these tags" : "this tag"
+          }.</p>${p}`,
           k.querySelectorAll(".suggest-tag").forEach((u) => {
             u.addEventListener("click", () => {
               s = [u.dataset.tag], f(), g();
             });
           });
-      } else k.innerHTML = "<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Try adjusting your search query.</p>";
+      } else {k.innerHTML =
+          "<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Try adjusting your search query.</p>";}
     } else {
       if (resultCountEl && resultCountText) {
         const totalPosts = b.length;
         const filteredPosts = T.length;
         if (s.length > 0 || c.value.trim() || i !== "all") {
-          resultCountText.textContent = `Showing ${filteredPosts} of ${totalPosts} post${totalPosts !== 1 ? 's' : ''}`;
+          resultCountText.textContent =
+            `Showing ${filteredPosts} of ${totalPosts} post${
+              totalPosts !== 1 ? "s" : ""
+            }`;
           resultCountEl.style.display = "block";
         } else {
           resultCountEl.style.display = "none";
