@@ -4,19 +4,19 @@
     const progressBar = document.getElementById("readingProgress");
     const article = document.querySelector(".blog-content");
     if (progressBar && article) {
-      function updateProgress() {
+      const updateProgress = () => {
         const articleRect = article.getBoundingClientRect();
-        const articleTop = window.scrollY + articleRect.top;
+        const articleTop = globalThis.scrollY + articleRect.top;
         const articleHeight = article.offsetHeight;
-        const windowHeight = window.innerHeight;
-        const scrolled = window.scrollY - articleTop + windowHeight * 0.3;
+        const windowHeight = globalThis.innerHeight;
+        const scrolled = globalThis.scrollY - articleTop + windowHeight * 0.3;
         const progress = Math.min(
           100,
-          Math.max(0, (scrolled / articleHeight) * 100)
+          Math.max(0, (scrolled / articleHeight) * 100),
         );
         progressBar.style.width = progress + "%";
-      }
-      window.addEventListener("scroll", updateProgress, { passive: true });
+      };
+      globalThis.addEventListener("scroll", updateProgress, { passive: true });
       updateProgress();
     }
   }
@@ -63,38 +63,38 @@
   });
 
   // ========== SOCIAL SHARE BUTTONS ==========
-  const pageUrl = encodeURIComponent(window.location.href);
+  const pageUrl = encodeURIComponent(globalThis.location.href);
   const pageTitle = encodeURIComponent(document.title);
 
-  function shareTwitter() {
-    window.open(
+  const shareTwitter = () => {
+    globalThis.open(
       `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
       "_blank",
-      "width=550,height=420"
+      "width=550,height=420",
     );
-  }
-  function shareLinkedIn() {
-    window.open(
+  };
+  const shareLinkedIn = () => {
+    globalThis.open(
       `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`,
       "_blank",
-      "width=550,height=420"
+      "width=550,height=420",
     );
-  }
+  };
   async function shareNative(btn) {
     if (navigator.share) {
       try {
         await navigator.share({
           title: document.title,
-          text:
-            document.querySelector('meta[name="description"]')?.content || "",
-          url: window.location.href,
+          text: document.querySelector('meta[name="description"]')?.content ||
+            "",
+          url: globalThis.location.href,
         });
       } catch (err) {
         if (err.name !== "AbortError") console.error("Share failed:", err);
       }
     } else {
       try {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(globalThis.location.href);
         const orig = btn.innerHTML;
         btn.innerHTML =
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>';
@@ -132,7 +132,7 @@
     const lightboxPrev = document.getElementById("lightboxPrev");
     const lightboxNext = document.getElementById("lightboxNext");
     const imageList = Array.from(
-      document.querySelectorAll(".blog-content img, .blog-cover img")
+      document.querySelectorAll(".blog-content img, .blog-cover img"),
     );
     let currentImageIndex = 0;
 
@@ -141,7 +141,7 @@
       img.addEventListener("click", () => openLightbox(i));
     });
 
-    function openLightbox(index) {
+    const openLightbox = (index) => {
       currentImageIndex = index;
       lightboxImage.src = imageList[index].src;
       lightboxCaption.textContent = imageList[index].alt || "";
@@ -149,25 +149,27 @@
       lightbox.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       updateNavButtons();
-    }
-    function closeLightbox() {
+    };
+    const closeLightbox = () => {
       lightbox.classList.remove("active");
       lightbox.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
-    }
-    function updateNavButtons() {
+    };
+    const updateNavButtons = () => {
       lightboxPrev.style.display = currentImageIndex > 0 ? "flex" : "none";
-      lightboxNext.style.display =
-        currentImageIndex < imageList.length - 1 ? "flex" : "none";
-    }
+      lightboxNext.style.display = currentImageIndex < imageList.length - 1
+        ? "flex"
+        : "none";
+    };
 
     lightboxClose.addEventListener("click", closeLightbox);
     lightboxPrev.addEventListener("click", () => {
       if (currentImageIndex > 0) openLightbox(currentImageIndex - 1);
     });
     lightboxNext.addEventListener("click", () => {
-      if (currentImageIndex < imageList.length - 1)
+      if (currentImageIndex < imageList.length - 1) {
         openLightbox(currentImageIndex + 1);
+      }
     });
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) closeLightbox();
@@ -175,13 +177,15 @@
     document.addEventListener("keydown", (e) => {
       if (!lightbox.classList.contains("active")) return;
       if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft" && currentImageIndex > 0)
+      if (e.key === "ArrowLeft" && currentImageIndex > 0) {
         openLightbox(currentImageIndex - 1);
+      }
       if (
         e.key === "ArrowRight" &&
         currentImageIndex < imageList.length - 1
-      )
+      ) {
         openLightbox(currentImageIndex + 1);
+      }
     });
   }
 
@@ -232,7 +236,7 @@
       });
 
       const links = Array.from(tocList.querySelectorAll("a"));
-      function onScroll() {
+      const onScroll = () => {
         let current = headings[0];
         for (const h of headings) {
           if (h.getBoundingClientRect().top <= 120) current = h;
@@ -241,11 +245,11 @@
         links.forEach((a) => {
           a.classList.toggle(
             "toc-active",
-            a.getAttribute("href") === "#" + current.id
+            a.getAttribute("href") === "#" + current.id,
           );
         });
-      }
-      window.addEventListener("scroll", onScroll, { passive: true });
+      };
+      globalThis.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     }
   }
@@ -268,11 +272,13 @@
   });
 
   // ========== READING HISTORY ==========
-  const blogTitle = document.querySelector(".blog-title")?.textContent?.trim() || document.title;
+  const blogTitle =
+    document.querySelector(".blog-title")?.textContent?.trim() ||
+    document.title;
   try {
-    const pageHref = window.location.pathname;
+    const pageHref = globalThis.location.pathname;
     const readingHistory = JSON.parse(
-      localStorage.getItem("blog_reading_history") || "[]"
+      localStorage.getItem("blog_reading_history") || "[]",
     );
     const idx = readingHistory.findIndex((i) => i.url === pageHref);
     if (idx > -1) readingHistory.splice(idx, 1);
@@ -284,7 +290,7 @@
     if (readingHistory.length > 50) readingHistory.pop();
     localStorage.setItem(
       "blog_reading_history",
-      JSON.stringify(readingHistory)
+      JSON.stringify(readingHistory),
     );
   } catch (e) {
     console.warn("Could not save reading history:", e);
