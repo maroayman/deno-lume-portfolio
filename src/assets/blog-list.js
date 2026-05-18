@@ -208,14 +208,15 @@
   const U = "blog_bookmarks";
   function C() {
     try {
-      return JSON.parse(localStorage.getItem(U)) || [];
+      const stored = JSON.parse(localStorage.getItem(U)) || [];
+      return stored.map((e) => e.replace(/\/$/, ""));
     } catch (t) {
       return [];
     }
   }
   function et(t) {
-    const e = C(), a = e.indexOf(t);
-    a > -1 ? e.splice(a, 1) : e.push(t),
+    const e = C(), a = e.indexOf(t), n = t.replace(/\/$/, "");
+    a > -1 ? e.splice(a, 1) : e.push(n),
       localStorage.setItem(U, JSON.stringify(e)),
       K(),
       Y(),
@@ -224,7 +225,7 @@
   function K() {
     const t = C();
     document.querySelectorAll(".bookmark-btn").forEach((e) => {
-      const a = e.dataset.url, l = t.includes(a);
+      const a = e.dataset.url.replace(/\/$/, ""), l = t.includes(a);
       e.classList.toggle("bookmarked", l),
         e.title = l ? "Remove bookmark" : "Bookmark";
     });
@@ -249,9 +250,12 @@
     }
   }
   function ot() {
-    const t = G().map((e) => typeof e == "string" ? e : e.url);
+    const t = G().map((e) => {
+      const url = typeof e == "string" ? e : e.url;
+      return url.replace(/\/$/, "");
+    });
     b.forEach((e) => {
-      const a = e.dataset.url;
+      const a = e.dataset.url.replace(/\/$/, "");
       t.includes(a) && e.classList.add("read");
     });
   }
@@ -272,9 +276,12 @@
     const t = c.value.trim(),
       { tags: e, term: a } = J(t),
       l = C(),
-      o = G().map((n) => typeof n == "string" ? n : n.url);
+      o = G().map((n) => {
+        const url = typeof n == "string" ? n : n.url;
+        return url.replace(/\/$/, "");
+      });
     return b.filter((n) => {
-      const p = n.dataset.url,
+      const p = n.dataset.url.replace(/\/$/, ""),
         u = (n.dataset.title || "").toLowerCase(),
         M = (n.dataset.tags || "").toLowerCase().split(",").filter((v) => v);
       if (
