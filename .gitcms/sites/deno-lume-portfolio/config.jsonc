@@ -1,0 +1,57 @@
+{
+  "version": "1",
+  "media_path": "/docs/.vuepress/public",
+  "ssg_framework": "other",
+  "frontmatter_format": "yaml",
+  "sitemap_url": "https://deno-lume-portfolio.vercel.app/sitemap.xml",
+  "publishing_mode": "direct_publish",
+  "collections": [
+    {
+      "name": "blog",
+      "git_path": "/src/blog/",
+      "file_extension": ".md",
+      "filename_pattern": "",
+      "collection_type": "flat",
+      "frontmatter_schema": [
+        {
+          "name": "title",
+          "type": "title",
+          "label": "Title"
+        },
+        {
+          "name": "description",
+          "type": "richtext",
+          "label": "Description"
+        },
+        {
+          "name": "date",
+          "type": "datetime",
+          "label": "Date"
+        },
+        {
+          "name": "cover",
+          "type": "image",
+          "label": "Cover"
+        },
+        {
+          "name": "tags",
+          "type": "multiselect",
+          "label": "Tags",
+          "options": [
+            "AWS",
+            "Python",
+            "Linux"
+          ],
+          "color": "blue"
+        }
+      ]
+    },
+    {
+      "name": "docs",
+      "git_path": "/docs/",
+      "file_extension": ".md",
+      "filename_pattern": "",
+      "collection_type": "flat"
+    }
+  ]
+}
