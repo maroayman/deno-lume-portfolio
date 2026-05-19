@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "sites": [
+    {
+      "key": "deno-lume-portfolio",
+      "display_name": "Deno Lume Portfolio",
+      "website_url": "https://deno-lume-portfolio.vercel.app",
+      "root_path": ""
+    }
+  ]
+}
