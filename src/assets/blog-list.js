@@ -215,7 +215,7 @@
     }
   }
   function et(t) {
-    const e = C(), a = e.indexOf(t), n = t.replace(/\/$/, "");
+    const e = C(), n = t.replace(/\/$/, ""), a = e.indexOf(n);
     a > -1 ? e.splice(a, 1) : e.push(n),
       localStorage.setItem(U, JSON.stringify(e)),
       K(),
