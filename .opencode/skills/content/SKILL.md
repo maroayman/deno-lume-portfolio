@@ -12,6 +12,7 @@ Rules for editing site data and page templates in the deno-lume-portfolio projec
 - `src/_data/experience.json`
 - `src/_data/projects.json`
 - `src/_data/certifications.json`
+- `src/_data/certifications.yml`
 - `src/uses.vto`
 - `src/index.vto`
 
@@ -64,12 +65,27 @@ Rules for editing site data and page templates in the deno-lume-portfolio projec
 }
 ```
 
+### `certifications.yml`
+
+```yaml
+- title: string
+  issuer: string
+  date: YYYY-MM   # keep parseable (e.g., 2026-05) or Month YYYY if already used
+  expiryDate: YYYY-MM # optional
+  credentialId: string | null
+```
+
 ## Sorting rules
 
 All collections are sorted descending by end date via `toTime()` in `src/_data.ts`.
 
 - `period` is parsed by reading the last year/month token in the string
 - Malformed dates return `0` and float to the bottom — always use valid date strings
+
+## Source of truth
+
+- If both `certifications.json` and `certifications.yml` exist, prefer the format already used by the page consuming it.
+- Keep entries aligned when both files are present to avoid mismatched content.
 
 ## Tag format
 
