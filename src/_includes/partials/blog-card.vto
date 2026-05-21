@@ -1,9 +1,9 @@
 <article class="blog-card"{{ if paginationItem }} data-pagination-item{{ /if }} data-url="{{ post.url }}"{{ if paginationItem }} data-title="{{ post.title }}" data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}" data-description="{{ post.description }}"{{ /if }}>
+  {{ if post.cover }}
   <div class="blog-card-cover">
-    {{ if post.cover }}
     <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
-    {{ /if }}
   </div>
+  {{ /if }}
   <div class="blog-card-content">
     <div class="blog-card-header">
       <h3 class="blog-card-title">
@@ -22,6 +22,7 @@
       {{ if post.readingTime }}
       <span>· {{ post.readingTime }} min read</span>
       {{ /if }}
+      <span class="read-inline">· ✓ Read</span>
     </div>
     <p class="blog-card-excerpt">{{ post.description }}</p>
     {{ if post.tags }}
