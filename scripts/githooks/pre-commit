@@ -21,7 +21,7 @@ done
 format_files=""
 for file in $staged_files; do
   case "$file" in
-    src/*|_config.ts)
+    src/*.vto|src/*.css|src/*.js|src/*.ts|_config.ts)
       format_files="$format_files $file"
       ;;
   esac
