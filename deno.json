@@ -1,39 +1,67 @@
 {
   "nodeModulesDir": "auto",
   "tasks": {
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable-ffi -A -",
+    "lume": {
+      "description": "Run Lume command",
+      "command": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run --allow-ffi --allow-sys lume/cli.ts"
+    },
     "check": "deno check _config.ts",
     "audit": "deno audit",
-    "build": "DENO_ENV=production deno task lume",
+    "build": {
+      "description": "Build the site for production",
+      "command": "DENO_ENV=production deno task lume"
+    },
     "build:audit": "deno task audit; deno task build",
     "build:sw": "deno run --allow-read --allow-write scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
-    "serve": "deno task build:sw && deno task lume -s",
+    "serve": {
+      "description": "Run and serve the site for development",
+      "command": "deno task build:sw && deno task lume -s"
+    },
     "dev": "deno task serve",
     "lint": "deno lint src/ _config.ts",
     "fmt": "deno fmt src/ _config.ts",
     "resume": "$HOME/.local/bin/typst compile main.typ src/resume.pdf",
-    "deploy": "deno task lint && deno task check && deno task build && deno deploy deploy --prod --app portfolio"
+    "deploy": "deno task lint && deno task check && deno task build && deno deploy deploy --prod --app portfolio",
+    "new": {
+      "description": "Create new content or code using artifacts",
+      "command": "deno task lume new"
+    }
   },
   "imports": {
-    "lume/": "https://deno.land/x/lume@v3.1.4/"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.6/",
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.15/jsx-runtime.ts"
   },
   "compilerOptions": {
     "types": [
       "lume/types.ts"
-    ]
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "lume"
   },
-  "permissions": {
-    "allow-read": ["./src/**", "./_site/**"],
-    "allow-write": ["./_site/**"],
-    "allow-env": ["DENO_ENV"],
-    "allow-net": [
-      "fonts.googleapis.com:443",
-      "fonts.gstatic.com:443"
-    ]
-  },
+
   "deploy": {
     "org": "maroayman",
     "app": "deno-lume-portfolio"
-  }
+  },
+  "unstable": [
+    "fmt-component"
+  ],
+  "allowScripts": {
+    "deny": [
+      "npm:sharp",
+      "npm:@parcel/watcher"
+    ]
+  },
+  "lint": {
+    "plugins": [
+      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.6/lint.ts"
+    ],
+    "rules": {
+      "exclude": [
+        "no-import-prefix"
+      ]
+    }
+  },
+  "lock": false
 }
