@@ -47,9 +47,9 @@ vercel --prod
 
 The `vercel.json` file is already configured with:
 
-- **Build Command**: `deno task build`
-- **Output Directory**: `dist`
-- **Install Command**: Installs Deno automatically
+- **Build Command**: installs pinned Deno `2.9.1`, then runs `deno task build && deno task build:sw`
+- **Output Directory**: `_site`
+- **Install Command**: installs pinned Deno `2.9.1`
 
 ## Environment Variables
 
