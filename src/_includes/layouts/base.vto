@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
@@ -71,7 +71,7 @@
       "@id": "{{ site.url }}{{ url }}"
     }
     {{ if tags }},
-    "keywords": "{{ tags.join(', ') }}"
+    "keywords": "{{ tags.join(", ") }}"
     {{ /if }}
   }
   </script>
@@ -95,11 +95,13 @@
 
   <!-- Styles (inlined for performance) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
+  <link rel="stylesheet" href="/styles/blog.css" inline>
+  <link rel="stylesheet" href="/styles/pages.css" inline>
 
   {{ include "partials/head-theme-flash.vto" }}
   {{ include "partials/head-prefetch.vto" }}
-</head>
-<body>
+  </head>
+  <body>
   <!-- Skip to main content link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -176,5 +178,5 @@
 
   {{ include "partials/scripts-common.vto" }}
   {{ include "partials/scripts-sw.vto" }}
-</body>
+  </body>
 </html>

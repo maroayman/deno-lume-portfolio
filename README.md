@@ -39,7 +39,7 @@ Unknown tags trigger a warning to maintain consistency.
 
 ### Prerequisites
 
-- [Deno](https://deno.land/) installed on your system
+- [Deno](https://deno.land/) **2.9.1** (pinned in `.deno-version`)
 
 ### Installation
 
@@ -82,7 +82,13 @@ Build the site for production:
 deno task build
 ```
 
-The built site will be in the `dist` directory.
+The built site will be in the `_site` directory.
+
+Run a quick selector audit before larger styling cleanups:
+
+```bash
+deno task css:audit
+```
 
 ## Customization
 
@@ -132,8 +138,13 @@ const APPROVED_TAGS = [
 
 ### Styling
 
-All styles are in `src/styles/main.css`. The design system uses CSS custom
-properties (variables) for easy customization:
+Styles are split by concern:
+
+- `src/styles/main.css` (core/global)
+- `src/styles/blog.css` (blog article/code/lightbox)
+- `src/styles/pages.css` (404/uses/toc/responsive/print)
+
+The design system uses CSS custom properties (variables) for easy customization:
 
 - Colors: Update the `:root` variables for your color scheme
 - Typography: Change font families and sizes
@@ -152,21 +163,25 @@ deno-lume-portfolio/
 │   │       ├── base.vto    # Base layout template
 │   │       └── blog.vto    # Blog post layout
 │   ├── _data/
-│   │   ├── experience.json
-│   │   ├── projects.json
-│   │   ├── certifications.json
-│   │   └── skills.json
+│   │   ├── experience.yml
+│   │   ├── projects.yml
+│   │   ├── certifications.yml
+│   │   └── uses.json
 │   ├── blog/
 │   │   ├── _data.yml       # Blog post defaults
 │   │   └── *.md            # Blog posts (Markdown)
 │   ├── styles/
-│   │   └── main.css        # Main stylesheet
+│   │   ├── main.css        # Core/global styles
+│   │   ├── blog.css        # Blog-specific styles
+│   │   └── pages.css       # Page-level and responsive styles
 │   ├── index.vto           # Homepage
 │   ├── blog.vto            # Blog listing page
 │   ├── experience.vto      # Experience page
 │   ├── projects.vto        # Projects page
 │   └── certifications.vto  # Certifications page
-└── dist/                   # Built site (generated)
+├── .deno-version           # Pinned Deno runtime version
+├── deno.lock               # Dependency lockfile
+└── _site/                  # Built site (generated)
 ```
 
 ## Technologies Used

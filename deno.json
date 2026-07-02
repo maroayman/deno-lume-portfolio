@@ -14,6 +14,7 @@
     "build:audit": "deno task audit; deno task build",
     "build:sw": "deno run --allow-read --allow-write scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
+    "css:audit": "deno run --allow-read scripts/audit-css-selectors.ts",
     "serve": {
       "description": "Run and serve the site for development",
       "command": "deno task build:sw && deno task lume -s"
@@ -63,5 +64,5 @@
       ]
     }
   },
-  "lock": false
+  "lock": true
 }
