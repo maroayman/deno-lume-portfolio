@@ -54,14 +54,6 @@
 
 
 
-:root {
-  --color-accent: #4f46e5;
-  --color-accent-light: rgba(79, 70, 229, 0.08);
-  --color-accent-light-hover: rgba(79, 70, 229, 0.14);
-  --color-accent-border: rgba(79, 70, 229, 0.32);
-  --color-accent-underline: rgba(79, 70, 229, 0.36);
-}
-
 body.dark-mode,
 html.dark-mode {
   --color-bg: #0f1117;
@@ -162,21 +154,21 @@ main {
 /* Dark mode */
 body.dark-mode,
 html.dark-mode {
-  --color-bg: #111111;
-  --color-bg-elevated: #1a1a1a;
-  --color-bg-code: #1e1e1e;
-  --color-text: #f5f5f5;
-  --color-text-secondary: #a3a3a3;
-  --color-text-faint: #888888;
-  --color-border: #2a2a2a;
-  --color-border-subtle: #222222;
-  --color-link: #f5f5f5;
-  --color-link-hover: #60a5fa;
-  --color-accent: #60a5fa;
-  --color-accent-light: rgba(96, 165, 250, 0.10);
-  --color-accent-light-hover: rgba(96, 165, 250, 0.18);
-  --color-accent-border: rgba(96, 165, 250, 0.30);
-  --color-accent-underline: rgba(96, 165, 250, 0.35);
+  --color-bg: #151619;
+  --color-bg-elevated: #1d1f23;
+  --color-bg-code: #23262b;
+  --color-text: #f2efe8;
+  --color-text-secondary: #aaa79f;
+  --color-text-faint: #787a7d;
+  --color-border: #303238;
+  --color-border-subtle: #25272c;
+  --color-link: #f2efe8;
+  --color-link-hover: #8ea7ff;
+  --color-accent: #718cff;
+  --color-accent-light: rgba(113, 140, 255, 0.09);
+  --color-accent-light-hover: rgba(113, 140, 255, 0.15);
+  --color-accent-border: rgba(113, 140, 255, 0.28);
+  --color-accent-underline: rgba(113, 140, 255, 0.38);
 }
 
 *,
@@ -1661,57 +1653,176 @@ a.tech-tag:focus {
   max-width: 100%;
 }
 
-/* Subtle visual refresh */
+/* Quiet editorial portfolio refresh */
 :root {
-  --color-accent: #4f46e5;
-  --color-accent-light: rgba(79, 70, 229, 0.08);
-  --color-accent-light-hover: rgba(79, 70, 229, 0.14);
-  --color-accent-border: rgba(79, 70, 229, 0.32);
-  --color-accent-underline: rgba(79, 70, 229, 0.36);
+  --color-bg: #f6f4ef;
+  --color-bg-elevated: #fbfaf7;
+  --color-text: #202226;
+  --color-text-secondary: #66686b;
+  --color-text-faint: #999a99;
+  --color-border: #dcdcd6;
+  --color-border-subtle: #e9e8e2;
+  --color-link: #202226;
+  --color-link-hover: #3f5edb;
+  --color-accent: #3f5edb;
+  --color-accent-light: rgba(63, 94, 219, 0.07);
+  --color-accent-light-hover: rgba(63, 94, 219, 0.12);
+  --color-accent-border: rgba(63, 94, 219, 0.28);
+  --color-accent-underline: rgba(63, 94, 219, 0.38);
+  --max-width: 760px;
+  --spacing: 2.5rem;
+  --radius: 2px;
 }
 
 body.dark-mode,
 html.dark-mode {
-  --color-bg: #0f1117;
-  --color-bg-elevated: #171a22;
-  --color-bg-code: #1d2130;
-  --color-border: #292e3b;
-  --color-border-subtle: #202532;
-  --color-accent: #8b9cff;
-  --color-link-hover: #a7b2ff;
-  --color-accent-light: rgba(139, 156, 255, 0.11);
-  --color-accent-light-hover: rgba(139, 156, 255, 0.18);
-  --color-accent-border: rgba(139, 156, 255, 0.34);
-  --color-accent-underline: rgba(139, 156, 255, 0.4);
+  --color-bg: #151619;
+  --color-bg-elevated: #1d1f23;
+  --color-bg-code: #23262b;
+  --color-text: #f2efe8;
+  --color-text-secondary: #aaa79f;
+  --color-text-faint: #787a7d;
+  --color-border: #303238;
+  --color-border-subtle: #25272c;
+  --color-link: #f2efe8;
+  --color-link-hover: #8ea7ff;
+  --color-accent: #718cff;
+  --color-accent-light: rgba(113, 140, 255, 0.09);
+  --color-accent-light-hover: rgba(113, 140, 255, 0.15);
+  --color-accent-border: rgba(113, 140, 255, 0.28);
+  --color-accent-underline: rgba(113, 140, 255, 0.38);
+}
+
+body {
+  letter-spacing: 0.005em;
 }
 
 header {
-  padding: 1.5rem 0 1.25rem;
-  backdrop-filter: blur(14px);
-  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1.1rem 0 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(16px);
 }
 
-header h1 { letter-spacing: -0.035em; }
-.tagline { max-width: 34rem; line-height: 1.55; }
-.header-nav a { display: inline-block; padding-bottom: 0.2rem; border-bottom: 1px solid transparent; }
-.header-nav a:hover { border-bottom-color: var(--color-accent); }
-main { padding-top: 3rem; }
+header h1 {
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.045em;
+}
+
+.tagline {
+  max-width: 36rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.header-nav {
+  gap: 1.15rem;
+}
+
+.header-nav a {
+  position: relative;
+  padding-bottom: 0.35rem;
+  color: var(--color-text-secondary);
+}
+
+.header-nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--color-accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base);
+}
+
+.header-nav a:hover,
+.header-nav a:focus-visible {
+  color: var(--color-text);
+}
+
+.header-nav a:hover::after,
+.header-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+main {
+  padding-top: 4.5rem;
+}
+
+.section-title {
+  letter-spacing: -0.035em;
+}
 
 .section-link,
 .project-card,
 .contact-box,
-.blog-card {
+.blog-card,
+.experience-item,
+.certification-item {
   transition: background-color var(--t-base), border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
 }
 
-.section-link:hover { padding-left: 0.5rem; padding-right: 0.5rem; background: var(--color-accent-light); }
+.section-link {
+  border-color: var(--color-border-subtle);
+  background: transparent;
+}
+
+.section-link:hover {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  border-color: var(--color-accent-border);
+  background: var(--color-accent-light);
+}
+
+.project-card,
+.blog-card,
+.contact-box {
+  border-color: var(--color-border-subtle);
+  background: transparent;
+}
+
 .project-card:hover,
-.blog-card:hover { transform: translateY(-2px); border-color: var(--color-accent-border); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12); }
+.blog-card:hover,
+.experience-item:hover,
+.certification-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent-border);
+}
+
+.contact-box {
+  padding: 2rem;
+}
+
+footer {
+  margin-top: 6rem;
+  border-top-color: var(--color-border-subtle);
+}
 
 @media (max-width: 600px) {
-  header { padding-top: 1.25rem; }
-  main { padding-top: 2rem; }
+  header {
+    padding-top: 1rem;
+  }
+
+  .header-nav {
+    gap: 0.75rem;
+  }
+
+  main {
+    padding-top: 3rem;
+  }
+
+  .contact-box {
+    padding: 1.5rem;
+  }
 }
+
 
 .blog-cover {
   margin: 0 0 1.75rem;
