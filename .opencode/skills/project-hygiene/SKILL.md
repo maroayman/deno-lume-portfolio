@@ -11,7 +11,6 @@ Rules for keeping build artifacts, outputs, and repo hygiene consistent in the d
 
 - `.gitignore`
 - `README.md`
-- `spec-kit.md`
 - `vercel.json`
 - `_config.ts`
 
