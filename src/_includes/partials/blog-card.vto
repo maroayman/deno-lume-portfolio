@@ -28,7 +28,7 @@
     {{ if post.tags }}
     <div class="tech-tags">
       {{ for tag of post.tags }}
-      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }} posts</a>
+      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag" aria-label="View posts tagged {{ tag }}"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }}<span class="visually-hidden"> posts</span></a>
       {{ /for }}
     </div>
     {{ /if }}
