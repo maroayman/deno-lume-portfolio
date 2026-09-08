@@ -1,0 +1,12 @@
+[
+{{ for index, post of search.pages("type=post", "date=desc") }}{{ if index }},{{ /if }}
+  {{ set postDate = post.date |> date('DATE') }}
+  {
+    "title": {{ JSON.stringify(post.title) }},
+    "description": {{ JSON.stringify(post.description) }},
+    "url": {{ JSON.stringify(post.url) }},
+    "date": {{ JSON.stringify(postDate) }},
+    "tags": {{ JSON.stringify(post.tags || []) }}
+  }
+{{ /for }}
+]

@@ -3,7 +3,7 @@
   "tasks": {
     "lume": {
       "description": "Run Lume command",
-      "command": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run --allow-ffi --allow-sys lume/cli.ts"
+      "command": "deno run --allow-read --allow-write --allow-net --allow-env --allow-sys lume/cli.ts"
     },
     "check": "deno check _config.ts",
     "audit": "deno audit",
@@ -15,6 +15,10 @@
     "build:sw": "deno run --allow-read --allow-write scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
     "css:audit": "deno run --allow-read scripts/audit-css-selectors.ts",
+    "check:content": "deno run --allow-read scripts/validate-content.ts",
+    "check:format": "deno fmt --check src/ _config.ts scripts/",
+    "check:lint": "deno lint src/ _config.ts scripts/",
+    "check:all": "deno task check:format && deno task check:lint && deno task check:content && deno task check && deno task build",
     "serve": {
       "description": "Run and serve the site for development",
       "command": "deno task build:sw && deno task lume -s"

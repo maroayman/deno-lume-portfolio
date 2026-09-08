@@ -25,10 +25,12 @@
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
 
-      // Apply on load (theme already set by head-theme-flash.vto, just sync icons)
-      const initialTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-      sunIcon.style.display = initialTheme === 'dark' ? 'none' : 'block';
-      moonIcon.style.display = initialTheme === 'dark' ? 'block' : 'none';
+      // Apply on load. head-theme-flash.vto runs before <body> exists, so it
+      // can only set the class on <html> — re-apply the resolved theme to
+      // BOTH elements here so body state, icons, and the toggle handler
+      // all agree on first click (previously the first click was a no-op
+      // whenever the initial theme was dark).
+      applyTheme(resolveTheme());
 
       // Toggle handler — once the user clicks, their choice is persisted
       themeToggle.addEventListener('click', function() {

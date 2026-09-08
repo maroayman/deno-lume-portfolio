@@ -1,3 +1,4 @@
+# Files & Misc.
 dist/
 _site/
 _cache/
@@ -12,3 +13,6 @@ node_modules/
 # Resume source — managed locally via `deno task resume`, not tracked in repo
 resume.json
 main.typ
+
+# Directories
+.directory
