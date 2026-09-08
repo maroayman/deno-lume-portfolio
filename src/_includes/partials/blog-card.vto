@@ -1,7 +1,7 @@
 <article class="blog-card"{{ if paginationItem }} data-pagination-item{{ /if }} data-url="{{ post.url }}"{{ if paginationItem }} data-title="{{ post.title }}" data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}" data-description="{{ post.description }}"{{ /if }}>
   {{ if post.cover }}
   <div class="blog-card-cover">
-    <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
+    <img src="{{ post.cover }}" alt="{{ post.title }}" width="80" height="60" loading="lazy">
   </div>
   {{ /if }}
   <div class="blog-card-content">
@@ -28,7 +28,7 @@
     {{ if post.tags }}
     <div class="tech-tags">
       {{ for tag of post.tags }}
-      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }}</a>
+      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }} posts</a>
       {{ /for }}
     </div>
     {{ /if }}

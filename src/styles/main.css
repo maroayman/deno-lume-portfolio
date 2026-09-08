@@ -6,7 +6,7 @@
   --color-bg-code: #f4f4f4;
   --color-text: #111111;
   --color-text-secondary: #555555;
-  --color-text-faint: #aaaaaa;
+  --color-text-faint: #707070;
   --color-border: #e4e4e4;
   --color-border-subtle: #eeeeee;
   --color-link: #111111;
@@ -1359,6 +1359,7 @@ a.tech-tag:focus {
   flex-shrink: 0;
   width: 80px;
   height: 60px;
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--color-bg-code);

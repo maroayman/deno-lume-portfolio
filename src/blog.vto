@@ -88,8 +88,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           <button 
             class="filter-btn filter-tag active" 
             data-tag="all" 
-            role="option" 
-            aria-selected="true"
+            aria-pressed="true"
           >All <span class="tag-count">({{ totalPosts }})</span></button>
           
           <!-- Show top 5 most used tags inline -->
@@ -99,8 +98,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
             class="filter-btn filter-tag weight-{{ weight }}" 
             data-tag="{{ item.tag }}" 
             data-count="{{ item.count }}"
-            role="option" 
-            aria-selected="false"
+            aria-pressed="false"
           >{{ item.tag }} <span class="tag-count">({{ item.count }})</span></button>
           {{ /for }}
           
@@ -113,7 +111,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
                 <path d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
-            <div class="tag-dropdown-panel" id="tagDropdownPanel" role="listbox" aria-label="All tags">
+            <div class="tag-dropdown-panel" id="tagDropdownPanel">
               <div class="tag-dropdown-search">
                 <svg class="tag-dropdown-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                   <circle cx="11" cy="11" r="8"/>
