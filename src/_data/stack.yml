@@ -1,0 +1,37 @@
+- name: Infrastructure
+  description: Reliable systems and runtime foundations
+  items:
+    - Linux
+    - Kubernetes
+    - Docker
+    - Proxmox VE
+    - Rocky Linux
+
+- name: Delivery
+  description: Repeatable release and GitOps workflows
+  items:
+    - GitOps
+    - CI/CD
+    - ArgoCD
+    - Flux CD
+    - Jenkins
+    - Gitea
+
+- name: Automation
+  description: Infrastructure declared, tested, and repeatable
+  items:
+    - Terraform
+    - Ansible
+    - Helm
+    - Bash
+    - Python
+
+- name: Cloud & observability
+  description: Platforms, metrics, and operational feedback
+  items:
+    - AWS
+    - GCP
+    - Azure
+    - Prometheus
+    - Grafana
+    - MinIO
