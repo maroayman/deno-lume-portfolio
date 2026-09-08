@@ -10,7 +10,7 @@ layout: layouts/base.vto
     <article class="blog-article">
       {{ if cover }}
       <figure class="blog-cover" data-lightbox>
-        <img src="{{ cover }}" alt="{{ title }}" loading="lazy">
+        <img src="{{ cover }}" alt="{{ title }}" width="1200" height="675" loading="lazy">
       </figure>
       {{ /if }}
 
@@ -112,7 +112,7 @@ layout: layouts/base.vto
         <a href="{{ post.url }}" class="related-post-card">
           {{ if post.cover }}
           <div class="related-post-cover">
-            <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ post.cover }}" alt="{{ post.title }}" width="1200" height="675" loading="lazy">
           </div>
           {{ /if }}
           <div class="related-post-content">

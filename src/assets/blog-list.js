@@ -111,7 +111,7 @@
     R.forEach((t) => {
       const e = t.dataset.tag,
         a = e === "all" && s.length === 0 || s.includes(e);
-      t.classList.toggle("active", a), t.setAttribute("aria-selected", a);
+      t.classList.toggle("active", a), t.setAttribute("aria-pressed", a);
     });
   }
   function W() {

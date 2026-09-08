@@ -121,6 +121,7 @@ body.dark-mode .terminal-404 {
   .blog-card-cover {
     width: 64px;
     height: 48px;
+    aspect-ratio: 4 / 3;
   }
 
   .related-posts-grid {
