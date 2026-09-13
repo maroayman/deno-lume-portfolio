@@ -18,14 +18,31 @@ async function readYaml(path: string): Promise<unknown> {
   try {
     return parse(await Deno.readTextFile(path));
   } catch (error) {
-    errors.push(`${path}: invalid YAML (${error instanceof Error ? error.message : error})`);
+    errors.push(
+      `${path}: invalid YAML (${
+        error instanceof Error ? error.message : error
+      })`,
+    );
     return null;
   }
 }
 
 const collections = [
-  { path: "src/_data/experience.yml", fields: ["title", "company", "period", "description", "responsibilities", "tags"] },
-  { path: "src/_data/projects.yml", fields: ["title", "period", "summary", "highlights", "tech"] },
+  {
+    path: "src/_data/experience.yml",
+    fields: [
+      "title",
+      "company",
+      "period",
+      "description",
+      "responsibilities",
+      "tags",
+    ],
+  },
+  {
+    path: "src/_data/projects.yml",
+    fields: ["title", "period", "summary", "highlights", "tech"],
+  },
   { path: "src/_data/certifications.yml", fields: ["title", "issuer", "date"] },
   { path: "src/_data/stack.yml", fields: ["name", "description", "items"] },
 ];
@@ -45,7 +62,11 @@ for (const collection of collections) {
     }
     for (const field of collection.fields) {
       const value = (entry as Record<string, unknown>)[field];
-      if (["responsibilities", "tags", "highlights", "tech", "items"].includes(field)) {
+      if (
+        ["responsibilities", "tags", "highlights", "tech", "items"].includes(
+          field,
+        )
+      ) {
         requireArray(value, field, source);
       } else {
         requireString(value, field, source);
@@ -71,7 +92,11 @@ for (const file of blogFiles) {
   try {
     frontmatter = parse(match[1]);
   } catch (error) {
-    errors.push(`${path}: invalid frontmatter YAML (${error instanceof Error ? error.message : error})`);
+    errors.push(
+      `${path}: invalid frontmatter YAML (${
+        error instanceof Error ? error.message : error
+      })`,
+    );
     continue;
   }
   if (!frontmatter || typeof frontmatter !== "object") {
@@ -84,7 +109,10 @@ for (const file of blogFiles) {
   requireString(data.description, "description", path);
   // YAML auto-parses unquoted dates (e.g. `date: 2026-09-04`) into Date
   // objects — accept those exactly as Lume's date plugin does.
-  if (!(typeof data.date === "string" && data.date.trim() !== "") && !(data.date instanceof Date)) {
+  if (
+    !(typeof data.date === "string" && data.date.trim() !== "") &&
+    !(data.date instanceof Date)
+  ) {
     errors.push(`${path}: date must be a non-empty string or date`);
   }
   requireArray(data.tags, "tags", path);
@@ -100,4 +128,6 @@ if (errors.length > 0) {
   Deno.exit(1);
 }
 
-console.log(`Content validation passed: ${blogFiles.length} blog posts and ${collections.length} data collections checked.`);
+console.log(
+  `Content validation passed: ${blogFiles.length} blog posts and ${collections.length} data collections checked.`,
+);

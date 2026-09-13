@@ -63,8 +63,8 @@ matches reality.
 
 ### Basic Deployment YAML Example
 
-:::tabs
-[YAML]
+:::tabs [YAML]
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -88,15 +88,18 @@ spec:
 ```
 
 [Apply]
+
 ```bash
 kubectl apply -f deployment.yaml
 ```
 
 [Verify]
+
 ```bash
 kubectl get deployments
 kubectl get pods
 ```
+
 :::
 
 ---

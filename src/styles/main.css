@@ -1,12 +1,13 @@
 /* google-fonts */
 
 :root {
+  color-scheme: light;
   --color-bg: #fafafa;
   --color-bg-elevated: #ffffff;
   --color-bg-code: #f4f4f4;
   --color-text: #111111;
   --color-text-secondary: #555555;
-  --color-text-faint: #707070;
+  --color-text-faint: #595959;
   --color-border: #e4e4e4;
   --color-border-subtle: #eeeeee;
   --color-link: #111111;
@@ -45,10 +46,20 @@
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
+    animation-timeline: none !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 
@@ -84,12 +95,13 @@
 /* Dark mode */
 body.dark-mode,
 html.dark-mode {
+  color-scheme: dark;
   --color-bg: #111111;
   --color-bg-elevated: #1a1a1a;
   --color-bg-code: #1e1e1e;
   --color-text: #f5f5f5;
   --color-text-secondary: #a3a3a3;
-  --color-text-faint: #888888;
+  --color-text-faint: #aaaaaa;
   --color-border: #2a2a2a;
   --color-border-subtle: #222222;
   --color-link: #f5f5f5;
@@ -113,6 +125,26 @@ html {
   font-size: var(--font-size-base);
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+html:focus-within {
+  scroll-behavior: smooth;
+}
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+main:focus {
+  outline: none;
+}
+#main-content {
+  scroll-margin-top: 6rem;
+}
+.blog-content h2,
+.blog-content h3,
+.page-title,
+.uses-group-title {
+  scroll-margin-top: 6rem;
 }
 
 body {
@@ -200,12 +232,17 @@ header {
   z-index: 100;
 }
 
-header h1 {
+header .site-title {
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
   display: inline-block;
+  color: var(--color-text);
+}
+header h1,
+.page-title {
+  scroll-margin-top: 6rem;
 }
 
 .tagline {
@@ -317,11 +354,13 @@ footer p {
   right: 1.5rem;
   bottom: 1.5rem;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(0.75rem);
   pointer-events: none;
   transition:
     opacity var(--t-base),
     transform var(--t-base),
+    visibility var(--t-base),
     color var(--t-fast),
     border-color var(--t-fast),
     background-color var(--t-fast);
@@ -331,6 +370,7 @@ footer p {
 
 .back-to-top.visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
 }
@@ -673,11 +713,12 @@ footer p {
 .tech-tag {
   display: inline-block;
   font-size: 0.75rem;
+  font-weight: 500;
   color: var(--color-accent);
   background: var(--color-accent-light);
   border: 1px solid var(--color-accent-border);
   border-radius: var(--radius-sm);
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.5rem;
   font-family: var(--font-mono);
   text-decoration: none;
   transition:
@@ -743,7 +784,8 @@ a.tech-tag:focus {
     transform var(--t-fast);
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
   border-color: var(--color-accent-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
@@ -993,6 +1035,11 @@ a.tech-tag:focus {
 
 .blog-search-input:focus {
   border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0;
+}
+.blog-search-input:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .blog-search-clear {
@@ -1142,6 +1189,7 @@ a.tech-tag:focus {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   min-width: 200px;
+  max-width: min(320px, calc(100vw - 2rem));
   max-height: 280px;
   overflow: hidden;
   flex-direction: column;
@@ -1262,7 +1310,12 @@ a.tech-tag:focus {
   border: none;
   cursor: pointer;
   color: inherit;
-  padding: 0;
+  padding: 0.15rem;
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
   opacity: 0.7;
   transition: opacity var(--t-fast);
@@ -1359,7 +1412,8 @@ a.tech-tag:focus {
   transition: background-color var(--t-fast);
 }
 
-.blog-card:hover {
+.blog-card:hover,
+.blog-card:focus-within {
   background: var(--color-accent-light);
 }
 
@@ -1407,7 +1461,8 @@ a.tech-tag:focus {
   transition: transform var(--t-fast);
 }
 
-.blog-card:hover .blog-card-cover img {
+.blog-card:hover .blog-card-cover img,
+.blog-card:focus-within .blog-card-cover img {
   transform: scale(1.04);
 }
 
@@ -1462,7 +1517,12 @@ a.tech-tag:focus {
   border: none;
   cursor: pointer;
   color: var(--color-text-faint);
-  padding: 0.1rem;
+  padding: 0.25rem;
+  min-width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
   border-radius: var(--radius-sm);
   transition: color var(--t-fast);
@@ -1489,7 +1549,8 @@ a.tech-tag:focus {
   color: var(--color-text-secondary);
 }
 
-.blog-card:hover .blog-card-title a {
+.blog-card:hover .blog-card-title a,
+.blog-card:focus-within .blog-card-title a {
   color: var(--color-accent);
 }
 

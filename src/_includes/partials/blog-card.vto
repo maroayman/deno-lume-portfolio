@@ -1,7 +1,11 @@
-<article class="blog-card"{{ if paginationItem }} data-pagination-item{{ /if }} data-url="{{ post.url }}"{{ if paginationItem }} data-title="{{ post.title }}" data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}" data-description="{{ post.description }}"{{ /if }}>
+<article class="blog-card" {{ if paginationItem }} data-pagination-item{{ /if }}
+  data-url="{{ post.url }}" {{ if paginationItem }}
+  data-title="{{ post.title }}"
+  data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}"
+  data-description="{{ post.description }}" {{ /if }}>
   {{ if post.cover }}
   <div class="blog-card-cover">
-    <img src="{{ post.cover }}" alt="{{ post.title }}" width="80" height="60" loading="lazy">
+    <img src="{{ post.cover }}" alt="" width="80" height="60" loading="lazy" decoding="async">
   </div>
   {{ /if }}
   <div class="blog-card-content">
@@ -10,8 +14,8 @@
         <a href="{{ post.url }}">{{ post.title }}</a>
       </h3>
       {{ if showBookmark }}
-      <button class="bookmark-btn" data-url="{{ post.url }}" aria-label="Bookmark article" title="Bookmark">
-        <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button class="bookmark-btn" data-url="{{ post.url }}" aria-label="Bookmark article" aria-pressed="false" title="Bookmark">
+        <svg class="bookmark-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
         </svg>
       </button>

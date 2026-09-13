@@ -44,7 +44,7 @@ body.dark-mode .terminal-404 {
 
 .terminal-title {
   font-size: 0.75rem;
-  color: #8b8b8b;
+  color: #b0b0b0;
   font-family: var(--font-mono);
   margin-left: 0.25rem;
 }
@@ -75,7 +75,7 @@ body.dark-mode .terminal-404 {
 }
 
 .terminal-error {
-  color: #f85149;
+  color: #ff7b72;
 }
 
 .terminal-json {

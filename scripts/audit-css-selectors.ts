@@ -1,13 +1,23 @@
 const STYLE_ROOT = "src/styles";
 const SEARCH_DIRS = ["src", "scripts", "plugins"];
 const CSS_EXTENSIONS = new Set([".css"]);
-const SOURCE_EXTENSIONS = new Set([".vto", ".ts", ".js", ".md", ".yml", ".json"]);
+const SOURCE_EXTENSIONS = new Set([
+  ".vto",
+  ".ts",
+  ".js",
+  ".md",
+  ".yml",
+  ".json",
+]);
 
 function hasAllowedExtension(path: string, allowed: Set<string>) {
   return [...allowed].some((ext) => path.endsWith(ext));
 }
 
-async function collectFiles(root: string, allowed: Set<string>): Promise<string[]> {
+async function collectFiles(
+  root: string,
+  allowed: Set<string>,
+): Promise<string[]> {
   const files: string[] = [];
   for await (const entry of Deno.readDir(root)) {
     const full = `${root}/${entry.name}`;
@@ -35,17 +45,23 @@ for (const file of cssFiles) {
 }
 
 const sourceFiles = (
-  await Promise.all(SEARCH_DIRS.map((dir) => collectFiles(dir, SOURCE_EXTENSIONS)))
+  await Promise.all(
+    SEARCH_DIRS.map((dir) => collectFiles(dir, SOURCE_EXTENSIONS)),
+  )
 ).flat();
 
 const sourceText = (
   await Promise.all(sourceFiles.map((file) => Deno.readTextFile(file)))
 ).join("\n");
 
-const unused = [...classNames].filter((className) => !sourceText.includes(className)).sort();
+const unused = [...classNames].filter((className) =>
+  !sourceText.includes(className)
+).sort();
 
 if (unused.length === 0) {
-  console.log(`No unused CSS classes found across ${cssFiles.length} style files.`);
+  console.log(
+    `No unused CSS classes found across ${cssFiles.length} style files.`,
+  );
   Deno.exit(0);
 }
 

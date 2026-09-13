@@ -1,166 +1,190 @@
-  <script>
-    // ========== THEME TOGGLE ==========
-    (function() {
-      const themeToggle = document.getElementById('themeToggle');
-      const sunIcon = document.querySelector('.sun-icon');
-      const moonIcon = document.querySelector('.moon-icon');
+<script>
+// ========== THEME TOGGLE ==========
+(function () {
+  const themeToggle = document.getElementById("themeToggle");
+  const sunIcon = document.querySelector(".sun-icon");
+  const moonIcon = document.querySelector(".moon-icon");
 
-      if (!themeToggle || !sunIcon || !moonIcon) {
-        console.warn('Theme toggle elements not found');
-        return;
-      }
+  if (!themeToggle || !sunIcon || !moonIcon) {
+    console.warn("Theme toggle elements not found");
+    return;
+  }
 
-      function applyTheme(theme) {
-        const isDark = theme === 'dark';
-        document.body.classList.toggle('dark-mode', isDark);
-        document.documentElement.classList.toggle('dark-mode', isDark);
-        sunIcon.style.display = isDark ? 'none' : 'block';
-        moonIcon.style.display = isDark ? 'block' : 'none';
-      }
+  function applyTheme(theme) {
+    const isDark = theme === "dark";
+    document.body.classList.toggle("dark-mode", isDark);
+    document.documentElement.classList.toggle("dark-mode", isDark);
+    sunIcon.style.display = isDark ? "none" : "block";
+    moonIcon.style.display = isDark ? "block" : "none";
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+    themeToggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light mode" : "Switch to dark mode",
+    );
+  }
 
-      // Resolve effective theme: explicit user preference > OS preference > light
-      function resolveTheme() {
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
+  // Resolve effective theme: explicit user preference > OS preference > light
+  function resolveTheme() {
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
 
-      // Apply on load. head-theme-flash.vto runs before <body> exists, so it
-      // can only set the class on <html> — re-apply the resolved theme to
-      // BOTH elements here so body state, icons, and the toggle handler
-      // all agree on first click (previously the first click was a no-op
-      // whenever the initial theme was dark).
-      applyTheme(resolveTheme());
+  // Apply on load. head-theme-flash.vto runs before <body> exists, so it
+  // can only set the class on <html> — re-apply the resolved theme to
+  // BOTH elements here so body state, icons, and the toggle handler
+  // all agree on first click (previously the first click was a no-op
+  // whenever the initial theme was dark).
+  applyTheme(resolveTheme());
 
-      // Toggle handler — once the user clicks, their choice is persisted
-      themeToggle.addEventListener('click', function() {
-        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-      });
+  // Toggle handler — once the user clicks, their choice is persisted
+  themeToggle.addEventListener("click", function () {
+    const newTheme = document.body.classList.contains("dark-mode")
+      ? "light"
+      : "dark";
+    localStorage.setItem("theme", newTheme);
+    applyTheme(newTheme);
+  });
 
-      // Follow OS changes only when the user has NOT set an explicit preference
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-          applyTheme(e.matches ? 'dark' : 'light');
-        }
-      });
-    })();
+  // Follow OS changes only when the user has NOT set an explicit preference
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  mq.addEventListener("change", function (e) {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+  });
+})();
 
-    // ========== FOOTER YEAR ==========
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+// ========== FOOTER YEAR ==========
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // ========== SECURITY: noopener / noreferrer ==========
-    document.querySelectorAll('a[target="_blank"]').forEach(link => {
-      if (!link.rel.includes('noopener'))   link.rel += (link.rel ? ' ' : '') + 'noopener';
-      if (!link.rel.includes('noreferrer')) link.rel += (link.rel ? ' ' : '') + 'noreferrer';
-    });
+// ========== SECURITY: noopener / noreferrer ==========
+document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+  if (!link.rel.includes("noopener")) {
+    link.rel += (link.rel ? " " : "") + "noopener";
+  }
+  if (!link.rel.includes("noreferrer")) {
+    link.rel += (link.rel ? " " : "") + "noreferrer";
+  }
+});
 
-    // ========== BACK TO TOP ==========
-    (function() {
-      const backToTop = document.getElementById('backToTop');
-      if (!backToTop) {
-        console.warn('Back-to-top button not found');
-        return;
-      }
+// ========== BACK TO TOP ==========
+(function () {
+  const backToTop = document.getElementById("backToTop");
+  if (!backToTop) {
+    console.warn("Back-to-top button not found");
+    return;
+  }
 
-      // Performance: requestAnimationFrame throttling
-      let ticking = false;
-      let lastScrollY = 0;
+  // Performance: requestAnimationFrame throttling
+  let ticking = false;
+  let lastScrollY = 0;
 
-      // Accessibility: detect reduced motion preference
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Accessibility: detect reduced motion preference (evaluated per interaction)
+  const getPrefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // UX: viewport-relative threshold (show after scrolling 40% of viewport)
-      const getThreshold = () => Math.max(window.innerHeight * 0.4, 300);
+  // UX: viewport-relative threshold (show after scrolling 40% of viewport)
+  const getThreshold = () => Math.max(window.innerHeight * 0.4, 300);
 
-      // Performance & UX: Show on scroll-up only
-      function handleScroll() {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const currentScrollY = window.scrollY;
-            const threshold = getThreshold();
-            const isScrollingUp = currentScrollY < lastScrollY;
-            
-            // Show if: scrolled past threshold AND scrolling up
-            const shouldShow = currentScrollY > threshold && (isScrollingUp || currentScrollY < threshold + 100);
-            
-            backToTop.classList.toggle('visible', shouldShow);
-            backToTop.setAttribute('aria-hidden', String(!shouldShow));
-            
-            lastScrollY = currentScrollY;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
+  // Performance & UX: Show on scroll-up only
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const threshold = getThreshold();
+        const isScrollingUp = currentScrollY < lastScrollY;
 
-      // Performance: passive scroll listener
-      window.addEventListener('scroll', handleScroll, { passive: true });
+        // Show if: scrolled past threshold AND scrolling up
+        const shouldShow = currentScrollY > threshold &&
+          (isScrollingUp || currentScrollY < threshold + 100);
 
-      // Smooth scroll with Safari fallback and reduced motion support
-      function smoothScrollTo(target) {
-        // Feature detection for smooth scroll support
-        const supportsSmooth = 'scrollBehavior' in document.documentElement.style;
-        
-        if (prefersReducedMotion) {
-          // Instant scroll for reduced motion
-          window.scrollTo(0, target);
-        } else if (supportsSmooth) {
-          // Native smooth scroll
-          window.scrollTo({ top: target, behavior: 'smooth' });
+        backToTop.classList.toggle("visible", shouldShow);
+        backToTop.setAttribute("aria-hidden", String(!shouldShow));
+        if (shouldShow) {
+          backToTop.removeAttribute("hidden");
+          backToTop.removeAttribute("tabindex");
         } else {
-          // Polyfill for Safari <15.4
-          const start = window.scrollY;
-          const distance = target - start;
-          const duration = 500;
-          const startTime = performance.now();
-          
-          function animation(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Ease-out cubic for smooth deceleration
-            const ease = 1 - Math.pow(1 - progress, 3);
-            
-            window.scrollTo(0, start + distance * ease);
-            
-            if (progress < 1) {
-              requestAnimationFrame(animation);
-            }
-          }
-          
+          backToTop.setAttribute("hidden", "");
+          backToTop.setAttribute("tabindex", "-1");
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // Performance: passive scroll listener
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  // Smooth scroll with Safari fallback and reduced motion support
+  function smoothScrollTo(target) {
+    // Feature detection for smooth scroll support
+    const supportsSmooth = "scrollBehavior" in document.documentElement.style;
+
+    if (getPrefersReducedMotion()) {
+      // Instant scroll for reduced motion
+      window.scrollTo(0, target);
+    } else if (supportsSmooth) {
+      // Native smooth scroll
+      window.scrollTo({ top: target, behavior: "smooth" });
+    } else {
+      // Polyfill for Safari <15.4
+      const start = window.scrollY;
+      const distance = target - start;
+      const duration = 500;
+      const startTime = performance.now();
+
+      function animation(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease-out cubic for smooth deceleration
+        const ease = 1 - Math.pow(1 - progress, 3);
+
+        window.scrollTo(0, start + distance * ease);
+
+        if (progress < 1) {
           requestAnimationFrame(animation);
         }
       }
 
-      // Click handler with visual feedback
-      backToTop.addEventListener('click', () => {
-        backToTop.classList.add('scrolling');
-        smoothScrollTo(0);
-        
-        // Remove feedback class after animation
-        setTimeout(() => {
-          backToTop.classList.remove('scrolling');
-        }, 600);
-      });
-    })();
-
-    // ========== SHOW MORE / SHOW LESS ==========
-    function toggleShowMore(btn) {
-      const list = btn.previousElementSibling;
-      const items = list.querySelectorAll('.show-more-item');
-      const isExpanded = list.classList.contains('expanded');
-      if (isExpanded) {
-        items.forEach(item => item.style.display = 'none');
-        btn.textContent = `Show more (${items.length})`;
-        list.classList.remove('expanded');
-      } else {
-        items.forEach(item => item.style.display = 'list-item');
-        btn.textContent = 'Show less';
-        list.classList.add('expanded');
-      }
+      requestAnimationFrame(animation);
     }
-  </script>
+  }
+
+  // Click handler with visual feedback
+  backToTop.addEventListener("click", () => {
+    backToTop.classList.add("scrolling");
+    smoothScrollTo(0);
+
+    // Remove feedback class after animation
+    setTimeout(() => {
+      backToTop.classList.remove("scrolling");
+    }, 600);
+  });
+})();
+
+// ========== SHOW MORE / SHOW LESS ==========
+function toggleShowMore(btn) {
+  const list = btn.previousElementSibling;
+  const items = list.querySelectorAll(".show-more-item");
+  const isExpanded = list.classList.contains("expanded");
+  if (isExpanded) {
+    items.forEach((item) => item.style.display = "none");
+    btn.textContent = `Show more (${items.length})`;
+    btn.setAttribute("aria-expanded", "false");
+    list.classList.remove("expanded");
+  } else {
+    items.forEach((item) => item.style.display = "list-item");
+    btn.textContent = "Show less";
+    btn.setAttribute("aria-expanded", "true");
+    list.classList.add("expanded");
+  }
+}
+</script>

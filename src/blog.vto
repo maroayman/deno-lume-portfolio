@@ -5,28 +5,67 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
 ---
 
 <!-- Instant read indicator - injects CSS into head synchronously -->
-<script>(function(){try{const t=JSON.parse(localStorage.getItem("blog_reading_history")||"[]").map(e=>{const u=typeof e=="string"?e:e.url;return u.replace(/\/$/,"")});if(t.length>0){window.__readUrls=new Set(t);const e=document.createElement("style");e.id="read-indicator-styles",e.textContent=t.map(r=>`.blog-card[data-url="${r}"] .read-inline,.blog-card[data-url="${r}/"] .read-inline{display:inline}`).join(""),document.head.insertBefore(e,document.head.firstChild)}}catch(o){}})();</script>
+<script>
+(function () {
+  try {
+    const t = JSON.parse(localStorage.getItem("blog_reading_history") || "[]")
+      .map((e) => {
+        const u = typeof e == "string" ? e : e.url;
+        return u.replace(/\/$/, "");
+      });
+    if (t.length > 0) {
+      window.__readUrls = new Set(t);
+      const e = document.createElement("style");
+      e.id = "read-indicator-styles",
+        e.textContent = t.map((r) =>
+          `.blog-card[data-url="${r}"] .read-inline,.blog-card[data-url="${r}/"] .read-inline{display:inline}`
+        ).join(""),
+        document.head.insertBefore(e, document.head.firstChild);
+    }
+  } catch (o) {}
+})();
+</script>
 
-<!-- Hide cards until read status is applied, then reveal -->
-<style>.blog-card { opacity: 0; }</style>
-<script>requestAnimationFrame(()=>{const e=document.createElement("style");e.textContent=".blog-card { opacity: 1; transition: opacity 0.15s ease, background-color var(--t-fast); }",document.head.appendChild(e)});</script>
+<!-- Hide cards until read status is applied, then reveal (progressive enhancement) -->
+<style>
+.blog-card {
+  opacity: 1;
+}
+</style>
+<script>
+document.documentElement.classList.add("js");
+</script>
+<style>
+.js .blog-card {
+  opacity: 0;
+}
+</style>
+<script>
+requestAnimationFrame(() => {
+  const e = document.createElement("style");
+  e.textContent =
+    ".js .blog-card { opacity: 1; transition: opacity 0.15s ease, background-color var(--t-fast); }",
+    document.head.appendChild(e);
+});
+</script>
+<noscript><style>.blog-card{opacity:1 !important}</style></noscript>
 
 <div class="container">
   <section class="section">
     <p class="back-link">
-      <a href="/">← Back</a>
+      <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
-    
-    <h2 class="page-title">Blog</h2>
-    
+
+    <h1 class="page-title">Blog</h1>
+
     <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
       Technical articles about cloud infrastructure, DevOps practices, and lessons learned.
     </p>
-    
+
     <!-- Search and Filter -->
     <div class="blog-search-container">
       <div class="blog-search-wrapper">
-        <svg class="blog-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="blog-search-icon" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
         <input 
@@ -38,28 +77,28 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           aria-label="Search blog posts"
         >
         <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
       
       <!-- View Tabs: All Posts / Bookmarks / History -->
-      <div class="blog-view-tabs">
-        <button class="view-tab active" data-view="all">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+      <div class="blog-view-tabs" role="group" aria-label="Blog view">
+        <button class="view-tab active" data-view="all" aria-pressed="true">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
           </svg>
           All Posts
         </button>
-        <button class="view-tab" data-view="bookmarks">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <button class="view-tab" data-view="bookmarks" aria-pressed="false">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
           </svg>
           Bookmarks <span class="bookmark-count" id="bookmarkCount"></span>
         </button>
-        <button class="view-tab" data-view="history">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <button class="view-tab" data-view="history" aria-pressed="false">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
             <circle cx="12" cy="12" r="10"/>
             <polyline points="12 6 12 12 16 14"/>
           </svg>
@@ -105,15 +144,15 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
           <!-- Dropdown for all tags -->
           {{ if uniqueTags.length > 5 }}
           <div class="tag-dropdown" id="tagDropdown">
-            <button class="filter-btn tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox">
+            <button class="filter-btn tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="tagDropdownList">
               <span>More tags</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                 <path d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
             <div class="tag-dropdown-panel" id="tagDropdownPanel">
               <div class="tag-dropdown-search">
-                <svg class="tag-dropdown-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <svg class="tag-dropdown-search-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                   <circle cx="11" cy="11" r="8"/>
                   <path d="M21 21l-4.35-4.35"/>
                 </svg>
@@ -123,6 +162,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
                   class="tag-dropdown-search-input" 
                   placeholder="Search {{ uniqueTags.length }} tags..."
                   autocomplete="off"
+                  aria-label="Search tags"
                 >
               </div>
               <div class="tag-dropdown-list" id="tagDropdownList" role="listbox" tabindex="-1">
@@ -148,11 +188,11 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
         </div>
         
         <!-- Active filters indicator -->
-        <div class="active-filters" id="activeFilters" style="display: none;">
+        <div class="active-filters" id="activeFilters" style="display: none;" aria-live="polite">
           <span class="active-filters-label">Filtering by:</span>
           <div class="active-filters-tags" id="activeFiltersTags"></div>
           <button class="active-filters-clear" id="clearFilters" aria-label="Clear all filters">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
               <path d="M18 6L6 18M6 6l12 12"/>
             </svg>
             Clear
@@ -160,23 +200,27 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
         </div>
       </div>
     </div>
-    
-    <div class="blog-result-count" id="resultCount" style="display: none;">
+
+    <div class="blog-result-count" id="resultCount" style="display: none;"
+      role="status" aria-live="polite" aria-atomic="true">
       <span id="resultCountText"></span>
     </div>
-    
-    <div class="blog-no-results" id="noResults" style="display: none;">
+
+    <div class="blog-no-results" id="noResults" style="display: none;"
+      role="status" aria-live="polite">
       <p>No posts found matching your search.</p>
     </div>
-    
+
     <div class="blog-grid" id="pagination-container">
       {{ for post of search.pages("type=post", "date=desc") }}
       {{ include "partials/blog-card.vto" { post, paginationItem: true, showBookmark: true } }}
       {{ /for }}
     </div>
-    
+
     <!-- Pagination Controls -->
-    <div id="pagination-controls" class="pagination"></div>
+    <nav aria-label="Blog pagination">
+      <div id="pagination-controls" class="pagination"></div>
+    </nav>
   </section>
 </div>
 

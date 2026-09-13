@@ -5,12 +5,13 @@ description: The page you're looking for doesn't exist
 ---
 
 <div class="container">
-  <section class="section">
-    <div class="terminal-404">
-      <div class="terminal-header">
-        <span class="terminal-dot red"></span>
-        <span class="terminal-dot yellow"></span>
-        <span class="terminal-dot green"></span>
+  <section class="section" aria-labelledby="notfound-title">
+    <h1 id="notfound-title" class="visually-hidden">Page not found</h1>
+    <div class="terminal-404" role="presentation">
+      <div class="terminal-header" aria-hidden="true">
+        <span class="terminal-dot red" aria-hidden="true"></span>
+        <span class="terminal-dot yellow" aria-hidden="true"></span>
+        <span class="terminal-dot green" aria-hidden="true"></span>
         <span class="terminal-title">bash</span>
       </div>
       <div class="terminal-body">
@@ -27,9 +28,10 @@ description: The page you're looking for doesn't exist
         <p><span class="terminal-prompt">$</span> <span class="terminal-cursor">_</span></p>
       </div>
     </div>
-    
+
     <div style="text-align: center; margin-top: 2rem;">
-      <a href="/" class="resume-button">← cd /home</a>
+      <a href="/"
+        class="resume-button"><span aria-hidden="true">←</span> cd /home</a>
     </div>
   </section>
 </div>

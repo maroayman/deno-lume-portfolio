@@ -244,8 +244,8 @@ permissions and ownership.
 
 ## Up Next: Linux File Management
 
-Now that you understand **permissions and ownership**, you're ready to learn
-how to work with files and directories.
+Now that you understand **permissions and ownership**, you're ready to learn how
+to work with files and directories.
 
 In the next article, we'll cover:
 

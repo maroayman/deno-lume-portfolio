@@ -202,6 +202,7 @@ optimization (multi-stage builds).
 ```bash
 docker run hello-world
 ```
+
 Confirms Docker is installed and working.
 
 2. **Run an Nginx Web Server**
@@ -210,7 +211,7 @@ Confirms Docker is installed and working.
 docker run -d -p 8080:80 nginx
 ```
 
-   ✅ Open [`http://localhost:8080`](http://localhost:8080) in your browser.
+✅ Open [`http://localhost:8080`](http://localhost:8080) in your browser.
 
 3. **List, Stop, and Remove Containers**
 
@@ -233,13 +234,14 @@ docker rmi <image_id>
 multi-container apps.
 
 1. **Build a Custom Python App Image**\
-`app.py`
+   `app.py`
 
 ```bash
 print("Hello from Dockerized Python!")
 ```
 
 `Dockerfile`
+
 ```bash
 FROM python:3.9-slim
 COPY app.py /app/app.py
@@ -262,25 +264,26 @@ docker exec -it <container_id> ls /data
 ```
 
 3. **Run Multi-Container App with Docker Compose**\
-`docker-compose.yml`
+   `docker-compose.yml`
+
 ```bash
-   version: '3'
-   services:
-     web:
-       image: nginx
-       ports:
-         - "8080:80"
-     db:
-       image: mysql:5.7
-       environment:
-         MYSQL_ROOT_PASSWORD: root
-   ```
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+```
 
-   Run:
+Run:
 
-   ```bash
-   docker-compose up -d
-   ```
+```bash
+docker-compose up -d
+```
 
 ## Advanced Labs 🧠
 
@@ -290,37 +293,37 @@ docker exec -it <container_id> ls /data
    `main.go`
 
 ```go
-   package main
-   import "fmt"
-   func main() {
-       fmt.Println("Hello from Go!")
-   }
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello from Go!")
+}
 ```
 
-   `Dockerfile`
+`Dockerfile`
 
-   ```dockerfile
-   # Build stage
-   FROM golang:1.20 AS builder
-   WORKDIR /app
-   COPY . .
-   RUN go build -o myapp
+```dockerfile
+# Build stage
+FROM golang:1.20 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o myapp
 
-   # Final stage
-   FROM alpine:latest
-   COPY --from=builder /app/myapp /usr/local/bin/myapp
-   CMD ["myapp"]
-   ```
+# Final stage
+FROM alpine:latest
+COPY --from=builder /app/myapp /usr/local/bin/myapp
+CMD ["myapp"]
+```
 
-   Build & Run:
+Build & Run:
 
-   ```bash
-   docker build -t my-go-app .
-   docker run --rm my-go-app
-   ```
+```bash
+docker build -t my-go-app .
+docker run --rm my-go-app
+```
 
-   ✅ Notice the image is small because it only contains the binary, not the
-   whole Go toolchain.
+✅ Notice the image is small because it only contains the binary, not the whole
+Go toolchain.
 
 2. **Scan Image for Vulnerabilities**
 
@@ -328,7 +331,7 @@ docker exec -it <container_id> ls /data
 docker scout cves my-go-app
 ```
 
-   ✅ Identifies security issues.
+✅ Identifies security issues.
 
 3. **CI/CD Pipeline Exercise**
 

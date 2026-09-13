@@ -1,29 +1,57 @@
-  <script>
-    // Register Service Worker with update handling (only in production)
-    if ('serviceWorker' in navigator && !location.hostname.match(/^(localhost|127\.0\.0\.1)$/)) {
-      window.addEventListener('load', async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('ServiceWorker registered:', registration.scope);
+<div id="sw-toast" role="status" aria-live="polite" aria-atomic="true"
+  style="display:none; position:fixed; bottom:1rem; left:50%; transform:translateX(-50%); background:var(--color-bg-elevated); border:1px solid var(--color-border); padding:0.75rem 1rem; border-radius:var(--radius); box-shadow:0 4px 16px rgba(0,0,0,0.12); z-index:999; gap:0.5rem; align-items:center;">
+  <span>New version available</span>
+  <button id="sw-toast-reload" class="resume-button"
+    style="margin-left:0.5rem; padding:0.25rem 0.6rem;">Reload</button>
+  <button id="sw-toast-dismiss" aria-label="Dismiss"
+    style="background:none; border:none; cursor:pointer; padding:0.25rem; margin-left:0.25rem;">✕</button>
+</div>
+<script>
+// Register Service Worker with update handling (only in production)
+if (
+  "serviceWorker" in navigator &&
+  !location.hostname.match(/^(localhost|127\.0\.0\.1)$/)
+) {
+  window.addEventListener("load", async () => {
+    try {
+      const registration = await navigator.serviceWorker.register("/sw.js");
+      console.log("ServiceWorker registered:", registration.scope);
 
-          // Check for updates
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // New content available, show refresh prompt
-                  if (confirm('New version available! Reload to update?')) {
-                    newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    window.location.reload();
-                  }
-                }
-              });
+      const toast = document.getElementById("sw-toast");
+      const reloadBtn = document.getElementById("sw-toast-reload");
+      const dismissBtn = document.getElementById("sw-toast-dismiss");
+      let newWorker = null;
+      const showToast = (worker) => {
+        newWorker = worker;
+        if (toast) toast.style.display = "flex";
+      };
+      dismissBtn?.addEventListener("click", () => {
+        if (toast) toast.style.display = "none";
+      });
+      reloadBtn?.addEventListener("click", () => {
+        if (newWorker) newWorker.postMessage({ type: "SKIP_WAITING" });
+        window.location.reload();
+      });
+      // Check for updates
+      registration.addEventListener("updatefound", () => {
+        const worker = registration.installing;
+        if (worker) {
+          worker.addEventListener("statechange", () => {
+            if (
+              worker.state === "installed" && navigator.serviceWorker.controller
+            ) {
+              showToast(worker);
             }
           });
-        } catch (error) {
-          console.log('ServiceWorker registration failed:', error);
         }
       });
+      // If an update is already waiting (e.g. installed while page was open)
+      if (registration.waiting && navigator.serviceWorker.controller) {
+        showToast(registration.waiting);
+      }
+    } catch (error) {
+      console.log("ServiceWorker registration failed:", error);
     }
-  </script>
+  });
+}
+</script>

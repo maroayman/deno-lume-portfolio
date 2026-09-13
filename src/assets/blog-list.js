@@ -53,17 +53,27 @@
     m.addEventListener("keydown", (t) => {
       var a;
       const e = P();
-      t.key === "ArrowDown"
-        ? (t.preventDefault(), F(d + 1))
-        : t.key === "ArrowUp"
-        ? (t.preventDefault(), F(d - 1))
-        : t.key === "Enter" && d >= 0
-        ? (t.preventDefault(), (a = e[d]) == null || a.click())
-        : t.key === "Escape" &&
-          (m.classList.remove("open"),
-            h.setAttribute("aria-expanded", "false"),
-            h.focus(),
-            d = -1);
+      if (t.key === "ArrowDown") {
+        t.preventDefault();
+        F(d + 1);
+      } else if (t.key === "ArrowUp") {
+        t.preventDefault();
+        F(d - 1);
+      } else if (t.key === "Home") {
+        t.preventDefault();
+        F(0);
+      } else if (t.key === "End") {
+        t.preventDefault();
+        F(e.length - 1);
+      } else if (t.key === "Enter" && d >= 0) {
+        t.preventDefault();
+        (a = e[d]) == null || a.click();
+      } else if (t.key === "Escape") {
+        m.classList.remove("open");
+        h.setAttribute("aria-expanded", "false");
+        h.focus();
+        d = -1;
+      }
     }),
     y && y.addEventListener("input", () => {
       const t = y.value.toLowerCase().trim();
@@ -117,7 +127,9 @@
   function W() {
     S.forEach((t) => {
       const e = t.dataset.tag;
-      t.classList.toggle("selected", s.includes(e));
+      const sel = s.includes(e);
+      t.classList.toggle("selected", sel);
+      t.setAttribute("aria-selected", String(sel));
     });
   }
   function X() {
@@ -180,7 +192,10 @@
       return s = t.tags,
         i = t.view,
         f(),
-        E.forEach((e) => e.classList.toggle("active", e.dataset.view === i)),
+        E.forEach((e) => {
+          e.classList.toggle("active", e.dataset.view === i);
+          e.setAttribute("aria-pressed", String(e.dataset.view === i));
+        }),
         L.style.display = i === "all" ? "" : "none",
         !0;
     }
@@ -191,7 +206,10 @@
           i = e.view || "all",
           s = e.tags || [],
           c.value = e.search || "",
-          E.forEach((a) => a.classList.toggle("active", a.dataset.view === i)),
+          E.forEach((a) => {
+            a.classList.toggle("active", a.dataset.view === i);
+            a.setAttribute("aria-pressed", String(a.dataset.view === i));
+          }),
           f(),
           L.style.display = i === "all" ? "" : "none",
           e.scrollY > 0 && setTimeout(() => window.scrollTo(0, e.scrollY), 50),
@@ -227,7 +245,12 @@
     document.querySelectorAll(".bookmark-btn").forEach((e) => {
       const a = e.dataset.url.replace(/\/$/, ""), l = t.includes(a);
       e.classList.toggle("bookmarked", l),
-        e.title = l ? "Remove bookmark" : "Bookmark";
+        e.setAttribute("aria-pressed", String(l)),
+        e.setAttribute(
+          "aria-label",
+          l ? "Remove bookmark" : "Bookmark article",
+        ),
+        e.title = l ? "Remove bookmark" : "Bookmark article";
     });
   }
   function Y() {
@@ -296,6 +319,9 @@
       return O && lt;
     });
   }
+  function shouldSmooth() {
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
   function st() {
     const t = Math.ceil(T.length / 6);
     if (w.innerHTML = "", t <= 1) {
@@ -306,12 +332,16 @@
       const o = document.createElement("a");
       o.className = "tech-tag pagination-btn",
         o.textContent = "\u2190 Back",
+        o.setAttribute("aria-label", "Previous page"),
         o.href = "#",
         o.onclick = (n) => {
           n.preventDefault(),
             r--,
             I(),
-            scrollTo({ top: 0, behavior: "smooth" });
+            scrollTo({
+              top: 0,
+              behavior: shouldSmooth() ? "smooth" : "instant",
+            });
         },
         w.appendChild(o);
     }
@@ -324,12 +354,17 @@
         o === r ? " pagination-active" : ""
       }`,
         n.textContent = o,
+        n.setAttribute("aria-label", "Page " + o),
+        o === r && n.setAttribute("aria-current", "page"),
         o !== r && (n.href = "#",
           n.onclick = (p) => {
             p.preventDefault(),
               r = o,
               I(),
-              scrollTo({ top: 0, behavior: "smooth" });
+              scrollTo({
+                top: 0,
+                behavior: shouldSmooth() ? "smooth" : "instant",
+              });
           }),
         w.appendChild(n);
     }
@@ -337,12 +372,16 @@
       const o = document.createElement("a");
       o.className = "tech-tag pagination-btn",
         o.textContent = "Next \u2192",
+        o.setAttribute("aria-label", "Next page"),
         o.href = "#",
         o.onclick = (n) => {
           n.preventDefault(),
             r++,
             I(),
-            scrollTo({ top: 0, behavior: "smooth" });
+            scrollTo({
+              top: 0,
+              behavior: shouldSmooth() ? "smooth" : "instant",
+            });
         },
         w.appendChild(o);
     }
@@ -442,8 +481,12 @@
     E.forEach((t) => {
       t.addEventListener("click", () => {
         i = t.dataset.view,
-          E.forEach((e) => e.classList.remove("active")),
+          E.forEach((e) => {
+            e.classList.remove("active");
+            e.setAttribute("aria-pressed", "false");
+          }),
           t.classList.add("active"),
+          t.setAttribute("aria-pressed", "true"),
           L.style.display = i === "all" ? "" : "none",
           A(),
           g();
@@ -466,15 +509,20 @@
           e.preventDefault(), e.stopPropagation();
           const a = t.dataset.tag.toLowerCase();
           i = "all",
-            E.forEach((l) =>
-              l.classList.toggle("active", l.dataset.view === "all")
-            ),
+            E.forEach((l) => {
+              const isAll = l.dataset.view === "all";
+              l.classList.toggle("active", isAll);
+              l.setAttribute("aria-pressed", String(isAll));
+            }),
             L.style.display = "",
             e.ctrlKey || e.metaKey ? s.includes(a) || s.push(a) : s = [a],
             f(),
             g(),
             document.querySelector(".blog-search-container").scrollIntoView({
-              behavior: "smooth",
+              behavior:
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                  ? "instant"
+                  : "smooth",
             });
         });
     }),
@@ -483,7 +531,10 @@
       s = t.tags,
         i = t.view,
         f(),
-        E.forEach((e) => e.classList.toggle("active", e.dataset.view === i)),
+        E.forEach((e) => {
+          e.classList.toggle("active", e.dataset.view === i);
+          e.setAttribute("aria-pressed", String(e.dataset.view === i));
+        }),
         L.style.display = i === "all" ? "" : "none",
         g();
     }),

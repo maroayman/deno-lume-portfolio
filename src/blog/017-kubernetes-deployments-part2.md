@@ -5,45 +5,44 @@ description: Deep dive into Rolling Updates, Blue/Green, Canary
   deployments, rollback mechanisms, and production-grade Kubernetes
   configuration.
 tags:
-- Kubernetes
-- Cloud-Native
-- DevOps
-- CI/CD
+  - Kubernetes
+  - Cloud-Native
+  - DevOps
+  - CI/CD
 title: "Kubernetes Deployments Part 2: Update Strategies &
   Production Practices"
 ---
 
-In [Part 1](/blog/016-kubernetes-deployments-part1), we covered Deployment fundamentals, scaling, and
-self-healing.
+In [Part 1](/blog/016-kubernetes-deployments-part1), we covered Deployment
+fundamentals, scaling, and self-healing.
 
 In Part 2, we go deeper into:
 
--   Rolling Updates
--   Rollbacks
--   Blue/Green Deployments
--   Canary Deployments
--   Production Best Practices
+- Rolling Updates
+- Rollbacks
+- Blue/Green Deployments
+- Canary Deployments
+- Production Best Practices
 
-------------------------------------------------------------------------
+---
 
 ## Rolling Updates
 
-Rolling Updates allow you to update your application **without
-downtime**.
+Rolling Updates allow you to update your application **without downtime**.
 
 Instead of deleting all old Pods at once, Kubernetes:
 
-1.  Creates new Pods with the new version
-2.  Gradually terminates old Pods
-3.  Maintains availability during the process
+1. Creates new Pods with the new version
+2. Gradually terminates old Pods
+3. Maintains availability during the process
 
 ![Rolling Update Visualization](https://velog.velcdn.com/images/salgu1998/post/a01256b0-5403-4c73-b41a-7cb71b3bae48/image.png)
 
-------------------------------------------------------------------------
+---
 
 ## Rolling Update Configuration
 
-``` yaml
+```yaml
 strategy:
   type: RollingUpdate
   rollingUpdate:
@@ -57,44 +56,46 @@ Maximum number of Pods that can be unavailable during the update.
 
 **Example:**
 
-``` yaml
+```yaml
 replicas: 4
 maxUnavailable: 1
 ```
 
-Kubernetes guarantees that **at least 3 Pods will always be available**
-during the update.
+Kubernetes guarantees that **at least 3 Pods will always be available** during
+the update.
 
 **Why it matters:**
 
--   Controls availability
--   Protects against downtime
--   Critical for production systems
--   Important for SLA-based applications
+- Controls availability
+- Protects against downtime
+- Critical for production systems
+- Important for SLA-based applications
 
-For high-availability systems (banking, checkout, auth services), set `maxUnavailable: 0` to ensure **zero downtime rollout**.
+For high-availability systems (banking, checkout, auth services), set
+`maxUnavailable: 0` to ensure **zero downtime rollout**.
 
 ### maxSurge
 
 Maximum extra Pods created above desired replicas.
 
-You can read more about maxSurge and maxUnavailable use cases in the [official docs](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment).
+You can read more about maxSurge and maxUnavailable use cases in the
+[official docs](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment).
 
-------------------------------------------------------------------------
+---
 
 ### Updating an Image Version
 
-``` bash
+```bash
 kubectl set image deployment/web-deployment nginx-container=nginx:1.26
 ```
 
 Watch the rollout:
 
-``` bash
+```bash
 kubectl rollout status deployment/web-deployment
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Rollbacks
 
@@ -102,27 +103,27 @@ If something goes wrong, Kubernetes allows instant rollback.
 
 Check rollout history:
 
-``` bash
+```bash
 kubectl rollout history deployment/web-deployment
 ```
 
 Rollback:
 
-``` bash
+```bash
 kubectl rollout undo deployment/web-deployment
 ```
 
 This restores the previous ReplicaSet.
 
-------------------------------------------------------------------------
+---
 
 ## Blue/Green Deployment
 
 Blue/Green means:
 
--   Blue = current version
--   Green = new version
--   Traffic switches only after validation
+- Blue = current version
+- Green = new version
+- Traffic switches only after validation
 
 Instead of updating Pods gradually, you deploy a separate environment.
 
@@ -130,14 +131,14 @@ Instead of updating Pods gradually, you deploy a separate environment.
 
 ### How It Works
 
-1.  Deploy new version (Green)
-2.  Test internally
-3.  Switch Service selector to Green
-4.  Remove Blue after validation
+1. Deploy new version (Green)
+2. Test internally
+3. Switch Service selector to Green
+4. Remove Blue after validation
 
 This provides zero-downtime and safe testing.
 
-------------------------------------------------------------------------
+---
 
 ## Canary Deployment
 
@@ -145,25 +146,25 @@ Canary releases send traffic to a small subset of users first.
 
 Example:
 
--   90% traffic → old version
--   10% traffic → new version
+- 90% traffic → old version
+- 10% traffic → new version
 
 ![Canary Deployment Diagram](https://docs.rafay.co/learn/gitops/deploy/img/part5/canary.png)
 
 Canary requires:
 
--   Multiple Deployments
--   Traffic splitting (Ingress / Service Mesh)
+- Multiple Deployments
+- Traffic splitting (Ingress / Service Mesh)
 
 Used when you want gradual risk reduction.
 
-------------------------------------------------------------------------
+---
 
 ## Production Best Practices
 
 ### Always Use Probes
 
-``` yaml
+```yaml
 livenessProbe:
   httpGet:
     path: /health
@@ -179,14 +180,14 @@ readinessProbe:
   periodSeconds: 5
 ```
 
--   Liveness → restart unhealthy container
--   Readiness → control traffic routing
+- Liveness → restart unhealthy container
+- Readiness → control traffic routing
 
-------------------------------------------------------------------------
+---
 
 ### Define Resource Limits
 
-``` yaml
+```yaml
 resources:
   requests:
     cpu: "100m"
@@ -198,13 +199,13 @@ resources:
 
 Prevents noisy neighbor problems.
 
-------------------------------------------------------------------------
+---
 
 ### Use Proper Labels & Versioning
 
 Example:
 
-``` yaml
+```yaml
 labels:
   app: web
   version: v2
@@ -212,18 +213,18 @@ labels:
 
 Essential for Blue/Green & Canary strategies.
 
-------------------------------------------------------------------------
+---
 
 ## What You Learned in Part 2
 
--   How Rolling Updates maintain availability
--   How to rollback safely
--   When to use Blue/Green
--   When to use Canary
--   Production-ready configuration tips
+- How Rolling Updates maintain availability
+- How to rollback safely
+- When to use Blue/Green
+- When to use Canary
+- Production-ready configuration tips
 
-------------------------------------------------------------------------
+---
 
-In Part 3, we will explore advanced Deployment topics: - Deployment
-failure scenarios - HPA integration - Pod disruption budgets - Real
-production debugging strategies
+In Part 3, we will explore advanced Deployment topics: - Deployment failure
+scenarios - HPA integration - Pod disruption budgets - Real production debugging
+strategies

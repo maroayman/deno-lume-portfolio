@@ -110,6 +110,7 @@ pwd
 
 ## Up Next: Understanding Permissions
 
-Ready to learn about **file permissions and ownership**? Head to the next article:
+Ready to learn about **file permissions and ownership**? Head to the next
+article:
 
 → [Linux File Permissions](/blog/linux-file-permissions)

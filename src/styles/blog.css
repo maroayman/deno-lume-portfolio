@@ -167,7 +167,7 @@ pre::before {
   padding: 0.45rem 1rem;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  color: var(--color-text-faint);
+  color: var(--color-text-secondary);
   background: var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -209,13 +209,16 @@ pre code {
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 0.25rem 0.5rem;
+  padding: 0.35rem 0.5rem;
+  min-height: 28px;
   cursor: pointer;
   opacity: 0;
   transition: opacity var(--t-fast), color var(--t-fast);
 }
 
-.code-block-wrapper:hover .copy-code-btn {
+.code-block-wrapper:hover .copy-code-btn,
+.code-block-wrapper:focus-within .copy-code-btn,
+.copy-code-btn:focus-visible {
   opacity: 1;
 }
 

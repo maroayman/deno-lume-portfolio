@@ -274,6 +274,7 @@ manager.
 
 ## Up Next: Process Management
 
-Now that you can manage software, let's learn about **managing running programs**:
+Now that you can manage software, let's learn about **managing running
+programs**:
 
 → [Linux Process Management](/blog/008-linux-process-management)

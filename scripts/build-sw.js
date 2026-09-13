@@ -32,9 +32,6 @@ console.log("SW cache version:", CACHE_VERSION);
 const SW_SOURCE = `const CACHE_VERSION = '${CACHE_VERSION}';
 const PRECACHE_ASSETS = [
   '/',
-  '/index.html',
-  '/styles/main.css',
-  '/resume.pdf',
   '/404.html',
 ];
 
@@ -60,6 +57,8 @@ const CACHE_STRATEGIES = {
   },
   pdfs: {
     cacheName: \`pdfs-\${CACHE_VERSION}\`,
+    maxEntries: 5,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
   },
 };
 
@@ -110,13 +109,27 @@ function getStrategy(request) {
   return null;
 }
 
+// Helper: Safe cache.put — Cache API only supports http(s) GET requests.
+// Silently skips chrome-extension:, data:, blob:, etc. instead of throwing
+// an unhandled "Request scheme is unsupported" rejection.
+async function safePut(cache, request, response) {
+  try {
+    if (request.method !== 'GET') return;
+    const url = new URL(request.url);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+    await cache.put(request, response);
+  } catch (e) {
+    // Ignore: unsupported scheme, opaque response, quota exceeded, etc.
+  }
+}
+
 // Helper: Network First strategy
 async function networkFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
+      await safePut(cache, request, networkResponse.clone());
     }
     return networkResponse;
   } catch (error) {
@@ -149,7 +162,7 @@ async function cacheFirst(request, cacheName, maxAge) {
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
+      await safePut(cache, request, networkResponse.clone());
     }
     return networkResponse;
   } catch (error) {
@@ -165,9 +178,9 @@ async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cachedResponse = await cache.match(request);
   
-  const networkPromise = fetch(request).then((networkResponse) => {
+  const networkPromise = fetch(request).then(async (networkResponse) => {
     if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
+      await safePut(cache, request, networkResponse.clone());
     }
     return networkResponse;
   }).catch(() => cachedResponse);

@@ -26,11 +26,30 @@ site.hooks.addMarkdownItPlugin(markdownTabs);
 
 // Attach data-lang attribute to fenced code blocks so CSS can show the
 // language name in the pre::before bar instead of "· · ·".
+type FenceRenderer = {
+  renderToken: (tokens: unknown, idx: number, options: unknown) => string;
+  renderAttrs: (token: unknown) => string;
+};
+type FenceFn = (
+  tokens: { info: string }[],
+  idx: number,
+  options: unknown,
+  env: unknown,
+  self: FenceRenderer,
+) => string;
+// deno-lint-ignore no-explicit-any
 site.hooks.addMarkdownItPlugin((md: any) => {
-  const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules) ??
-    ((tokens: any, idx: any, options: any, env: any, self: any) =>
+  const rules = md.renderer.rules;
+  const defaultFence: FenceFn = rules.fence?.bind(rules) ??
+    ((tokens, idx, options, _env, self) =>
       self.renderToken(tokens, idx, options));
-  md.renderer.rules.fence = function (tokens: any, idx: any, options: any, env: any, self: any) {
+  rules.fence = function (
+    tokens: { info: string }[],
+    idx: number,
+    options: unknown,
+    env: unknown,
+    self: FenceRenderer,
+  ) {
     const token = tokens[idx];
     const lang = token.info.trim().split(/\s+/)[0];
     const html = defaultFence(tokens, idx, options, env, self);
@@ -39,14 +58,13 @@ site.hooks.addMarkdownItPlugin((md: any) => {
   };
 });
 site.use(date());
-site.use(slugifyUrls());
 site.use(googleFonts({
   cssFile: "styles/main.css",
   placeholder: "/* google-fonts */",
   subsets: ["latin"],
-  fonts:
-    "https://fonts.google.com/share?selection.family=Inter:wght@100..900",
+  fonts: "https://fonts.google.com/share?selection.family=Inter:wght@100..900",
 }));
+site.use(slugifyUrls());
 
 /**
  * Custom "slug" filter — available in all Vento templates as `|> slug`.
@@ -109,49 +127,63 @@ site.preprocess([".md"], (pages) => {
         .replace(/^[-*_]{3,}\s*$/gm, "") // horizontal rules
         .replace(/[*_~`#>|]/g, ""); // remaining Markdown punctuation
 
-      const words = plain.trim().split(/\s+/).filter((w) => w.length > 0).length;
+      const words = plain.trim().split(/\s+/).filter((w) =>
+        w.length > 0
+      ).length;
       page.data.readingTime = Math.max(1, Math.ceil(words / 200));
     }
   }
 });
 
-site.use(inline());
+// deno-lint-ignore lume/plugin-order
 site.use(lightningcss());
+// deno-lint-ignore lume/plugin-order
 site.use(purgecss({
   options: {
     // Classes added dynamically by JS (not present in static HTML) must be
     // safelisted so PurgeCSS does not strip the rules that reference them.
     safelist: {
       standard: [
-        /^dark-mode$/,      // theme toggle — on <body> and <html>
-        /^visible$/,        // back-to-top, scroll-triggered visibility
-        /^read$/,           // blog card visited state (localStorage)
-        /^code-tab/,        // :::tabs component (code-tab-btn, code-tab-pane, active)
-        /^active$/,         // filter tags, view tabs, toc links, pagination
-        /^open$/,           // tag dropdown, ToC
-        /^copied$/,         // copy-code button feedback
-        /^expanded$/,       // show-more/show-less toggle
-        /^bookmarked$/,     // blog card bookmark state
-        /^focused$/,        // dropdown keyboard navigation
-        /^selected$/,       // dropdown items
+        /^dark-mode$/, // theme toggle — on <body> and <html>
+        /^visible$/, // back-to-top, scroll-triggered visibility
+        /^read$/, // blog card visited state (localStorage)
+        /^code-tab/, // :::tabs component (code-tab-btn, code-tab-pane, active)
+        /^active$/, // filter tags, view tabs, toc links, pagination
+        /^open$/, // tag dropdown, ToC
+        /^copied$/, // copy-code button feedback
+        /^expanded$/, // show-more/show-less toggle
+        /^bookmarked$/, // blog card bookmark state
+        /^focused$/, // dropdown keyboard navigation
+        /^selected$/, // dropdown items
         /^pagination-active$/, // active page button in pagination
-        /^toc-active$/,     // active heading in ToC
-        /^toc-h2$/,         // ToC item injected by JS
-        /^toc-h3$/,         // ToC item injected by JS
-        /^weight-[1-5]$/,   // tag frequency weight classes
+        /^toc-active$/, // active heading in ToC
+        /^toc-h2$/, // ToC item injected by JS
+        /^toc-h3$/, // ToC item injected by JS
+        /^weight-[1-5]$/, // tag frequency weight classes
+        /^mark$/, // search highlight injected by JS
+        /^read-inline$/, // read indicator
+        /^scrolling$/, // back-to-top visual feedback
+        /^show-more-item$/, // show-more toggle
+        /^suggest-tag$/, // suggested tags in no-results
+        /^code-block-wrapper$/, // code block wrapper injected by JS
+        /^copy-code-btn$/, // copy button injected by JS
+        /^share-/, // share button variants
       ],
     },
   },
 }));
+site.use(inline());
 
-site.use(sitemap());
+site.use(sitemap({
+  query: "url!=/search-index.json",
+}));
 
 // RSS feed — generates /feed.rss from all pages with type=post
 site.use(feed({
   output: "/feed.rss",
   query: "type=post",
   sort: "date=desc",
-  limit: 20,
+  limit: 10,
   info: {
     title: "Marwan Ayman Shawky — Blog",
     description: "Cloud & DevOps Engineering articles by Marwan Ayman Shawky",
@@ -165,7 +197,6 @@ site.use(feed({
     description: "=description",
     published: "=date",
     content: "=children",
-    lang: "=lang",
     image: "=cover",
   },
 }));

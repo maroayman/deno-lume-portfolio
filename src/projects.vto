@@ -7,11 +7,11 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
 <div class="container">
   <section class="section">
     <p class="back-link">
-      <a href="/">← Back</a>
+      <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
-    
-    <h2 class="page-title">Projects</h2>
-    
+
+    <h1 class="page-title">Projects</h1>
+
     <div class="projects-grid" id="pagination-container">
       {{ for project of projects }}
       <div class="card project-card" data-pagination-item>
@@ -29,7 +29,7 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         <p class="project-summary">{{ project.summary }}</p>
         
         {{ if project.highlights }}
-        <ul class="dash-list project-highlights">
+        <ul class="dash-list project-highlights" id="proj-{{ project.title |> slug }}">
           {{ for i, highlight of project.highlights }}
           {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
           {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
@@ -37,7 +37,7 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
           {{ /for }}
         </ul>
         {{ if project.highlights.length > 4 }}
-        <button class="show-more-btn" onclick="toggleShowMore(this)">
+        <button class="show-more-btn" onclick="toggleShowMore(this)" aria-expanded="false" aria-controls="proj-{{ project.title |> slug }}">
           Show more ({{ project.highlights.length - 4 }})
         </button>
         {{ /if }}

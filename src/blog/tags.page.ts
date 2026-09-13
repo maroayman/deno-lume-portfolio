@@ -31,7 +31,8 @@ export default function* (
     yield {
       url: `/blog/tags/${slug(tag)}/`,
       title: `Posts tagged "${tag}" — Marwan Ayman Shawky`,
-      description: `All articles tagged with "${tag}" on Marwan Ayman Shawky's blog.`,
+      description:
+        `All articles tagged with "${tag}" on Marwan Ayman Shawky's blog.`,
       tag,
       posts,
     };

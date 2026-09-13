@@ -1,3 +1,7 @@
+---
+url: /search-index.json
+layout: false
+---
 [
 {{ for index, post of search.pages("type=post", "date=desc") }}{{ if index }},{{ /if }}
   {{ set postDate = post.date |> date('DATE') }}

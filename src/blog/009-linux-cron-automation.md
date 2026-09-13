@@ -118,11 +118,11 @@ can use **timers**.
 
 ### Beginner
 
-1. Schedule a job with `at` that writes "Take a break!" into
-   `/tmp/reminder.log` after 1 minute.
+1. Schedule a job with `at` that writes "Take a break!" into `/tmp/reminder.log`
+   after 1 minute.
 
-2. Create a cron job that runs every 5 minutes and writes the current date
-   into `/tmp/date.log`.
+2. Create a cron job that runs every 5 minutes and writes the current date into
+   `/tmp/date.log`.
 
 ### Intermediate
 
@@ -136,8 +136,8 @@ can use **timers**.
 5. Create a systemd timer that runs `echo "Systemd Rocks"` into
    `/tmp/systemd.log` every hour.
 
-6. Compare the execution of a cron job vs. a systemd timer — which one
-   provides better logging?
+6. Compare the execution of a cron job vs. a systemd timer — which one provides
+   better logging?
 
 ---
 

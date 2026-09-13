@@ -7,11 +7,11 @@ description: DevOps training and internships focused on cloud automation
 <div class="container">
   <section class="section">
     <p class="back-link">
-      <a href="/">← Back</a>
+      <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
-    
-    <h2 class="page-title">Experience</h2>
-    
+
+    <h1 class="page-title">Experience</h1>
+
     <div class="experience-list" id="pagination-container">
       {{ for index, job of experience }}
       <div class="experience-item" data-pagination-item>
@@ -29,7 +29,7 @@ description: DevOps training and internships focused on cloud automation
         
         {{ if job.responsibilities }}
         <p class="responsibilities-title">Key Responsibilities:</p>
-        <ul class="dash-list responsibilities-list">
+        <ul class="dash-list responsibilities-list" id="resp-{{ index }}">
           {{ for i, responsibility of job.responsibilities }}
           {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
           {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
@@ -37,7 +37,7 @@ description: DevOps training and internships focused on cloud automation
           {{ /for }}
         </ul>
         {{ if job.responsibilities.length > 4 }}
-        <button class="show-more-btn" onclick="toggleShowMore(this)">
+        <button class="show-more-btn" onclick="toggleShowMore(this)" aria-expanded="false" aria-controls="resp-{{ index }}">
           Show more ({{ job.responsibilities.length - 4 }})
         </button>
         {{ /if }}
