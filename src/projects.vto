@@ -10,7 +10,11 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
       <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
 
-    <h1 class="page-title">Projects</h1>
+    <div class="shead">
+      <h1 class="page-title">Projects</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">المشاريع</span>
+    </div>
+    <p
+      class="page-sub">Infrastructure I've built, broken, and written down afterwards.</p>
 
     <div class="projects-grid" id="pagination-container">
       {{ for project of projects }}
@@ -29,18 +33,11 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         <p class="project-summary">{{ project.summary }}</p>
         
         {{ if project.highlights }}
-        <ul class="dash-list project-highlights" id="proj-{{ project.title |> slug }}">
-          {{ for i, highlight of project.highlights }}
-          {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
-          {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
-          <li class="{{ hiddenClass }}" style="{{ hiddenStyle }}">{{ highlight }}</li>
+        <ul class="dash-list project-highlights">
+          {{ for highlight of project.highlights }}
+          <li>{{ highlight }}</li>
           {{ /for }}
         </ul>
-        {{ if project.highlights.length > 4 }}
-        <button class="show-more-btn" onclick="toggleShowMore(this)" aria-expanded="false" aria-controls="proj-{{ project.title |> slug }}">
-          Show more ({{ project.highlights.length - 4 }})
-        </button>
-        {{ /if }}
         {{ /if }}
         
         <div class="tech-tags">

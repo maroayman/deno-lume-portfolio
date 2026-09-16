@@ -1,5 +1,5 @@
 ---
-cover: https://iili.io/qKvajft.jpg
+cover: /covers/kubernetes-deployments-part2.jpg
 date: 2026-02-24
 description: Deep dive into Rolling Updates, Blue/Green, Canary
   deployments, rollback mechanisms, and production-grade Kubernetes

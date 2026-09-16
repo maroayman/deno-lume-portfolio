@@ -4,156 +4,134 @@ title: Marwan Ayman Shawky - Cloud & DevOps Engineer
 description: Cloud & DevOps Engineer passionate about building scalable infrastructure and automating everything
 ---
 
-<div class="container">
-  <section class="section">
-    <h1 class="page-title visually-hidden">Marwan Ayman Shawky</h1>
-    <!-- About -->
-    <div style="margin-bottom: calc(var(--spacing) * 2);">
-      <h2
-        style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">About</h2>
-      <p style="margin-bottom: 1rem;">
-        Cloud & DevOps Engineer with hands-on experience in cloud infrastructure, containerization, and CI/CD pipelines. I love automating workflows and building scalable systems.
-      </p>
-      <p style="margin-bottom: 1rem;">
-        My focus areas include GitOps pipelines with built-in guardrails, Prometheus + Grafana monitoring bundles, and infrastructure automation across AWS, Azure, and GCP using Terraform, Ansible, and Helm.
-      </p>
-      <p style="margin-bottom: 0;">
-        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
-          class="resume-button">View Resume <span aria-hidden="true">→</span><span class="visually-hidden"> (opens in new tab)</span></a>
-      </p>
+<section class="hero">
+  <div class="lightwash" aria-hidden="true">
+    <svg preserveAspectRatio="none" viewBox="0 0 900 620">
+      <rect width="900" height="620" fill="url(#mash)" />
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="screen" aria-hidden="true">
+      <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 224 340">
+        <rect width="224" height="340" fill="url(#mash)" />
+      </svg>
     </div>
-
-    <!-- Tech Stack -->
-    <div class="stack-row">
-      <span class="stack-label">Stack</span>
-      <div class="stack-carousel">
-        <div class="tech-tags">
-          {{ for group of stack }}
-          {{ for item of group.items }}
-          <span class="tech-tag">{{ item }}</span>
-          {{ /for }}
-          {{ /for }}
-        </div>
+    <div class="nameplate">
+      <p class="name-ar" dir="rtl" lang="ar">مروان أيمن شوقي</p>
+      <h1 class="name-lat">Marwan<br>Ayman</h1>
+      <p
+        class="role">Cloud &amp; DevOps engineer. I keep other people's systems boring on purpose.</p>
+      <div class="place">
+        <span class="ar" dir="rtl" lang="ar">القاهرة، مصر</span>
+        <span>Cairo, Egypt</span>
+        <span class="coord">30.0444° N, 31.2357° E</span>
+        <span>Open to remote</span>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Main Section Links -->
-    <div class="section-links">
-      <a href="/projects" class="section-link">
-        <div>
-          <strong>Projects</strong>
-          <span>Cloud & DevOps projects showcasing infrastructure automation.</span>
-        </div>
+<section class="about">
+  <div class="wrap">
+    <div class="shead">
+      <h2>About</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">نبذة</span>
+    </div>
+    <div class="about-cols">
+      <div>
+        <p
+          class="lede">I build the unglamorous half of the stack: pipelines that fail loudly and roll back quietly, alerts that wake a human only when a human is actually needed, and infrastructure that lives in files instead of in somebody's memory.</p>
+      </div>
+      <div>
+        <p>Most of my work has been on-premises — Proxmox, HA Kubernetes, Gitea, Flux — where there's no managed control plane to hide behind and every failure is yours to explain. The AWS and GCP work came afterwards, and the on-prem years are the reason I trust it.</p>
+        <p>Currently in Cairo, working with teams anywhere. <em>Read the postmortems before the résumé.</em></p>
+        <p style="margin-top: 1.1em;">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+            class="resume-button">View Resume</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stack" style="border-bottom: 1px solid var(--line);">
+  <div class="wrap">
+    <div class="shead">
+      <h2>Stack</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الأدوات</span>
+    </div>
+    <div class="bands">
+      {{ for group of stack }}
+      <div class="band"><div class="b-label">{{ group.name }}</div><ul>{{ for item of group.items }}<li>{{ item }}</li>{{ /for }}</ul></div>
+      {{ /for }}
+    </div>
+  </div>
+</section>
+
+<section class="windows">
+  <div class="wrap">
+    <div class="shead">
+      <h2>Look through</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">المشربية</span>
+    </div>
+    <div class="grid">
+      <a class="cell" href="/projects">
+        <span class="c-ar" dir="rtl" lang="ar">المشاريع</span>
+        <h3>Projects</h3>
+        <p>Infrastructure I've built, broken, and written down afterwards.</p>
+        <span class="go">Open</span>
       </a>
-
-      <a href="/experience" class="section-link">
-        <div>
-          <strong>Experience</strong>
-          <span>DevOps engineering and cloud automation.</span>
-        </div>
+      <a class="cell" href="/experience">
+        <span class="c-ar" dir="rtl" lang="ar">الخبرة</span>
+        <h3>Experience</h3>
+        <p>Where the on-prem lessons came from.</p>
+        <span class="go">Open</span>
       </a>
-
-      <a href="/certifications" class="section-link">
-        <div>
-          <strong>Certifications</strong>
-          <span>AWS, Linux Foundation, and Huawei cloud certifications.</span>
-        </div>
+      <a class="cell" href="/certifications">
+        <span class="c-ar" dir="rtl" lang="ar">الشهادات</span>
+        <h3>Certifications</h3>
+        <p>AWS, Linux Foundation, Huawei.</p>
+        <span class="go">Open</span>
       </a>
-
-      <a href="/blog" class="section-link">
-        <div>
-          <strong>Blog</strong>
-          <span>Technical articles about cloud, DevOps, and infrastructure.</span>
-        </div>
+      <a class="cell" href="/blog">
+        <span class="c-ar" dir="rtl" lang="ar">المدونة</span>
+        <h3>Blog</h3>
+        <p>Terminal notes, cleaned up enough to be useful to someone else.</p>
+        <span class="go">Open</span>
       </a>
-
-      <a href="/uses" class="section-link">
-        <div>
-          <strong>Uses</strong>
-          <span>Tools, gear, and software I use daily.</span>
-        </div>
+      <a class="cell" href="/uses">
+        <span class="c-ar" dir="rtl" lang="ar">عُدَّتي</span>
+        <h3>Uses</h3>
+        <p>Machine, shell, and everything running on it.</p>
+        <span class="go">Open</span>
       </a>
     </div>
+  </div>
+</section>
 
-    <!-- Social Links -->
-    <div class="contact-box">
+<section style="border-bottom: none;">
+  <div class="wrap">
+    <div class="shead">
+      <h2>Elsewhere</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">تواصل</span>
+    </div>
+    <div class="contact-box" style="margin-top: 0;">
       <div class="contact-group">
         <span class="contact-label">Connect</span>
         <div class="contact-items">
           <a href="https://github.com/maroayman" target="_blank"
-            rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="currentColor" width="20" height="20">
-              <path
-                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            <span>GitHub</span>
-          </a>
+            rel="noopener noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/maroayman" target="_blank"
-            rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="currentColor" width="20" height="20">
-              <path
-                d="M21 21H17V14.25C17 13.19 15.81 12.31 14.75 12.31C13.69 12.31 13 13.19 13 14.25V21H9V9H13V11C13.66 9.93 15.36 9.24 16.5 9.24C19 9.24 21 11.28 21 13.75V21M7 21H3V9H7V21M5 3A2 2 0 0 1 7 5A2 2 0 0 1 5 7A2 2 0 0 1 3 5A2 2 0 0 1 5 3Z" />
-            </svg>
-            <span>LinkedIn</span>
-          </a>
-          <a href="https://linktr.ee/maroayman" target="_blank"
-            rel="noopener noreferrer" aria-label="Linktree (opens in new tab)">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 417 512.238"
-              fill="currentColor" width="20" height="20">
-              <path
-                d="M171.274 344.942h74.09v167.296h-74.09V344.942zM0 173.468h126.068l-89.622-85.44 49.591-50.985 85.439 87.829V0h74.086v124.872L331 37.243l49.552 50.785-89.58 85.24H417v70.502H290.252l90.183 87.629L331 381.192 208.519 258.11 86.037 381.192l-49.591-49.591 90.218-87.631H0v-70.502z" />
-            </svg>
-            <span>Linktree</span>
-          </a>
+            rel="noopener noreferrer">LinkedIn</a>
           <a href="https://gitlab.com/maroayman" target="_blank"
-            rel="noopener noreferrer" aria-label="GitLab (opens in new tab)">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="currentColor" width="20" height="20">
-              <path
-                d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51 1.22 3.78a.84.84 0 0 1-.3.94z" />
-            </svg>
-            <span>GitLab</span>
-          </a>
+            rel="noopener noreferrer">GitLab</a>
         </div>
       </div>
       <div class="contact-group">
         <span class="contact-label">Contact</span>
         <div class="contact-items">
-          <a href="tel:+201122889126" aria-label="Phone +20 112 288 9126">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" width="20"
-              height="20">
-              <path
-                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-            <span>+20 112 288 9126</span>
-          </a>
+          <a href="tel:+201122889126">+20 112 288 9126</a>
           <a href="https://maps.google.com/?q=Cairo+Egypt" target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Location Cairo, Egypt (opens in new tab)">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" width="20"
-              height="20">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span>Cairo, Egypt</span>
-          </a>
-          <a href="mailto:marwanayman.shawky@gmail.com"
-            aria-label="Email marwanayman.shawky@gmail.com">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" width="20"
-              height="20">
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            <span>Email</span>
-          </a>
+            rel="noopener noreferrer">Cairo, Egypt</a>
+          <a href="mailto:marwanayman.shawky@gmail.com">Email</a>
         </div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>

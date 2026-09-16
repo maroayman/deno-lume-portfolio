@@ -6,7 +6,6 @@
   "framework": null,
   "trailingSlash": false,
   "cleanUrls": true,
-  "rewrites": [],
   "redirects": [
     {
       "source": "/github",

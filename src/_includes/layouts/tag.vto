@@ -7,11 +7,13 @@ layout: layouts/base.vto
       <a href="/blog"><span aria-hidden="true">←</span> Back to Blog</a>
     </p>
 
-    <h1 class="page-title">
-      Posts tagged <span class="tech-tag" style="font-size: inherit; vertical-align: middle;">{{ tag }}</span>
-    </h1>
+    <div class="shead">
+      <h1 class="page-title tag-page-title">
+        Posts tagged <span class="tech-tag" style="font-size: inherit; vertical-align: middle;">{{ tag }}</span>
+      </h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">وسم</span>
+    </div>
 
-    <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);"
+    <p class="page-sub"
       role="status" aria-live="polite" aria-atomic="true">
       <span id="tagResultCount">{{ posts.length }}</span> article{{ posts.length === 1 ? "" : "s" }}
     </p>

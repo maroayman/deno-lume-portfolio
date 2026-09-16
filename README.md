@@ -1,13 +1,14 @@
 # Deno Lume Portfolio
 
-A modern, minimal portfolio website built with Deno and Lume static site
-generator.
+A portfolio website built with Deno and the Lume static site generator, styled
+in a Cairo direction: paper/ink tones with red, brass, and teal accents,
+bilingual Latin/Arabic typography, and hairline-ruled sections.
 
 ## Features
 
 ### Core
 
-- 🎨 Clean, minimal design with light/dark mode
+- 🎨 Cairo visual direction with light/dark mode
 - 📱 Fully responsive design
 - ⚡ Fast performance with static site generation
 - 🔍 SEO optimized with sitemap
@@ -30,10 +31,13 @@ generator.
 - 🖼️ Image lightbox
 - 📊 Reading progress bar
 
-### Tag Validation
+### Content Validation
 
-Tags are validated at build time against an approved list in `_config.ts`.
-Unknown tags trigger a warning to maintain consistency.
+Run `deno task check:content` to validate every data collection (`experience`,
+`projects`, `certifications`, `stack`) and every post's frontmatter (title,
+description, date, tags). Blog tags are lowercased automatically at build time,
+and one page per used tag is generated at `/blog/tags/[tag]/` — there is no tag
+registry to maintain.
 
 ## Getting Started
 
@@ -69,8 +73,11 @@ git config core.hooksPath scripts/githooks
 ```
 
 Hooks included:
-- `pre-commit`: blocks `resume.json`, `main.typ`, `_cache/` and runs `deno fmt` + `deno lint` on staged files
-- `commit-msg`: enforces conventional commit prefixes (feat, fix, docs, style, refactor, perf, test, chore)
+
+- `pre-commit`: blocks `resume.json`, `main.typ`, `_cache/` and runs
+  `deno fmt` + `deno lint` on staged files
+- `commit-msg`: enforces conventional commit prefixes (feat, fix, docs, style,
+  refactor, perf, test, chore)
 - `pre-push`: confirms push and runs `deno task check` + `deno task build`
 - `post-merge`: regenerates the service worker with `deno task build:sw`
 
@@ -124,64 +131,78 @@ Your content here...
 
 ### Managing Tags
 
-Add new tags to the `APPROVED_TAGS` array in `_config.ts`:
+Write tags normally in a post's frontmatter — they are lowercased at build time
+and tag pages are generated automatically. No registry to update. Validate
+everything with:
 
-```typescript
-const APPROVED_TAGS = [
-  "linux",
-  "docker",
-  "aws",
-  "automation",
-  // Add your new tags here
-];
+```bash
+deno task check:content
 ```
 
 ### Styling
 
 Styles are split by concern:
 
-- `src/styles/main.css` (core/global)
+- `src/styles/main.css` (tokens, layout, pages, blog list)
 - `src/styles/blog.css` (blog article/code/lightbox)
 - `src/styles/pages.css` (404/uses/toc/responsive/print)
 
-The design system uses CSS custom properties (variables) for easy customization:
+The design system uses CSS custom properties (variables):
 
-- Colors: Update the `:root` variables for your color scheme
-- Typography: Change font families and sizes
-- Spacing: Adjust spacing variables
+- Colors: paper/ink base with red, brass, and teal accents (`--paper`, `--ink`,
+  `--red`, `--brass`, `--teal`), each with a dark-mode override
+- Typography: Archivo (display), IBM Plex Sans Arabic (body), Reem Kufi (Arabic
+  accents)
+- Spacing: sharp corners and hairline rules throughout
 
 ## Project Structure
 
 ```
 deno-lume-portfolio/
-├── _config.ts              # Lume configuration + tag validation
+├── _config.ts              # Lume config: plugins, filters, preprocessors
 ├── deno.json               # Deno configuration and tasks
+├── plugins/
+│   └── markdown-tabs.ts    # :::tabs code-tab block for Markdown
+├── scripts/
+│   ├── audit-css-selectors.ts  # Unused-CSS audit
+│   ├── build-sw.js             # Service worker generator
+│   ├── validate-content.ts     # Frontmatter/YAML validation
+│   └── githooks/               # Shared pre-commit/commit-msg/pre-push/post-merge
+├── docs/
+│   └── ADDING_BLOG.md      # How to write a new post
 ├── src/
-│   ├── _data.ts            # Global site data
-│   ├── _includes/
-│   │   └── layouts/
-│   │       ├── base.vto    # Base layout template
-│   │       └── blog.vto    # Blog post layout
+│   ├── _data.ts            # Global site data (author, nav, social)
 │   ├── _data/
 │   │   ├── experience.yml
 │   │   ├── projects.yml
 │   │   ├── certifications.yml
+│   │   ├── stack.yml
 │   │   └── uses.json
+│   ├── _includes/
+│   │   ├── layouts/
+│   │   │   ├── base.vto    # Masthead, footer, SEO
+│   │   │   ├── blog.vto    # Blog post layout
+│   │   │   └── tag.vto     # Tag listing layout
+│   │   └── partials/       # Cards, theme flash, prefetch, scripts
+│   ├── assets/
+│   │   ├── blog-list.js    # Blog search/filter/pagination
+│   │   └── blog-post.js    # TOC, lightbox, share, reading history
 │   ├── blog/
-│   │   ├── _data.yml       # Blog post defaults
+│   │   ├── tags.page.ts    # One page generated per used tag
 │   │   └── *.md            # Blog posts (Markdown)
 │   ├── styles/
-│   │   ├── main.css        # Core/global styles
+│   │   ├── main.css        # Tokens/layout/pages/blog list
 │   │   ├── blog.css        # Blog-specific styles
 │   │   └── pages.css       # Page-level and responsive styles
 │   ├── index.vto           # Homepage
 │   ├── blog.vto            # Blog listing page
 │   ├── experience.vto      # Experience page
 │   ├── projects.vto        # Projects page
-│   └── certifications.vto  # Certifications page
+│   ├── certifications.vto  # Certifications page
+│   └── uses.vto            # Uses page
 ├── .deno-version           # Pinned Deno runtime version
 ├── deno.lock               # Dependency lockfile
-└── _site/                  # Built site (generated)
+└── _site/                  # Built site (generated, git-ignored)
 ```
 
 ## Technologies Used

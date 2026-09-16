@@ -1,465 +1,555 @@
-// deno-lint-ignore-file no-var no-unused-vars prefer-const no-window no-window-prefix
 (function () {
-  const _ = "blog_pagination_state",
-    c = document.getElementById("blogSearch"),
-    $ = document.getElementById("searchClear"),
-    R = document.querySelectorAll(".quick-tags .filter-tag"),
-    E = document.querySelectorAll(".view-tab"),
-    L = document.getElementById("tagFiltersContainer"),
-    j = document.getElementById("bookmarkCount"),
-    b = [...document.querySelectorAll(".blog-card")],
-    k = document.getElementById("noResults"),
-    N = document.getElementById("pagination-container"),
-    w = document.getElementById("pagination-controls"),
-    m = document.getElementById("tagDropdown"),
-    h = document.getElementById("tagDropdownTrigger"),
-    _rt = document.getElementById("tagDropdownPanel"),
-    y = document.getElementById("tagDropdownSearch"),
-    _ct = document.getElementById("tagDropdownList"),
-    x = document.getElementById("tagDropdownEmpty"),
-    S = document.querySelectorAll(".tag-dropdown-item"),
-    B = document.getElementById("activeFilters"),
-    D = document.getElementById("activeFiltersTags"),
-    q = document.getElementById("clearFilters"),
-    resultCountEl = document.getElementById("resultCount"),
-    resultCountText = document.getElementById("resultCountText");
-  if (!c || !N) return;
-  let s = [], i = "all", r = 1, T = b, d = -1;
-  function P() {
-    return [...S].filter((t) => t.style.display !== "none");
+  const SESSION_KEY = "blog_pagination_state";
+  const BOOKMARK_KEY = "blog_bookmarks";
+  const HISTORY_KEY = "blog_reading_history";
+  const PER_PAGE = 6;
+  const MAX_PAGE_BUTTONS = 10;
+
+  const searchInput = document.getElementById("blogSearch");
+  const searchClearBtn = document.getElementById("searchClear");
+  const quickTagButtons = document.querySelectorAll(".quick-tags .filter-tag");
+  const viewTabs = document.querySelectorAll(".view-tab");
+  const tagFiltersBox = document.getElementById("tagFiltersContainer");
+  const bookmarkCountEl = document.getElementById("bookmarkCount");
+  const allCards = [...document.querySelectorAll(".blog-card")];
+  const noResultsEl = document.getElementById("noResults");
+  const cardsContainer = document.getElementById("pagination-container");
+  const paginationControls = document.getElementById("pagination-controls");
+  const tagDropdown = document.getElementById("tagDropdown");
+  const dropdownTrigger = document.getElementById("tagDropdownTrigger");
+  const dropdownSearch = document.getElementById("tagDropdownSearch");
+  const dropdownEmpty = document.getElementById("tagDropdownEmpty");
+  const dropdownItems = document.querySelectorAll(".tag-dropdown-item");
+  const activeFiltersBox = document.getElementById("activeFilters");
+  const activeFiltersTags = document.getElementById("activeFiltersTags");
+  const clearFiltersBtn = document.getElementById("clearFilters");
+  const resultCountEl = document.getElementById("resultCount");
+  const resultCountText = document.getElementById("resultCountText");
+
+  if (!searchInput || !cardsContainer) return;
+
+  let selectedTags = [];
+  let currentView = "all";
+  let currentPage = 1;
+  let filteredCards = allCards;
+  let focusedItemIndex = -1;
+
+  function getVisibleDropdownItems() {
+    return [...dropdownItems].filter((item) => item.style.display !== "none");
   }
-  function F(t) {
-    var a;
-    const e = P();
-    e.length !== 0 &&
-      (d = Math.max(0, Math.min(t, e.length - 1)),
-        e.forEach((l, o) => {
-          l.classList.toggle("focused", o === d);
-        }),
-        (a = e[d]) == null || a.scrollIntoView({ block: "nearest" }));
+
+  function focusDropdownItem(index) {
+    const visible = getVisibleDropdownItems();
+    if (visible.length === 0) return;
+    focusedItemIndex = Math.max(0, Math.min(index, visible.length - 1));
+    visible.forEach((item, position) => {
+      item.classList.toggle("focused", position === focusedItemIndex);
+    });
+    const focused = visible[focusedItemIndex];
+    if (focused) focused.scrollIntoView({ block: "nearest" });
   }
-  h && m && (h.addEventListener("click", (t) => {
-    t.stopPropagation();
-    const e = m.classList.toggle("open");
-    h.setAttribute("aria-expanded", e),
-      e && y && (d = -1, setTimeout(() => y.focus(), 50));
-  }),
-    document.addEventListener("click", (t) => {
-      m.contains(t.target) ||
-        (m.classList.remove("open"),
-          h.setAttribute("aria-expanded", "false"),
-          d = -1);
-    }),
-    m.addEventListener("keydown", (t) => {
-      var a;
-      const e = P();
-      if (t.key === "ArrowDown") {
-        t.preventDefault();
-        F(d + 1);
-      } else if (t.key === "ArrowUp") {
-        t.preventDefault();
-        F(d - 1);
-      } else if (t.key === "Home") {
-        t.preventDefault();
-        F(0);
-      } else if (t.key === "End") {
-        t.preventDefault();
-        F(e.length - 1);
-      } else if (t.key === "Enter" && d >= 0) {
-        t.preventDefault();
-        (a = e[d]) == null || a.click();
-      } else if (t.key === "Escape") {
-        m.classList.remove("open");
-        h.setAttribute("aria-expanded", "false");
-        h.focus();
-        d = -1;
+
+  if (dropdownTrigger && tagDropdown) {
+    dropdownTrigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = tagDropdown.classList.toggle("open");
+      dropdownTrigger.setAttribute("aria-expanded", isOpen);
+      if (isOpen && dropdownSearch) {
+        focusedItemIndex = -1;
+        setTimeout(() => dropdownSearch.focus(), 50);
       }
-    }),
-    y && y.addEventListener("input", () => {
-      const t = y.value.toLowerCase().trim();
-      let e = 0;
-      S.forEach((a) => {
-        const o = a.dataset.tag.toLowerCase().includes(t);
-        a.style.display = o ? "" : "none",
-          a.classList.remove("focused"),
-          o && e++;
-      }),
-        d = -1,
-        x && (x.style.display = e === 0 ? "block" : "none");
-    }),
-    S.forEach((t) => {
-      t.addEventListener("click", () => {
-        const e = t.dataset.tag;
-        Q(e),
-          m.classList.remove("open"),
-          h.setAttribute("aria-expanded", "false"),
-          y && (y.value = ""),
-          S.forEach((a) => {
-            a.style.display = "", a.classList.remove("focused");
-          }),
-          d = -1,
-          x && (x.style.display = "none");
-      }),
-        t.addEventListener("mouseenter", () => {
-          const e = P();
-          d = e.indexOf(t),
-            e.forEach((a, l) => a.classList.toggle("focused", l === d));
+    });
+    document.addEventListener("click", (event) => {
+      if (!tagDropdown.contains(event.target)) {
+        tagDropdown.classList.remove("open");
+        dropdownTrigger.setAttribute("aria-expanded", "false");
+        focusedItemIndex = -1;
+      }
+    });
+    tagDropdown.addEventListener("keydown", (event) => {
+      const visible = getVisibleDropdownItems();
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        focusDropdownItem(focusedItemIndex + 1);
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        focusDropdownItem(focusedItemIndex - 1);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        focusDropdownItem(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        focusDropdownItem(visible.length - 1);
+      } else if (event.key === "Enter" && focusedItemIndex >= 0) {
+        event.preventDefault();
+        const focused = visible[focusedItemIndex];
+        if (focused) focused.click();
+      } else if (event.key === "Escape") {
+        tagDropdown.classList.remove("open");
+        dropdownTrigger.setAttribute("aria-expanded", "false");
+        dropdownTrigger.focus();
+        focusedItemIndex = -1;
+      }
+    });
+    if (dropdownSearch) {
+      dropdownSearch.addEventListener("input", () => {
+        const query = dropdownSearch.value.toLowerCase().trim();
+        let matchCount = 0;
+        dropdownItems.forEach((item) => {
+          const matches = item.dataset.tag.toLowerCase().includes(query);
+          item.style.display = matches ? "" : "none";
+          item.classList.remove("focused");
+          if (matches) matchCount++;
         });
-    }));
-  function Q(t) {
-    if (t === "all") s = [];
-    else {
-      const e = s.indexOf(t);
-      e > -1 ? s.splice(e, 1) : s.push(t);
+        focusedItemIndex = -1;
+        if (dropdownEmpty) {
+          dropdownEmpty.style.display = matchCount === 0 ? "block" : "none";
+        }
+      });
     }
-    f(), g();
-  }
-  function f() {
-    z(), W(), X(), A();
-  }
-  function z() {
-    R.forEach((t) => {
-      const e = t.dataset.tag,
-        a = e === "all" && s.length === 0 || s.includes(e);
-      t.classList.toggle("active", a), t.setAttribute("aria-pressed", a);
+    dropdownItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        toggleDropdownTag(item.dataset.tag);
+        tagDropdown.classList.remove("open");
+        dropdownTrigger.setAttribute("aria-expanded", "false");
+        if (dropdownSearch) dropdownSearch.value = "";
+        dropdownItems.forEach((entry) => {
+          entry.style.display = "";
+          entry.classList.remove("focused");
+        });
+        focusedItemIndex = -1;
+        if (dropdownEmpty) dropdownEmpty.style.display = "none";
+      });
+      item.addEventListener("mouseenter", () => {
+        const visible = getVisibleDropdownItems();
+        focusedItemIndex = visible.indexOf(item);
+        visible.forEach((entry, position) => {
+          entry.classList.toggle("focused", position === focusedItemIndex);
+        });
+      });
     });
   }
-  function W() {
-    S.forEach((t) => {
-      const e = t.dataset.tag;
-      const sel = s.includes(e);
-      t.classList.toggle("selected", sel);
-      t.setAttribute("aria-selected", String(sel));
+
+  function toggleDropdownTag(tag) {
+    if (tag === "all") {
+      selectedTags = [];
+    } else {
+      const index = selectedTags.indexOf(tag);
+      if (index > -1) selectedTags.splice(index, 1);
+      else selectedTags.push(tag);
+    }
+    refreshFilterUI();
+    resetPageAndRender();
+  }
+
+  function refreshFilterUI() {
+    paintQuickTags();
+    paintDropdownItems();
+    renderActiveFilters();
+    syncHash();
+  }
+
+  function paintQuickTags() {
+    quickTagButtons.forEach((button) => {
+      const tag = button.dataset.tag;
+      const isActive = (tag === "all" && selectedTags.length === 0) ||
+        selectedTags.includes(tag);
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive);
     });
   }
-  function X() {
-    if (!(!B || !D)) {
-      if (s.length === 0) {
-        B.style.display = "none";
-        return;
-      }
-      B.style.display = "flex",
-        D.innerHTML = s.map((t) => `
-      <span class="active-filter-tag">
-        ${t}
-        <button data-remove-tag="${t}" aria-label="Remove ${t} filter">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
-            <path d="M18 6L6 18M6 6l12 12"/>
-          </svg>
-        </button>
-      </span>
-    `).join(""),
-        D.querySelectorAll("[data-remove-tag]").forEach((t) => {
-          t.addEventListener("click", () => {
-            const e = t.dataset.removeTag, a = s.indexOf(e);
-            a > -1 && s.splice(a, 1), f(), g();
-          });
-        });
+
+  function paintDropdownItems() {
+    dropdownItems.forEach((item) => {
+      const isSelected = selectedTags.includes(item.dataset.tag);
+      item.classList.toggle("selected", isSelected);
+      item.setAttribute("aria-selected", String(isSelected));
+    });
+  }
+
+  function renderActiveFilters() {
+    if (!activeFiltersBox || !activeFiltersTags) return;
+    if (selectedTags.length === 0) {
+      activeFiltersBox.style.display = "none";
+      return;
     }
+    activeFiltersBox.style.display = "flex";
+    activeFiltersTags.innerHTML = selectedTags.map((tag) => `
+      <button class="active-filter-tag" data-remove-tag="${tag}" aria-label="Remove ${tag} filter" title="Remove ${tag} filter">
+        ${tag} <span class="active-filter-x" aria-hidden="true">×</span>
+      </button>
+    `).join("");
+    activeFiltersTags.querySelectorAll("[data-remove-tag]").forEach(
+      (button) => {
+        button.addEventListener("click", () => {
+          const index = selectedTags.indexOf(button.dataset.removeTag);
+          if (index > -1) selectedTags.splice(index, 1);
+          refreshFilterUI();
+          resetPageAndRender();
+        });
+      },
+    );
   }
-  q && q.addEventListener("click", () => {
-    s = [], f(), g();
-  });
-  function A() {
-    const t = new URLSearchParams();
-    s.length > 0 && t.set("tags", s.join(",")), i !== "all" && t.set("view", i);
-    const e = t.toString(),
-      a = e ? `${window.location.pathname}#${e}` : window.location.pathname;
-    history.replaceState(null, "", a);
+
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener("click", () => {
+      selectedTags = [];
+      refreshFilterUI();
+      resetPageAndRender();
+    });
   }
-  function H() {
-    const t = window.location.hash.slice(1);
-    if (!t) return { tags: [], view: "all" };
-    const e = new URLSearchParams(t), a = e.get("tags"), l = e.get("view");
+
+  function syncHash() {
+    const params = new URLSearchParams();
+    if (selectedTags.length > 0) params.set("tags", selectedTags.join(","));
+    if (currentView !== "all") params.set("view", currentView);
+    const query = params.toString();
+    const url = query
+      ? `${globalThis.location.pathname}#${query}`
+      : globalThis.location.pathname;
+    history.replaceState(null, "", url);
+  }
+
+  function parseHash() {
+    const hash = globalThis.location.hash.slice(1);
+    if (!hash) return { tags: [], view: "all" };
+    const params = new URLSearchParams(hash);
+    const tags = params.get("tags");
     return {
-      tags: a ? a.split(",").map((o) => o.trim().toLowerCase()) : [],
-      view: l || "all",
+      tags: tags ? tags.split(",").map((tag) => tag.trim().toLowerCase()) : [],
+      view: params.get("view") || "all",
     };
   }
-  function Z() {
-    const t = {
-      page: r,
-      view: i,
-      tags: s,
-      search: c.value,
-      scrollY: window.scrollY,
+
+  function saveSession() {
+    const state = {
+      page: currentPage,
+      view: currentView,
+      tags: selectedTags,
+      search: searchInput.value,
+      scrollY: globalThis.scrollY,
     };
-    sessionStorage.setItem(_, JSON.stringify(t));
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(state));
   }
-  function tt() {
-    const t = H();
-    if (t.tags.length > 0 || t.view !== "all") {
-      return s = t.tags,
-        i = t.view,
-        f(),
-        E.forEach((e) => {
-          e.classList.toggle("active", e.dataset.view === i);
-          e.setAttribute("aria-pressed", String(e.dataset.view === i));
-        }),
-        L.style.display = i === "all" ? "" : "none",
-        !0;
+
+  function restoreState() {
+    const fromHash = parseHash();
+    if (fromHash.tags.length > 0 || fromHash.view !== "all") {
+      selectedTags = fromHash.tags;
+      currentView = fromHash.view;
+      refreshFilterUI();
+      paintViewTabs();
+      tagFiltersBox.style.display = currentView === "all" ? "" : "none";
+      return true;
     }
     try {
-      const e = JSON.parse(sessionStorage.getItem(_));
-      return e
-        ? (r = e.page || 1,
-          i = e.view || "all",
-          s = e.tags || [],
-          c.value = e.search || "",
-          E.forEach((a) => {
-            a.classList.toggle("active", a.dataset.view === i);
-            a.setAttribute("aria-pressed", String(a.dataset.view === i));
-          }),
-          f(),
-          L.style.display = i === "all" ? "" : "none",
-          e.scrollY > 0 && setTimeout(() => window.scrollTo(0, e.scrollY), 50),
-          !0)
-        : !1;
-    } catch (e) {
-      return !1;
+      const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+      if (!saved) return false;
+      currentPage = saved.page || 1;
+      currentView = saved.view || "all";
+      selectedTags = saved.tags || [];
+      searchInput.value = saved.search || "";
+      paintViewTabs();
+      refreshFilterUI();
+      tagFiltersBox.style.display = currentView === "all" ? "" : "none";
+      if (saved.scrollY > 0) {
+        setTimeout(() => globalThis.scrollTo(0, saved.scrollY), 50);
+      }
+      return true;
+    } catch {
+      return false;
     }
   }
-  b.forEach((t) => {
-    const e = t.querySelector("a");
-    e && e.addEventListener("click", Z);
+
+  function paintViewTabs() {
+    viewTabs.forEach((tab) => {
+      const isActive = tab.dataset.view === currentView;
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  allCards.forEach((card) => {
+    const link = card.querySelector("a");
+    if (link) link.addEventListener("click", saveSession);
   });
-  const U = "blog_bookmarks";
-  function C() {
+
+  function getBookmarks() {
     try {
-      const stored = JSON.parse(localStorage.getItem(U)) || [];
-      return stored.map((e) => e.replace(/\/$/, ""));
-    } catch (t) {
+      const stored = JSON.parse(localStorage.getItem(BOOKMARK_KEY)) || [];
+      return stored.map((entry) => entry.replace(/\/$/, ""));
+    } catch {
       return [];
     }
   }
-  function et(t) {
-    const e = C(), n = t.replace(/\/$/, ""), a = e.indexOf(n);
-    a > -1 ? e.splice(a, 1) : e.push(n),
-      localStorage.setItem(U, JSON.stringify(e)),
-      K(),
-      Y(),
-      i === "bookmarks" && g();
+
+  function toggleBookmark(url) {
+    const bookmarks = getBookmarks();
+    const normalized = url.replace(/\/$/, "");
+    const index = bookmarks.indexOf(normalized);
+    if (index > -1) bookmarks.splice(index, 1);
+    else bookmarks.push(normalized);
+    localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
+    paintBookmarks();
+    paintBookmarkCount();
+    if (currentView === "bookmarks") resetPageAndRender();
   }
-  function K() {
-    const t = C();
-    document.querySelectorAll(".bookmark-btn").forEach((e) => {
-      const a = e.dataset.url.replace(/\/$/, ""), l = t.includes(a);
-      e.classList.toggle("bookmarked", l),
-        e.setAttribute("aria-pressed", String(l)),
-        e.setAttribute(
-          "aria-label",
-          l ? "Remove bookmark" : "Bookmark article",
-        ),
-        e.title = l ? "Remove bookmark" : "Bookmark article";
+
+  function paintBookmarks() {
+    const bookmarks = getBookmarks();
+    document.querySelectorAll(".bookmark-btn").forEach((button) => {
+      const isSaved = bookmarks.includes(button.dataset.url.replace(/\/$/, ""));
+      button.classList.toggle("bookmarked", isSaved);
+      button.setAttribute("aria-pressed", String(isSaved));
+      button.setAttribute(
+        "aria-label",
+        isSaved ? "Remove bookmark" : "Bookmark article",
+      );
+      button.title = isSaved ? "Remove bookmark" : "Bookmark article";
     });
   }
-  function Y() {
-    const t = C().length;
-    j.textContent = t > 0 ? `(${t})` : "";
+
+  function paintBookmarkCount() {
+    const count = getBookmarks().length;
+    bookmarkCountEl.textContent = count > 0 ? `(${count})` : "";
   }
-  document.querySelectorAll(".bookmark-btn").forEach((t) => {
-    t.addEventListener("click", (e) => {
-      e.preventDefault(), e.stopPropagation(), et(t.dataset.url);
+
+  document.querySelectorAll(".bookmark-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleBookmark(button.dataset.url);
     });
-  }),
-    K(),
-    Y();
-  const at = "blog_reading_history";
-  function G() {
+  });
+  paintBookmarks();
+  paintBookmarkCount();
+
+  function getReadingHistory() {
     try {
-      return JSON.parse(localStorage.getItem(at)) || [];
-    } catch (t) {
+      return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    } catch {
       return [];
     }
   }
-  function ot() {
-    const t = G().map((e) => {
-      const url = typeof e == "string" ? e : e.url;
+
+  function paintReadStates() {
+    const readUrls = getReadingHistory().map((entry) => {
+      const url = typeof entry == "string" ? entry : entry.url;
       return url.replace(/\/$/, "");
     });
-    b.forEach((e) => {
-      const a = e.dataset.url.replace(/\/$/, "");
-      t.includes(a) && e.classList.add("read");
+    allCards.forEach((card) => {
+      const url = card.dataset.url.replace(/\/$/, "");
+      if (readUrls.includes(url)) card.classList.add("read");
     });
   }
-  ot();
-  function J(t) {
-    const e = t.indexOf(":");
-    if (e > 0) {
-      const a = t.substring(0, e).trim().toLowerCase(),
-        l = t.substring(e + 1).trim().toLowerCase();
+  paintReadStates();
+
+  function parseSearchQuery(raw) {
+    const separator = raw.indexOf(":");
+    if (separator > 0) {
+      const tags = raw.substring(0, separator).trim().toLowerCase();
       return {
-        tags: a.split(",").map((n) => n.trim()).filter((n) => n),
-        term: l,
+        tags: tags.split(",").map((tag) => tag.trim()).filter((tag) => tag),
+        term: raw.substring(separator + 1).trim().toLowerCase(),
       };
     }
-    return { tags: [], term: t.toLowerCase() };
+    return { tags: [], term: raw.toLowerCase() };
   }
-  function nt() {
-    const t = c.value.trim(),
-      { tags: e, term: a } = J(t),
-      l = C(),
-      o = G().map((n) => {
-        const url = typeof n == "string" ? n : n.url;
-        return url.replace(/\/$/, "");
-      });
-    return b.filter((n) => {
-      const p = n.dataset.url.replace(/\/$/, ""),
-        u = (n.dataset.title || "").toLowerCase(),
-        M = (n.dataset.tags || "").toLowerCase().split(",").filter((v) => v);
-      if (
-        i === "bookmarks" && !l.includes(p) || i === "history" && !o.includes(p)
-      ) return !1;
-      let O = !0;
-      e.length > 0
-        ? O = e.every((v) => M.includes(v))
-        : s.length > 0 && !s.includes("all") &&
-          (O = s.every((v) => M.includes(v.toLowerCase())));
-      const lt = !a || u.includes(a) || M.some((v) => v.includes(a));
-      return O && lt;
+
+  function computeFiltered() {
+    const { tags: queryTags, term } = parseSearchQuery(
+      searchInput.value.trim(),
+    );
+    const bookmarks = getBookmarks();
+    const readUrls = getReadingHistory().map((entry) => {
+      const url = typeof entry == "string" ? entry : entry.url;
+      return url.replace(/\/$/, "");
+    });
+    return allCards.filter((card) => {
+      const url = card.dataset.url.replace(/\/$/, "");
+      const title = (card.dataset.title || "").toLowerCase();
+      const tags = (card.dataset.tags || "").toLowerCase().split(",").filter(
+        (tag) => tag,
+      );
+      if (currentView === "bookmarks" && !bookmarks.includes(url)) return false;
+      if (currentView === "history" && !readUrls.includes(url)) return false;
+      let tagMatch = true;
+      if (queryTags.length > 0) {
+        tagMatch = queryTags.every((tag) => tags.includes(tag));
+      } else if (selectedTags.length > 0 && !selectedTags.includes("all")) {
+        tagMatch = selectedTags.every((tag) =>
+          tags.includes(tag.toLowerCase())
+        );
+      }
+      const termMatch = !term ||
+        title.includes(term) ||
+        tags.some((tag) => tag.includes(term));
+      return tagMatch && termMatch;
     });
   }
-  function shouldSmooth() {
-    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function prefersReducedMotion() {
+    return globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
-  function st() {
-    const t = Math.ceil(T.length / 6);
-    if (w.innerHTML = "", t <= 1) {
-      w.style.display = "none";
-      return;
-    }
-    if (w.style.display = "flex", r > 1) {
-      const o = document.createElement("a");
-      o.className = "tech-tag pagination-btn",
-        o.textContent = "\u2190 Back",
-        o.setAttribute("aria-label", "Previous page"),
-        o.href = "#",
-        o.onclick = (n) => {
-          n.preventDefault(),
-            r--,
-            I(),
-            scrollTo({
-              top: 0,
-              behavior: shouldSmooth() ? "smooth" : "instant",
-            });
-        },
-        w.appendChild(o);
-    }
-    const e = 10;
-    let a = Math.max(1, Math.min(r - Math.floor(e / 2), t - e + 1)),
-      l = Math.min(t, a + e - 1);
-    for (let o = a; o <= l; o++) {
-      const n = document.createElement(o === r ? "span" : "a");
-      n.className = `tech-tag pagination-btn${
-        o === r ? " pagination-active" : ""
-      }`,
-        n.textContent = o,
-        n.setAttribute("aria-label", "Page " + o),
-        o === r && n.setAttribute("aria-current", "page"),
-        o !== r && (n.href = "#",
-          n.onclick = (p) => {
-            p.preventDefault(),
-              r = o,
-              I(),
-              scrollTo({
-                top: 0,
-                behavior: shouldSmooth() ? "smooth" : "instant",
-              });
-          }),
-        w.appendChild(n);
-    }
-    if (r < t) {
-      const o = document.createElement("a");
-      o.className = "tech-tag pagination-btn",
-        o.textContent = "Next \u2192",
-        o.setAttribute("aria-label", "Next page"),
-        o.href = "#",
-        o.onclick = (n) => {
-          n.preventDefault(),
-            r++,
-            I(),
-            scrollTo({
-              top: 0,
-              behavior: shouldSmooth() ? "smooth" : "instant",
-            });
-        },
-        w.appendChild(o);
-    }
-  }
-  function V(t, e) {
-    const a = t.querySelector(".blog-card-title a");
-    if (!a) return;
-    const l = t.dataset.title;
-    if (!e) {
-      a.innerHTML = l;
-      return;
-    }
-    const o = new RegExp(`(${e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
-    a.innerHTML = l.replace(o, "<mark>$1</mark>");
-  }
-  function I() {
-    T = nt();
-    const t = Math.ceil(T.length / 6), e = J(c.value.trim()).term;
-    r > t && (r = Math.max(1, t)),
-      b.forEach((n) => {
-        n.style.display = "none",
-          n.style.opacity = "0",
-          n.style.animationDelay = "",
-          V(n, "");
-      });
-    const a = (r - 1) * 6, l = a + 6;
-    T.slice(a, l).forEach((n, p) => {
-      n.style.display = "",
-        n.style.animationDelay = `${p * 50}ms`,
-        n.offsetWidth,
-        n.style.opacity = "1",
-        e && V(n, e);
+
+  function scrollToTop() {
+    globalThis.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion() ? "instant" : "smooth",
     });
-    const o = T.length === 0;
-    if (
-      k.style.display = o ? "block" : "none",
-        N.style.display = o ? "none" : "",
-        $.style.display = c.value.trim() ? "flex" : "none",
-        o
-    ) {
-      resultCountEl && (resultCountEl.style.display = "none");
-      if (i === "bookmarks") {
-        k.innerHTML =
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(filteredCards.length / PER_PAGE);
+    paginationControls.innerHTML = "";
+    if (totalPages <= 1) {
+      paginationControls.style.display = "none";
+      return;
+    }
+    paginationControls.style.display = "flex";
+    if (currentPage > 1) {
+      const back = document.createElement("a");
+      back.className = "tech-tag pagination-btn";
+      back.textContent = "← Back";
+      back.setAttribute("aria-label", "Previous page");
+      back.href = "#";
+      back.onclick = (event) => {
+        event.preventDefault();
+        currentPage--;
+        renderCards();
+        scrollToTop();
+      };
+      paginationControls.appendChild(back);
+    }
+    const firstPage = Math.max(
+      1,
+      Math.min(
+        currentPage - Math.floor(MAX_PAGE_BUTTONS / 2),
+        totalPages - MAX_PAGE_BUTTONS + 1,
+      ),
+    );
+    const lastPage = Math.min(totalPages, firstPage + MAX_PAGE_BUTTONS - 1);
+    for (let page = firstPage; page <= lastPage; page++) {
+      const isCurrent = page === currentPage;
+      const button = document.createElement(isCurrent ? "span" : "a");
+      button.className = `tech-tag pagination-btn${
+        isCurrent ? " pagination-active" : ""
+      }`;
+      button.textContent = page;
+      button.setAttribute("aria-label", "Page " + page);
+      if (isCurrent) {
+        button.setAttribute("aria-current", "page");
+      } else {
+        button.href = "#";
+        button.onclick = (event) => {
+          event.preventDefault();
+          currentPage = page;
+          renderCards();
+          scrollToTop();
+        };
+      }
+      paginationControls.appendChild(button);
+    }
+    if (currentPage < totalPages) {
+      const next = document.createElement("a");
+      next.className = "tech-tag pagination-btn";
+      next.textContent = "Next →";
+      next.setAttribute("aria-label", "Next page");
+      next.href = "#";
+      next.onclick = (event) => {
+        event.preventDefault();
+        currentPage++;
+        renderCards();
+        scrollToTop();
+      };
+      paginationControls.appendChild(next);
+    }
+  }
+
+  function highlightMatch(card, term) {
+    const link = card.querySelector(".blog-card-title a");
+    if (!link) return;
+    if (!term) {
+      link.innerHTML = card.dataset.title;
+      return;
+    }
+    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    link.innerHTML = card.dataset.title.replace(
+      new RegExp(`(${escaped})`, "gi"),
+      "<mark>$1</mark>",
+    );
+  }
+
+  function renderCards() {
+    filteredCards = computeFiltered();
+    const totalPages = Math.ceil(filteredCards.length / PER_PAGE);
+    const { term } = parseSearchQuery(searchInput.value.trim());
+    if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+    allCards.forEach((card) => {
+      card.style.display = "none";
+      card.style.opacity = "0";
+      card.style.animationDelay = "";
+      highlightMatch(card, "");
+    });
+    const start = (currentPage - 1) * PER_PAGE;
+    filteredCards.slice(start, start + PER_PAGE).forEach((card, position) => {
+      card.style.display = "";
+      card.style.animationDelay = `${position * 50}ms`;
+      void card.offsetWidth;
+      card.style.opacity = "1";
+      if (term) highlightMatch(card, term);
+    });
+    const isEmpty = filteredCards.length === 0;
+    noResultsEl.style.display = isEmpty ? "block" : "none";
+    cardsContainer.style.display = isEmpty ? "none" : "";
+    searchClearBtn.style.display = searchInput.value.trim() ? "flex" : "none";
+    if (isEmpty) {
+      if (resultCountEl) resultCountEl.style.display = "none";
+      if (currentView === "bookmarks") {
+        noResultsEl.innerHTML =
           "<p>No Bookmarks Yet</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Click the bookmark icon on any article to save it for later.</p>";
-      } else if (i === "history") {
-        k.innerHTML =
+      } else if (currentView === "history") {
+        noResultsEl.innerHTML =
           "<p>No Reading History</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Start reading articles to build your history.</p>";
-      } else if (s.length > 0) {
-        const n = [
-            ...document.querySelectorAll(
-              '.quick-tags .filter-tag:not([data-tag="all"])',
-            ),
-          ].map((u) => u.dataset.tag).filter((u) => !s.includes(u)).slice(0, 3),
-          p = n.length > 0
-            ? `<p style="margin-top: 1rem; font-size: 0.875rem;">Try these tags: ${
-              n.map((u) =>
-                `<button class="suggest-tag" data-tag="${u}">${u}</button>`
-              ).join(" ")
-            }</p>`
-            : "";
-        k.innerHTML =
+      } else if (selectedTags.length > 0) {
+        const suggestions = [
+          ...document.querySelectorAll(
+            '.quick-tags .filter-tag:not([data-tag="all"])',
+          ),
+        ].map((button) => button.dataset.tag)
+          .filter((tag) => !selectedTags.includes(tag))
+          .slice(0, 3);
+        const suggestionHtml = suggestions.length > 0
+          ? `<p style="margin-top: 1rem; font-size: 0.875rem;">Try these tags: ${
+            suggestions.map((tag) =>
+              `<button class="suggest-tag" data-tag="${tag}">${tag}</button>`
+            ).join(" ")
+          }</p>`
+          : "";
+        noResultsEl.innerHTML =
           `<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>No posts match ${
-            s.length > 1 ? "all these tags" : "this tag"
-          }.</p>${p}`,
-          k.querySelectorAll(".suggest-tag").forEach((u) => {
-            u.addEventListener("click", () => {
-              s = [u.dataset.tag], f(), g();
-            });
+            selectedTags.length > 1 ? "all these tags" : "this tag"
+          }.</p>${suggestionHtml}`;
+        noResultsEl.querySelectorAll(".suggest-tag").forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedTags = [button.dataset.tag];
+            refreshFilterUI();
+            resetPageAndRender();
           });
-      } else {k.innerHTML =
-          "<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Try adjusting your search query.</p>";}
+        });
+      } else {
+        noResultsEl.innerHTML =
+          "<p>No Posts Found</p><p style='font-size: 0.875rem; margin-top: 0.75rem;'>Try adjusting your search query.</p>";
+      }
     } else {
       if (resultCountEl && resultCountText) {
-        const totalPosts = b.length;
-        const filteredPosts = T.length;
-        if (s.length > 0 || c.value.trim() || i !== "all") {
+        const totalPosts = allCards.length;
+        if (
+          selectedTags.length > 0 || searchInput.value.trim() ||
+          currentView !== "all"
+        ) {
           resultCountText.textContent =
-            `Showing ${filteredPosts} of ${totalPosts} post${
+            `Showing ${filteredCards.length} of ${totalPosts} post${
               totalPosts !== 1 ? "s" : ""
             }`;
           resultCountEl.style.display = "block";
@@ -468,81 +558,94 @@
         }
       }
     }
-    st(), A();
+    renderPagination();
+    syncHash();
   }
-  function g() {
-    r = 1, I();
+
+  function resetPageAndRender() {
+    currentPage = 1;
+    renderCards();
   }
-  c.addEventListener("input", g),
-    c.addEventListener("search", g),
-    $.addEventListener("click", () => {
-      c.value = "", s = [], f(), g(), c.focus();
-    }),
-    E.forEach((t) => {
-      t.addEventListener("click", () => {
-        i = t.dataset.view,
-          E.forEach((e) => {
-            e.classList.remove("active");
-            e.setAttribute("aria-pressed", "false");
-          }),
-          t.classList.add("active"),
-          t.setAttribute("aria-pressed", "true"),
-          L.style.display = i === "all" ? "" : "none",
-          A(),
-          g();
+
+  searchInput.addEventListener("input", resetPageAndRender);
+  searchInput.addEventListener("search", resetPageAndRender);
+  searchClearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    selectedTags = [];
+    refreshFilterUI();
+    resetPageAndRender();
+    searchInput.focus();
+  });
+
+  viewTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      currentView = tab.dataset.view;
+      paintViewTabs();
+      tagFiltersBox.style.display = currentView === "all" ? "" : "none";
+      syncHash();
+      resetPageAndRender();
+    });
+  });
+
+  quickTagButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const tag = button.dataset.tag;
+      if (tag === "all") {
+        selectedTags = [];
+      } else if (event.ctrlKey || event.metaKey) {
+        const index = selectedTags.indexOf(tag);
+        if (index > -1) selectedTags.splice(index, 1);
+        else selectedTags.push(tag);
+      } else {
+        selectedTags = [tag];
+      }
+      refreshFilterUI();
+      resetPageAndRender();
+    });
+  });
+
+  document.querySelectorAll(".blog-card .tech-tag").forEach((tag) => {
+    tag.style.cursor = "pointer";
+    tag.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const tagName = tag.dataset.tag.toLowerCase();
+      currentView = "all";
+      paintViewTabs();
+      tagFiltersBox.style.display = "";
+      if (event.ctrlKey || event.metaKey) {
+        if (!selectedTags.includes(tagName)) selectedTags.push(tagName);
+      } else {
+        selectedTags = [tagName];
+      }
+      refreshFilterUI();
+      resetPageAndRender();
+      document.querySelector(".blog-search-container").scrollIntoView({
+        behavior: prefersReducedMotion() ? "instant" : "smooth",
       });
-    }),
-    R.forEach((t) => {
-      t.addEventListener("click", (e) => {
-        const a = t.dataset.tag;
-        if (a === "all") s = [];
-        else if (e.ctrlKey || e.metaKey) {
-          const l = s.indexOf(a);
-          l > -1 ? s.splice(l, 1) : s.push(a);
-        } else s = [a];
-        f(), g();
-      });
-    }),
-    document.querySelectorAll(".blog-card .tech-tag").forEach((t) => {
-      t.style.cursor = "pointer",
-        t.addEventListener("click", (e) => {
-          e.preventDefault(), e.stopPropagation();
-          const a = t.dataset.tag.toLowerCase();
-          i = "all",
-            E.forEach((l) => {
-              const isAll = l.dataset.view === "all";
-              l.classList.toggle("active", isAll);
-              l.setAttribute("aria-pressed", String(isAll));
-            }),
-            L.style.display = "",
-            e.ctrlKey || e.metaKey ? s.includes(a) || s.push(a) : s = [a],
-            f(),
-            g(),
-            document.querySelector(".blog-search-container").scrollIntoView({
-              behavior:
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches
-                  ? "instant"
-                  : "smooth",
-            });
-        });
-    }),
-    window.addEventListener("hashchange", () => {
-      const t = H();
-      s = t.tags,
-        i = t.view,
-        f(),
-        E.forEach((e) => {
-          e.classList.toggle("active", e.dataset.view === i);
-          e.setAttribute("aria-pressed", String(e.dataset.view === i));
-        }),
-        L.style.display = i === "all" ? "" : "none",
-        g();
-    }),
-    document.addEventListener("keydown", (t) => {
-      t.key === "/" && document.activeElement !== c &&
-      (t.preventDefault(), c.focus()),
-        t.key === "Escape" && document.activeElement === c && c.blur();
-    }),
-    tt(),
-    I();
+    });
+  });
+
+  globalThis.addEventListener("hashchange", () => {
+    const parsed = parseHash();
+    selectedTags = parsed.tags;
+    currentView = parsed.view;
+    refreshFilterUI();
+    paintViewTabs();
+    tagFiltersBox.style.display = currentView === "all" ? "" : "none";
+    resetPageAndRender();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "/" && document.activeElement !== searchInput) {
+      event.preventDefault();
+      searchInput.focus();
+    }
+    if (event.key === "Escape" && document.activeElement === searchInput) {
+      searchInput.blur();
+    }
+  });
+
+  restoreState();
+  renderCards();
 })();

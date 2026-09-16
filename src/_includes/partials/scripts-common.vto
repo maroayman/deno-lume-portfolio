@@ -4,6 +4,7 @@
   const themeToggle = document.getElementById("themeToggle");
   const sunIcon = document.querySelector(".sun-icon");
   const moonIcon = document.querySelector(".moon-icon");
+  const themeLabel = document.getElementById("themeLabel");
 
   if (!themeToggle || !sunIcon || !moonIcon) {
     console.warn("Theme toggle elements not found");
@@ -16,6 +17,7 @@
     document.documentElement.classList.toggle("dark-mode", isDark);
     sunIcon.style.display = isDark ? "none" : "block";
     moonIcon.style.display = isDark ? "block" : "none";
+    if (themeLabel) themeLabel.textContent = isDark ? "Day" : "Night";
     themeToggle.setAttribute("aria-pressed", String(isDark));
     themeToggle.setAttribute(
       "aria-label",
@@ -169,22 +171,4 @@ document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     }, 600);
   });
 })();
-
-// ========== SHOW MORE / SHOW LESS ==========
-function toggleShowMore(btn) {
-  const list = btn.previousElementSibling;
-  const items = list.querySelectorAll(".show-more-item");
-  const isExpanded = list.classList.contains("expanded");
-  if (isExpanded) {
-    items.forEach((item) => item.style.display = "none");
-    btn.textContent = `Show more (${items.length})`;
-    btn.setAttribute("aria-expanded", "false");
-    list.classList.remove("expanded");
-  } else {
-    items.forEach((item) => item.style.display = "list-item");
-    btn.textContent = "Show less";
-    btn.setAttribute("aria-expanded", "true");
-    list.classList.add("expanded");
-  }
-}
 </script>

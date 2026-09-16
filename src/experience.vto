@@ -10,7 +10,11 @@ description: DevOps training and internships focused on cloud automation
       <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
 
-    <h1 class="page-title">Experience</h1>
+    <div class="shead">
+      <h1 class="page-title">Experience</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الخبرة</span>
+    </div>
+    <p
+      class="page-sub">Where the on-prem lessons came from — bare metal, self-hosted GitOps, and no managed control plane to hide behind.</p>
 
     <div class="experience-list" id="pagination-container">
       {{ for index, job of experience }}
@@ -29,18 +33,11 @@ description: DevOps training and internships focused on cloud automation
         
         {{ if job.responsibilities }}
         <p class="responsibilities-title">Key Responsibilities:</p>
-        <ul class="dash-list responsibilities-list" id="resp-{{ index }}">
-          {{ for i, responsibility of job.responsibilities }}
-          {{ set hiddenClass = i >= 4 ? 'show-more-item' : '' }}
-          {{ set hiddenStyle = i >= 4 ? 'display:none' : '' }}
-          <li class="{{ hiddenClass }}" style="{{ hiddenStyle }}">{{ responsibility }}</li>
+        <ul class="dash-list responsibilities-list">
+          {{ for responsibility of job.responsibilities }}
+          <li>{{ responsibility }}</li>
           {{ /for }}
         </ul>
-        {{ if job.responsibilities.length > 4 }}
-        <button class="show-more-btn" onclick="toggleShowMore(this)" aria-expanded="false" aria-controls="resp-{{ index }}">
-          Show more ({{ job.responsibilities.length - 4 }})
-        </button>
-        {{ /if }}
         {{ /if }}
         
         <div class="tech-tags">

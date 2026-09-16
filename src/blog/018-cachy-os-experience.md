@@ -1,5 +1,5 @@
 ---
-cover: https://iili.io/nJo6Fyv.png
+cover: /covers/cachy-os-experience.png
 date: 2026-09-04
 description: My experience switching to CachyOS, exploring Arch package management, Pacman, AUR, and Fish shell while learning Linux beyond WSL2.
 tags:

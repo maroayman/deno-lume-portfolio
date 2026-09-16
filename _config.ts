@@ -61,8 +61,9 @@ site.use(date());
 site.use(googleFonts({
   cssFile: "styles/main.css",
   placeholder: "/* google-fonts */",
-  subsets: ["latin"],
-  fonts: "https://fonts.google.com/share?selection.family=Inter:wght@100..900",
+  subsets: ["latin", "arabic"],
+  fonts:
+    "https://fonts.google.com/share?selection.family=Archivo:wdth,wght@75..125,400..800|IBM+Plex+Sans+Arabic:wght@300;400;500;600|Reem+Kufi:wght@400..700",
 }));
 site.use(slugifyUrls());
 
@@ -151,7 +152,6 @@ site.use(purgecss({
         /^active$/, // filter tags, view tabs, toc links, pagination
         /^open$/, // tag dropdown, ToC
         /^copied$/, // copy-code button feedback
-        /^expanded$/, // show-more/show-less toggle
         /^bookmarked$/, // blog card bookmark state
         /^focused$/, // dropdown keyboard navigation
         /^selected$/, // dropdown items
@@ -163,7 +163,6 @@ site.use(purgecss({
         /^mark$/, // search highlight injected by JS
         /^read-inline$/, // read indicator
         /^scrolling$/, // back-to-top visual feedback
-        /^show-more-item$/, // show-more toggle
         /^suggest-tag$/, // suggested tags in no-results
         /^code-block-wrapper$/, // code block wrapper injected by JS
         /^copy-code-btn$/, // copy button injected by JS
@@ -174,9 +173,7 @@ site.use(purgecss({
 }));
 site.use(inline());
 
-site.use(sitemap({
-  query: "url!=/search-index.json",
-}));
+site.use(sitemap());
 
 // RSS feed — generates /feed.rss from all pages with type=post
 site.use(feed({

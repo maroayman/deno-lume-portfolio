@@ -10,14 +10,15 @@ description: Tools, hardware, and software I use daily as a Cloud & DevOps Engin
       <a href="/"><span aria-hidden="true">←</span> Back</a>
     </p>
 
-    <h1 class="page-title">Uses</h1>
-
-    <p style="margin-bottom: 2rem; color: var(--color-text-secondary);">
-      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">uses.tech</a>.
+    <div class="shead">
+      <h1 class="page-title">Uses</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">عُدَّتي</span>
+    </div>
+    <p class="page-sub">
+      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--brass); color: var(--brass);">uses.tech</a>.
     </p>
 
     {{ for section of uses }}
-    <div class="uses-group">
+    <div class="uses-group" style="margin-bottom: 0;">
       <h3 class="uses-group-title">{{ section.group }}</h3>
       <ul class="uses-list">
         {{ for item of section.items }}

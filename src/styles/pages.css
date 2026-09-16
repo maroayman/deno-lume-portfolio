@@ -4,11 +4,11 @@
 
 .terminal-404 {
   background: #0d1117;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  max-width: 480px;
+  max-width: 640px;
 }
 
 html.dark-mode .terminal-404,
@@ -132,10 +132,9 @@ body.dark-mode .terminal-404 {
     max-width: 100%;
   }
 
-  /* Adjust floating button spacing for mobile */
-  .theme-toggle {
-    top: 0.75rem;
-    right: 0.75rem;
+  /* Adjust lamp / floating button spacing for mobile */
+  .lamp {
+    order: 3;
   }
 
   .back-to-top {
@@ -155,18 +154,28 @@ body.dark-mode .terminal-404 {
    ============================================================ */
 
 .uses-group {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.uses-group:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.uses-group + .uses-group {
+  border-top: none;
 }
 
 .uses-group-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--color-text-faint);
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-border);
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--brass);
+  margin-bottom: 0;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--hair);
+  background: var(--red-wash);
 }
 
 .uses-list {
@@ -177,11 +186,12 @@ body.dark-mode .terminal-404 {
 }
 
 .uses-item {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--color-border-subtle);
+  display: grid;
+  grid-template-columns: 172px 1fr;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--hair);
 }
 
 .uses-item:last-child {
@@ -189,26 +199,34 @@ body.dark-mode .terminal-404 {
 }
 
 .uses-item-name {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
-  min-width: 160px;
-  flex-shrink: 0;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--brass);
+  padding: 13px 18px;
+  border-inline-end: 1px solid var(--hair);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
 
 .uses-item-desc {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  padding: 12px 18px;
 }
 
 @media (max-width: 600px) {
   .uses-item {
-    flex-direction: column;
-    gap: 0.2rem;
+    grid-template-columns: 1fr;
   }
   .uses-item-name {
-    min-width: unset;
+    border-inline-end: none;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 8px;
+  }
+  .uses-item-desc {
+    padding-top: 9px;
   }
 }
 
@@ -218,8 +236,8 @@ body.dark-mode .terminal-404 {
 
 .toc {
   margin-bottom: 2rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -229,20 +247,19 @@ body.dark-mode .terminal-404 {
   justify-content: space-between;
   width: 100%;
   padding: 0.75rem 1rem;
-  background: var(--color-bg-elevated);
+  background: var(--red-wash);
   border: none;
   cursor: pointer;
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brass);
   text-align: left;
-  transition: background-color var(--t-fast), color var(--t-fast);
 }
 
 .toc-toggle:hover {
-  color: var(--color-text);
-  background: var(--color-bg-code);
+  color: var(--ink);
+  background: var(--paper-2);
 }
 
 .toc-toggle-icon {
@@ -257,8 +274,8 @@ body.dark-mode .terminal-404 {
 .toc-list {
   list-style: none;
   padding: 0.5rem 0;
-  background: var(--color-bg-elevated);
-  border-top: 1px solid var(--color-border);
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
 }
 
 .toc-list li {
@@ -297,7 +314,7 @@ body.dark-mode .terminal-404 {
    ============================================================ */
 
 @media print {
-  .theme-toggle,
+  .lamp,
   .back-to-top,
   .reading-progress,
   .social-share,

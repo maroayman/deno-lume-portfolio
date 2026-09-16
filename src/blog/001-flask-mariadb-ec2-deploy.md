@@ -2,7 +2,7 @@
 title: "Deploy a Flask + MariaDB Note App on EC2 (Amazon Linux 2023) — Complete Guide"
 description: "This guide walks you through deploying a simple Flask web app connected to a MariaDB database on a free-tier Amazon EC2 instance running Amazon Linux 2023. Prerequisites  An AWS account  EC2 instance"
 date: 2025-07-17
-cover: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/y0mt62qd4qdfqcx7zqtc.png
+cover: /covers/flask-mariadb-ec2-deploy.jpg
 tags:
   - AWS
   - Python

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Deployments Part 1: Foundations & Core Concepts"
 description: "Understand Kubernetes Deployments from architecture to hands-on practice with real examples."
-cover: https://iili.io/qJvle8x.jpg
+cover: /covers/kubernetes-deployments-part1.jpg
 date: 2026-02-15
 tags:
   - Kubernetes

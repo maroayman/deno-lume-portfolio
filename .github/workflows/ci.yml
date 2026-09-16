@@ -15,4 +15,6 @@ jobs:
           deno-version-file: .deno-version
       - run: deno task check
       - run: deno task lint
+      - run: deno fmt --check src/ _config.ts scripts/
+      - run: deno task check:content
       - run: deno task build
