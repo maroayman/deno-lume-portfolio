@@ -62,23 +62,25 @@ const CACHE_STRATEGIES = {
   },
 };
 
-// Install: Precache critical assets
+// Install: Precache critical assets (a single failure must not kill install)
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(\`precache-\${CACHE_VERSION}\`).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS);
+      return cache.addAll(PRECACHE_ASSETS).catch((error) => {
+        console.warn('SW precache skipped:', error);
+      });
     })
   );
   self.skipWaiting();
 });
 
-// Activate: Clean up old caches
+// Activate: Clean up old caches (anything without the current version)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => !name.includes(CACHE_VERSION) && !name.startsWith(\`precache-\${CACHE_VERSION}\`))
+          .filter((name) => !name.includes(CACHE_VERSION))
           .map((name) => caches.delete(name))
       );
     })
@@ -123,13 +125,27 @@ async function safePut(cache, request, response) {
   }
 }
 
+// Helper: Enforce maxEntries — the Cache API has no built-in eviction,
+// so without this the maxEntries limits in CACHE_STRATEGIES are dead config
+// and caches grow unbounded.
+async function trimCache(cacheName, maxEntries) {
+  if (!maxEntries) return;
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  const excess = keys.length - maxEntries;
+  for (let i = 0; i < excess; i++) {
+    await cache.delete(keys[i]);
+  }
+}
+
 // Helper: Network First strategy
-async function networkFirst(request, cacheName) {
+async function networkFirst(request, cacheName, maxEntries) {
   const cache = await caches.open(cacheName);
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
       await safePut(cache, request, networkResponse.clone());
+      await trimCache(cacheName, maxEntries);
     }
     return networkResponse;
   } catch (error) {
@@ -142,7 +158,7 @@ async function networkFirst(request, cacheName) {
 }
 
 // Helper: Cache First strategy
-async function cacheFirst(request, cacheName, maxAge) {
+async function cacheFirst(request, cacheName, maxAge, maxEntries) {
   const cache = await caches.open(cacheName);
   const cachedResponse = await cache.match(request);
   
@@ -150,12 +166,14 @@ async function cacheFirst(request, cacheName, maxAge) {
     // Check if cache is still fresh
     if (!maxAge) return cachedResponse;
     
+    // Opaque (cross-origin, no-cors) responses expose no headers — without
+    // a date to compare against, treat them as fresh instead of hitting
+    // the network on every request.
     const dateHeader = cachedResponse.headers.get('date');
-    if (dateHeader) {
-      const age = Date.now() - new Date(dateHeader).getTime();
-      if (age < maxAge) {
-        return cachedResponse;
-      }
+    if (!dateHeader) return cachedResponse;
+    const age = Date.now() - new Date(dateHeader).getTime();
+    if (age < maxAge) {
+      return cachedResponse;
     }
   }
   
@@ -163,6 +181,7 @@ async function cacheFirst(request, cacheName, maxAge) {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
       await safePut(cache, request, networkResponse.clone());
+      await trimCache(cacheName, maxEntries);
     }
     return networkResponse;
   } catch (error) {
@@ -174,22 +193,30 @@ async function cacheFirst(request, cacheName, maxAge) {
 }
 
 // Helper: Stale While Revalidate strategy
-async function staleWhileRevalidate(request, cacheName) {
+async function staleWhileRevalidate(request, cacheName, maxEntries) {
   const cache = await caches.open(cacheName);
   const cachedResponse = await cache.match(request);
   
   const networkPromise = fetch(request).then(async (networkResponse) => {
     if (networkResponse.ok) {
       await safePut(cache, request, networkResponse.clone());
+      await trimCache(cacheName, maxEntries);
     }
     return networkResponse;
-  }).catch(() => cachedResponse);
+  }).catch(() => {
+    // Offline with no cache must reject (outer handler serves the fallback);
+    // resolving undefined here would make respondWith() throw.
+    if (cachedResponse) return cachedResponse;
+    throw new Error('offline');
+  });
   
   return cachedResponse || networkPromise;
 }
 
 // Fetch: Handle requests with appropriate strategy
 self.addEventListener('fetch', (event) => {
+  // Only cache GET — bypass form posts, API mutations, etc. entirely.
+  if (event.request.method !== 'GET') return;
   const strategy = getStrategy(event.request);
   
   if (!strategy) return;
@@ -199,11 +226,11 @@ self.addEventListener('fetch', (event) => {
       try {
         switch (strategy.type) {
           case 'network-first':
-            return await networkFirst(event.request, strategy.cacheName);
+            return await networkFirst(event.request, strategy.cacheName, strategy.maxEntries);
           case 'cache-first':
-            return await cacheFirst(event.request, strategy.cacheName, strategy.maxAge);
+            return await cacheFirst(event.request, strategy.cacheName, strategy.maxAge, strategy.maxEntries);
           case 'stale-while-revalidate':
-            return await staleWhileRevalidate(event.request, strategy.cacheName);
+            return await staleWhileRevalidate(event.request, strategy.cacheName, strategy.maxEntries);
           default:
             return fetch(event.request);
         }

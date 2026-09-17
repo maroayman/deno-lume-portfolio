@@ -21,6 +21,14 @@ if (
       const reloadBtn = document.getElementById("sw-toast-reload");
       const dismissBtn = document.getElementById("sw-toast-dismiss");
       let newWorker = null;
+      // Reload only after the new worker actually takes control — reloading
+      // immediately after postMessage races activation and can serve the old worker.
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
       const showToast = (worker) => {
         newWorker = worker;
         if (toast) toast.style.display = "flex";
@@ -30,7 +38,7 @@ if (
       });
       reloadBtn?.addEventListener("click", () => {
         if (newWorker) newWorker.postMessage({ type: "SKIP_WAITING" });
-        window.location.reload();
+        else window.location.reload();
       });
       // Check for updates
       registration.addEventListener("updatefound", () => {

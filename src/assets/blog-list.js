@@ -176,7 +176,7 @@
     activeFiltersBox.style.display = "flex";
     activeFiltersTags.innerHTML = selectedTags.map((tag) => `
       <button class="active-filter-tag" data-remove-tag="${tag}" aria-label="Remove ${tag} filter" title="Remove ${tag} filter">
-        ${tag} <span class="active-filter-x" aria-hidden="true">×</span>
+        ${tag} <span class="active-filter-x" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
       </button>
     `).join("");
     activeFiltersTags.querySelectorAll("[data-remove-tag]").forEach(

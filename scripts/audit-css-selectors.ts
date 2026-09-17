@@ -70,4 +70,6 @@ for (const className of unused) {
   console.log(`- ${className}`);
 }
 
-console.log("\nTip: review dynamic class usage before deleting selectors.");
+console.log(
+  "\nTip: review dynamic class usage before deleting selectors. Note: PurgeCSS scans rendered HTML output, not JS source — classes injected via innerHTML (e.g. in blog-list.js) look 'used' to this audit but are still stripped unless safelisted in _config.ts.",
+);

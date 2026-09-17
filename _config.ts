@@ -164,6 +164,8 @@ site.use(purgecss({
         /^read-inline$/, // read indicator
         /^scrolling$/, // back-to-top visual feedback
         /^suggest-tag$/, // suggested tags in no-results
+        /^active-filter-tag$/, // active filter chip — injected by JS (renderActiveFilters)
+        /^active-filter-x$/, // × icon inside the chip — injected by JS
         /^code-block-wrapper$/, // code block wrapper injected by JS
         /^copy-code-btn$/, // copy button injected by JS
         /^share-/, // share button variants

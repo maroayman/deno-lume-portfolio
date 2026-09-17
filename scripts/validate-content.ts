@@ -75,6 +75,46 @@ for (const collection of collections) {
   });
 }
 
+// uses.json drives the Uses page (src/uses.vto) — same guarantees apply.
+try {
+  const groups: unknown = JSON.parse(
+    await Deno.readTextFile("src/_data/uses.json"),
+  );
+  if (!Array.isArray(groups) || groups.length === 0) {
+    errors.push("src/_data/uses.json: expected a non-empty list");
+  } else {
+    groups.forEach((group: unknown, index: number) => {
+      const source = `src/_data/uses.json[${index}]`;
+      if (!group || typeof group !== "object") {
+        errors.push(`${source}: expected an object`);
+        return;
+      }
+      const g = group as Record<string, unknown>;
+      requireString(g.group, "group", source);
+      if (!Array.isArray(g.items) || g.items.length === 0) {
+        errors.push(`${source}: items must contain at least one item`);
+        return;
+      }
+      g.items.forEach((item: unknown, itemIndex: number) => {
+        const itemSource = `${source}.items[${itemIndex}]`;
+        if (!item || typeof item !== "object") {
+          errors.push(`${itemSource}: expected an object`);
+          return;
+        }
+        const it = item as Record<string, unknown>;
+        requireString(it.name, "name", itemSource);
+        requireString(it.desc, "desc", itemSource);
+      });
+    });
+  }
+} catch (error) {
+  errors.push(
+    `src/_data/uses.json: unreadable (${
+      error instanceof Error ? error.message : error
+    })`,
+  );
+}
+
 const blogFiles = [...Deno.readDirSync("src/blog")]
   .filter((entry) => entry.isFile && entry.name.endsWith(".md"));
 const slugs = new Set<string>();
