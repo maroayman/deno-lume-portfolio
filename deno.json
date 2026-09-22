@@ -19,6 +19,14 @@
     "check:format": "deno fmt --check src/ _config.ts scripts/",
     "check:lint": "deno lint src/ _config.ts scripts/",
     "check:all": "deno task check:format && deno task check:lint && deno task check:content && deno task check && deno task build",
+    "images:pull": {
+      "description": "Pull cover images from GHCR (digest-pinned, anonymous)",
+      "command": "oras pull ghcr.io/maroayman/images@sha256:393b8aaf0191ebbd9f3d231d5f9399136e5a9733f3c110572101bb69f2bebaf5 -o ."
+    },
+    "images:push": {
+      "description": "Push src/public/images to GHCR (-- --pin rewrites the digest pin)",
+      "command": "bash scripts/push-images.sh"
+    },
     "serve": {
       "description": "Run and serve the site for development",
       "command": "deno task build:sw && deno task lume -s"

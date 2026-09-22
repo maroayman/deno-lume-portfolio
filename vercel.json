@@ -1,5 +1,5 @@
 {
-  "buildCommand": "DENO_VERSION=2.9.1 && curl -fsSL https://deno.land/install.sh | sh -s v${DENO_VERSION} && export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\" && deno task build:all",
+  "buildCommand": "bash scripts/vercel-build.sh",
   "outputDirectory": "_site",
   "installCommand": "DENO_VERSION=2.9.1 && curl -fsSL https://deno.land/install.sh | sh -s v${DENO_VERSION} && export DENO_INSTALL=\"$HOME/.deno\" && export PATH=\"$DENO_INSTALL/bin:$PATH\"",
   "devCommand": "deno task serve",

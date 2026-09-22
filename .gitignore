@@ -16,3 +16,7 @@ main.typ
 
 # Directories
 .directory
+
+# Cover/content images — pulled digest-pinned from GHCR at build time
+# (CI, Vercel, `deno task images:pull`), never committed
+src/public/images/

@@ -17,4 +17,6 @@ jobs:
       - run: deno task lint
       - run: deno fmt --check src/ _config.ts scripts/
       - run: deno task check:content
+      - uses: oras-project/setup-oras@v1
+      - run: oras pull ghcr.io/maroayman/images@sha256:393b8aaf0191ebbd9f3d231d5f9399136e5a9733f3c110572101bb69f2bebaf5 -o .
       - run: deno task build
