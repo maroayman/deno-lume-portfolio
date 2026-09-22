@@ -19,13 +19,13 @@ automates deployment, scaling, and management of containerized applications.
 
 ### Cluster Overview
 
-![Kubernetes Architecture](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
+![Kubernetes Architecture](/images/015-kubernetes-starter-guide/image03.svg)
 
 A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 
 ### Control Plane Components
 
-![Control Plane Components](https://www.cherryservers.com/v3/assets/blog/2025-05-19/img-01.png)
+![Control Plane Components](/images/015-kubernetes-starter-guide/image04.png)
 
 - API Server
 - etcd
@@ -34,7 +34,7 @@ A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 
 ## Worker Nodes & Pods
 
-![Pods and Nodes](https://images.ctfassets.net/w1bd7cq683kz/5Ex6830HzBPU5h8Ou8xQAB/2c948105fc10094348203bec6c1eab04/Kubernetes_20architecture_20diagram.png)
+![Pods and Nodes](/images/015-kubernetes-starter-guide/image05.png)
 
 - Nodes run workloads
 - Pods are the smallest deployable unit
@@ -54,9 +54,9 @@ Manage replicas, rolling updates, and self‑healing.
 
 Expose applications and provide stable networking.
 
-![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-node-port-diagram.41bb0147.webp)
+![NodePort Service](/images/015-kubernetes-starter-guide/image01.svg)
 
-![Service Networking](https://www.scaleway.com/en/docs/_next/static/media/scaleway-l-b-diagram.f1e36310.webp)
+![LoadBalancer Service](/images/015-kubernetes-starter-guide/image02.svg)
 
 ## Configuration & Secrets
 

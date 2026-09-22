@@ -48,9 +48,9 @@ ps aux
 ps -ef
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391176354/6a00dc89-cb0f-40ea-b324-d32ea64c7467.png)
+![](/images/008-linux-process-management/image01.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391188908/bac2beed-285d-4132-8539-39c82fd57512.png)
+![](/images/008-linux-process-management/image02.png)
 
 ### Jobs vs Processes
 
@@ -112,21 +112,21 @@ kill -KILL <pid>
 
 - `top` / `htop` → CPU & memory usage
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391741714/624af3a1-b303-4284-bfa5-f4dba15c0b09.png)
+![](/images/008-linux-process-management/image03.png)
 
 - `ps -ejH` → process tree
 
-- ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391771358/0ffd2787-4ba2-4324-a382-3166c6b5cf2e.png)
+- ![](/images/008-linux-process-management/image04.png)
 
 - `pstree -p` → tree view
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391795599/d295ef05-0d28-46b0-9e94-a3e5bb606162.png)
+![](/images/008-linux-process-management/image05.png)
 
 - `watch -n 2 ps aux | grep python` → auto-refresh
 
 - `lsof -p <pid>` → open files
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757391905451/f7317824-5fd7-4697-bfc5-a7cf021a9384.png)
+![](/images/008-linux-process-management/image06.png)
 
 ### Killing & Managing Processes
 

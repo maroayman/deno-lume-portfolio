@@ -36,7 +36,7 @@ directories**. This is where Linux becomes fun — and powerful.
 - I created a folder called "practice" in the home directory using
   `mkdir practice` and then entered it to run all the commands for this section.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039181087/b0a47765-31b7-4b43-901c-0905025e3f39.png)
+![](/images/006-linux-file-management/image01.png)
 
 - Create empty file:
 
@@ -44,7 +44,7 @@ directories**. This is where Linux becomes fun — and powerful.
   touch notes.txt
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039236375/8c68a430-43e0-408a-8e84-cd7e697156e1.png)
+  ![](/images/006-linux-file-management/image02.png)
 
 - Create a directory: (You'll notice that directories are colored in blue)
 
@@ -52,7 +52,7 @@ directories**. This is where Linux becomes fun — and powerful.
   mkdir projects
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039262879/2f3e752c-0fbb-41bd-af79-4a14476b37a6.png)
+  ![](/images/006-linux-file-management/image03.png)
 
 - Create nested directories:
 
@@ -60,12 +60,12 @@ directories**. This is where Linux becomes fun — and powerful.
   mkdir -p projects/app/src
   ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039262879/2f3e752c-0fbb-41bd-af79-4a14476b37a6.png)
+![](/images/006-linux-file-management/image03.png)
 
 - You can see how in both lines we check the first nested directory, and then in
   the next line, we check another nested one inside `projects/app`.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039423240/ed16efdc-5aa8-4044-8088-38bdcc2dbe1b.png)
+![](/images/006-linux-file-management/image04.png)
 
 ## Copying and Moving Files
 
@@ -75,7 +75,7 @@ directories**. This is where Linux becomes fun — and powerful.
   cp notes.txt notes2.txt
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039576750/d4cfb503-edfb-4568-a607-991c9aea4176.png)
+  ![](/images/006-linux-file-management/image05.png)
 
   - Copy directory
 
@@ -83,7 +83,7 @@ directories**. This is where Linux becomes fun — and powerful.
     cp -r projects projects2/
     ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757039667279/7889226c-7bf9-45ba-8271-307c46a741d5.png)
+  ![](/images/006-linux-file-management/image06.png)
 
   - Move file:
 
@@ -91,7 +91,7 @@ directories**. This is where Linux becomes fun — and powerful.
     mv notes.txt projects/
     ```
 
-    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040362059/9310e688-f5f8-4eaf-ada9-bbbe0083bbf0.png)
+    ![](/images/006-linux-file-management/image07.png)
 
   - Rename file:
 
@@ -99,7 +99,7 @@ directories**. This is where Linux becomes fun — and powerful.
     mv notes2.txt notes3.txt
     ```
 
-    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040499265/de37ae32-788a-44c4-b446-5c9c533643c0.png)
+    ![](/images/006-linux-file-management/image08.png)
 
 ## Deleting Files and Directories
 
@@ -109,7 +109,7 @@ directories**. This is where Linux becomes fun — and powerful.
       rm notes.txt
       ```
 
-      ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040690664/c9c4d3b1-64d2-44e6-b4d5-80167ce93167.png)
+      ![](/images/006-linux-file-management/image09.png)
 
     - Delete multiple files:
 
@@ -117,7 +117,7 @@ directories**. This is where Linux becomes fun — and powerful.
       rm notes2.txt notes3.txt
       ```
 
-      ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040734073/8f2caa4a-1828-4ba7-8cde-ac6fd3a1b639.png)
+      ![](/images/006-linux-file-management/image10.png)
 
     - Delete directory (recursively):
 
@@ -125,7 +125,7 @@ directories**. This is where Linux becomes fun — and powerful.
       rm -r projects2/
       ```
 
-      ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040766844/3a1fe507-1772-44e1-95a2-d80819d2a386.png)
+      ![](/images/006-linux-file-management/image11.png)
 
     - Safer delete with confirmation:\
       You can confirm your choice by typing either (Yes/No) or (Y/N).
@@ -134,7 +134,7 @@ directories**. This is where Linux becomes fun — and powerful.
       rm -i notes1.txt
       ```
 
-      ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757040908300/89548b16-ded5-42cc-9096-a3ce71e3c5c6.png)
+      ![](/images/006-linux-file-management/image12.png)
 
 > ⚠️ Warning: Be careful with rm -rf /. It can wipe your system.
 
@@ -142,20 +142,20 @@ directories**. This is where Linux becomes fun — and powerful.
 
 - Show whole file: `cat notes.txt`
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041147347/29760cba-1ae7-41cb-9cd8-0e35af80e4bd.png)
+![](/images/006-linux-file-management/image13.png)
 
 - Scroll through: `less notes.txt`
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041217722/7e751882-a391-4448-a515-4ed4318b8f3c.png)
+![](/images/006-linux-file-management/image14.png)
 
 - Show the top lines: `head -n 10 notes.txt` (you can replace 10 with the number
   of lines you want from the top)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041249294/d180f911-e07b-4022-8217-f2a53704d154.png)
+![](/images/006-linux-file-management/image15.png)
 
 - Show bottom lines: `tail -n 10 notes.txt`
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041299846/46b98a5e-a6b4-4c7f-b25b-2a9ca6115cce.png)
+![](/images/006-linux-file-management/image16.png)
 
 - Follow logs in real time:
 
@@ -168,7 +168,7 @@ directories**. This is where Linux becomes fun — and powerful.
 I have prepared a directory to apply our new practices on file globbing and
 wildcards. Follow the steps in the next screenshots and instructions.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041740143/ed79af16-1a94-4cd2-965b-e35efbdbbdf9.png)
+![](/images/006-linux-file-management/image17.png)
 
 ### Copy all .txt files into a folder
 
@@ -177,7 +177,7 @@ mkdir texts
 cp *.txt texts/
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757041870168/a960d78a-3892-4c1a-9c46-9d5dbee5ce05.png)
+![](/images/006-linux-file-management/image18.png)
 
 ### Move only report1.pdf and report2.pdf
 
@@ -186,7 +186,7 @@ mkdir reports
 mv report[1-2].pdf reports/
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757042029659/3ff7053f-3bdc-4fd9-82c0-0247c6053dbf.png)
+![](/images/006-linux-file-management/image19.png)
 
 ### Delete only January–June backups
 
@@ -194,7 +194,7 @@ mv report[1-2].pdf reports/
 rm backup_2023-0[1-6]*.tar.gz
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757042433267/c3c70251-d9d6-4f92-8541-1c5cdb13eded.png)
+![](/images/006-linux-file-management/image20.png)
 
 > 💡 **In this specific command, the** `*` **acts as a wildcard to match any
 > characters that might appear after** `2023-0[1-6]` **and before** `.tar.gz`
@@ -202,7 +202,7 @@ rm backup_2023-0[1-6]*.tar.gz
 
 ### View only image files starting with "image"
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043180942/a7c20aa4-69ce-44ed-9e51-02c803290ab6.png)
+![](/images/006-linux-file-management/image21.png)
 
 ### Concatenate text files into one
 
@@ -210,7 +210,7 @@ rm backup_2023-0[1-6]*.tar.gz
 cat file?.txt > combined.txt
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043405195/5b6d4405-e692-4623-bd6b-e87406a3e70b.png)
+![](/images/006-linux-file-management/image22.png)
 
 ### Tar archive all PDF reports
 
@@ -218,7 +218,7 @@ cat file?.txt > combined.txt
 tar -czf reports.tar.gz report*.pdf
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757043492581/2e39992a-9370-4a9e-99bd-826f1ec681a8.png)
+![](/images/006-linux-file-management/image23.png)
 
 Once you're comfortable with the basics, here are some **real-world use cases**
 where globbing saves tons of time:
@@ -304,7 +304,7 @@ Try these on your own:
   cd /home/<your-username>/projects
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757044032897/ba69b41b-8e59-49d5-bf2d-98bd31eb75a5.png)
+  ![](/images/006-linux-file-management/image24.png)
 
 - **Relative path** → relative to your current directory
 
@@ -312,7 +312,7 @@ Try these on your own:
   cd ../projects
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757044169091/f7ecd48b-52ca-40b4-b2f9-1f835a5f0c7d.png)
+  ![](/images/006-linux-file-management/image25.png)
 
 💡 **Pro Tip:** Use `~` for your home directory:
 
@@ -329,7 +329,7 @@ cd ~/Downloads # Replace Downloads with any folder your have in username home fo
   # Replace file.txt with the original filename / Replace file_hard.txt with the new link name.
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757045034250/50c3e70e-77d4-45a4-baad-598eee68250a.png)
+  ![](/images/006-linux-file-management/image26.png)
 
 - **Identical:** The hard link is indistinguishable from the original file. Both
   have the same size, permissions, and owner, and both point to the same data.
@@ -347,9 +347,9 @@ cd ~/Downloads # Replace Downloads with any folder your have in username home fo
   ln -s /var/log/syslog syslog_link # It can work with files and directories!
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757045349927/0914e61e-6931-4534-8442-5184147a34cc.png)
+  ![](/images/006-linux-file-management/image27.png)
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757045393157/3ec6a293-2d0f-4750-8e17-88b9ace07c01.png)
+  ![](/images/006-linux-file-management/image28.png)
 
   - 1 - We use soft links with files.
 

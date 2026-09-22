@@ -115,7 +115,7 @@ Ensure you’re running **Windows 11**:
 2. Search for the distro name (e.g., Ubuntu)
 3. Click **Install**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756519230527/46af053c-43b2-43a7-9cdf-af58fe08d558.png)**
+![](/images/003-linux-wsl-beginners/image01.png)**
 
 #### Method 2: Command Line
 
@@ -124,7 +124,7 @@ wsl --list --online
 wsl --install -d <DistroName>
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756519938852/28796004-e4cb-4528-aaf4-9ed2ede925ff.png)
+![](/images/003-linux-wsl-beginners/image02.png)
 
 ```bash
 wsl --list --online
@@ -184,7 +184,7 @@ wsl --set-default kali-linux
 - Click the dropdown arrow next to `+`
 - Select your distro
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756520591467/edce4a58-1679-47ca-9319-7df23504b6ec.png)
+![](/images/003-linux-wsl-beginners/image03.png)
 
 ---
 
@@ -206,9 +206,9 @@ VS Code will open connected directly to your Linux filesystem.
 - **Windows → Linux:** `\wsl.localhost`
 - **Linux → Windows:** `/mnt/c`, `/mnt/d`, etc.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756520788375/67ce884d-72ff-48bc-90cf-d1ac7eecdc84.png)
+![](/images/003-linux-wsl-beginners/image04.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756520949762/f70651a8-2fff-471b-87f3-43c97c1c96ff.png)
+![](/images/003-linux-wsl-beginners/image05.png)
 
 ---
 

@@ -23,7 +23,7 @@ what you need quickly.
 (root). All files, programs, devices, and even drives are located under this
 root.
 
-![Filesystem – Source: FutureLearn](https://cdn-wordpress-info.futurelearn.com/info/wp-content/uploads/a2794f8f-b0c1-468d-89c6-bcf29d2d6517-1.png)
+![Filesystem – Source: FutureLearn](/images/004-linux-filesystem-overview/image01.png)
 
 ---
 

@@ -22,7 +22,7 @@ creating partitions, formatting, and monitoring disk health.
 
   (Shows disk space usage in a human-readable format)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758536501246/7ea7672e-d2a4-4485-8838-4680cdc7ae6c.png)
+![](/images/010-linux-disk-management/image01.png)
 
 - **Check directory/file usage**
 
@@ -31,9 +31,9 @@ creating partitions, formatting, and monitoring disk health.
   du -h --max-depth=1 /var
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758536578622/7adf6ba7-7706-4d5a-9dd2-0d6fc9619717.png)
+  ![](/images/010-linux-disk-management/image02.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758536639098/6454331a-47d2-4fd0-b3ec-9a277a5b2c55.png)
+![](/images/010-linux-disk-management/image03.png)
 
 > 💡 **Note:** You can adjust the depth level based on how deeply you want to
 > check the folder structure of a specific directory.
@@ -44,7 +44,7 @@ creating partitions, formatting, and monitoring disk health.
   lsblk
   ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758538458235/3550a333-4b8f-4d6b-87d5-7bc8ee3a02bc.png)
+![](/images/010-linux-disk-management/image04.png)
 
 ## Mounting and Unmounting
 
@@ -91,7 +91,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   sudo fdisk -l
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758538510622/73c87b76-89cc-4232-bf62-9bcc109a3a32.png)
+  ![](/images/010-linux-disk-management/image05.png)
 
 - **Create/modify partitions** (interactive tools):
 
@@ -125,7 +125,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   iostat
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758539317757/7feb63e4-b4a2-4887-a150-7764bfb21b6b.png)
+  ![](/images/010-linux-disk-management/image06.png)
 
 - **SMART monitoring** (for hardware health)
 
@@ -140,7 +140,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   sudo smartctl -a /dev/sda
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758539056282/598fc1e1-5e48-4d8a-b109-460b53c14b8c.png)
+  ![](/images/010-linux-disk-management/image07.png)
 
 - **Check disk usage in real time**
 
@@ -151,7 +151,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   iotop
   ```
 
-  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758538730953/e8d006d7-f109-4e02-9298-c6c60c7fe57a.png)
+  ![](/images/010-linux-disk-management/image08.png)
 
 **Key Takeaways**
 

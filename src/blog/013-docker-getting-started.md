@@ -23,7 +23,7 @@ Docker brings many benefits to developers and teams:
 
 Here is a diagram showing the difference between Docker and virtual machines.
 
-![Docker vs Virtual Machines](https://www.c-sharpcorner.com/article/docker-vs-virtual-machines-vms/Images/Docker-.jpg)
+![Docker vs Virtual Machines](/images/013-docker-getting-started/image01.svg)
 
 ## Installing Docker
 
@@ -44,7 +44,7 @@ Let’s go through them:
 docker --version
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1759039419216/cc7f4372-18fc-46a6-bc10-980319de05d2.png)
+![](/images/013-docker-getting-started/image02.png)
 
 ### 2\. macOS
 
@@ -153,7 +153,7 @@ What happens here?
 Congratulations 🎉 — you’ve successfully set up Docker and launched your first
 container!
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1759039502345/430311b4-383d-44fa-bf7d-dbbd7ae7b3e5.png)
+![](/images/013-docker-getting-started/image03.png)
 
 ## Key Terms to Remember
 

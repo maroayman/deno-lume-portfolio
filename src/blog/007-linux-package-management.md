@@ -67,9 +67,9 @@ sudo apt update            # refresh package list
 sudo apt install nginx     # install Nginx web server
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195289854/e0678282-2db5-45a9-8420-8be84b76a794.png)
+![](/images/007-linux-package-management/image01.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195310098/798203a5-bfca-4510-96e9-ba5bd9ce5f98.png)
+![](/images/007-linux-package-management/image02.png)
 
 ### Fedora / CentOS 8+ / RHEL 8+
 
@@ -79,7 +79,7 @@ sudo apt install nginx     # install Nginx web server
 sudo dnf install nginx
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195395366/4f6b90c3-868d-4b7c-ae61-0168528b526a.png)
+![](/images/007-linux-package-management/image03.png)
 
 ### CentOS 7 / RHEL 7
 
@@ -102,7 +102,7 @@ sudo apt remove nginx
 sudo apt autoremove     # clean up unused dependencies
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1757195639864/b8e0082e-f02f-4834-8a4e-58fc5eef3629.png)
+![](/images/007-linux-package-management/image04.png)
 
 ### Fedora / CentOS / RHEL
 

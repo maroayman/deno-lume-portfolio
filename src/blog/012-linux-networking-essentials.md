@@ -34,7 +34,7 @@ A network interface is the connection between your Linux machine and the network
 ip link show
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758419498273/d8af3d84-c4d0-4a96-8bda-f83d4acf1f73.png)
+![](/images/012-linux-networking-essentials/image01.png)
 
 ## IP Addressing Basics
 
@@ -50,7 +50,7 @@ Every network interface needs an IP address to communicate.
 ip addr show
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758419731162/edea7292-4f33-4211-8bc0-b65097816e37.png)
+![](/images/012-linux-networking-essentials/image02.png)
 
 **Assign an IP manually**:
 
@@ -90,7 +90,7 @@ nameserver 8.8.8.8
 nameserver 1.1.1.1
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758420352550/cbdd8d97-ec68-41a8-a643-4e6adfa08738.png)
+![](/images/012-linux-networking-essentials/image03.png)
 
 **Test DNS resolution**:
 
@@ -99,9 +99,9 @@ dig google.com
 nslookup github.com
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758420634451/d6d7be1f-8a0f-4844-8d7d-419b1d6fa6fc.png)
+![](/images/012-linux-networking-essentials/image04.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758420652273/6944c40e-01fc-40d0-9542-0684f5f10492.png)
+![](/images/012-linux-networking-essentials/image05.png)
 
 ## Essential Networking Commands
 
@@ -110,25 +110,25 @@ Linux:
 
 - `ping` → Test connectivity
 
-- ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758421472518/d0305789-da2e-44e7-8422-794a042b5caa.png)
+- ![](/images/012-linux-networking-essentials/image06.png)
 
 - `traceroute` → Trace the path packets take
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758421508634/5a25d85c-fc60-4b66-b524-c21a4eceea9d.png)
+![](/images/012-linux-networking-essentials/image07.png)
 
 - `curl` / `wget` → Fetch URLs
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758421538437/224dbae3-824b-4171-901f-9d577474a46b.png)
+![](/images/012-linux-networking-essentials/image08.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758422524587/0561d6cd-5573-4021-9c5c-fdc5e3747a18.png)
+![](/images/012-linux-networking-essentials/image09.png)
 
 - `netstat` or `ss` → View open ports and connections
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758422935765/0316929c-cc8d-43c4-bfd9-a4c7d09b1673.png)
+![](/images/012-linux-networking-essentials/image10.png)
 
 - `tcpdump` → Capture network packets
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758423358765/d9097263-16c2-46a4-9300-4b6291dcf445.png)
+![](/images/012-linux-networking-essentials/image11.png)
 
 ## Hands-on Labs
 

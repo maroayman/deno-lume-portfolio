@@ -36,7 +36,7 @@ Instead of deleting all old Pods at once, Kubernetes:
 2. Gradually terminates old Pods
 3. Maintains availability during the process
 
-![Rolling Update Visualization](https://velog.velcdn.com/images/salgu1998/post/a01256b0-5403-4c73-b41a-7cb71b3bae48/image.png)
+![Rolling Update Visualization](/images/017-kubernetes-deployments-part2/image01.png)
 
 ---
 
@@ -127,7 +127,7 @@ Blue/Green means:
 
 Instead of updating Pods gradually, you deploy a separate environment.
 
-![Blue Green Diagram](https://docs.rafay.co/learn/gitops/deploy/img/part4/blue-green.jpeg)
+![Blue Green Diagram](/images/017-kubernetes-deployments-part2/image02.jpg)
 
 ### How It Works
 
@@ -149,7 +149,7 @@ Example:
 - 90% traffic → old version
 - 10% traffic → new version
 
-![Canary Deployment Diagram](https://docs.rafay.co/learn/gitops/deploy/img/part5/canary.png)
+![Canary Deployment Diagram](/images/017-kubernetes-deployments-part2/image03.png)
 
 Canary requires:
 

@@ -39,7 +39,7 @@ ssh -i your-key.pem ec2-user@<your-ec2-public-ip>
 Here is a list of all python packages needed for the deployment. Keep in mind
 the current working Python version is (3.9.23)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1752670748507/c170cd04-4e57-456f-ae6c-c67c87b83044.png)
+![](/images/001-flask-mariadb-ec2-deploy/image01.png)
 
 This command is for installing the required packages
 
@@ -197,7 +197,7 @@ http://<your-ec2-public-ip>:5000
 
 Here is a screenshot of the app while its running.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1752732311848/62e601e9-6028-4862-a6d0-096f229476a7.png)
+![](/images/001-flask-mariadb-ec2-deploy/image02.png)
 
 ## Summary for the project requirements
 

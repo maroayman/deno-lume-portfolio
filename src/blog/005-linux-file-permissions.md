@@ -44,7 +44,7 @@ Let’s see ownership in action:
 ls -l
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756780254658/29d56cde-972e-4680-a006-81e5fc7f36f7.png)
+![](/images/005-linux-file-permissions/image01.png)
 
 ## Understanding Permissions
 
@@ -84,7 +84,7 @@ Grant execute permission to the user:
 chmod u+x script.sh
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756780715788/43fafdd6-efe7-404f-88c6-b39e7c7ccfd3.png)
+![](/images/005-linux-file-permissions/image02.png)
 
 In the previous example, we used the command on the `notes.txt` file. You can
 see that the file name changed color to green, indicating it is now executable.
@@ -97,7 +97,7 @@ Add write permission for group:
 chmod g-w notes.txt
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756781269787/2e81bab6-7bfd-491b-9750-559a4e08eef0.png)
+![](/images/005-linux-file-permissions/image03.png)
 
 You can see how the write permission is removed from the group in the second
 photo.
@@ -116,7 +116,7 @@ Example:
 chmod 755 script.sh
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756781420561/861130e4-491d-4f5b-b6ed-09e91d530ee0.png)
+![](/images/005-linux-file-permissions/image04.png)
 
 Breakdown:
 
@@ -184,7 +184,7 @@ You can view an example of umask in the shell screenshot, which illustrates how
 default permissions are applied to new files and directories based on the umask
 value.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1756782933815/f215fbef-bc9e-4e23-a119-bb154361a069.png)
+![](/images/005-linux-file-permissions/image05.png)
 
 > **Trivia: Why Files Start at** `666` and Directories at `777`
 >

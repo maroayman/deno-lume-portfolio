@@ -35,7 +35,7 @@ them all at once.
    echo "Hello, World!"
    ```
 
-   ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521710888/8171c72b-f741-4701-a91a-94463d036566.png)
+   ![](/images/011-linux-shell-scripting-basics/image01.png)
 
 3. Save and exit.
 
@@ -51,7 +51,7 @@ them all at once.
    ./hello.sh
    ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521771838/d6faf2d2-de2d-46e9-a367-51dbdb0a1a1a.png)
+![](/images/011-linux-shell-scripting-basics/image02.png)
 
 ## Variables in Shell Scripts
 
@@ -63,7 +63,7 @@ name="Marwan"
 echo "Hello, $name!"
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521880714/c474ab53-b834-4213-95b2-29d952f4a748.png)
+![](/images/011-linux-shell-scripting-basics/image03.png)
 
 Output:
 
@@ -71,7 +71,7 @@ Output:
 Hello, Marwan!
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758521866033/d65dea0a-ab8f-47ef-b9fb-3a90d27871de.png)
+![](/images/011-linux-shell-scripting-basics/image04.png)
 
 ## Conditional Statements
 
@@ -86,9 +86,9 @@ else
 fi
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523640950/ffa32597-004a-4462-985e-5951169022ab.png)
+![](/images/011-linux-shell-scripting-basics/image05.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523652283/ada038b7-c28d-4d0c-9c12-85c739ab10e3.png)
+![](/images/011-linux-shell-scripting-basics/image06.png)
 
 ## Loops
 
@@ -104,9 +104,9 @@ do
 done
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523695962/a21c06e1-7f34-4257-b5d9-7a2568a9ca1c.png)
+![](/images/011-linux-shell-scripting-basics/image07.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523724079/916dc554-1bdf-4c31-90ab-fc698cb7cda4.png)
+![](/images/011-linux-shell-scripting-basics/image08.png)
 
 ### While Loop Example:
 
@@ -120,9 +120,9 @@ do
 done
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523770304/1e0a8066-3d00-42f4-986a-f071a9aa13d3.png)
+![](/images/011-linux-shell-scripting-basics/image09.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523803434/1f7c1ce2-1f04-4424-83a5-6159e81c076b.png)
+![](/images/011-linux-shell-scripting-basics/image10.png)
 
 ## Functions
 
@@ -136,9 +136,9 @@ greet() {
 greet "Linux User"
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523831613/c741a068-5906-4f7b-9528-97db074b727c.png)
+![](/images/011-linux-shell-scripting-basics/image11.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1758523852554/e1bb985d-3741-487a-89b6-69dd42438d06.png)
+![](/images/011-linux-shell-scripting-basics/image12.png)
 
 ## Useful Commands in Scripts
 

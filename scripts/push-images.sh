@@ -21,6 +21,7 @@ for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
     --pin) PIN=1 ;;
+    --) ;; # bare separator forwarded by `deno task x -- ...`
     -h|--help)
       sed -n '2,/^set /p' "$0"
       exit 0

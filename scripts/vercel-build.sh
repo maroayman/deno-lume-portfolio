@@ -8,7 +8,7 @@ curl -fsSL "https://github.com/oras-project/oras/releases/download/v${ORAS_VERSI
 mkdir -p "$HOME/.oras"
 tar -zxf /tmp/oras.tar.gz -C "$HOME/.oras"
 export PATH="$HOME/.oras:$PATH"
-oras pull ghcr.io/maroayman/images@sha256:393b8aaf0191ebbd9f3d231d5f9399136e5a9733f3c110572101bb69f2bebaf5 -o .
+oras pull ghcr.io/maroayman/images@sha256:0f1ce542ac77052d3fbd4115661b762b654d5d296520fa1f13451d38be3dc4e1 -o .
 
 DENO_VERSION=2.9.1
 curl -fsSL https://deno.land/install.sh | sh -s "v${DENO_VERSION}"
