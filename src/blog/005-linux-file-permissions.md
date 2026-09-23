@@ -164,7 +164,7 @@ So far, you’ve learned how to view and modify permissions, but did you know
 Linux uses a setting called `umask` (user file-creation mode mask) to determine
 **default permissions**.
 
-#### 🔹 How `umask` works:
+### 🔹 How `umask` works:
 
 - New files start with `666` (read and write for everyone) **minus** the
   `umask`.

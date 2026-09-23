@@ -32,7 +32,7 @@ This guide will walk you from the basics of **jobs in your shell** to the
 advanced topics of **daemonization, scheduling, and resource control** — with
 **hands-on exercises** so you can practice along the way.
 
-### Understanding Processes
+## Understanding Processes
 
 - Every running program = **process**
 
@@ -52,7 +52,7 @@ ps -ef
 
 ![](/images/008-linux-process-management/image02.png)
 
-### Jobs vs Processes
+## Jobs vs Processes
 
 - **Job** → process started from your shell (`%1`, `%2`, …)
 
@@ -64,7 +64,7 @@ List jobs :
 jobs
 ```
 
-### Foreground & Background Jobs
+## Foreground & Background Jobs
 
 | Command / Keys | Action                 |
 | -------------- | ---------------------- |
@@ -76,7 +76,7 @@ jobs
 | `jobs`         | Show jobs              |
 | `disown %n`    | Detach from shell      |
 
-### Signals & Process Control
+## Signals & Process Control
 
 Linux uses **signals** to control processes.
 
@@ -98,7 +98,7 @@ kill -TERM <pid>
 kill -KILL <pid>
 ```
 
-### Process States
+## Process States
 
 | Code | State           | Meaning               |
 | ---- | --------------- | --------------------- |
@@ -108,7 +108,7 @@ kill -KILL <pid>
 | Z    | Zombie          | Finished, not cleaned |
 | D    | Uninterruptible | Waiting on I/O        |
 
-### Monitoring & Inspecting Processes
+## Monitoring & Inspecting Processes
 
 - `top` / `htop` → CPU & memory usage
 
@@ -128,7 +128,7 @@ kill -KILL <pid>
 
 ![](/images/008-linux-process-management/image06.png)
 
-### Killing & Managing Processes
+## Killing & Managing Processes
 
 - Kill by PID:
 
@@ -198,7 +198,7 @@ kill -KILL <pid>
 
   Rule of thumb: **try SIGTERM before SIGKILL**.
 
-  # Scheduling & Priorities (nice & renice)
+  ## Scheduling & Priorities (nice & renice)
 
   Linux allows you to control **how much CPU time** a process gets using
   **niceness values**.
@@ -225,7 +225,7 @@ kill -KILL <pid>
 
   - Only **root** can assign negative nice values (higher priority).
 
-  # Monitoring System Load
+  ## Monitoring System Load
 
   ### `uptime`
 

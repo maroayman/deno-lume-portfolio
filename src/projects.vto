@@ -20,13 +20,13 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
       {{ for project of projects }}
       <div class="card project-card" data-pagination-item>
         <div class="project-header">
-          <h3 class="project-title">
+          <h2 class="project-title">
             {{ if project.link }}
             <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
             {{ else }}
             {{ project.title }}
             {{ /if }}
-          </h3>
+          </h2>
           <span class="project-meta">{{ project.role }} · {{ project.period }}</span>
         </div>
         
