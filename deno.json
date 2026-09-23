@@ -27,6 +27,14 @@
       "description": "Push src/public/images to GHCR (-- --pin rewrites the digest pin)",
       "command": "bash scripts/push-images.sh"
     },
+    "images:sync": {
+      "description": "Delta-sync images into _site (only new/changed files transfer)",
+      "command": "mkdir -p _site/images && rsync -a --delete src/public/images/ _site/images/"
+    },
+    "dev:fast": {
+      "description": "Local build skipping bulk image copy + delta-sync (SKIP_IMAGES=1)",
+      "command": "SKIP_IMAGES=1 deno task build && deno task images:sync"
+    },
     "serve": {
       "description": "Run and serve the site for development",
       "command": "deno task build:sw && deno task lume -s"

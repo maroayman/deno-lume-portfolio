@@ -87,6 +87,12 @@ site.filter("slug", (text: string) => {
 site.add("styles");
 site.add("assets");
 site.add("public", ".");
+// Fast local loop: SKIP_IMAGES=1 drops the bulk image copy (CI/prod never
+// set this, so deploys always ship images). Pair with `images:sync`, which
+// delta-copies only new/changed files into _site/.
+if (Deno.env.get("SKIP_IMAGES") === "1") {
+  site.ignore("public/images");
+}
 site.add([".pdf"]);
 
 site.data("layout", "layouts/blog.vto", "/blog");
