@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # Keeps checkout / setup-deno / setup-oras pinned without manual watching.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

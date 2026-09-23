@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
 
+# Superseded runs never waste minutes: only the latest per ref finishes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -17,6 +22,7 @@ jobs:
       - run: deno task lint
       - run: deno fmt --check src/ _config.ts scripts/
       - run: deno task check:content
+      - run: deno task check:pins
       - uses: oras-project/setup-oras@v1
       - run: oras pull ghcr.io/maroayman/images@sha256:0f1ce542ac77052d3fbd4115661b762b654d5d296520fa1f13451d38be3dc4e1 -o .
       - run: deno task build
