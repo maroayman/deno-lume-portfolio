@@ -104,6 +104,12 @@ function getStrategy(request) {
   if (url.pathname.endsWith('.pdf')) {
     return { type: 'stale-while-revalidate', ...CACHE_STRATEGIES.pdfs };
   }
+  // Web app manifest: tiny, fetched on every load for installability check.
+  // SWR gives instant repeat visits + background refresh. Without this the
+  // request bypasses the SW entirely (destination is "manifest"/empty).
+  if (url.pathname.endsWith('.webmanifest') || request.destination === 'manifest') {
+    return { type: 'stale-while-revalidate', ...CACHE_STRATEGIES.static };
+  }
   if (request.destination === 'style' || request.destination === 'script') {
     return { type: 'cache-first', ...CACHE_STRATEGIES.static };
   }

@@ -17,7 +17,7 @@ echo "oras: $(oras version 2>/dev/null | head -n 1)"
 oras pull ghcr.io/maroayman/images@sha256:0f1ce542ac77052d3fbd4115661b762b654d5d296520fa1f13451d38be3dc4e1 -o .
 echo "images: $(find src/public/images -type f | wc -l) files restored from GHCR"
 
-DENO_VERSION=2.9.1
+DENO_VERSION=2.9.7
 if [ ! -x "$HOME/.deno/bin/deno" ]; then
   curl -fsSL https://deno.land/install.sh | sh -s "v${DENO_VERSION}"
 fi

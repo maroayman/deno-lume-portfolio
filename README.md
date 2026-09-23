@@ -43,7 +43,7 @@ registry to maintain.
 
 ### Prerequisites
 
-- [Deno](https://deno.land/) **2.9.1** (pinned in `.deno-version`)
+- [Deno](https://deno.land/) **2.9.7** (pinned in `.deno-version`)
 
 ### Installation
 

@@ -3,7 +3,7 @@
 The blog is already integrated in this repository and runs on the same pinned
 runtime/tooling as the rest of the site:
 
-- Deno: `2.9.1` (see `.deno-version`)
+- Deno: `2.9.7` (see `.deno-version`)
 - Lume: `3.2.6` (see `deno.json` imports)
 
 ## Key files
