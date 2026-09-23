@@ -19,6 +19,7 @@ for file in $staged_files; do
 done
 
 format_files=""
+lint_files=""
 for file in $staged_files; do
   case "$file" in
     src/*.vto|src/*.css|src/*.js|src/*.ts|_config.ts)
@@ -27,10 +28,20 @@ for file in $staged_files; do
       fi
       ;;
   esac
+  case "$file" in
+    src/*.js|src/*.ts|_config.ts|scripts/*.js|scripts/*.ts)
+      if [ -f "$file" ]; then
+        lint_files="$lint_files $file"
+      fi
+      ;;
+  esac
 done
 
 if [ -n "$format_files" ]; then
   deno fmt $format_files
-  deno lint $format_files
   git add $format_files
+fi
+
+if [ -n "$lint_files" ]; then
+  deno lint $lint_files
 fi

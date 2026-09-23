@@ -8,7 +8,6 @@ import markdown from "lume/plugins/markdown.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import inline from "lume/plugins/inline.ts";
 import feed from "lume/plugins/feed.ts";
-import googleFonts from "lume/plugins/google_fonts.ts";
 import purgecss from "lume/plugins/purgecss.ts";
 import markdownTabs from "./plugins/markdown-tabs.ts";
 
@@ -58,13 +57,9 @@ site.hooks.addMarkdownItPlugin((md: any) => {
   };
 });
 site.use(date());
-site.use(googleFonts({
-  cssFile: "styles/main.css",
-  placeholder: "/* google-fonts */",
-  subsets: ["latin", "arabic"],
-  fonts:
-    "https://fonts.google.com/share?selection.family=Archivo:wdth,wght@75..125,400..800|IBM+Plex+Sans+Arabic:wght@300;400;500;600|Reem+Kufi:wght@400..700",
-}));
+// NOTE: fonts used to come from the googleFonts plugin (network fetch per
+// build). The @font-face rules + woff2 files are now vendored:
+// CSS lives at the top of src/styles/main.css, files in src/public/fonts/.
 site.use(slugifyUrls());
 
 /**
