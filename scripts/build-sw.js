@@ -33,6 +33,14 @@ const SW_SOURCE = `const CACHE_VERSION = '${CACHE_VERSION}';
 const PRECACHE_ASSETS = [
   '/',
   '/404.html',
+  // Shell assets — stable paths, so precaching is safe. A single failure
+  // must not kill install (see catch below).
+  '/styles/main.css',
+  '/styles/blog.css',
+  '/styles/pages.css',
+  '/assets/blog-list.js',
+  '/assets/blog-post.js',
+  '/site.webmanifest',
 ];
 
 const CACHE_STRATEGIES = {

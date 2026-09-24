@@ -13,7 +13,16 @@ export default function* (
   { slug }: Lume.Helpers,
 ): Generator<Partial<Lume.Data>> {
   // Collect every unique tag used across all blog posts.
-  const allPosts = search.pages("type=post", "date=desc") as Lume.Data[];
+  // date=desc with title=asc tiebreak (Lume ignores multi-field order
+  // strings) so same-date posts sort deterministically everywhere.
+  const allPosts = (search.pages("type=post", "date=desc") as Lume.Data[])
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.date as string).getTime() -
+          new Date(a.date as string).getTime() ||
+        String(a.title).localeCompare(String(b.title)),
+    );
   const tagSet = new Set<string>();
   for (const post of allPosts) {
     if (Array.isArray(post.tags)) {

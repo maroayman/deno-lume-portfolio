@@ -33,6 +33,11 @@ done
 cd "$(dirname "$0")/.."
 REGISTRY="ghcr.io/maroayman/images"
 
+# mktemp avoids collisions between parallel runs and guarantees cleanup.
+LIST_FILE=$(mktemp /tmp/opencode-images-list.XXXXXX)
+PUSH_LOG=$(mktemp /tmp/opencode-oras-push.XXXXXX)
+trap 'rm -f "$LIST_FILE" "$PUSH_LOG"' EXIT INT TERM
+
 command -v oras >/dev/null 2>&1 || {
   echo "error: oras not found (local: /usr/local/bin/oras, CI: oras-project/setup-oras)" >&2
   exit 1
@@ -45,7 +50,6 @@ fi
 
 # Collect files as <path>:<media-type>, preserving repo-relative titles so
 # `oras pull ... -o .` restores src/public/images/... exactly.
-set --
 find src/public/images -type f | sort | while IFS= read -r f; do
   case "$f" in
     *.jpg|*.jpeg) printf '%s:%s\n' "$f" "image/jpeg" ;;
@@ -56,22 +60,22 @@ find src/public/images -type f | sort | while IFS= read -r f; do
     *.gif) printf '%s:%s\n' "$f" "image/gif" ;;
     *) printf '%s:%s\n' "$f" "application/octet-stream" ;;
   esac
-done >/tmp/opencode-images-list.txt
+done >"$LIST_FILE"
 
-if [ ! -s /tmp/opencode-images-list.txt ]; then
+if [ ! -s "$LIST_FILE" ]; then
   echo "error: no files under src/public/images" >&2
   exit 1
 fi
 
 if [ "$DRY_RUN" = "1" ]; then
-  echo "Would push $REGISTRY:$TAG with $(wc -l < /tmp/opencode-images-list.txt) file(s):"
-  cat /tmp/opencode-images-list.txt
+  echo "Would push $REGISTRY:$TAG with $(wc -l < "$LIST_FILE") file(s):"
+  cat "$LIST_FILE"
   exit 0
 fi
 
 # shellcheck disable=SC2046
-oras push "$REGISTRY:$TAG" $(cat /tmp/opencode-images-list.txt) 2>&1 | tee /tmp/opencode-oras-push.log
-DIGEST=$(grep -o 'sha256:[0-9a-f]\{64\}' /tmp/opencode-oras-push.log | tail -n 1)
+oras push "$REGISTRY:$TAG" $(cat "$LIST_FILE") 2>&1 | tee "$PUSH_LOG"
+DIGEST=$(grep -o 'sha256:[0-9a-f]\{64\}' "$PUSH_LOG" | tail -n 1)
 
 if [ -z "${DIGEST:-}" ]; then
   echo "error: could not parse digest from oras output" >&2
@@ -82,6 +86,8 @@ echo "Pushed $REGISTRY:$TAG"
 echo "Pinned: $REGISTRY@$DIGEST"
 
 if [ "$PIN" = "1" ]; then
+  # NOTE: `sed -i` without suffix is GNU sed (Linux). On macOS/BSD use
+  # `sed -i ''` or run the --pin step on Linux/CI.
   for f in .github/workflows/ci.yml deno.json scripts/vercel-build.sh; do
     sed -i "s|ghcr.io/maroayman/images@sha256:[0-9a-f]\\{64\\}|ghcr.io/maroayman/images@$DIGEST|" "$f"
   done

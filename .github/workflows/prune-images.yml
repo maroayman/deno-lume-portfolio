@@ -7,6 +7,11 @@ name: Prune images
 #
 # No checkout needed: the action works purely via the Packages API.
 # Run manually right after an image push, or let the weekly schedule handle it.
+#
+# Safety is structural, no extra guard needed: every push tags `:latest` and
+# pins that digest, so the pinned version is always tagged — and this job
+# only ever deletes *untagged* versions. CI's digest-pinned `oras pull`
+# would fail loudly if that invariant ever broke.
 on:
   schedule:
     - cron: "0 6 * * 0"

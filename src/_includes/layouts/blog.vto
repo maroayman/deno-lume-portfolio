@@ -104,7 +104,7 @@ layout: layouts/base.vto
 
     <!-- Related Posts -->
     {{ if tags }}
-    {{ set relatedPosts = search.pages("type=post", "date=desc").filter(p => p.url !== url && p.tags && p.tags.some(t => tags.includes(t))).slice(0, 3) }}
+    {{ set relatedPosts = search.pages("type=post", "date=desc").slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime() || String(a.title).localeCompare(String(b.title))).filter(p => p.url !== url && p.tags && p.tags.some(t => tags.includes(t))).slice(0, 3) }}
     {{ if relatedPosts.length > 0 }}
     <section class="related-posts" aria-labelledby="related-title">
       <h2 class="related-posts-title" id="related-title">Related Articles</h2>
@@ -113,7 +113,7 @@ layout: layouts/base.vto
         <a href="{{ post.url }}" class="related-post-card">
           {{ if post.cover }}
           <div class="related-post-cover">
-            <img src="{{ post.cover }}" alt="" width="1200" height="675" loading="lazy" decoding="async">
+            <img src="{{ post.cover.replace(/(\.[a-z]+)$/, "-thumb$1") }}" srcset="{{ post.cover.replace(/(\.[a-z]+)$/, "-thumb$1") }} 320w, {{ post.cover }} 1024w" sizes="(max-width: 700px) 100vw, 400px" alt="" width="1200" height="675" loading="lazy" decoding="async">
           </div>
           {{ /if }}
           <div class="related-post-content">

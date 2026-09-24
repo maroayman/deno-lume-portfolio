@@ -1,6 +1,6 @@
 ---
 title: "Linux File Management Made Simple: How to Copy, Move, Delete, and Organize"
-description: "Introduction So far in this series, you’ve:  Explored the Linux filesystem layout  Learned about permissions and ownership   Now it’s time to roll up your sleeves and actually work with files and dire"
+description: "Roll up your sleeves and work with files and directories: copy, move, delete, and organize like a pro."
 date: 2025-09-05
 tags:
   - Linux

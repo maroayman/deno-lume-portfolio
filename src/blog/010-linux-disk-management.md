@@ -1,6 +1,6 @@
 ---
 title: "Mastering Disk Management for Better Storage Control"
-description: "Disk management in Linux is about handling storage devices, partitions, and file systems to ensure proper allocation, performance, and data reliability. It includes tasks like checking available space"
+description: "Handle storage devices, partitions, and file systems: check available space, partition disks, and keep data reliable."
 date: 2025-09-22
 tags:
   - Linux

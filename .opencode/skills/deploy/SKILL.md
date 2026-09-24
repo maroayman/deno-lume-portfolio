@@ -24,12 +24,12 @@ Or use the `/deploy` command:
 
 **Vercel build command (runs on Vercel's infrastructure):**
 ```sh
-curl -fsSL https://deno.land/install.sh | sh
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-deno task build
-npx -y workbox-cli generateSW scripts/workbox-config.js
+bash scripts/vercel-build.sh
 ```
+
+The script installs pinned Deno (version from `.deno-version`) and ORAS,
+pulls digest-pinned images from GHCR, then runs `deno task build:all`.
+Kept as a script because `vercel.json` `buildCommand` must stay <= 256 chars.
 
 Output directory: `_site/`
 
@@ -41,21 +41,22 @@ Run locally when you want to deploy to Deno Deploy instead:
 deno task deploy
 ```
 
-This runs: `deno task lint && deno task check && deno task build && deno deploy deploy --prod --app portfolio`
+This runs: `deno task lint && deno task check && deno task build && deno deploy --prod --org maroayman --app deno-lume-portfolio`
 
 Config in `deno.json`:
 ```json
 "deploy": { "org": "maroayman", "app": "deno-lume-portfolio" }
 ```
 
-## Service worker — two separate build paths
+## Service worker — single build path
 
 | Environment | SW generator | Command |
 |---|---|---|
-| Local dev / local build | `scripts/build-sw.js` (hand-rolled, uses git SHA for cache version) | `deno task build:sw` |
-| Vercel | `scripts/workbox-config.js` (Workbox CLI) | `npx workbox-cli generateSW` |
+| Local dev / local build / Vercel | `scripts/build-sw.js` (hand-rolled, uses git SHA for cache version) | `deno task build:sw` |
 
-Both produce `_site/sw.js` with the same caching strategies. Do not confuse or merge them.
+`deno task build:all` runs `build` + `build:sw`. There is no Workbox
+config in this repo — do not run `workbox-cli generateSW`, it would
+overwrite the hand-rolled `_site/sw.js` and lose its eviction guards.
 
 **Local SW build is required before serving:**
 ```bash
@@ -67,10 +68,10 @@ deno task dev     # alias for serve
 
 ```bash
 deno task dev        # build:sw + lume dev server with live reload
-deno task build      # deno audit + DENO_ENV=production lume build
+deno task build      # DENO_ENV=production lume build (site only, no SW)
 deno task build:sw   # regenerate _site/sw.js using git SHA cache version
-deno task build:all  # build + build:sw
-deno task lint       # deno lint src/ _config.ts
+deno task build:all  # build + build:sw (what Vercel ships; CI runs this too)
+deno task lint       # deno lint src/ _config.ts scripts/
 deno task check      # deno check _config.ts (type check)
 deno task resume     # compile main.typ → src/resume.pdf via Typst
 deno task deploy     # lint + check + build + deno deploy --prod
@@ -95,7 +96,12 @@ Temporary redirects (302):
 - `/cv` → `/resume.pdf`
 
 Cache headers:
-- HTML: `max-age=0, stale-while-revalidate=86400`
-- CSS/JS/fonts/images: `max-age=31536000, immutable` (1 year)
-- PDF: `max-age=86400, stale-while-revalidate=604800`
+- HTML (including extensionless `cleanUrls` routes): `max-age=0, stale-while-revalidate=86400`
+- CSS/JS: `max-age=3600, stale-while-revalidate=86400` (filenames aren't content-hashed, so no `immutable`)
+- Images/icons/fonts/manifest/PDF: images + PDF + manifest use SWR; fonts stay `immutable` (filenames encode weight/subset)
+- Feed/sitemap/robots (`rss/xml/json/txt`): `max-age=3600, stale-while-revalidate=86400`
 - `sw.js`: `no-cache, no-store, must-revalidate`
+- No enforcing CSP yet (inline scripts throughout): catch-all sends
+  `Content-Security-Policy-Report-Only` as a baseline — violations log to
+  console without breaking pages. Enforcing needs hashes for the inline
+  scripts in `blog.vto` / `tag.vto` / `scripts-common.vto` first.

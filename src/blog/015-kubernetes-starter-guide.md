@@ -8,8 +8,6 @@ tags:
   - Linux
 ---
 
-# Kubernetes Starter Guide
-
 ## What is Kubernetes?
 
 Kubernetes (K8s) is an open‑source container orchestration platform that

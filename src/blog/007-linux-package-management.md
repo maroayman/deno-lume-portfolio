@@ -1,6 +1,6 @@
 ---
 title: "How to Install and Update Software on Linux: A Guide to Package Management"
-description: "One of the most important tasks in Linux is managing software — installing, updating, and removing applications. Unlike Windows, where you download .exe files, or macOS with .dmg apps, Linux distribution"
+description: "Installing, updating, and removing software on Linux with package managers — one guide for the major distributions."
 date: 2025-09-06
 tags:
   - Linux

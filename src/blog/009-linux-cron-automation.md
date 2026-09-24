@@ -1,6 +1,6 @@
 ---
 title: "Scheduling & Automation in Linux: Mastering Cron, At, and Systemd Timers"
-description: "One of the most powerful features of Linux is the ability to automate tasks. Whether it's running a backup every night, sending reports every week, or cleaning up logs at boot, scheduling saves time alot"
+description: "One of the most powerful features of Linux is the ability to automate tasks. Whether it's running a backup every night, sending reports every week, or cleaning up logs at boot, scheduling saves a lot of time"
 date: 2025-09-16
 tags:
   - Linux

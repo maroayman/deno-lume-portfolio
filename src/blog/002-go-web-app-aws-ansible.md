@@ -1,6 +1,6 @@
 ---
 title: "Automated Deployment of a Go Web App on AWS EC2 with Daily Backups Using Ansible"
-description: "From Code to Cloud: Deploying a Go Note App on EC2 with Ansible and Daily Backups In this guide, we'll walk through deploying a simple Go-based note-taking web app on AWS EC2, with a local SQLite data"
+description: "From code to cloud: deploy a Go note-taking app on EC2 with Ansible, local SQLite data, and automated daily backups."
 date: 2025-08-06
 cover: /images/covers/go-web-app-aws-ansible.jpg
 tags:

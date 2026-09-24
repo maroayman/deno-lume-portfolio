@@ -1,6 +1,6 @@
 ---
 title: "Beginner's Guide to Shell Scripting Basics in Linux"
-description: "Shell scripting is one of the most powerful skills you can learn in Linux. It allows you to automate repetitive tasks, build simple tools, and combine commands into workflows. Whether you’re an aspiri"
+description: "Automate repetitive tasks and combine commands into workflows — shell scripting basics for aspiring sysadmins and developers."
 date: 2025-09-22
 tags:
   - Linux

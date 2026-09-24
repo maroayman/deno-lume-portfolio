@@ -1,5 +1,6 @@
 /* ============================================================
-   404 TERMINAL
+   404 TERMINAL — intentionally always GitHub-dark in both modes
+   (a dark terminal widget on light paper is the design, not a gap).
    ============================================================ */
 
 .terminal-404 {
@@ -292,21 +293,21 @@ body.dark-mode .terminal-404 {
   display: block;
   padding: 0.3rem 1rem;
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--ink-2);
   text-decoration: none;
-  transition: color var(--t-fast), background-color var(--t-fast);
+  transition: color var(--t-base), background-color var(--t-base);
   border-left: 2px solid transparent;
 }
 
 .toc-list a:hover {
-  color: var(--color-accent);
-  background: var(--color-accent-light);
+  color: var(--red);
+  background: var(--red-wash);
 }
 
 .toc-list a.toc-active {
-  color: var(--color-accent);
-  border-left-color: var(--color-accent);
-  background: var(--color-accent-light);
+  color: var(--red);
+  border-left-color: var(--red);
+  background: var(--red-wash);
   font-weight: 500;
 }
 

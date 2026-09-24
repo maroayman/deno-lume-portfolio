@@ -157,6 +157,19 @@ for (const file of blogFiles) {
   }
   requireArray(data.tags, "tags", path);
 
+  // Covers render via 320px thumbnails (blog-card + related posts) with the
+  // full file in srcset — every cover needs its `-thumb` sibling, generated
+  // with: magick cover.jpg -resize '320x>' -quality 70 cover-thumb.jpg
+  // (see docs/ADDING_BLOG.md). Thumbs ship inside the GHCR images artifact.
+  if (typeof data.cover === "string" && data.cover.startsWith("/images/")) {
+    const thumb = data.cover.replace(/(\.[a-z]+)$/i, "-thumb$1");
+    try {
+      Deno.statSync(`src/public${thumb}`);
+    } catch {
+      errors.push(`${path}: cover thumbnail missing (${thumb})`);
+    }
+  }
+
   const slug = file.name.replace(/\.md$/, "");
   if (slugs.has(slug)) errors.push(`${path}: duplicate slug`);
   slugs.add(slug);

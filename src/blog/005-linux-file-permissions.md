@@ -1,13 +1,11 @@
 ---
 title: "Understanding Linux File Permissions and Ownership: A Complete Guide for Beginners to Experts"
-description: "Understanding Linux File Ownership and Permissions: A Beginner’s Guide In the previous article we explored the Linux filesystem hierarchy and got familiar with its structure.Now, let’s unlock a powerful concept: who can access what in Linux."
+description: "Who can access what in Linux? Learn file ownership and permissions — users, groups, chmod, chown — from beginner basics to expert practice."
 date: 2025-09-02
 tags:
   - Linux
   - Security
 ---
-
-# Understanding Linux File Ownership and Permissions: A Beginner’s Guide
 
 In the [previous article](/blog/004-linux-filesystem-overview) we explored the
 **Linux filesystem hierarchy** and got familiar with its structure.\

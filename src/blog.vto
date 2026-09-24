@@ -44,7 +44,7 @@ document.documentElement.classList.add("js");
 requestAnimationFrame(() => {
   const e = document.createElement("style");
   e.textContent =
-    ".js .blog-card { opacity: 1; transition: opacity 0.15s ease, background-color var(--t-fast); }",
+    ".js .blog-card { opacity: 1; transition: opacity 0.15s ease, background-color var(--t-base); }",
     document.head.appendChild(e);
 });
 </script>
@@ -214,7 +214,11 @@ requestAnimationFrame(() => {
     </div>
 
     <div class="blog-grid" id="pagination-container">
-      {{ for post of search.pages("type=post", "date=desc") }}
+      {{# date=desc with title=asc tiebreak — Lume ignores multi-field order
+         strings, so the secondary sort is explicit here (same in tags.page.ts
+         and layouts/blog.vto related posts). #}}
+      {{ set posts = search.pages("type=post", "date=desc").slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime() || String(a.title).localeCompare(String(b.title))) }}
+      {{ for post of posts }}
       {{ include "partials/blog-card.vto" { post, paginationItem: true, showBookmark: true } }}
       {{ /for }}
     </div>

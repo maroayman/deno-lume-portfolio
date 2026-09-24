@@ -6,20 +6,34 @@
 # vercel.json is a no-op; everything resolves here.
 set -eu
 
-ORAS_VERSION=1.2.0
-if ! "$HOME/.oras/oras" version >/dev/null 2>&1; then
-  curl -fsSL "https://github.com/oras-project/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz" -o /tmp/oras.tar.gz
+ORAS_VERSION=1.3.4
+INSTALLED_ORAS_VERSION=$("$HOME/.oras/oras" version 2>/dev/null | grep -o '[0-9][0-9.]*' | head -n 1 || true)
+if [ "$INSTALLED_ORAS_VERSION" != "$ORAS_VERSION" ]; then
+  curl -fsSL --retry 3 "https://github.com/oras-project/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz" -o /tmp/oras.tar.gz
   mkdir -p "$HOME/.oras"
   tar -zxf /tmp/oras.tar.gz -C "$HOME/.oras"
+  rm -f /tmp/oras.tar.gz
 fi
 export PATH="$HOME/.oras:$PATH"
 echo "oras: $(oras version 2>/dev/null | head -n 1)"
-oras pull ghcr.io/maroayman/images@sha256:0f1ce542ac77052d3fbd4115661b762b654d5d296520fa1f13451d38be3dc4e1 -o .
-echo "images: $(find src/public/images -type f | wc -l) files restored from GHCR"
+# Extract into a temp dir first: a hostile or corrupt artifact must never be
+# able to write outside src/public/images via crafted member paths.
+rm -rf ./_images-tmp
+oras pull ghcr.io/maroayman/images@sha256:0f1ce542ac77052d3fbd4115661b762b654d5d296520fa1f13451d38be3dc4e1 -o ./_images-tmp
+mkdir -p src/public/images
+cp -r ./_images-tmp/src/public/images/. src/public/images/
+rm -rf ./_images-tmp
+IMAGE_COUNT=$(find src/public/images -type f | wc -l)
+if [ "$IMAGE_COUNT" -eq 0 ]; then
+  echo "error: oras pull restored 0 files from GHCR" >&2
+  exit 1
+fi
+echo "images: $IMAGE_COUNT files restored from GHCR"
 
-DENO_VERSION=2.9.7
-if [ ! -x "$HOME/.deno/bin/deno" ]; then
-  curl -fsSL https://deno.land/install.sh | sh -s "v${DENO_VERSION}"
+DENO_VERSION=$(cat .deno-version)
+INSTALLED_DENO_VERSION=$("$HOME/.deno/bin/deno" --version 2>/dev/null | grep -o 'deno [0-9][0-9.]*' | awk '{print $2}' || true)
+if [ "$INSTALLED_DENO_VERSION" != "$DENO_VERSION" ]; then
+  curl -fsSL --retry 3 https://deno.land/install.sh | sh -s "v${DENO_VERSION}"
 fi
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"

@@ -178,7 +178,9 @@ site.use(inline());
 
 site.use(sitemap());
 
-// RSS feed — generates /feed.rss from all pages with type=post
+// RSS feed — generates /feed.rss from all pages with type=post.
+// NOTE: limit 10 of 18 posts is intentional (latest only, keeps feed small).
+// Posts without `cover` emit no feed image (cover is optional, see docs/ADDING_BLOG.md).
 site.use(feed({
   output: "/feed.rss",
   query: "type=post",

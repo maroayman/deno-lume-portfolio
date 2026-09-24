@@ -1,6 +1,6 @@
 ---
 title: "Step-by-Step Guide to Handling Processes and Jobs in Linux"
-description: "Overview When you run a program in Linux, it becomes a process — a living entity inside the operating system with its own ID, state, and resources.Whether you’re compiling code, running a web server,"
+description: "Every program you run becomes a process. Learn to inspect, control, and manage processes and jobs — from ps and kill to background jobs."
 date: 2025-09-16
 tags:
   - Linux

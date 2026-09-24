@@ -32,6 +32,19 @@ cover: /images/covers/my-post.jpg
 Your content here...
 ```
 
+`cover` is optional — posts without one fall back to `og-image.png`
+(feed items simply omit the image). Tags are lowercased at build time,
+so write them lowercase in source.
+
+Covers render via 320px thumbnails — every new cover needs its sibling:
+
+```bash
+magick src/public/images/covers/my-post.jpg -resize '320x>' -quality 70 src/public/images/covers/my-post-thumb.jpg
+```
+
+Thumbs ride along in the GHCR artifact automatically (`images:push` ships the
+whole directory). `deno task check:content` fails if a cover lacks its thumb.
+
 ## Images (GHCR-backed, gitignored)
 
 Article assets live in `src/public/images/` and are **not committed** —

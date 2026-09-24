@@ -41,12 +41,12 @@ layout: layouts/base.vto
 
     <div class="blog-grid" id="tagGrid">
       {{ for post of posts }}
-      {{ include "partials/blog-card.vto" { post, showBookmark: false, paginationItem: false } }}
+      {{ include "partials/blog-card.vto" { post, showBookmark: false, paginationItem: true } }}
       {{ /for }}
     </div>
 
     <p id="tagNoResults"
-      style="display:none; color: var(--color-text-secondary); margin-top: 1.5rem;"
+      style="display:none; color: var(--ink-2); margin-top: 1.5rem;"
       role="status" aria-live="polite">
       No articles match your search.
     </p>

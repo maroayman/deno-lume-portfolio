@@ -1,12 +1,10 @@
 ---
 title: "Understanding Linux: A Beginner's Guide to Practicing on Windows"
-description: "Linux & WSL: A Beginner-Friendly Guide Table of Contents  Part 1: A Brief Overview of Linux  What Is Linux? Why Learn Linux? Popular Linux Distributions   Part 2: Practicing Linux on Windows with WSL "
+description: "New to Linux on Windows? Learn what Linux is, why it matters, and how to practice safely with WSL — distros, setup, and first commands."
 date: 2025-08-30
 tags:
   - Linux
   - WSL
----
-
 ---
 
 ## Part 1: A Brief Overview of Linux
