@@ -1,0 +1,26 @@
+name: Prune images
+# Each `deno task images:push` moves the `:latest` tag, orphaning the
+# previous version as untagged. Without pruning, GHCR accumulates one
+# untagged version per push forever. This workflow deletes all untagged
+# `ghcr.io/maroayman/images` versions except the 2 most recent, keeping a
+# rollback buffer while bounding storage/clutter.
+#
+# No checkout needed: the action works purely via the Packages API.
+# Run manually right after an image push, or let the weekly schedule handle it.
+on:
+  schedule:
+    - cron: "0 6 * * 0"
+  workflow_dispatch:
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: "images"
+          package-type: "container"
+          min-versions-to-keep: 2
+          delete-only-untagged-versions: "true"
