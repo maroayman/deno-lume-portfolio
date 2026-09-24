@@ -128,9 +128,13 @@ function getStrategy(request) {
 // Helper: Safe cache.put — Cache API only supports http(s) GET requests.
 // Silently skips chrome-extension:, data:, blob:, etc. instead of throwing
 // an unhandled "Request scheme is unsupported" rejection.
+// Never caches error responses: storing a 404 (e.g. an image deployed
+// minutes after the HTML referencing it) poisons the cache for maxAge and
+// the stale entry survives even after the file exists server-side.
 async function safePut(cache, request, response) {
   try {
-    if (request.method !== 'GET') return;
+    if (request.method !== "GET") return;
+    if (!response.ok) return;
     const url = new URL(request.url);
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
     await cache.put(request, response);
