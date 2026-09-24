@@ -18,7 +18,7 @@ jobs:
     env:
       DENO_FROZEN_LOCKFILE: "1"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: denoland/setup-deno@v2
         with:
           deno-version-file: .deno-version
