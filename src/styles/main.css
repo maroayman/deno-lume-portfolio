@@ -162,15 +162,15 @@ html.dark-mode {
   --paper-2: #1C1810;
   --ink: #EFE3C8;
   --ink-2: #AC9C7D;
-  --red: #C96A4E;
-  --red-wash: rgba(201,106,78,.10);
+  --red: #E07A5F;
+  --red-wash: rgba(224,122,95,.12);
   --teal: #3DA096;
   --brass: #CFA255;
   --line: rgba(239,227,200,.26);
   --hair: rgba(239,227,200,.13);
   --lattice-op: .5;
   --wash-op: .13;
-  --color-accent-light-hover: rgba(201,106,78,.18);
+  --color-accent-light-hover: rgba(224,122,95,.20);
 }
 
 *,
@@ -1153,18 +1153,15 @@ span.tech-tag:hover {
   font-weight: 600;
 }
 .tag-count {
-  color: var(--brass);
+  color: var(--ink-2);
   font-size: 0.7rem;
 }
-.filter-tag.weight-1 {
-  opacity: 0.7;
+.filter-tag.active .tag-count {
+  color: inherit;
 }
-.filter-tag.weight-2 {
-  opacity: 0.8;
-}
-.filter-tag.weight-3 {
-  opacity: 0.9;
-}
+.filter-tag.weight-1,
+.filter-tag.weight-2,
+.filter-tag.weight-3,
 .filter-tag.weight-4,
 .filter-tag.weight-5 {
   opacity: 1;
@@ -1476,11 +1473,17 @@ span.tech-tag:hover {
   gap: 8px;
   margin-top: 1.25rem;
 }
-/* Pagination items are lamp-box actions, never underline tags */
+/* Pagination items are lamp-box actions, never underline tags.
+   Explicit 24px minimum (WCAG 2.2 AA) with 44px preferred touch size;
+   kept separate from .tech-tag underline voice so PurgeCSS must retain it
+   (see safelist: pagination-btn is JS-injected). */
 .pagination-btn,
 a.pagination-btn,
 span.pagination-btn,
 button.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   text-decoration: none;
   font-size: 13px;
@@ -1489,8 +1492,9 @@ button.pagination-btn {
   border-bottom: 1px solid var(--line);
   background: transparent;
   color: var(--ink-2);
-  padding: 4px 11px;
-  min-width: 34px;
+  padding: 10px 12px;
+  min-width: 44px;
+  min-height: 44px;
   text-align: center;
   border-radius: 0;
 }

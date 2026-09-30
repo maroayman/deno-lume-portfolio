@@ -156,6 +156,8 @@ site.use(purgecss({
         /^bookmarked$/, // blog card bookmark state
         /^focused$/, // dropdown keyboard navigation
         /^selected$/, // dropdown items
+        /^pagination$/, // pagination container — class is static but keep explicitly
+        /^pagination-btn$/, // pagination buttons — injected by blog-list.js / tag.vto
         /^pagination-active$/, // active page button in pagination
         /^toc-active$/, // active heading in ToC
         /^toc-h2$/, // ToC item injected by JS

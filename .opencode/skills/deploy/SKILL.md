@@ -101,7 +101,11 @@ Cache headers:
 - Images/icons/fonts/manifest/PDF: images + PDF + manifest use SWR; fonts stay `immutable` (filenames encode weight/subset)
 - Feed/sitemap/robots (`rss/xml/json/txt`): `max-age=3600, stale-while-revalidate=86400`
 - `sw.js`: `no-cache, no-store, must-revalidate`
-- No enforcing CSP yet (inline scripts throughout): catch-all sends
-  `Content-Security-Policy-Report-Only` as a baseline — violations log to
-  console without breaking pages. Enforcing needs hashes for the inline
-  scripts in `blog.vto` / `tag.vto` / `scripts-common.vto` first.
+- CSP is `Content-Security-Policy-Report-Only` (no enforcing yet): all
+  executable scripts are external (`script-src 'self'` passes with zero
+  inline violations — `theme-flash.js` / `site-common.js` / `sw-register.js`
+  / `blog-head.js` / `blog-list.js` / `tag-filter.js` / `speculation-rules.json`;
+  only `application/ld+json` data blocks remain inline, which are exempt).
+  `style-src` keeps `'unsafe-inline'` for `<style>` blocks and `style=""`
+  attributes. Safe to promote to enforcing `Content-Security-Policy` once
+  violations stay clean in production logs.

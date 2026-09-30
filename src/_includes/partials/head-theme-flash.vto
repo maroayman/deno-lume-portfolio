@@ -1,12 +1,5 @@
 <!-- Apply theme immediately to prevent flash of unstyled content.
-     Priority: 1) explicit localStorage value, 2) OS prefers-color-scheme. -->
-<script>
-(function () {
-  const saved = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (prefersDark ? "dark" : "light");
-  if (theme === "dark") {
-    document.documentElement.classList.add("dark-mode");
-  }
-})();
-</script>
+     Priority: 1) explicit localStorage value, 2) OS prefers-color-scheme.
+     External synchronous script (no defer) so it runs before first paint.
+     CSP-compliant: script-src 'self' blocks inline execution. -->
+<script src="/assets/theme-flash.js"></script>
