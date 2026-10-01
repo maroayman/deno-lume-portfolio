@@ -1,7 +1,18 @@
 <!-- Speculation Rules for faster navigation (Chrome/Edge 109+).
      Inline: browsers ignore src on type="speculationrules", so external
-     files warn and are never applied. Data blocks (like ld+json) are
-     exempt from CSP script-src, so inline still passes. -->
+     files warn and are never applied. Unlike ld+json, inline
+     speculation rules ARE gated by CSP script-src — allowed via
+     'inline-speculation-rules' in vercel.json (no unsafe-inline needed). -->
+<!-- Preload LCP headline fonts early (CSS-discovered otherwise):
+     Archivo latin (88K hero headline) + Reem Kufi arabic/latin pair
+     (arabic hero uses both subsets — spaces resolve to latin).
+     Remaining weights stay on font-display:swap. -->
+<link rel="preload" href="/fonts/archivo-75-125-normal-400-800-latin.woff2"
+  as="font" type="font/woff2" crossorigin fetchpriority="high">
+<link rel="preload" href="/fonts/reem-kufi-normal-400-700-arabic.woff2"
+  as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/reem-kufi-normal-400-700-latin.woff2" as="font"
+  type="font/woff2" crossorigin>
 <script type="speculationrules">
 {
   "prerender": [
