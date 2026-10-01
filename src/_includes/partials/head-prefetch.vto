@@ -1,3 +1,25 @@
 <!-- Speculation Rules for faster navigation (Chrome/Edge 109+).
-     External file so CSP script-src 'self' passes (no inline script). -->
-<script type="speculationrules" src="/assets/speculation-rules.json"></script>
+     Inline: browsers ignore src on type="speculationrules", so external
+     files warn and are never applied. Data blocks (like ld+json) are
+     exempt from CSP script-src, so inline still passes. -->
+<script type="speculationrules">
+{
+  "prerender": [
+    {
+      "source": "document",
+      "where": {
+        "and": [
+          { "href_matches": "/blog/*" },
+          { "href_matches": "/projects" },
+          { "href_matches": "/experience" },
+          { "href_matches": "/certifications" },
+          { "not": { "href_matches": "/*\\?*" } },
+          { "not": { "selector_matches": "[rel~=external]" } },
+          { "not": { "selector_matches": "[target=_blank]" } }
+        ]
+      },
+      "eagerness": "conservative"
+    }
+  ]
+}
+</script>
