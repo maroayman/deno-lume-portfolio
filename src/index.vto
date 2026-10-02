@@ -58,11 +58,17 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
     <div class="shead">
       <h2>Stack</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الأدوات</span>
     </div>
-    <div class="bands">
+    <ol class="stack-index">
       {{ for group of stack }}
-      <div class="band"><div class="b-label">{{ group.name }}</div><ul>{{ for item of group.items }}<li>{{ item }}</li>{{ /for }}</ul></div>
+      <li class="stack-row">
+        <div class="stack-meta">
+          <h3>{{ group.name }}</h3>
+          <p>{{ group.description }}</p>
+        </div>
+        <div class="tech-tags">{{ for item of group.items }}<span class="tech-tag">{{ item }}</span>{{ /for }}</div>
+      </li>
       {{ /for }}
-    </div>
+    </ol>
   </div>
 </section>
 

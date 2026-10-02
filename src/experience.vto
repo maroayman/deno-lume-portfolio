@@ -32,12 +32,14 @@ description: DevOps training and internships focused on cloud automation
         <p class="job-description">{{ job.description }}</p>
         
         {{ if job.responsibilities }}
-        <p class="responsibilities-title">Key Responsibilities:</p>
-        <ul class="dash-list responsibilities-list">
-          {{ for responsibility of job.responsibilities }}
-          <li>{{ responsibility }}</li>
-          {{ /for }}
-        </ul>
+        <details class="responsibilities" name="job-responsibilities">
+          <summary class="responsibilities-title">Key responsibilities ({{ job.responsibilities.length }})</summary>
+          <ul class="dash-list responsibilities-list">
+            {{ for responsibility of job.responsibilities }}
+            <li>{{ responsibility }}</li>
+            {{ /for }}
+          </ul>
+        </details>
         {{ /if }}
         
         <div class="tech-tags">
