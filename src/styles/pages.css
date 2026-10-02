@@ -106,44 +106,6 @@ body.dark-mode .terminal-404 {
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 600px) {
-  :root {
-    --font-size-base: 15px;
-  }
-
-  .blog-title {
-    font-size: 1.375rem;
-  }
-
-  .blog-grid {
-    gap: 0;
-  }
-
-  .blog-card-cover {
-    width: 64px;
-    height: 48px;
-    aspect-ratio: 4 / 3;
-  }
-
-  .related-posts-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .terminal-404 {
-    max-width: 100%;
-  }
-
-  /* Adjust lamp / floating button spacing for mobile */
-  .lamp {
-    order: 3;
-  }
-
-  .back-to-top {
-    right: 1rem;
-    bottom: 1rem;
-  }
-}
-
 @media (max-width: 400px) {
   .blog-view-tabs {
     flex-wrap: wrap;
@@ -223,6 +185,43 @@ body.dark-mode .terminal-404 {
 }
 
 @media (max-width: 600px) {
+  :root {
+    --font-size-base: 15px;
+  }
+
+  .blog-title {
+    font-size: 1.375rem;
+  }
+
+  .blog-grid {
+    gap: 0;
+  }
+
+  .blog-card-cover {
+    width: 64px;
+    height: 48px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .related-posts-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .terminal-404 {
+    max-width: 100%;
+  }
+
+  /* Adjust lamp / floating button spacing for mobile */
+  .lamp {
+    order: 3;
+  }
+
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  /* uses overrides stay after their base rules above */
   .uses-item {
     grid-template-columns: minmax(0, 1fr);
   }

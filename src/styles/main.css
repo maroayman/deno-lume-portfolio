@@ -133,8 +133,7 @@
   --lattice-op: .55;
   --wash-op: .16;
 
-  /* Standalone accent tints (not plain aliases, so they stay) */
-  --color-accent-light-hover: rgba(153,64,46,.16);
+  /* Standalone accent tint (not a plain alias, so it stays) */
   --color-accent-underline: rgba(153,64,46,.45);
 
   --icon-github: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
@@ -148,7 +147,6 @@
   --line-height: 1.65;
 
   --max-width: 1140px;
-  --spacing: 2rem;
   --radius: 0;
 
   --t-base: 0.18s ease;
@@ -170,7 +168,6 @@ html.dark-mode {
   --hair: rgba(239,227,200,.13);
   --lattice-op: .5;
   --wash-op: .13;
-  --color-accent-light-hover: rgba(224,122,95,.20);
 }
 
 *,
@@ -437,7 +434,12 @@ section {
   text-decoration: none;
   border-bottom: 1px solid var(--hair);
 }
-.back-link a:hover {
+/* Shared red hover for inline text links */
+.back-link a:hover,
+.contact-box .contact-items a:hover,
+.project-title a:hover,
+.job-company a:hover,
+.foot a:hover {
   color: var(--red);
   border-bottom-color: var(--red);
 }
@@ -465,6 +467,7 @@ section {
   min-height: 340px;
   position: relative;
   clip-path: inset(0 0 0 0);
+  animation: screenIn 1000ms cubic-bezier(.22,.7,.28,1) both;
 }
 .screen svg {
   display: block;
@@ -574,42 +577,6 @@ section {
   color: var(--red);
 }
 
-/* ---- ablaq stack bands ---- */
-.bands {
-  border: 1px solid var(--line);
-  border-bottom: none;
-}
-.band {
-  display: grid;
-  grid-template-columns: 172px 1fr;
-  border-bottom: 1px solid var(--hair);
-  align-items: center;
-}
-.band:nth-child(odd) {
-  background: var(--red-wash);
-}
-.band .b-label {
-  padding: 13px 18px;
-  font-size: 13.5px;
-  color: var(--brass);
-  border-inline-end: 1px solid var(--hair);
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-}
-.band ul {
-  list-style: none;
-  margin: 0;
-  padding: 12px 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
-  font-size: 15px;
-}
-.band li {
-  white-space: nowrap;
-}
-
 /* ---- stack index: numbered editorial rows (numerals auto-generate) ---- */
 .stack-index {
   list-style: none;
@@ -649,12 +616,6 @@ section {
   margin-top: 0;
   grid-column: 2;
 }
-@media (max-width: 760px) {
-  .stack-row {
-    grid-template-columns: 48px 1fr;
-  }
-}
-
 /* ---- mashrabiya windows: index nav + collections ---- */
 .windows {
   border-bottom: 1px solid var(--line);
@@ -678,8 +639,11 @@ section {
   min-height: 186px;
   background: transparent;
 }
+/* Shared mashrabiya corner diamonds (index cells + project cards) */
 .cell::before,
-.cell::after {
+.cell::after,
+.card::before,
+.card::after {
   content: "";
   position: absolute;
   width: 7px;
@@ -687,11 +651,13 @@ section {
   background: var(--brass);
   transform: rotate(45deg);
 }
-.cell::before {
+.cell::before,
+.card::before {
   top: -4px;
   inset-inline-start: -4px;
 }
-.cell::after {
+.cell::after,
+.card::after {
   bottom: -4px;
   inset-inline-end: -4px;
 }
@@ -761,13 +727,6 @@ section {
   border-bottom: 1px solid var(--hair);
   align-self: flex-start;
 }
-.contact-box .contact-items a:hover {
-  border-bottom-color: var(--red);
-  color: var(--red);
-}
-
-/* Index stack uses .bands / .band (Cairo ablaq) */
-
 .resume-button {
   display: inline-flex;
   align-items: center;
@@ -781,7 +740,13 @@ section {
   text-decoration: none;
   background: transparent;
 }
-.resume-button:hover {
+/* Shared "raised paper" hover for buttons and filter chips */
+.resume-button:hover,
+.quick-tags .filter-tag:hover,
+.tag-dropdown-trigger.filter-btn:hover,
+.active-filter-tag:hover,
+.pagination-btn:hover,
+.share-btn:hover {
   color: var(--ink);
   border-color: var(--brass);
   background: var(--paper-2);
@@ -844,23 +809,6 @@ span.tech-tag:hover {
   position: relative;
   min-width: 0;
 }
-.card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: var(--brass);
-  transform: rotate(45deg);
-}
-.card::before {
-  top: -4px;
-  inset-inline-start: -4px;
-}
-.card::after {
-  bottom: -4px;
-  inset-inline-end: -4px;
-}
 .card:hover,
 .card:focus-within {
   background: var(--paper-2);
@@ -892,10 +840,6 @@ span.tech-tag:hover {
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-}
-.project-title a:hover {
-  color: var(--red);
-  border-bottom-color: var(--red);
 }
 .project-meta {
   font-size: 13px;
@@ -982,10 +926,6 @@ span.tech-tag:hover {
   color: var(--ink-2);
   text-decoration: none;
   border-bottom: 1px solid var(--hair);
-}
-.job-company a:hover {
-  color: var(--red);
-  border-bottom-color: var(--red);
 }
 .job-meta {
   font-size: 13px;
@@ -1214,11 +1154,6 @@ span.tech-tag:hover {
   padding: 4px 11px;
   cursor: pointer;
 }
-.quick-tags .filter-tag:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
-}
 .filter-tag.active {
   color: var(--red);
   border-color: var(--red);
@@ -1232,13 +1167,9 @@ span.tech-tag:hover {
 .filter-tag.active .tag-count {
   color: inherit;
 }
-.filter-tag.weight-1,
-.filter-tag.weight-2,
-.filter-tag.weight-3,
-.filter-tag.weight-4,
-.filter-tag.weight-5 {
-  opacity: 1;
-}
+/* .filter-tag.weight-1..5 are still emitted by blog.vto as grouping hooks,
+   but intentionally carry no styles: the old graded opacity failed contrast
+   (flattened in 96fea69). Do not "restore" without re-checking a11y. */
 .tag-dropdown {
   position: relative;
   display: inline-flex;
@@ -1256,11 +1187,6 @@ span.tech-tag:hover {
   border-radius: 0;
   padding: 4px 11px;
   cursor: pointer;
-}
-.tag-dropdown-trigger.filter-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
 }
 .tag-dropdown-panel {
   display: none;
@@ -1365,11 +1291,6 @@ span.tech-tag:hover {
   padding: 4px 11px;
   cursor: pointer;
   font-weight: 600;
-}
-.active-filter-tag:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
 }
 .active-filter-x {
   display: inline-flex;
@@ -1571,11 +1492,6 @@ button.pagination-btn {
   text-align: center;
   border-radius: 0;
 }
-.pagination-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
-}
 .pagination-active {
   color: var(--red) !important;
   border-color: var(--red) !important;
@@ -1661,11 +1577,6 @@ button.pagination-btn {
   padding: 0.3rem 0.45rem;
   line-height: 0;
 }
-.share-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
-}
 .share-btn.copied {
   color: var(--teal);
   border-color: var(--teal);
@@ -1718,10 +1629,6 @@ footer {
   text-decoration: none;
   border-bottom: 1px solid var(--hair);
   align-self: flex-start;
-}
-.foot a:hover {
-  border-bottom-color: var(--red);
-  color: var(--red);
 }
 .foot ul.social-links {
   flex-direction: row;
@@ -1805,9 +1712,6 @@ footer {
     clip-path: inset(0 0 0 0);
   }
 }
-.screen {
-  animation: screenIn 1000ms cubic-bezier(.22,.7,.28,1) both;
-}
 @media (prefers-reduced-motion: reduce) {
   .screen {
     animation: none;
@@ -1825,23 +1729,15 @@ footer {
 }
 
 @media (max-width: 760px) {
+  .stack-row {
+    grid-template-columns: 48px 1fr;
+  }
   .hero .wrap {
     grid-template-columns: 1fr;
   }
   .screen {
     min-height: 112px;
     order: -1;
-  }
-  .band {
-    grid-template-columns: 1fr;
-  }
-  .band .b-label {
-    border-inline-end: none;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 8px;
-  }
-  .band ul {
-    padding-top: 9px;
   }
   .masthead-nav {
     gap: 14px;

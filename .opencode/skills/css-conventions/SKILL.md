@@ -9,7 +9,7 @@ Conventions for the single-file CSS architecture in `src/styles/main.css` (Light
 
 ## Ground rules
 
-- There is **one CSS file** — `src/styles/main.css`. No imports, no splits, no preprocessor.
+- There are **three CSS files** — `src/styles/main.css`, `src/styles/blog.css`, `src/styles/pages.css`. No imports, no preprocessor.
 - LightningCSS handles transforms and autoprefixing. Nesting is supported.
 - Always reuse existing tokens and classes. Do not introduce new variables unless truly new.
 - Add new sections at the logical position in the file, following the existing comment header pattern.
@@ -30,7 +30,6 @@ Conventions for the single-file CSS architecture in `src/styles/main.css` (Light
 --color-link-hover       /* link hover */
 --color-accent           /* primary accent (blue) */
 --color-accent-light     /* accent background tint */
---color-accent-light-hover
 --color-accent-border
 --color-accent-underline
 ```
@@ -46,7 +45,6 @@ Conventions for the single-file CSS architecture in `src/styles/main.css` (Light
 ### Layout & spacing
 ```css
 --max-width: 680px   /* content column width */
---spacing: 2rem
 --radius: 4px
 --radius-sm: 2px
 --radius-full: 9999px
@@ -67,7 +65,7 @@ Dark mode overrides all color tokens on `body.dark-mode, html.dark-mode`. It is 
 - Component blocks: hyphenated BEM-style — `.blog-card`, `.blog-card-title`, `.project-card`, `.blog-header`
 - Modifier/state classes: single lowercase word — `.active`, `.open`, `.copied`, `.read`, `.visible`
 - The only utility class is `.sr-only` (screen reader only)
-- Tag frequency variants: `.filter-tag.weight-1` through `.weight-5` (opacity-based)
+- Tag frequency variants: `.filter-tag.weight-1` through `.weight-5` — emitted by `blog.vto` as grouping hooks but deliberately unstyled (graded opacity failed contrast, flattened in 96fea69)
 
 ## JS-toggled classes — must stay in PurgeCSS safelist
 

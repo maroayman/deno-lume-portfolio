@@ -162,7 +162,6 @@ site.use(purgecss({
         /^toc-active$/, // active heading in ToC
         /^toc-h2$/, // ToC item injected by JS
         /^toc-h3$/, // ToC item injected by JS
-        /^weight-[1-5]$/, // tag frequency weight classes
         /^mark$/, // search highlight injected by JS
         /^read-inline$/, // read indicator
         /^scrolling$/, // back-to-top visual feedback
