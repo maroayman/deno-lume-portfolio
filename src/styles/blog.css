@@ -1,11 +1,14 @@
 /* Scope blog content styles to prevent leakage to other pages */
-@scope (.blog-content) {
-  :scope {
-    font-size: 0.9375rem;
-    line-height: 1.8;
-    color: var(--ink-2);
-  }
 
+/* Root typography lives outside @scope on purpose: PurgeCSS does not
+   recognize :scope and silently strips it from every build. */
+.blog-content {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+@scope (.blog-content) {
   h1,
   h2,
   h3,
