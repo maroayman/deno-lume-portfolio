@@ -17,6 +17,9 @@ main.typ
 # Directories
 .directory
 
+# graphify knowledge-graph build output — regenerable via `graphify`, never committed
+graphify-out/
+
 # Cover/content images — pulled digest-pinned from GHCR at build time
 # (CI, Vercel, `deno task images:pull`), never committed
 src/public/images/
