@@ -39,8 +39,8 @@
   // ========== COPY CODE BUTTON ==========
   const copyIcon =
     '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-  const checkIcon =
-    '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>';
+  const checkIcon = (size) =>
+    `<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="${size}" height="${size}"><polyline points="20 6 9 17 4 12"/></svg>`;
 
   document.querySelectorAll(".blog-content pre").forEach((pre) => {
     const wrapper = document.createElement("div");
@@ -57,7 +57,7 @@
       const code = pre.querySelector("code") || pre;
       try {
         await navigator.clipboard.writeText(code.innerText);
-        copyBtn.innerHTML = checkIcon + "<span>Copied!</span>";
+        copyBtn.innerHTML = checkIcon(16) + "<span>Copied!</span>";
         copyBtn.setAttribute("aria-label", "Copied!");
         copyBtn.classList.add("copied");
         setTimeout(() => {
@@ -106,8 +106,7 @@
       try {
         await navigator.clipboard.writeText(globalThis.location.href);
         const orig = btn.innerHTML;
-        btn.innerHTML =
-          '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>';
+        btn.innerHTML = checkIcon(18);
         btn.classList.add("copied");
         btn.setAttribute("aria-label", "Copied link!");
         if (statusEl) statusEl.textContent = "Link copied to clipboard";

@@ -34,6 +34,10 @@
   let filteredCards = allCards;
   let focusedItemIndex = -1;
 
+  function stripTrailingSlash(url) {
+    return url.replace(/\/$/, "");
+  }
+
   function getVisibleDropdownItems() {
     return [...dropdownItems].filter((item) => item.style.display !== "none");
   }
@@ -277,7 +281,7 @@
   function getBookmarks() {
     try {
       const stored = JSON.parse(localStorage.getItem(BOOKMARK_KEY)) || [];
-      return stored.map((entry) => entry.replace(/\/$/, ""));
+      return stored.map((entry) => stripTrailingSlash(entry));
     } catch {
       return [];
     }
@@ -285,7 +289,7 @@
 
   function toggleBookmark(url) {
     const bookmarks = getBookmarks();
-    const normalized = url.replace(/\/$/, "");
+    const normalized = stripTrailingSlash(url);
     const index = bookmarks.indexOf(normalized);
     if (index > -1) bookmarks.splice(index, 1);
     else bookmarks.push(normalized);
@@ -298,7 +302,9 @@
   function paintBookmarks() {
     const bookmarks = getBookmarks();
     document.querySelectorAll(".bookmark-btn").forEach((button) => {
-      const isSaved = bookmarks.includes(button.dataset.url.replace(/\/$/, ""));
+      const isSaved = bookmarks.includes(
+        stripTrailingSlash(button.dataset.url),
+      );
       button.classList.toggle("bookmarked", isSaved);
       button.setAttribute("aria-pressed", String(isSaved));
       button.setAttribute(
@@ -332,13 +338,17 @@
     }
   }
 
-  function paintReadStates() {
-    const readUrls = getReadingHistory().map((entry) => {
+  function getReadUrls() {
+    return getReadingHistory().map((entry) => {
       const url = typeof entry == "string" ? entry : entry.url;
-      return url.replace(/\/$/, "");
+      return stripTrailingSlash(url);
     });
+  }
+
+  function paintReadStates() {
+    const readUrls = getReadUrls();
     allCards.forEach((card) => {
-      const url = card.dataset.url.replace(/\/$/, "");
+      const url = stripTrailingSlash(card.dataset.url);
       if (readUrls.includes(url)) card.classList.add("read");
     });
   }
@@ -361,12 +371,9 @@
       searchInput.value.trim(),
     );
     const bookmarks = getBookmarks();
-    const readUrls = getReadingHistory().map((entry) => {
-      const url = typeof entry == "string" ? entry : entry.url;
-      return url.replace(/\/$/, "");
-    });
+    const readUrls = getReadUrls();
     return allCards.filter((card) => {
-      const url = card.dataset.url.replace(/\/$/, "");
+      const url = stripTrailingSlash(card.dataset.url);
       const title = (card.dataset.title || "").toLowerCase();
       const tags = (card.dataset.tags || "").toLowerCase().split(",").filter(
         (tag) => tag,
