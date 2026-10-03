@@ -24,7 +24,7 @@ jobs:
           deno-version-file: .deno-version
       # Images first: check:content validates cover thumbnails, which only
       # exist after the GHCR pull (fresh clones need `deno task images:pull`).
-      - uses: oras-project/setup-oras@v1
+      - uses: oras-project/setup-oras@v2
       - run: oras pull ghcr.io/maroayman/images@sha256:940ce46ff896b1cd76bfdeed1c950b8d91b7a545c7b53c3a8bb6573b188be256 -o ./_images-tmp && mkdir -p src/public/images && cp -r ./_images-tmp/src/public/images/. src/public/images/ && rm -rf ./_images-tmp
       - run: |
           IMAGE_COUNT=$(find src/public/images -type f | wc -l)
