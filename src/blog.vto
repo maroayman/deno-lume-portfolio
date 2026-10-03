@@ -25,13 +25,9 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
 
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/"><span aria-hidden="true">←</span> Back</a>
-    </p>
+    {{ comp.back_link() }}
 
-    <div class="shead">
-      <h1 class="page-title">Blog</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">المدونة</span>
-    </div>
+    {{ comp.page_header({ title: "Blog", ar: "المدونة" }) }}
 
     <p class="page-sub">
       Technical articles about cloud infrastructure, DevOps practices, and lessons learned.

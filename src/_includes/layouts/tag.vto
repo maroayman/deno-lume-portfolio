@@ -3,9 +3,7 @@ layout: layouts/base.vto
 ---
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/blog"><span aria-hidden="true">←</span> Back to Blog</a>
-    </p>
+    {{ comp.back_link({ href: "/blog", label: "Back to Blog" }) }}
 
     <div class="shead">
       <h1 class="page-title tag-page-title">

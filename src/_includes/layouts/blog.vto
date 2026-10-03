@@ -3,9 +3,7 @@ layout: layouts/base.vto
 ---
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/blog"><span aria-hidden="true">←</span> Back to Blog</a>
-    </p>
+    {{ comp.back_link({ href: "/blog", label: "Back to Blog" }) }}
 
     <article class="blog-article">
       {{ if cover }}
@@ -23,13 +21,7 @@ layout: layouts/base.vto
           <span>·</span>
           <span id="wordCount"></span>
         </div>
-        {{ if tags }}
-        <div class="blog-tags">
-          {{ for tag of tags }}
-          <span class="tech-tag">{{ tag }}</span>
-          {{ /for }}
-        </div>
-        {{ /if }}
+        {{ comp.tech_tags({ tags: tags, wrapper: "blog-tags" }) }}
 
         <!-- Social Share Buttons -->
         <div class="social-share">

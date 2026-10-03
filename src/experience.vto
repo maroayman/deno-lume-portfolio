@@ -6,13 +6,9 @@ description: DevOps training and internships focused on cloud automation
 
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/"><span aria-hidden="true">←</span> Back</a>
-    </p>
+    {{ comp.back_link() }}
 
-    <div class="shead">
-      <h1 class="page-title">Experience</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الخبرة</span>
-    </div>
+    {{ comp.page_header({ title: "Experience", ar: "الخبرة" }) }}
     <p
       class="page-sub">Where the on-prem lessons came from — bare metal, self-hosted GitOps, and no managed control plane to hide behind.</p>
 
@@ -42,11 +38,7 @@ description: DevOps training and internships focused on cloud automation
         </details>
         {{ /if }}
         
-        <div class="tech-tags">
-          {{ for tag of job.tags }}
-          <span class="tech-tag">{{ tag }}</span>
-          {{ /for }}
-        </div>
+        {{ comp.tech_tags({ tags: job.tags }) }}
       </div>
       {{ /for }}
     </div>

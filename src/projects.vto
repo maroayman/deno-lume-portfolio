@@ -6,13 +6,9 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
 
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/"><span aria-hidden="true">←</span> Back</a>
-    </p>
+    {{ comp.back_link() }}
 
-    <div class="shead">
-      <h1 class="page-title">Projects</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">المشاريع</span>
-    </div>
+    {{ comp.page_header({ title: "Projects", ar: "المشاريع" }) }}
     <p
       class="page-sub">Infrastructure I've built, broken, and written down afterwards.</p>
 
@@ -43,11 +39,7 @@ description: Cloud & DevOps projects showcasing infrastructure automation and CI
         </details>
         {{ /if }}
         
-        <div class="tech-tags">
-          {{ for tech of project.tech }}
-          <span class="tech-tag">{{ tech }}</span>
-          {{ /for }}
-        </div>
+        {{ comp.tech_tags({ tags: project.tech }) }}
       </div>
       {{ /for }}
     </div>

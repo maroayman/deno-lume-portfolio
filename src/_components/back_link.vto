@@ -1,0 +1,10 @@
+{{# Back navigation link.
+
+Props:
+- `href`: link target, defaults to "/".
+- `label`: link text after the arrow, defaults to "Back".
+#}}
+{{ set href = href ?? "/" }}
+{{ set label = label ?? "Back" }}
+<p
+  class="back-link"><a href="{{ href }}"><span aria-hidden="true">←</span> {{ label }}</a></p>

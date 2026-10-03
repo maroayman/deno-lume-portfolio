@@ -27,12 +27,6 @@
       <span class="read-inline">· ✓ Read</span>
     </div>
     <p class="blog-card-excerpt">{{ post.description }}</p>
-    {{ if post.tags }}
-    <div class="tech-tags">
-      {{ for tag of post.tags }}
-      <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag" aria-label="View posts tagged {{ tag }}"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }}<span class="visually-hidden"> posts</span></a>
-      {{ /for }}
-    </div>
-    {{ /if }}
+    {{ comp.tech_tags({ tags: post.tags, linked: true, paginationItem: paginationItem }) }}
   </div>
 </article>

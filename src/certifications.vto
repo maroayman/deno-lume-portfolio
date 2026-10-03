@@ -6,13 +6,9 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
 
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/"><span aria-hidden="true">←</span> Back</a>
-    </p>
+    {{ comp.back_link() }}
 
-    <div class="shead">
-      <h1 class="page-title">Certifications</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الشهادات</span>
-    </div>
+    {{ comp.page_header({ title: "Certifications", ar: "الشهادات" }) }}
     <p class="page-sub">AWS, Linux Foundation, Huawei — the paper trail.</p>
 
     <div class="certifications-grid" id="pagination-container">

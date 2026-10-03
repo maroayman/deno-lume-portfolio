@@ -1,0 +1,15 @@
+{{# Section header: title + rule + Arabic label.
+
+Props:
+- `title`: heading text.
+- `ar`: Arabic label text.
+- `level`: heading level, "h1" (default) or "h2".
+- `cls`: heading class, defaults to "page-title". Pass "" for no class
+  (homepage h2 sections).
+- `id`: optional heading id (404 page).
+#}}
+{{ set level = level ?? "h1" }}
+{{ set cls = cls ?? "page-title" }}
+<div class="shead">
+  <{{ level }}{{ if cls }} class="{{ cls }}"{{ /if }}{{ if id }} id="{{ id }}"{{ /if }}>{{ title }}</{{ level }}><span class="rule"></span><span class="ar" dir="rtl" lang="ar">{{ ar }}</span>
+</div>

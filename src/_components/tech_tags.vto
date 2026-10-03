@@ -1,0 +1,23 @@
+{{# Technology/tag list.
+
+Props:
+- `tags`: array of tag strings. Nothing renders when empty/missing.
+- `linked`: render tag links to /blog/tags/... (blog cards) instead of
+  plain spans (projects, experience, stack).
+- `paginationItem`: add data-tag hooks for client-side filtering
+  (only meaningful with linked: true).
+- `wrapper`: wrapper div class, defaults to "tech-tags".
+  Use "blog-tags" for the blog post header.
+#}}
+{{ if tags }}
+{{ set wrapper = wrapper ?? "tech-tags" }}
+<div class="{{ wrapper }}">
+  {{ for tag of tags }}
+  {{ if linked }}
+  <a href="/blog/tags/{{ tag |> slug }}/" class="tech-tag" aria-label="View posts tagged {{ tag }}"{{ if paginationItem }} data-tag="{{ tag }}"{{ /if }}>{{ tag }}<span class="visually-hidden"> posts</span></a>
+  {{ else }}
+  <span class="tech-tag">{{ tag }}</span>
+  {{ /if }}
+  {{ /for }}
+</div>
+{{ /if }}

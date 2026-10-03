@@ -33,9 +33,7 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
 
 <section class="about">
   <div class="wrap">
-    <div class="shead">
-      <h2>About</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">نبذة</span>
-    </div>
+    {{ comp.page_header({ title: "About", ar: "نبذة", level: "h2", cls: "" }) }}
     <div class="about-cols">
       <div>
         <p
@@ -55,9 +53,7 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
 
 <section class="stack" style="border-bottom: 1px solid var(--line);">
   <div class="wrap">
-    <div class="shead">
-      <h2>Stack</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">الأدوات</span>
-    </div>
+    {{ comp.page_header({ title: "Stack", ar: "الأدوات", level: "h2", cls: "" }) }}
     <ol class="stack-index">
       {{ for group of stack }}
       <li class="stack-row">
@@ -65,7 +61,7 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
           <h3>{{ group.name }}</h3>
           <p>{{ group.description }}</p>
         </div>
-        <div class="tech-tags">{{ for item of group.items }}<span class="tech-tag">{{ item }}</span>{{ /for }}</div>
+        {{ comp.tech_tags({ tags: group.items }) }}
       </li>
       {{ /for }}
     </ol>
@@ -74,9 +70,7 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
 
 <section class="windows">
   <div class="wrap">
-    <div class="shead">
-      <h2>Look through</h2><span class="rule"></span><span class="ar" dir="rtl" lang="ar">المشربية</span>
-    </div>
+    {{ comp.page_header({ title: "Look through", ar: "المشربية", level: "h2", cls: "" }) }}
     <div class="grid">
       <a class="cell" href="/projects">
         <span class="c-ar" dir="rtl" lang="ar">المشاريع</span>

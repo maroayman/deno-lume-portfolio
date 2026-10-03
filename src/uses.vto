@@ -6,13 +6,9 @@ description: Tools, hardware, and software I use daily as a Cloud & DevOps Engin
 
 <div class="container">
   <section class="section">
-    <p class="back-link">
-      <a href="/"><span aria-hidden="true">←</span> Back</a>
-    </p>
+    {{ comp.back_link() }}
 
-    <div class="shead">
-      <h1 class="page-title">Uses</h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">عُدَّتي</span>
-    </div>
+    {{ comp.page_header({ title: "Uses", ar: "عُدَّتي" }) }}
     <p class="page-sub">
       Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--brass); color: var(--brass);">uses.tech</a>.
     </p>
