@@ -10,6 +10,12 @@ import inline from "lume/plugins/inline.ts";
 import feed from "lume/plugins/feed.ts";
 import purgecss from "lume/plugins/purgecss.ts";
 import markdownTabs from "./plugins/markdown-tabs.ts";
+import {
+  relatedPosts,
+  sortPosts,
+  tagCounts,
+  thumb,
+} from "./plugins/blog-data.ts";
 
 const isProduction = Deno.env.get("DENO_ENV") === "production";
 
@@ -78,6 +84,24 @@ site.filter("slug", (text: string) => {
     .replace(/-+/g, "-")
     .trim();
 });
+
+/**
+ * Blog data-preparation filters (see plugins/blog-data.ts).
+ *
+ * TypeScript prepares data, Vento renders it:
+ * - `search.pages("type=post") |> sortPosts` — date desc, title asc tiebreak
+ * - `posts |> tagCounts` — [{ tag, count }] sorted by count desc
+ * - `pages |> relatedPosts(url, tags, 3)` — related posts for a page
+ * - `post.cover |> thumb` — thumbnail cover URL
+ */
+site.filter("sortPosts", (posts: unknown) => sortPosts(posts as Lume.Data[]));
+site.filter("tagCounts", (posts: unknown) => tagCounts(posts as Lume.Data[]));
+site.filter(
+  "relatedPosts",
+  (posts: unknown, url: string, tags: string[], limit?: number) =>
+    relatedPosts(posts as Lume.Data[], url, tags, limit),
+);
+site.filter("thumb", (cover: unknown) => thumb(cover as string));
 
 site.add("styles");
 site.add("assets");

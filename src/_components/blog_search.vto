@@ -1,0 +1,15 @@
+{{# Blog search input + clear button (wired up by assets/blog-list.js). #}}
+<div class="blog-search-wrapper">
+  {{ comp.icon({ name: "search", cls: "blog-search-icon" }) }}
+  <input
+    type="text"
+    id="blogSearch"
+    class="blog-search-input"
+    placeholder="Search... (e.g. aws,linux:deploy)"
+    autocomplete="off"
+    aria-label="Search blog posts"
+  >
+  <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
+    {{ comp.icon({ name: "x" }) }}
+  </button>
+</div>

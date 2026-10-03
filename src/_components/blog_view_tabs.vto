@@ -1,0 +1,15 @@
+{{# Blog view tabs: All Posts / Bookmarks / History (wired up by assets/blog-list.js). #}}
+<div class="blog-view-tabs" role="group" aria-label="Blog view">
+  <button class="view-tab active" data-view="all" aria-pressed="true">
+    {{ comp.icon({ name: "archive", size: 16 }) }}
+    All Posts
+  </button>
+  <button class="view-tab" data-view="bookmarks" aria-pressed="false">
+    {{ comp.icon({ name: "bookmark", size: 16 }) }}
+    Bookmarks <span class="bookmark-count" id="bookmarkCount"></span>
+  </button>
+  <button class="view-tab" data-view="history" aria-pressed="false">
+    {{ comp.icon({ name: "history", size: 16 }) }}
+    History
+  </button>
+</div>

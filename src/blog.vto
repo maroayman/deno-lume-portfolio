@@ -33,125 +33,26 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
       Technical articles about cloud infrastructure, DevOps practices, and lessons learned.
     </p>
 
+    {{# Data preparation lives in TypeScript (plugins/blog-data.ts,
+       exposed as Vento filters in _config.ts). This template only
+       orchestrates: search UI + view tabs + tag filters + card grid.
+       NOTE: the two search calls below intentionally return different
+       sets (Lume caches per query string; see plugins/blog-data.ts):
+       - ordered query -> the 18 posts (card grid + tag counts),
+       - unordered query -> all 37 type=post pages, i.e. posts plus the
+         generated tag pages (the "All" total). Do not merge them. #}}
+    {{ set posts = search.pages("type=post", "date=desc") |> sortPosts }}
+    {{ set allTypePosts = search.pages("type=post") }}
+    {{ set totalPosts = allTypePosts.length }}
+    {{ set counts = allTypePosts |> tagCounts }}
+
     <!-- Search and Filter -->
     <div class="blog-search-container">
-      <div class="blog-search-wrapper">
-        {{ comp.icon({ name: "search", cls: "blog-search-icon" }) }}
-        <input 
-          type="text" 
-          id="blogSearch" 
-          class="blog-search-input" 
-          placeholder="Search... (e.g. aws,linux:deploy)"
-          autocomplete="off"
-          aria-label="Search blog posts"
-        >
-        <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
-          {{ comp.icon({ name: "x" }) }}
-        </button>
-      </div>
-      
-      <!-- View Tabs: All Posts / Bookmarks / History -->
-      <div class="blog-view-tabs" role="group" aria-label="Blog view">
-        <button class="view-tab active" data-view="all" aria-pressed="true">
-          {{ comp.icon({ name: "archive", size: 16 }) }}
-          All Posts
-        </button>
-        <button class="view-tab" data-view="bookmarks" aria-pressed="false">
-          {{ comp.icon({ name: "bookmark", size: 16 }) }}
-          Bookmarks <span class="bookmark-count" id="bookmarkCount"></span>
-        </button>
-        <button class="view-tab" data-view="history" aria-pressed="false">
-          {{ comp.icon({ name: "history", size: 16 }) }}
-          History
-        </button>
-      </div>
-      
-      <!-- Tag Filters -->
-      {{ set allTags = [] }}
-      {{ for post of search.pages("type=post") }}
-        {{ if post.tags }}
-          {{ for tag of post.tags }}
-            {{ set allTags = allTags.concat([tag]) }}
-          {{ /for }}
-        {{ /if }}
-      {{ /for }}
-      {{ set uniqueTags = [...new Set(allTags)] }}
-      {{ set totalPosts = search.pages("type=post").length }}
-      
-      {{# Build tag counts and sort by count descending using reduce #}}
-      {{ set tagCountPairs = uniqueTags.reduce((acc, tag) => { acc.push({ tag, count: allTags.filter(x => x === tag).length }); return acc; }, []).sort((a, b) => b.count - a.count) }}
-      
-      <div class="blog-tags-filter" id="tagFiltersContainer" role="group" aria-label="Filter posts by tag">
-        <!-- Quick filter: Top tags + dropdown for more -->
-        <div class="quick-tags">
-          <button 
-            class="filter-btn filter-tag active" 
-            data-tag="all" 
-            aria-pressed="true"
-          >All <span class="tag-count">({{ totalPosts }})</span></button>
-          
-          <!-- Show top 5 most used tags inline -->
-          {{ for item of tagCountPairs.slice(0, 5) }}
-          {{ set weight = Math.min(5, Math.max(1, Math.ceil(item.count / 3))) }}
-          <button 
-            class="filter-btn filter-tag weight-{{ weight }}" 
-            data-tag="{{ item.tag }}" 
-            data-count="{{ item.count }}"
-            aria-pressed="false"
-          >{{ item.tag }} <span class="tag-count">({{ item.count }})</span></button>
-          {{ /for }}
-          
-          <!-- Dropdown for all tags -->
-          {{ if uniqueTags.length > 5 }}
-          <div class="tag-dropdown" id="tagDropdown">
-            <button class="filter-btn tag-dropdown-trigger" id="tagDropdownTrigger" aria-expanded="false" aria-haspopup="listbox" aria-controls="tagDropdownList">
-              <span>More tags</span>
-              {{ comp.icon({ name: "chevron-down", size: 14 }) }}
-            </button>
-            <div class="tag-dropdown-panel" id="tagDropdownPanel">
-              <div class="tag-dropdown-search">
-                {{ comp.icon({ name: "search", size: 14, cls: "tag-dropdown-search-icon" }) }}
-                <input 
-                  type="text" 
-                  id="tagDropdownSearch" 
-                  class="tag-dropdown-search-input" 
-                  placeholder="Search {{ uniqueTags.length }} tags..."
-                  autocomplete="off"
-                  aria-label="Search tags"
-                >
-              </div>
-              <div class="tag-dropdown-list" id="tagDropdownList" role="listbox" tabindex="-1">
-                {{ for item of tagCountPairs }}
-                <button 
-                  class="tag-dropdown-item" 
-                  data-tag="{{ item.tag }}"
-                  data-count="{{ item.count }}"
-                  role="option"
-                  aria-selected="false"
-                >
-                  <span class="tag-dropdown-item-name">{{ item.tag }}</span>
-                  <span class="tag-dropdown-item-count">{{ item.count }} posts</span>
-                </button>
-                {{ /for }}
-              </div>
-              <div class="tag-dropdown-empty" id="tagDropdownEmpty" style="display: none;">
-                No tags found
-              </div>
-            </div>
-          </div>
-          {{ /if }}
-        </div>
-        
-        <!-- Active filters indicator -->
-        <div class="active-filters" id="activeFilters" style="display: none;" aria-live="polite">
-          <span class="active-filters-label">Filtering by:</span>
-          <div class="active-filters-tags" id="activeFiltersTags"></div>
-          <button class="active-filters-clear" id="clearFilters" aria-label="Clear all filters">
-            {{ comp.icon({ name: "x", size: 14 }) }}
-            Clear
-          </button>
-        </div>
-      </div>
+      {{ comp.blog_search() }}
+
+      {{ comp.blog_view_tabs() }}
+
+      {{ comp.blog_tag_filters({ counts: counts, total: totalPosts }) }}
     </div>
 
     <div class="blog-result-count" id="resultCount" style="display: none;"
@@ -165,10 +66,6 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     </div>
 
     <div class="blog-grid" id="pagination-container">
-      {{# date=desc with title=asc tiebreak — Lume ignores multi-field order
-         strings, so the secondary sort is explicit here (same in tags.page.ts
-         and layouts/blog.vto related posts). #}}
-      {{ set posts = search.pages("type=post", "date=desc").slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime() || String(a.title).localeCompare(String(b.title))) }}
       {{ for post of posts }}
       {{ include "partials/blog-card.vto" { post, paginationItem: true, showBookmark: true } }}
       {{ /for }}
