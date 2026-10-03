@@ -1,0 +1,16 @@
+{{# Social share button (used top + bottom of every blog post).
+
+Props:
+- `id`: button id (wired up by assets/blog-post.js).
+- `label`: aria-label text.
+- `title`: optional title tooltip (top share buttons only).
+- `icon`: comp.icon name ("x-logo", "linkedin", "share").
+- `size`: icon size in px (18 top, 20 bottom).
+- `text`: optional visible label inside a <span> (bottom buttons only).
+- `large`: set to true for the bottom `.share-btn-lg` variant.
+#}}
+<button class="share-btn{{ if large }} share-btn-lg{{ /if }}" id="{{ id }}"
+  aria-label="{{ label }}" {{ if title }} title="{{ title }}" {{ /if }}>
+  {{ comp.icon({ name: icon, size: size }) }}
+  {{ if text }}<span>{{ text }}</span>{{ /if }}
+</button>
