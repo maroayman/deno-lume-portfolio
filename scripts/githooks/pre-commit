@@ -18,6 +18,17 @@ for file in $staged_files; do
   esac
 done
 
+# Keep the CSP sha256 for the inlined theme script in sync with its source.
+# The inline plugin strips one trailing newline, so hash the file minus it —
+# proven identical to dev and prod build output. Re-stage vercel.json.
+case "$staged_files" in
+  *src/assets/theme-flash.js*)
+    theme_hash=$(python3 -c "import hashlib,base64; d=open('src/assets/theme-flash.js','rb').read(); d=d[:-1] if d.endswith(b'\n') else d; print(base64.b64encode(hashlib.sha256(d).digest()).decode())")
+    sed -i "s|sha256-[A-Za-z0-9+/=]*|sha256-${theme_hash}|" vercel.json
+    git add vercel.json
+    ;;
+esac
+
 format_files=""
 lint_files=""
 for file in $staged_files; do
