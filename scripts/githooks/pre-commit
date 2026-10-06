@@ -18,16 +18,43 @@ for file in $staged_files; do
   esac
 done
 
-# Keep the CSP sha256 for the inlined theme script in sync with its source.
-# The inline plugin strips one trailing newline, so hash the file minus it —
-# proven identical to dev and prod build output. Re-stage vercel.json.
+# Keep the CSP hashes in sync with their sources. Both hashes cover
+# bytes proven identical to dev and prod build output:
+# - theme script: src/assets/theme-flash.js minus its one trailing
+#   newline (the inline plugin strips it);
+# - speculation rules: the <script type="speculationrules"> body in
+#   src/_includes/partials/head-prefetch.vto, byte for byte.
+# Re-stage vercel.json.
+staged_theme=0
+staged_spec=0
 case "$staged_files" in
-  *src/assets/theme-flash.js*)
-    theme_hash=$(python3 -c "import hashlib,base64; d=open('src/assets/theme-flash.js','rb').read(); d=d[:-1] if d.endswith(b'\n') else d; print(base64.b64encode(hashlib.sha256(d).digest()).decode())")
-    sed -i "s|sha256-[A-Za-z0-9+/=]*|sha256-${theme_hash}|" vercel.json
-    git add vercel.json
-    ;;
+  *src/assets/theme-flash.js*) staged_theme=1 ;;
 esac
+case "$staged_files" in
+  *src/_includes/partials/head-prefetch.vto*) staged_spec=1 ;;
+esac
+if [ "$staged_theme" -eq 1 ] || [ "$staged_spec" -eq 1 ]; then
+  python3 - "$staged_theme" "$staged_spec" <<'EOF'
+import hashlib, base64, re, sys
+# (slot, value); slots follow vercel.json order: 0 = theme, 1 = speculation.
+digests = []
+if sys.argv[1] == "1":
+    d = open("src/assets/theme-flash.js", "rb").read()
+    d = d[:-1] if d.endswith(b"\n") else d
+    digests.append((0, base64.b64encode(hashlib.sha256(d).digest()).decode()))
+if sys.argv[2] == "1":
+    src = open("src/_includes/partials/head-prefetch.vto").read()
+    body = re.search(r'<script type="speculationrules">(.*?)</script>', src, re.S).group(1)
+    digests.append((1, base64.b64encode(hashlib.sha256(body.encode()).digest()).decode()))
+text = open("vercel.json").read()
+for slot, value in digests:
+    at = [m.start() for m in re.finditer(r"sha256-[A-Za-z0-9+/=]*", text)][slot]
+    end = at + len(re.match(r"sha256-[A-Za-z0-9+/=]*", text[at:]).group(0))
+    text = text[:at] + "sha256-" + value + text[end:]
+open("vercel.json", "w").write(text)
+EOF
+  git add vercel.json
+fi
 
 format_files=""
 lint_files=""
