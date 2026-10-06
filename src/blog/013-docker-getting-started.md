@@ -44,7 +44,7 @@ Let’s go through them:
 docker --version
 ```
 
-![](/images/013-docker-getting-started/image02.png)
+![](/images/013-docker-getting-started/image02.webp)
 
 ### 2\. macOS
 
@@ -153,7 +153,7 @@ What happens here?
 Congratulations 🎉 — you’ve successfully set up Docker and launched your first
 container!
 
-![](/images/013-docker-getting-started/image03.png)
+![](/images/013-docker-getting-started/image03.webp)
 
 ## Key Terms to Remember
 

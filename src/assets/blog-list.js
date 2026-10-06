@@ -257,7 +257,15 @@
       refreshFilterUI();
       tagFiltersBox.style.display = currentView === "all" ? "" : "none";
       if (saved.scrollY > 0) {
-        setTimeout(() => globalThis.scrollTo(0, saved.scrollY), 50);
+        setTimeout(() => {
+          // Jump instantly: the page's smooth scrolling would otherwise
+          // animate this restore as a slide-down on every revisit.
+          const root = document.documentElement;
+          const prev = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          globalThis.scrollTo(0, saved.scrollY);
+          root.style.scrollBehavior = prev;
+        }, 50);
       }
       return true;
     } catch {

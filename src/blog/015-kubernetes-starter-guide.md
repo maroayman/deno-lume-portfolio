@@ -23,7 +23,7 @@ A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 
 ### Control Plane Components
 
-![Control Plane Components](/images/015-kubernetes-starter-guide/image04.png)
+![Control Plane Components](/images/015-kubernetes-starter-guide/image04.webp)
 
 - API Server
 - etcd
@@ -32,7 +32,7 @@ A Kubernetes cluster consists of a **control plane** and **worker nodes**.
 
 ## Worker Nodes & Pods
 
-![Pods and Nodes](/images/015-kubernetes-starter-guide/image05.png)
+![Pods and Nodes](/images/015-kubernetes-starter-guide/image05.webp)
 
 - Nodes run workloads
 - Pods are the smallest deployable unit

@@ -309,6 +309,7 @@ summary.uses-group-title:hover {
   padding: 0.5rem 0;
   background: var(--paper-2);
   border-top: 1px solid var(--line);
+  counter-reset: toc;
 }
 
 .toc-list li {
@@ -337,9 +338,43 @@ summary.uses-group-title:hover {
   font-weight: 500;
 }
 
+/* Highlights (h2): ink-strong with brass section numbers. */
+.toc-list .toc-h2 {
+  counter-increment: toc;
+}
+.toc-list .toc-h2 a {
+  color: var(--ink);
+  font-weight: 500;
+}
+.toc-list .toc-h2 a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--brass);
+  margin-right: 0.6rem;
+}
+.toc-list .toc-h2 a.toc-active::before {
+  color: var(--red);
+}
+
+/* Sub-highlights (h3): quieter, railed under their parent. */
 .toc-list .toc-h3 a {
-  padding-left: 2rem;
-  font-size: 0.775rem;
+  padding-left: 2.75rem;
+  font-size: 0.75rem;
+  position: relative;
+}
+.toc-list .toc-h3 a::before {
+  content: "";
+  position: absolute;
+  left: 1.9rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 1px;
+  background: var(--line);
+}
+.toc-list .toc-h3 a.toc-active::before {
+  background: var(--brass);
 }
 
 /* ============================================================

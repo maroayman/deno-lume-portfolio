@@ -19,7 +19,7 @@ echo "oras: $(oras version 2>/dev/null | head -n 1)"
 # Extract into a temp dir first: a hostile or corrupt artifact must never be
 # able to write outside src/public/images via crafted member paths.
 rm -rf ./_images-tmp
-oras pull ghcr.io/maroayman/images@sha256:940ce46ff896b1cd76bfdeed1c950b8d91b7a545c7b53c3a8bb6573b188be256 -o ./_images-tmp
+oras pull ghcr.io/maroayman/images@sha256:16280f56b9ad9767cc2a2c544262ac810c5e1e6bf4f56d9d55793116ffa76044 -o ./_images-tmp
 mkdir -p src/public/images
 cp -r ./_images-tmp/src/public/images/. src/public/images/
 rm -rf ./_images-tmp

@@ -48,9 +48,9 @@ ps aux
 ps -ef
 ```
 
-![](/images/008-linux-process-management/image01.png)
+![](/images/008-linux-process-management/image01.webp)
 
-![](/images/008-linux-process-management/image02.png)
+![](/images/008-linux-process-management/image02.webp)
 
 ## Jobs vs Processes
 
@@ -112,21 +112,21 @@ kill -KILL <pid>
 
 - `top` / `htop` → CPU & memory usage
 
-![](/images/008-linux-process-management/image03.png)
+![](/images/008-linux-process-management/image03.webp)
 
 - `ps -ejH` → process tree
 
-- ![](/images/008-linux-process-management/image04.png)
+- ![](/images/008-linux-process-management/image04.webp)
 
 - `pstree -p` → tree view
 
-![](/images/008-linux-process-management/image05.png)
+![](/images/008-linux-process-management/image05.webp)
 
 - `watch -n 2 ps aux | grep python` → auto-refresh
 
 - `lsof -p <pid>` → open files
 
-![](/images/008-linux-process-management/image06.png)
+![](/images/008-linux-process-management/image06.webp)
 
 ## Killing & Managing Processes
 

@@ -22,7 +22,7 @@ creating partitions, formatting, and monitoring disk health.
 
   (Shows disk space usage in a human-readable format)
 
-![](/images/010-linux-disk-management/image01.png)
+![](/images/010-linux-disk-management/image01.webp)
 
 - **Check directory/file usage**
 
@@ -31,9 +31,9 @@ creating partitions, formatting, and monitoring disk health.
   du -h --max-depth=1 /var
   ```
 
-  ![](/images/010-linux-disk-management/image02.png)
+  ![](/images/010-linux-disk-management/image02.webp)
 
-![](/images/010-linux-disk-management/image03.png)
+![](/images/010-linux-disk-management/image03.webp)
 
 > 💡 **Note:** You can adjust the depth level based on how deeply you want to
 > check the folder structure of a specific directory.
@@ -44,7 +44,7 @@ creating partitions, formatting, and monitoring disk health.
   lsblk
   ```
 
-![](/images/010-linux-disk-management/image04.png)
+![](/images/010-linux-disk-management/image04.webp)
 
 ## Mounting and Unmounting
 
@@ -91,7 +91,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   sudo fdisk -l
   ```
 
-  ![](/images/010-linux-disk-management/image05.png)
+  ![](/images/010-linux-disk-management/image05.webp)
 
 - **Create/modify partitions** (interactive tools):
 
@@ -125,7 +125,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   iostat
   ```
 
-  ![](/images/010-linux-disk-management/image06.png)
+  ![](/images/010-linux-disk-management/image06.webp)
 
 - **SMART monitoring** (for hardware health)
 
@@ -140,7 +140,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   sudo smartctl -a /dev/sda
   ```
 
-  ![](/images/010-linux-disk-management/image07.png)
+  ![](/images/010-linux-disk-management/image07.webp)
 
 - **Check disk usage in real time**
 
@@ -151,7 +151,7 @@ echo "UUID=$UUID $MOUNT_POINT $FSTYPE $OPTIONS 0 2" | sudo tee -a /etc/fstab
   iotop
   ```
 
-  ![](/images/010-linux-disk-management/image08.png)
+  ![](/images/010-linux-disk-management/image08.webp)
 
 **Key Takeaways**
 

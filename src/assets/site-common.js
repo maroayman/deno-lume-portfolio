@@ -35,11 +35,7 @@
       : "light";
   }
 
-  // Apply on load. theme-flash.js runs before <body> exists, so it
-  // can only set the class on <html> — re-apply the resolved theme to
-  // BOTH elements here so body state, icons, and the toggle handler
-  // all agree on first click (previously the first click was a no-op
-  // whenever the initial theme was dark).
+  // Apply on load to both <html> (set by theme-flash) and <body>.
   applyTheme(resolveTheme());
 
   // Toggle handler — once the user clicks, their choice is persisted

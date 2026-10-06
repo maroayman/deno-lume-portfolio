@@ -284,6 +284,12 @@
 
       toc.style.display = "";
 
+      const sectionCount = headings.filter((h) => h.tagName === "H2").length;
+      const toggleLabel = tocToggle.querySelector("span");
+      if (toggleLabel) {
+        toggleLabel.textContent = `Table of Contents (${sectionCount})`;
+      }
+
       let isOpen = false;
       tocList.style.display = "none";
       tocToggle.setAttribute("aria-expanded", "false");

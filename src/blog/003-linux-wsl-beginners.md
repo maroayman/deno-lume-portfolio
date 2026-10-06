@@ -113,7 +113,7 @@ Ensure you’re running **Windows 11**:
 2. Search for the distro name (e.g., Ubuntu)
 3. Click **Install**
 
-![](/images/003-linux-wsl-beginners/image01.png)**
+![](/images/003-linux-wsl-beginners/image01.webp)**
 
 #### Method 2: Command Line
 
@@ -122,7 +122,7 @@ wsl --list --online
 wsl --install -d <DistroName>
 ```
 
-![](/images/003-linux-wsl-beginners/image02.png)
+![](/images/003-linux-wsl-beginners/image02.webp)
 
 ```bash
 wsl --list --online
@@ -182,7 +182,7 @@ wsl --set-default kali-linux
 - Click the dropdown arrow next to `+`
 - Select your distro
 
-![](/images/003-linux-wsl-beginners/image03.png)
+![](/images/003-linux-wsl-beginners/image03.webp)
 
 ---
 
@@ -204,9 +204,9 @@ VS Code will open connected directly to your Linux filesystem.
 - **Windows → Linux:** `\wsl.localhost`
 - **Linux → Windows:** `/mnt/c`, `/mnt/d`, etc.
 
-![](/images/003-linux-wsl-beginners/image04.png)
+![](/images/003-linux-wsl-beginners/image04.webp)
 
-![](/images/003-linux-wsl-beginners/image05.png)
+![](/images/003-linux-wsl-beginners/image05.webp)
 
 ---
 

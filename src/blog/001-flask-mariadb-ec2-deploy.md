@@ -2,7 +2,7 @@
 title: "Deploy a Flask + MariaDB Note App on EC2 (Amazon Linux 2023) — Complete Guide"
 description: "Deploy a Flask + MariaDB note app on a free-tier EC2 instance running Amazon Linux 2023 — from launching the server to connecting the database."
 date: 2025-07-17
-cover: /images/covers/flask-mariadb-ec2-deploy.jpg
+cover: /images/covers/flask-mariadb-ec2-deploy.webp
 tags:
   - AWS
   - Python
@@ -39,7 +39,7 @@ ssh -i your-key.pem ec2-user@<your-ec2-public-ip>
 Here is a list of all python packages needed for the deployment. Keep in mind
 the current working Python version is (3.9.23)
 
-![](/images/001-flask-mariadb-ec2-deploy/image01.png)
+![](/images/001-flask-mariadb-ec2-deploy/image01.webp)
 
 This command is for installing the required packages
 
@@ -197,7 +197,7 @@ http://<your-ec2-public-ip>:5000
 
 Here is a screenshot of the app while its running.
 
-![](/images/001-flask-mariadb-ec2-deploy/image02.png)
+![](/images/001-flask-mariadb-ec2-deploy/image02.webp)
 
 ## Summary for the project requirements
 

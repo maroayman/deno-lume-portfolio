@@ -42,7 +42,7 @@ Let’s see ownership in action:
 ls -l
 ```
 
-![](/images/005-linux-file-permissions/image01.png)
+![](/images/005-linux-file-permissions/image01.webp)
 
 ## Understanding Permissions
 
@@ -82,7 +82,7 @@ Grant execute permission to the user:
 chmod u+x script.sh
 ```
 
-![](/images/005-linux-file-permissions/image02.png)
+![](/images/005-linux-file-permissions/image02.webp)
 
 In the previous example, we used the command on the `notes.txt` file. You can
 see that the file name changed color to green, indicating it is now executable.
@@ -95,7 +95,7 @@ Add write permission for group:
 chmod g-w notes.txt
 ```
 
-![](/images/005-linux-file-permissions/image03.png)
+![](/images/005-linux-file-permissions/image03.webp)
 
 You can see how the write permission is removed from the group in the second
 photo.
@@ -114,7 +114,7 @@ Example:
 chmod 755 script.sh
 ```
 
-![](/images/005-linux-file-permissions/image04.png)
+![](/images/005-linux-file-permissions/image04.webp)
 
 Breakdown:
 
@@ -182,7 +182,7 @@ You can view an example of umask in the shell screenshot, which illustrates how
 default permissions are applied to new files and directories based on the umask
 value.
 
-![](/images/005-linux-file-permissions/image05.png)
+![](/images/005-linux-file-permissions/image05.webp)
 
 > **Trivia: Why Files Start at** `666` and Directories at `777`
 >

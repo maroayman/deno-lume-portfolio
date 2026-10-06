@@ -1,5 +1,5 @@
 ---
-cover: /images/covers/kubernetes-deployments-part2.jpg
+cover: /images/covers/kubernetes-deployments-part2.webp
 date: 2026-02-24
 description: Deep dive into Rolling Updates, Blue/Green, Canary
   deployments, rollback mechanisms, and production-grade Kubernetes
@@ -36,7 +36,7 @@ Instead of deleting all old Pods at once, Kubernetes:
 2. Gradually terminates old Pods
 3. Maintains availability during the process
 
-![Rolling Update Visualization](/images/017-kubernetes-deployments-part2/image01.png)
+![Rolling Update Visualization](/images/017-kubernetes-deployments-part2/image01.webp)
 
 ---
 
@@ -127,7 +127,7 @@ Blue/Green means:
 
 Instead of updating Pods gradually, you deploy a separate environment.
 
-![Blue Green Diagram](/images/017-kubernetes-deployments-part2/image02.jpg)
+![Blue Green Diagram](/images/017-kubernetes-deployments-part2/image02.webp)
 
 ### How It Works
 
@@ -149,7 +149,7 @@ Example:
 - 90% traffic → old version
 - 10% traffic → new version
 
-![Canary Deployment Diagram](/images/017-kubernetes-deployments-part2/image03.png)
+![Canary Deployment Diagram](/images/017-kubernetes-deployments-part2/image03.webp)
 
 Canary requires:
 

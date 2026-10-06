@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400 800;
   font-stretch: 75% 125%;
-  src: url("../fonts/archivo-75-125-normal-400-800-latin.woff2")format("woff2");
+  src: url("/fonts/archivo-75-125-normal-400-800-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -12,7 +12,7 @@
   font-style: normal;
   font-weight: 300;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-300-arabic.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-300-arabic.woff2")format("woff2");
   unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
   font-display: swap;
 }
@@ -21,7 +21,7 @@
   font-style: normal;
   font-weight: 300;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-300-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-300-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -30,7 +30,7 @@
   font-style: normal;
   font-weight: 400;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-400-arabic.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-400-arabic.woff2")format("woff2");
   unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
   font-display: swap;
 }
@@ -39,7 +39,7 @@
   font-style: normal;
   font-weight: 400;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-400-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-400-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -48,7 +48,7 @@
   font-style: normal;
   font-weight: 500;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-500-arabic.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-500-arabic.woff2")format("woff2");
   unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
   font-display: swap;
 }
@@ -57,7 +57,7 @@
   font-style: normal;
   font-weight: 500;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-500-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-500-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -66,7 +66,7 @@
   font-style: normal;
   font-weight: 600;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-600-arabic.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-600-arabic.woff2")format("woff2");
   unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
   font-display: swap;
 }
@@ -75,7 +75,7 @@
   font-style: normal;
   font-weight: 600;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexsansarabic-normal-600-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexsansarabic-normal-600-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -84,7 +84,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-stretch: 100%;
-  src: url("../fonts/reem-kufi-normal-400-700-arabic.woff2")format("woff2");
+  src: url("/fonts/reem-kufi-normal-400-700-arabic.woff2")format("woff2");
   unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
   font-display: swap;
 }
@@ -93,7 +93,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-stretch: 100%;
-  src: url("../fonts/reem-kufi-normal-400-700-latin.woff2")format("woff2");
+  src: url("/fonts/reem-kufi-normal-400-700-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -103,7 +103,7 @@
   font-style: normal;
   font-weight: 400;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexmono-normal-400-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexmono-normal-400-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -112,7 +112,7 @@
   font-style: normal;
   font-weight: 500;
   font-stretch: 100%;
-  src: url("../fonts/ibm-plexmono-normal-500-latin.woff2")format("woff2");
+  src: url("/fonts/ibm-plexmono-normal-500-latin.woff2")format("woff2");
   unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   font-display: swap;
 }
@@ -126,11 +126,10 @@
   --ink-2: #5C5040;
   --red: #99402E;
   --red-wash: rgba(153,64,46,.085);
-  --teal: #16756E;
-  --brass: #A8813C;
+  --teal: #0F6B64;
+  --brass: #7A5C22;
   --line: rgba(28,23,16,.28);
   --hair: rgba(28,23,16,.14);
-  --lattice-op: .55;
   --wash-op: .16;
 
   /* Standalone accent tint (not a plain alias, so it stays) */
@@ -166,7 +165,6 @@ html.dark-mode {
   --brass: #CFA255;
   --line: rgba(239,227,200,.26);
   --hair: rgba(239,227,200,.13);
-  --lattice-op: .5;
   --wash-op: .13;
 }
 
@@ -481,7 +479,7 @@ section {
   border-bottom-color: var(--red);
 }
 
-/* ---- hero: lattice screen + nameplate ---- */
+/* ---- hero: lightwash + nameplate ---- */
 .hero {
   position: relative;
   overflow: hidden;
@@ -490,36 +488,13 @@ section {
 }
 .hero .wrap {
   display: grid;
-  grid-template-columns: 230px 1fr;
+  grid-template-columns: 1fr;
   gap: clamp(24px, 5vw, 64px);
   align-items: stretch;
   padding-top: clamp(40px, 7vw, 86px);
   padding-bottom: clamp(40px, 7vw, 86px);
   position: relative;
   z-index: 2;
-}
-.screen {
-  border: 1px solid var(--line);
-  background: var(--paper-2);
-  min-height: 340px;
-  position: relative;
-  clip-path: inset(0 0 0 0);
-  animation: screenIn 1000ms cubic-bezier(.22,.7,.28,1) both;
-}
-.screen svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  opacity: var(--lattice-op);
-}
-.screen::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(190deg, rgba(168,129,60,.16), transparent 62%);
-  pointer-events: none;
 }
 .lightwash {
   position: absolute;
@@ -547,20 +522,21 @@ section {
   font-family: var(--font-ar);
   font-weight: 500;
   font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-  line-height: 1.35;
+  line-height: 1.2;
   color: var(--red);
-  margin: 0 0 0.12em;
+  margin: 0;
   direction: rtl;
   text-align: start;
 }
 .name-lat {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-ar);
+  font-weight: 700;
   font-size: clamp(2.5rem, 7.4vw, 5.1rem);
-  line-height: 0.94;
-  letter-spacing: -0.025em;
+  line-height: 1.05;
+  letter-spacing: 0;
   margin: 0;
   text-transform: uppercase;
+  color: var(--red);
 }
 .role {
   margin: 0.7em 0 0;
@@ -571,14 +547,13 @@ section {
 }
 .place {
   margin-top: auto;
-  padding-top: 26px;
+  padding-top: 20px;
   display: flex;
   gap: 16px;
   align-items: baseline;
   flex-wrap: wrap;
   font-size: 13.5px;
   color: var(--ink-2);
-  border-top: 1px solid var(--hair);
 }
 .place .ar {
   color: var(--red);
@@ -631,7 +606,6 @@ section {
   border-bottom: 1px solid var(--hair);
   align-content: start;
 }
-/* Counter numerals restored — editorial brass index. */
 .stack-row::before {
   content: counter(stack, decimal-leading-zero);
   grid-row: 1 / span 2;
@@ -654,7 +628,6 @@ section {
   margin-top: 0;
   grid-column: 2;
 }
-/* Overflow link to the full inventory on /uses (shown past 6 items). */
 .stack-more {
   grid-column: 2;
   margin: 0.6rem 0 0;
@@ -741,6 +714,11 @@ section {
   border-bottom: 1px solid var(--brass);
   align-self: flex-start;
   padding-bottom: 2px;
+  display: inline-block;
+  transition: transform var(--t-base);
+}
+.cell:hover .go {
+  transform: translateX(3px);
 }
 
 /* Index nav uses .windows / .grid / .cell (Cairo mashrabiya) */
@@ -1563,7 +1541,8 @@ button.pagination-btn {
 }
 
 .blog-article {
-  max-width: 100%;
+  max-width: min(100%, 740px);
+  margin-inline: auto;
 }
 .blog-cover {
   margin: 0 0 1.75rem;
@@ -1759,10 +1738,9 @@ footer {
   opacity: 0.7;
 }
 
-/* ---- entrance removed for paint metrics: sections starting at
-   opacity:0 delayed FCP/LCP. The lattice screenIn stays the one moment. ---- */
-
-/* ---- fluid rise for below-fold sections (hero paints instantly) ---- */
+/* ---- fluid scroll reveals: opacity + transform only (compositor
+   thread, zero layout/main-thread cost, CLS-exempt). No JS.
+   Unsupported browsers simply get static content — nothing hides. ---- */
 @keyframes rise {
   from {
     opacity: 0;
@@ -1773,31 +1751,20 @@ footer {
     transform: none;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  main section:not(.hero) {
-    animation: rise 450ms cubic-bezier(0.22, 0.7, 0.28, 1) both;
-  }
-  main section:nth-child(3) {
-    animation-delay: 70ms;
-  }
-  main section:nth-child(4) {
-    animation-delay: 140ms;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Homepage sections only: article/project `.section` wrappers are
+       far too tall — a cover-range fade would sit half-transparent
+       through most of the scroll and read as a dimmed page. */
+    main > section:not(.hero):not(.section) {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
   }
 }
 
-/* ---- one orchestrated moment: lattice screen reveal ---- */
-@keyframes screenIn {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
-  .screen {
-    animation: none;
-  }
   *,
   *::before,
   *::after {
@@ -1813,13 +1780,6 @@ footer {
 @media (max-width: 760px) {
   .stack-row {
     grid-template-columns: 48px 1fr;
-  }
-  .hero .wrap {
-    grid-template-columns: 1fr;
-  }
-  .screen {
-    min-height: 112px;
-    order: -1;
   }
   /* Header collapses to mark + one scrollable nav row (links + docked
      toggle) instead of 3–4 wrapped rows eating the viewport. */

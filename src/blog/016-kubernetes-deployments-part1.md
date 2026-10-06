@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Deployments Part 1: Foundations & Core Concepts"
 description: "Understand Kubernetes Deployments from architecture to hands-on practice with real examples."
-cover: /images/covers/kubernetes-deployments-part1.jpg
+cover: /images/covers/kubernetes-deployments-part1.webp
 date: 2026-02-15
 tags:
   - Kubernetes
@@ -63,7 +63,9 @@ matches reality.
 
 ### Basic Deployment YAML Example
 
-:::tabs [YAML]
+:::tabs
+
+[YAML]
 
 ```yaml
 apiVersion: apps/v1
@@ -128,7 +130,7 @@ Scale to 5 replicas:
 kubectl scale deployment web-deployment --replicas=5
 ```
 
-![Kubernetes Scaling](/images/016-kubernetes-deployments-part1/image02.png)
+![Kubernetes Scaling](/images/016-kubernetes-deployments-part1/image02.webp)
 
 Kubernetes immediately creates new Pods.
 
