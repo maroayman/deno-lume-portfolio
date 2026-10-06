@@ -1,0 +1,15 @@
+{{# Section header: tiny uppercase mono + hairline rule (terminal minimal).
+
+Props:
+- `title`: heading text.
+- `level`: heading level, "h1" (default) or "h2".
+- `cls`: heading class, defaults to "page-title".
+- `id`: optional heading id.
+- `num`: optional section number, rendered as "01 /" prefix via data-num.
+- `ar`: ignored (kept for backward compat with existing calls).
+#}}
+{{ set level = level ?? "h1" }}
+{{ set cls = cls ?? "page-title" }}
+<div class="shead">
+  <{{ level }}{{ if cls }} class="{{ cls }}"{{ /if }}{{ if id }} id="{{ id }}"{{ /if }}{{ if num }} data-num="{{ num }} /"{{ /if }}>{{ title }}</{{ level }}><span class="rule" aria-hidden="true"></span>
+</div>

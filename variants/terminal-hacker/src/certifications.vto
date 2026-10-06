@@ -1,0 +1,27 @@
+---
+layout: layouts/base.vto
+title: Certifications - Marwan Ayman Shawky
+description: AWS, Linux Foundation, and Huawei cloud certifications
+---
+
+<div class="container">
+  <section class="section">
+    {{ comp.back_link() }}
+
+    {{ comp.page_header({ title: "Certifications" }) }}
+    <p class="page-sub">AWS, Linux Foundation, Huawei — the paper trail.</p>
+
+    <div class="certifications-grid" id="pagination-container">
+      {{ for cert of certifications }}
+      <div class="card cert-card" data-pagination-item>
+        <div class="rowline">
+          <span class="truncate" title="{{ cert.title }}">{{ cert.title }}</span>
+          <span class="leader" aria-hidden="true"></span>
+          <span class="date">{{ cert.date }}</span>
+        </div>
+        <p class="project-summary">{{ cert.issuer }}{{ if cert.expiryDate }} · Expires {{ cert.expiryDate }}{{ /if }}{{ if cert.credentialId }} · ID: {{ cert.credentialId }}{{ /if }}</p>
+      </div>
+      {{ /for }}
+    </div>
+  </section>
+</div>

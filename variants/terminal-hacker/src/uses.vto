@@ -8,14 +8,14 @@ description: Tools, hardware, and software I use daily as a Cloud & DevOps Engin
   <section class="section">
     {{ comp.back_link() }}
 
-    {{ comp.page_header({ title: "Uses", ar: "عُدَّتي" }) }}
+    {{ comp.page_header({ title: "Uses" }) }}
     <p class="page-sub">
-      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--brass); color: var(--brass);">uses.tech</a>.
+      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">uses.tech</a>.
     </p>
 
-    {{ for index, section of uses }}
-    <details class="uses-group" style="margin-bottom: 0;" name="uses-groups"{{ if index === 0 }} open{{ /if }}>
-      <summary class="uses-group-title">{{ section.group }} <span class="uses-count">({{ section.items.length }})</span></summary>
+    {{ for section of uses }}
+    <div class="uses-group" style="margin-bottom: 0;">
+      <h2 class="uses-group-title">{{ section.group }}</h2>
       <ul class="uses-list">
         {{ for item of section.items }}
         <li class="uses-item">
@@ -24,7 +24,7 @@ description: Tools, hardware, and software I use daily as a Cloud & DevOps Engin
         </li>
         {{ /for }}
       </ul>
-    </details>
+    </div>
     {{ /for }}
 
   </section>

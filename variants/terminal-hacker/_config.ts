@@ -187,7 +187,6 @@ site.use(purgecss({
         /^toc-h2$/, // ToC item injected by JS
         /^toc-h3$/, // ToC item injected by JS
         /^mark$/, // search highlight injected by JS
-        /^kbd$/, // keyboard hints (rare elements, kept deliberately)
         /^read-inline$/, // read indicator
         /^scrolling$/, // back-to-top visual feedback
         /^suggest-tag$/, // suggested tags in no-results
@@ -195,6 +194,7 @@ site.use(purgecss({
         /^active-filter-x$/, // × icon inside the chip — injected by JS
         /^code-block-wrapper$/, // code block wrapper injected by JS
         /^copy-code-btn$/, // copy button injected by JS
+        /^section-active$/, // homepage scroll-spy — toggled on section in view
         /^share-/, // share button variants
       ],
     },

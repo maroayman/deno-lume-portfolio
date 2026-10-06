@@ -61,7 +61,10 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
           <h3>{{ group.name }}</h3>
           <p>{{ group.description }}</p>
         </div>
-        {{ comp.tech_tags({ tags: group.items }) }}
+        {{ comp.tech_tags({ tags: group.items.slice(0, 6) }) }}
+        {{ if group.items.length > 6 }}
+        <p class="stack-more"><a href="/uses">+{{ group.items.length - 6 }} more in full inventory →</a></p>
+        {{ /if }}
       </li>
       {{ /for }}
     </ol>

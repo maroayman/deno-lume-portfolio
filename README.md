@@ -177,7 +177,7 @@ deno-lume-portfolio/
 │   │   ├── projects.yml
 │   │   ├── certifications.yml
 │   │   ├── stack.yml
-│   │   └── uses.json
+│   │   └── uses.yml
 │   ├── _includes/
 │   │   ├── layouts/
 │   │   │   ├── base.vto    # Masthead, footer, SEO

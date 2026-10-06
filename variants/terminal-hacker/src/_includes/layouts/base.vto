@@ -11,7 +11,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#EDE3CF">
+  <meta name="theme-color" content="#fafafa">
   <meta name="color-scheme" content="light dark">
 
   <!-- SEO Meta Tags -->
@@ -103,32 +103,15 @@
   </script>
   {{ /if }}
 
-  <!-- Styles (inlined for performance; blog/pages CSS only where used
-       to keep non-blog HTML small for FCP/LCP) -->
+  <!-- Styles (inlined for performance) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
-  {{ if type === "post" || url.startsWith("/blog") || url === "/uses/" || url === "/404.html" }}
   <link rel="stylesheet" href="/styles/blog.css" inline>
   <link rel="stylesheet" href="/styles/pages.css" inline>
-  {{ /if }}
 
   {{ include "partials/head-theme-flash.vto" }}
   {{ include "partials/head-prefetch.vto" }}
   </head>
   <body>
-  <!-- Mashrabiya lattice defs — shared by hero screen + lightwash -->
-  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
-    <defs>
-      <pattern id="mash" width="56" height="56" patternUnits="userSpaceOnUse">
-        <g fill="none" stroke="var(--brass)" stroke-width="1.15" opacity="1">
-          <rect x="14" y="14" width="28" height="28"/>
-          <rect x="14" y="14" width="28" height="28" transform="rotate(45 28 28)"/>
-          <path d="M0 28 H8.2 M47.8 28 H56 M28 0 V8.2 M28 47.8 V56"/>
-          <path d="M0 0 L14 14 M56 0 L42 14 M0 56 L14 42 M56 56 L42 42"/>
-        </g>
-      </pattern>
-    </defs>
-  </svg>
-
   {{ if type === "post" }}
   <!-- Reading Progress Bar -->
   <div class="reading-progress" id="readingProgress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
@@ -159,7 +142,7 @@
   <!-- Masthead -->
   <header class="masthead">
     <div class="wrap">
-      <a class="mark" href="/">MARWAN<b>.</b>AYMAN</a>
+      <a class="mark" href="/"><span class="status-dot" aria-hidden="true"></span>Marwan Ayman</a>
       <nav class="masthead-nav" aria-label="Primary">
         {{ for item of site.navigation }}
         {{ if item.href === "/" }}
@@ -169,7 +152,7 @@
         {{ /if }}
         {{ /for }}
         <span class="nav-div" aria-hidden="true"></span>
-        <button class="lamp lamp-inline" id="themeToggle" type="button" aria-label="Night, switch to dark mode" aria-pressed="false">
+        <button class="lamp lamp-inline" id="themeToggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
           {{ comp.icon({ name: "sun", size: 14 }) }}
           {{ comp.icon({ name: "moon", size: 14, style: "display: none;" }) }}
           <span class="lamp-label" id="themeLabel">Night</span>
@@ -185,58 +168,15 @@
 
   <!-- Footer -->
   <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div>
-          <h2 class="foot-heading">Elsewhere</h2>
-          <ul class="social-links">
-            <li>
-              <a href="https://github.com/maroayman" aria-label="GitHub">
-                {{ comp.icon({ name: "github", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com/in/maroayman" aria-label="LinkedIn">
-                {{ comp.icon({ name: "linkedin", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="https://gitlab.com/maroayman" aria-label="GitLab">
-                {{ comp.icon({ name: "gitlab", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="foot-heading">Get in touch</h2>
-          <ul class="social-links">
-            <li>
-              <a href="mailto:marwanayman.shawky@gmail.com" aria-label="Email">
-                {{ comp.icon({ name: "mail", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="tel:+201122889126" aria-label="Phone: +20 112 288 9126">
-                {{ comp.icon({ name: "phone", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="foot-heading">Résumé</h2>
-          <ul class="social-links">
-            <li>
-              <a href="/resume.pdf" aria-label="Download résumé PDF">
-                {{ comp.icon({ name: "download", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="colophon">
-        <span>© <span id="year"></span> {{ site.author }} — Set in Reem Kufi, Archivo and IBM Plex Sans Arabic. Built with Deno &amp; Lume.</span>
-        <span class="ar" dir="rtl" lang="ar">صُنع في القاهرة</span>
-      </div>
+    <div class="colophon">
+      <span><span class="status-dot" aria-hidden="true" style="display:inline-block;vertical-align:baseline;"></span> © <span id="year"></span> {{ site.author }} · CAI</span>
+      <span class="foot-links">
+        <a href="https://github.com/maroayman">gh</a>
+        <a href="https://linkedin.com/in/maroayman">in</a>
+        <a href="mailto:marwanayman.shawky@gmail.com">mail</a>
+        <a href="/blog">// blog</a>
+        <a href="/feed.rss">rss</a>
+      </span>
     </div>
   </footer>
 

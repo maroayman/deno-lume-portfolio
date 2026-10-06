@@ -140,6 +140,33 @@ body.dark-mode .terminal-404 {
   border-bottom: 1px solid var(--hair);
   background: var(--red-wash);
 }
+/* Groups are collapsible <details> — title is the toggle. */
+summary.uses-group-title {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+summary.uses-group-title::-webkit-details-marker {
+  display: none;
+}
+summary.uses-group-title::before {
+  content: "+";
+  font-size: 14px;
+  line-height: 1;
+  color: var(--red);
+}
+.uses-group[open] summary.uses-group-title::before {
+  content: "–";
+}
+summary.uses-group-title:hover {
+  color: var(--ink);
+}
+.uses-count {
+  font-weight: 400;
+  color: var(--ink-2);
+}
 
 .uses-list {
   list-style: none;
