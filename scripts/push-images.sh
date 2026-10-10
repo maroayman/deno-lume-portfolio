@@ -1,6 +1,12 @@
 #!/bin/sh
-# Push src/public/images to GHCR as an OCI artifact (full set, :latest),
+# Push site images to GHCR as an OCI artifact (full set, :latest),
 # then optionally pin the new digest in CI / local task / Vercel build script.
+#
+# Covers both git-ignored bulk art (src/public/images, pulled digest-pinned
+# at build time) and the committed profile photo (src/public/profile, also
+# restored from GHCR on fresh clones so CI/Vercel never depend on git state
+# for it). Repo-relative paths are preserved so
+# `oras pull ... -o .` restores both trees exactly.
 #
 # Usage:
 #   bash scripts/push-images.sh [--dry-run] [--pin] [tag]
@@ -43,14 +49,15 @@ command -v oras >/dev/null 2>&1 || {
   exit 1
 }
 
-if [ ! -d src/public/images ]; then
-  echo "error: src/public/images missing — nothing to push" >&2
+if [ ! -d src/public/images ] && [ ! -d src/public/profile ]; then
+  echo "error: src/public/images and src/public/profile both missing — nothing to push" >&2
   exit 1
 fi
 
 # Collect files as <path>:<media-type>, preserving repo-relative titles so
-# `oras pull ... -o .` restores src/public/images/... exactly.
-find src/public/images -type f | sort | while IFS= read -r f; do
+# `oras pull ... -o .` restores src/public/images/... and
+# src/public/profile/... exactly.
+find src/public/images src/public/profile -type f 2>/dev/null | sort | while IFS= read -r f; do
   case "$f" in
     *.jpg|*.jpeg) printf '%s:%s\n' "$f" "image/jpeg" ;;
     *.png) printf '%s:%s\n' "$f" "image/png" ;;
@@ -63,7 +70,7 @@ find src/public/images -type f | sort | while IFS= read -r f; do
 done >"$LIST_FILE"
 
 if [ ! -s "$LIST_FILE" ]; then
-  echo "error: no files under src/public/images" >&2
+  echo "error: no files under src/public/images or src/public/profile" >&2
   exit 1
 fi
 

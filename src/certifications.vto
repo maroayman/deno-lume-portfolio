@@ -6,27 +6,17 @@ description: AWS, Linux Foundation, and Huawei cloud certifications
 
 <div class="container">
   <section class="section">
-    {{ comp.back_link() }}
-
-    {{ comp.page_header({ title: "Certifications", ar: "الشهادات" }) }}
+    {{ comp.page_header({ title: "Certifications" }) }}
     <p class="page-sub">AWS, Linux Foundation, Huawei — the paper trail.</p>
 
-    <div class="certifications-grid" id="pagination-container">
+    <div id="pagination-container">
       {{ for cert of certifications }}
-      <div class="card cert-card" data-pagination-item>
-        <div class="cert-content">
-          <h2 class="cert-title">{{ cert.title }}</h2>
-          <p class="cert-issuer">{{ cert.issuer }}</p>
-          <div class="cert-meta">
-            <span>Issued: {{ cert.date }}</span>
-            {{ if cert.expiryDate }}
-            <span>Expires: {{ cert.expiryDate }}</span>
-            {{ /if }}
-          </div>
-          {{ if cert.credentialId }}
-          <p class="cert-credential">ID: {{ cert.credentialId }}</p>
-          {{ /if }}
+      <div class="e" data-pagination-item>
+        <div>
+          <div class="t">{{ cert.title }}</div>
+          <div class="m cert-meta"><span class="chip">{{ cert.issuer }}</span>{{ if cert.expiryDate }}<span class="chip">Expires {{ cert.expiryDate }}</span>{{ /if }}{{ if cert.credentialId }}<span class="chip">ID {{ cert.credentialId }}</span>{{ /if }}</div>
         </div>
+        <div class="d">{{ cert.date }}</div>
       </div>
       {{ /for }}
     </div>

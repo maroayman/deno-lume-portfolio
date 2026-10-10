@@ -1,101 +1,12 @@
 @font-face {
-  font-family: Archivo;
+  font-family: "Albert Sans";
   font-style: normal;
-  font-weight: 400 800;
-  font-stretch: 75% 125%;
-  src: url("/fonts/archivo-75-125-normal-400-800-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  font-weight: 100 900;
   font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 300;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-300-arabic.woff2")format("woff2");
-  unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 300;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-300-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-400-arabic.woff2")format("woff2");
-  unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-400-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-500-arabic.woff2")format("woff2");
-  unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-500-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-600-arabic.woff2")format("woff2");
-  unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-  font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Sans Arabic;
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexsansarabic-normal-600-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
-}
-@font-face {
-  font-family: Reem Kufi;
-  font-style: normal;
-  font-weight: 400 700;
-  font-stretch: 100%;
-  src: url("/fonts/reem-kufi-normal-400-700-arabic.woff2")format("woff2");
-  unicode-range: U+6??,U+750-77F,U+870-88E,U+890-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-  font-display: swap;
-}
-@font-face {
-  font-family: Reem Kufi;
-  font-style: normal;
-  font-weight: 400 700;
-  font-stretch: 100%;
-  src: url("/fonts/reem-kufi-normal-400-700-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
+  src: url("/fonts/albert-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -118,28 +29,27 @@
 }
 
 :root {
-  color-scheme: light;
-  /* Cairo direction — paper / ink / red / teal / brass */
-  --paper: #EDE3CF;
-  --paper-2: #E3D6BC;
-  --ink: #1C1710;
-  --ink-2: #5C5040;
-  --red: #99402E;
-  --red-wash: rgba(153,64,46,.085);
-  --teal: #0F6B64;
-  --brass: #6B4F1C;
-  --line: rgba(28,23,16,.28);
-  --hair: rgba(28,23,16,.14);
-  --wash-op: .16;
+  color-scheme: dark;
+  /* Slate (d1) — single dark theme, no light mode. */
+  --paper: #20262F;
+  --paper-2: #262D38;
+  --ink: #E9EDF2;
+  --ink-2: #B4BFCC;
+  --red: #5EC4B6;
+  --red-wash: rgba(94, 196, 182, .12);
+  --teal: #5EC4B6;
+  --brass: #9FB0C0;
+  --line: #333D4A;
+  --hair: rgba(180, 191, 204, .16);
+  --wash-op: .13;
 
   /* Standalone accent tint (not a plain alias, so it stays) */
-  --color-accent-underline: rgba(153,64,46,.45);
+  --color-accent-underline: rgba(94, 196, 182, .45);
 
   --icon-github: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
 
-  --font-sans: "IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
-  --font-display: "Archivo", "IBM Plex Sans Arabic", system-ui, sans-serif;
-  --font-ar: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "Albert Sans", system-ui, sans-serif;
+  --font-display: "Albert Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
 
   --font-size-base: 17px;
@@ -149,23 +59,6 @@
   --radius: 0;
 
   --t-base: 0.18s ease;
-}
-
-/* Dark mode — Cairo night paper (JS toggles .dark-mode, never the media query) */
-body.dark-mode,
-html.dark-mode {
-  color-scheme: dark;
-  --paper: #131009;
-  --paper-2: #1C1810;
-  --ink: #EFE3C8;
-  --ink-2: #AC9C7D;
-  --red: #E07A5F;
-  --red-wash: rgba(224,122,95,.12);
-  --teal: #3DA096;
-  --brass: #CFA255;
-  --line: rgba(239,227,200,.26);
-  --hair: rgba(239,227,200,.13);
-  --wash-op: .13;
 }
 
 *,
@@ -186,7 +79,7 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--teal);
+  outline: 3px solid #F2B84B;
   outline-offset: 3px;
 }
 main:focus {
@@ -197,14 +90,13 @@ main:focus {
 }
 .blog-content h2,
 .blog-content h3,
-.page-title,
-.uses-group-title {
+.page-title {
   scroll-margin-top: 5rem;
 }
 
 body {
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1rem;
   line-height: var(--line-height);
   color: var(--ink);
@@ -252,12 +144,14 @@ em,
 i {
   font-style: italic;
 }
-.ar {
-  font-family: var(--font-ar);
-  font-weight: 500;
-}
 small {
   font-size: 0.8125rem;
+}
+
+/* Text selection — teal slab everywhere. */
+::selection {
+  background: #2C4A4A;
+  color: #fff;
 }
 
 /* Keyboard hints and search highlights */
@@ -310,83 +204,315 @@ figcaption {
   padding: 0 clamp(18px, 4vw, 44px);
 }
 
-/* ---- masthead ---- */
-.masthead {
-  border-bottom: 1px solid var(--line);
+/* ---- Slate shell (d1): sticky rail + single-column main ----
+   Rail keeps fixed Slate-dark paint in BOTH modes so the mock
+   matches on first paint; main column follows theme vars. */
+.s {
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr);
+  background: var(--paper);
+  color: var(--ink);
+}
+.r {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: var(--paper);
+  align-self: start;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 24px;
+  box-sizing: border-box;
+  background: #1A1F27;
+  border-right: 1px solid #333D4A;
+  color: #E9EDF2;
 }
-.masthead .wrap {
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid #5EC4B6;
+  background: #262D38;
+}
+.av {
   display: flex;
   align-items: center;
-  gap: 22px;
-  min-height: 64px;
-  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 15px;
+  color: #B4BFCC;
 }
-.mark {
-  font-family: var(--font-display);
-  font-stretch: expanded;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-size: 14px;
-  text-decoration: none;
-  color: var(--ink);
-  white-space: nowrap;
+.av i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  flex-shrink: 0;
 }
-.mark b {
-  color: var(--red);
-  font-weight: 700;
+.slate-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
-.masthead-nav {
+.slate-nav a {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 2.4vw, 26px);
-  margin-inline-start: auto;
-  flex-wrap: wrap;
+  min-height: 44px;
+  padding: 0 14px;
+  border-left: 3px solid transparent;
+  color: #B4BFCC;
+  font-weight: 500;
 }
-.nav-div {
-  width: 1px;
-  align-self: stretch;
-  min-height: 20px;
-  margin: 2px 0;
-  background: var(--hair);
+.slate-nav a:hover {
+  color: #fff;
+  background: #262D38;
 }
-.masthead-nav a {
-  text-decoration: none;
-  font-size: 14.5px;
-  color: var(--ink-2);
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
+.slate-nav a.on {
+  border-left-color: #5EC4B6;
+  color: #fff;
+  background: #262D38;
+  font-weight: 600;
 }
-.masthead-nav a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--red);
+.so {
+  display: flex;
+  gap: 4px;
+  margin-top: auto;
 }
-.masthead-nav a[aria-current] {
-  color: var(--ink);
-  border-bottom-color: var(--brass);
-}
-.lamp {
-  background: none;
-  border: 1px solid var(--line);
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 13px;
-  padding: 4px 11px;
-  cursor: pointer;
-  border-radius: 0;
+.so a {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: #B4BFCC;
+  border-bottom: none;
 }
-.lamp:hover {
-  color: var(--ink);
-  border-color: var(--brass);
+.so a:hover {
+  background: #262D38;
+  color: #5EC4B6;
+}
+.s-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.s-main > main {
+  flex: 1;
+}
+/* Slate content column: 800px + 56px gutters (mock `main`). */
+.s-main .wrap,
+.s-main .container {
+  max-width: 800px;
+  margin: 0;
+  padding: 0 56px;
+  box-sizing: border-box;
+}
+.s-main section,
+.s-main .section {
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+}
+.s-main section.hero,
+.s-main section:first-child {
+  border-top: none;
+}
+/* Slate hero buttons — fixed paint in both modes (mock values). */
+.b {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  margin: 0 8px 8px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  border-bottom: none;
+}
+.b1 {
+  background: #5EC4B6;
+  color: #0C2B27;
+}
+.b1:hover {
+  background: #86D8CC;
+  color: #0C2B27;
+}
+.b2 {
+  border: 1px solid #4A5667;
+  color: inherit;
+}
+.b2:hover {
+  border-color: currentColor;
+  color: inherit;
+}
+.hero-cta {
+  margin-top: 32px;
+}
+/* Slate entry rows (d1 `.e`): experience / projects / certifications.
+   Data loops, pagination hooks, and <details> expanders are unchanged —
+   only the row-box presentation is Slate. */
+.e {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+.e:first-child {
+  border-top: 1px solid var(--line);
+}
+.e > div:first-child {
+  min-width: 0;
+  flex: 1 1 0;
+}
+.t {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.t a {
+  border-bottom: 1px solid transparent;
+}
+.t a:hover {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+.m {
+  color: var(--ink-2);
+  max-width: 560px;
+}
+.m a {
+  color: inherit;
+  border-bottom: 1px solid var(--hair);
+}
+.m a:hover {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+.e .m + .m {
+  margin-top: 2px;
+}
+.e details {
+  margin-top: 8px;
+}
+.d,
+.chip {
+  white-space: nowrap;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5EC4B6;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 4px 10px;
+}
+/* Certification meta chips: issuer / expiry / credential ID share the
+   date-chip voice, wrapping as whole chips on narrow screens. */
+.m.cert-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  max-width: none;
+}
+/* Slate tag pills (d1 `.tg`): fixed paint in both modes. */
+.tg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
 }
 
-/* legacy header selectors removed — masthead uses .mark / .masthead-nav */
+/* Slate hero type: single-line display name, 40–64px. */
+.s-main .name-lat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 5.4vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  color: var(--ink);
+}
+.s-main .hero {
+  padding: 112px 0 88px;
+  border-bottom: none;
+}
+.s-main .hero .wrap {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.s-main .hero p {
+  max-width: 560px;
+  font-size: 20px;
+}
+/* Slate section heads: 28px semibold (mock `h2`). Inner pages use h1
+   titles — same size. */
+.s-main h1.page-title,
+.s-main .shead h2,
+.s-main h2.page-title,
+.s-main .sc h2 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+/* Slate section header with a view-all link (home highlights). */
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 32px;
+}
+.sec-head h2 {
+  margin: 0;
+}
+.sec-head a {
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.sec-head a:hover {
+  color: #5EC4B6;
+}
+/* Slate uses grid (mock `.u`). */
+.u {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+/* Slate rail/social stroke icons. */
+svg.i {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Linktree glyph is fill-based (brand path), not a stroke icon. */
+.so svg.lt {
+  fill: currentColor;
+  stroke: none;
+}
+@media (max-width: 820px) {
+  .s {
+    grid-template-columns: 1fr;
+  }
+  .r {
+    position: static;
+    min-height: 0;
+  }
+  .s-main .wrap,
+  .s-main .container {
+    padding: 0 24px;
+  }
+}
 
 main {
   flex: 1;
@@ -402,14 +528,12 @@ section {
 /* Below-fold sections skip rendering until near the viewport (render
    cost optimization). `auto` remembers real size so the scrollbar
    doesn't jump; content stays findable (unlike `hidden`). */
-.about,
-.stack,
-.windows {
+.s-main section:not(.hero) {
   content-visibility: auto;
   contain-intrinsic-size: auto 640px;
 }
 
-/* ---- section heads: latin + hairline rule + arabic ---- */
+/* ---- section heads (Slate: plain 28px headings) ---- */
 .shead {
   display: flex;
   align-items: center;
@@ -418,25 +542,6 @@ section {
   gap: 18px;
   margin: 0 0 26px;
 }
-.shead h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.28rem;
-  letter-spacing: -0.005em;
-  margin: 0;
-  white-space: nowrap;
-}
-.shead .rule {
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-}
-.shead .ar {
-  color: var(--red);
-  font-size: 1.35rem;
-  white-space: nowrap;
-}
-
 .page-title {
   font-family: var(--font-display);
   font-weight: 800;
@@ -447,13 +552,6 @@ section {
   margin: 0;
 }
 
-.shead .page-title {
-  font-size: clamp(1.65rem, 4vw, 2.5rem);
-}
-
-.tag-page-title {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-}
 .page-sub {
   color: var(--ink-2);
   max-width: 62ch;
@@ -469,74 +567,23 @@ section {
   text-decoration: none;
   border-bottom: 1px solid var(--hair);
 }
-/* Shared red hover for inline text links */
-.back-link a:hover,
-.contact-box .contact-items a:hover,
-.project-title a:hover,
-.job-company a:hover,
-.foot a:hover {
+/* Shared accent hover for inline text links */
+.back-link a:hover {
   color: var(--red);
   border-bottom-color: var(--red);
 }
 
-/* ---- hero: lightwash + nameplate ---- */
+/* ---- hero (Slate: type + CTA only) ---- */
 .hero {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
   padding: 0;
 }
-.hero .wrap {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(24px, 5vw, 64px);
-  align-items: stretch;
-  padding-top: clamp(40px, 7vw, 86px);
-  padding-bottom: clamp(40px, 7vw, 86px);
-  position: relative;
-  z-index: 2;
-}
-.lightwash {
-  position: absolute;
-  inset: -14% -6% -24% 8%;
-  z-index: 1;
-  opacity: var(--wash-op);
-  pointer-events: none;
-  transform: skewY(-7deg) scale(1.06);
-  -webkit-mask-image: linear-gradient(105deg, #000 6%, rgba(0,0,0,.35) 48%,
-    transparent 78%);
-  mask-image: linear-gradient(105deg, #000 6%, rgba(0,0,0,.35) 48%, transparent
-    78%);
-}
-.lightwash svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
 .nameplate {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.name-ar {
-  font-family: var(--font-ar);
-  font-weight: 500;
-  font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-  line-height: 1.2;
-  color: var(--red);
-  margin: 0;
-  direction: rtl;
-  text-align: start;
-}
-.name-lat {
-  font-family: var(--font-ar);
-  font-weight: 700;
-  font-size: clamp(2.5rem, 7.4vw, 5.1rem);
-  line-height: 1.05;
-  letter-spacing: 0;
-  margin: 0;
-  text-transform: uppercase;
-  color: var(--red);
 }
 .role {
   margin: 0.7em 0 0;
@@ -544,219 +591,6 @@ section {
   font-weight: 400;
   color: var(--ink-2);
   max-width: 32ch;
-}
-.place {
-  margin-top: auto;
-  padding-top: 20px;
-  display: flex;
-  gap: 16px;
-  align-items: baseline;
-  flex-wrap: wrap;
-  font-size: 13.5px;
-  color: var(--ink-2);
-}
-.place .ar {
-  color: var(--red);
-  font-size: 15px;
-}
-.place .coord {
-  color: var(--brass);
-  letter-spacing: 0.02em;
-}
-
-/* ---- about ---- */
-.about {
-  border-bottom: 1px solid var(--line);
-}
-.about-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: clamp(22px, 4vw, 56px);
-}
-.about-cols p {
-  margin: 0 0 1.1em;
-  max-width: 62ch;
-}
-.about-cols p:last-child {
-  margin-bottom: 0;
-}
-.lede {
-  font-size: 1.16rem;
-  color: var(--ink);
-}
-.about-cols em {
-  font-style: normal;
-  color: var(--red);
-}
-
-/* ---- stack index: numbered editorial rows (numerals auto-generate) ---- */
-.stack-index {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  counter-reset: stack;
-  border-top: 1px solid var(--line);
-}
-.stack-row {
-  counter-increment: stack;
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 10px 20px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--hair);
-  align-content: start;
-}
-.stack-row::before {
-  content: counter(stack, decimal-leading-zero);
-  grid-row: 1 / span 2;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.7rem;
-  line-height: 1.1;
-  color: var(--brass);
-}
-.stack-meta h3 {
-  margin: 0;
-  font-size: 1.05rem;
-}
-.stack-meta p {
-  margin: 2px 0 0;
-  font-size: 14.5px;
-  color: var(--ink-2);
-}
-.stack-row .tech-tags {
-  margin-top: 0;
-  grid-column: 2;
-}
-.stack-more {
-  grid-column: 2;
-  margin: 0.6rem 0 0;
-  font-size: 14px;
-}
-.stack-more a {
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--hair);
-  padding-bottom: 2px;
-}
-.stack-more a:hover {
-  color: var(--red);
-  border-bottom-color: var(--red);
-}
-/* ---- mashrabiya windows: index nav + collections ---- */
-.windows {
-  border-bottom: 1px solid var(--line);
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
-  border-top: 1px solid var(--line);
-  border-inline-start: 1px solid var(--line);
-}
-.cell {
-  position: relative;
-  padding: 26px 22px 30px;
-  text-decoration: none;
-  color: inherit;
-  border-inline-end: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  min-height: 186px;
-  background: transparent;
-}
-/* Shared mashrabiya corner diamonds (index cells + project cards) */
-.cell::before,
-.cell::after,
-.card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: var(--brass);
-  transform: rotate(45deg);
-}
-.cell::before,
-.card::before {
-  top: -4px;
-  inset-inline-start: -4px;
-}
-.cell::after,
-.card::after {
-  bottom: -4px;
-  inset-inline-end: -4px;
-}
-.cell:hover {
-  background: var(--paper-2);
-}
-.cell .c-ar {
-  font-size: 1.28rem;
-  color: var(--red);
-  line-height: 1.3;
-}
-.cell h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.02rem;
-  margin: 0;
-}
-.cell p {
-  margin: 0;
-  font-size: 14.5px;
-  color: var(--ink-2);
-  line-height: 1.55;
-}
-.cell .go {
-  margin-top: auto;
-  font-size: 13px;
-  color: var(--brass);
-  border-bottom: 1px solid var(--brass);
-  align-self: flex-start;
-  padding-bottom: 2px;
-  display: inline-block;
-  transition: transform var(--t-base);
-}
-.cell:hover .go {
-  transform: translateX(3px);
-}
-
-/* Index nav uses .windows / .grid / .cell (Cairo mashrabiya) */
-
-/* ---- contact / stack-row ---- */
-.contact-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 30px;
-  border: 1px solid var(--line);
-  padding: 26px 22px;
-  margin-top: 26px;
-}
-.contact-box .contact-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.contact-box .contact-label {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--brass);
-  margin-bottom: 4px;
-}
-.contact-box .contact-items {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  font-size: 15px;
-}
-.contact-box .contact-items a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--ink-2);
-  text-decoration: none;
-  border-bottom: 1px solid var(--hair);
-  align-self: flex-start;
 }
 .resume-button {
   display: inline-flex;
@@ -783,32 +617,32 @@ section {
   background: var(--paper-2);
 }
 
-.tech-tags {
+.tech-tags,
+.blog-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
+  gap: 6px;
   margin-top: 0.75rem;
 }
 .tech-tag {
   display: inline-block;
   max-width: 100%;
   overflow-wrap: anywhere;
-  font-size: 13.5px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--ink-2);
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--hair);
+  background: #1A1F27;
+  border: 1px solid var(--line);
   border-radius: 0;
-  padding: 0 0 2px;
+  padding: 4px 10px;
   font-family: var(--font-sans);
   text-decoration: none;
+  transition: color var(--t-base), border-color var(--t-base);
 }
-a.tech-tag:hover,
-span.tech-tag:hover {
-  color: var(--red);
-  border-bottom-color: var(--red);
-  background: none;
+a.tech-tag:hover {
+  color: #5EC4B6;
+  border-color: #5EC4B6;
+  background: #1A1F27;
 }
 
 .visually-hidden {
@@ -823,67 +657,6 @@ span.tech-tag:hover {
   border: 0;
 }
 
-/* ---- projects / experience / certs as Cairo bands + cells ---- */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  border-top: 1px solid var(--line);
-  border-inline-start: 1px solid var(--line);
-  gap: 0;
-}
-.card {
-  border: none;
-  border-inline-end: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-  position: relative;
-  min-width: 0;
-}
-.card:hover,
-.card:focus-within {
-  background: var(--paper-2);
-  border-color: var(--line);
-  box-shadow: none;
-  transform: none;
-}
-.project-card {
-  padding: 26px 22px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  min-width: 0;
-}
-.project-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 0.25rem;
-}
-.project-title {
-  font-size: 1.02rem;
-  font-weight: 700;
-  font-family: var(--font-display);
-  color: var(--ink);
-  margin: 0;
-}
-.project-title a {
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.project-meta {
-  font-size: 13px;
-  color: var(--brass);
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-.project-summary {
-  font-size: 14.5px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-}
 .project-highlights {
   padding-left: 0;
   margin-bottom: 0.5rem;
@@ -897,6 +670,14 @@ span.tech-tag:hover {
   color: var(--ink-2);
   line-height: 1.6;
 }
+/* Long unbreakable tokens (URLs, credential IDs) inside entries must
+   wrap instead of blowing out the flex column — same guard the base
+   styles give headings and links. Zero effect on normal text. */
+.e .m,
+.e .t,
+.dash-list li {
+  overflow-wrap: break-word;
+}
 .dash-list li::before {
   content: "–";
   position: absolute;
@@ -904,73 +685,6 @@ span.tech-tag:hover {
   color: var(--brass);
 }
 
-.experience-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: none;
-  border-inline-start: 1px solid var(--line);
-  margin-inline-start: 4px;
-  padding-inline-start: 30px;
-}
-.experience-item {
-  position: relative;
-  padding: 24px 18px 28px 0;
-  border-bottom: 1px solid var(--hair);
-  background: transparent;
-}
-.experience-item::before {
-  content: "";
-  position: absolute;
-  inset-inline-start: -34px;
-  top: 33px;
-  width: 7px;
-  height: 7px;
-  background: var(--brass);
-  transform: rotate(45deg);
-  transition: background-color var(--t-base);
-}
-.experience-item:hover::before,
-.experience-item:focus-within::before {
-  background: var(--red);
-}
-.experience-item:hover .job-title,
-.experience-item:focus-within .job-title {
-  color: var(--red);
-}
-.experience-item:last-child {
-  border-bottom: none;
-}
-.job-title {
-  font-family: var(--font-display);
-  font-size: 1.02rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 0.2rem;
-}
-.job-company {
-  font-size: 14.5px;
-  color: var(--ink-2);
-  margin-bottom: 0.2rem;
-}
-.job-company a {
-  color: var(--ink-2);
-  text-decoration: none;
-  border-bottom: 1px solid var(--hair);
-}
-.job-meta {
-  font-size: 13px;
-  color: var(--brass);
-  margin-bottom: 0.625rem;
-  overflow-wrap: break-word;
-}
-.job-description {
-  font-size: 15px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin-bottom: 0.625rem;
-  max-width: 68ch;
-}
 .responsibilities {
   margin-bottom: 0.625rem;
 }
@@ -1010,94 +724,47 @@ span.tech-tag:hover {
   margin-bottom: 0.5rem;
 }
 
-.certifications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  border-top: 1px solid var(--line);
-  border-inline-start: 1px solid var(--line);
-  gap: 0;
-}
-.cert-card {
-  padding: 26px 22px;
-  min-width: 0;
-}
-.cert-title {
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: var(--font-display);
-  color: var(--ink);
-  margin-bottom: 0.2rem;
-}
-.cert-issuer {
-  font-size: 14.5px;
-  color: var(--red);
-  margin-bottom: 0.25rem;
-}
-.cert-meta {
-  display: flex;
-  gap: 1rem;
-  font-size: 13px;
-  color: var(--brass);
-  flex-wrap: wrap;
-  overflow-wrap: break-word;
-}
-.cert-credential {
-  font-size: 13px;
-  color: var(--ink-2);
-  font-family: var(--font-mono);
-  overflow-wrap: anywhere;
-}
-
 /* ---- blog list ---- */
 .blog-search-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--line);
-  background: var(--paper);
+  gap: 12px;
+  border: none;
+  background: none;
   padding: 0;
-}
-.blog-search-container > * {
-  padding: 14px 18px;
-}
-.blog-search-container > * + * {
-  border-top: 1px solid var(--hair);
-}
-.blog-search-container .blog-tags-filter {
-  background: var(--red-wash);
 }
 .blog-search-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 0 0.5rem 0 0.625rem;
+  gap: 12px;
+  background: #1A1F27;
+  border: 1px solid #4A5667;
+  border-radius: 10px;
+  padding: 0 0.75rem 0 1rem;
+  min-height: 52px;
 }
 .blog-search-wrapper:focus-within {
-  border-color: var(--brass);
-  outline: 2px solid var(--teal);
-  outline-offset: 0;
+  border-color: #5EC4B6;
+  box-shadow: 0 0 0 3px rgba(94, 196, 182, .18);
 }
 .blog-search-icon {
   flex-shrink: 0;
-  width: 15px;
-  height: 15px;
-  color: var(--brass);
+  width: 18px;
+  height: 18px;
+  color: #5EC4B6;
   pointer-events: none;
 }
 .blog-search-input {
   flex: 1;
   min-width: 0;
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--ink);
   background: none;
   border: none;
   border-radius: 0;
-  padding: 0.55rem 0;
+  padding: 0.7rem 0;
   outline: none;
 }
 .blog-search-input::placeholder {
@@ -1106,6 +773,14 @@ span.tech-tag:hover {
 .blog-search-input:focus {
   outline: none;
   border: none;
+}
+/* The wrapper already draws a teal focus ring — suppress the global
+   amber outline here so keyboard and mouse focus show ONE ring. */
+.blog-search-input:focus-visible {
+  outline: none;
+}
+.blog-search-hint {
+  flex-shrink: 0;
 }
 .blog-search-clear {
   flex-shrink: 0;
@@ -1127,36 +802,45 @@ span.tech-tag:hover {
   color: var(--ink);
 }
 
+/* View tabs as a segmented control. */
 .blog-view-tabs {
   display: flex;
-  gap: clamp(12px, 2.4vw, 26px);
+  gap: 4px;
   flex-wrap: wrap;
+  background: #1A1F27;
+  border: 1px solid #333D4A;
+  border-radius: 10px;
+  padding: 4px;
 }
 .view-tab {
+  flex: 1 1 auto;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0 16px;
   font-size: 14.5px;
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--ink-2);
   background: none;
   border: none;
-  border-bottom: 1px solid transparent;
-  border-radius: 0;
-  padding: 4px 0;
+  border-radius: 7px;
   cursor: pointer;
+  white-space: nowrap;
 }
 .view-tab:hover {
   color: var(--ink);
-  border-bottom-color: var(--red);
-  background: none;
+  background: var(--paper-2);
 }
 .view-tab.active {
-  color: var(--ink);
-  background: none;
-  border-bottom-color: var(--brass);
-  font-weight: 500;
+  color: #BDEFE7;
+  background: #2C4A4A;
+  font-weight: 600;
+}
+.view-tab.active .bookmark-count {
+  color: inherit;
 }
 .bookmark-count {
   font-size: 0.75rem;
@@ -1167,6 +851,9 @@ span.tech-tag:hover {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 14px 18px;
 }
 .quick-tags {
   display: flex;
@@ -1174,21 +861,30 @@ span.tech-tag:hover {
   gap: 6px 20px;
   align-items: center;
 }
-/* Quick tags are boxed controls — same voice as pagination and lamp buttons */
+/* Quick tags are pills in the segmented-control voice (7px radius,
+   teal-fill active) — deliberately distinct from the boxed pagination
+   actions below the grid. */
 .quick-tags .filter-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   font-size: 13px;
   font-family: var(--font-sans);
+  font-weight: 500;
   color: var(--ink-2);
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 4px 11px;
+  border-radius: 7px;
+  padding: 4px 12px;
   cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-base), border-color var(--t-base), background-color
+    var(--t-base);
 }
 .filter-tag.active {
-  color: var(--red);
-  border-color: var(--red);
-  background: var(--red-wash);
+  color: #BDEFE7;
+  border-color: #2C4A4A;
+  background: #2C4A4A;
   font-weight: 600;
 }
 .tag-count {
@@ -1205,19 +901,24 @@ span.tech-tag:hover {
   position: relative;
   display: inline-flex;
 }
-/* Trigger is an action, so it keeps the lamp box voice */
+/* Trigger shares the pill voice so the row reads as one control set */
 .tag-dropdown-trigger.filter-btn {
   display: inline-flex;
   align-items: center;
+  min-height: 32px;
   gap: 0.25rem;
   font-size: 13px;
   font-family: var(--font-sans);
+  font-weight: 500;
   color: var(--ink-2);
-  background: none;
+  background: transparent;
   border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 4px 11px;
+  border-radius: 7px;
+  padding: 4px 12px;
   cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-base), border-color var(--t-base), background-color
+    var(--t-base);
 }
 .tag-dropdown-panel {
   display: none;
@@ -1315,13 +1016,20 @@ span.tech-tag:hover {
   gap: 0.375rem;
   font-size: 13px;
   font-family: var(--font-sans);
-  color: var(--red);
-  background: var(--red-wash);
-  border: 1px solid var(--red);
-  border-radius: 0;
-  padding: 4px 11px;
+  color: #BDEFE7;
+  background: #2C4A4A;
+  border: 1px solid #2C4A4A;
+  border-radius: 7px;
+  padding: 4px 10px;
   cursor: pointer;
   font-weight: 600;
+}
+/* Filled chip keeps its fill on hover (overrides the shared
+   raised-paper hover above, which would wash it out). */
+.active-filter-tag:hover {
+  color: #BDEFE7;
+  background: #2C4A4A;
+  border-color: #5EC4B6;
 }
 .active-filter-x {
   display: inline-flex;
@@ -1349,14 +1057,19 @@ span.tech-tag:hover {
 }
 
 .blog-no-results {
-  padding: 3rem 0;
+  padding: 3rem 1rem;
   text-align: center;
   color: var(--ink-2);
   border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #1A1F27;
 }
 .blog-result-count {
   padding: 0.75rem 0;
-  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ink-2);
 }
 .suggest-tag {
@@ -1384,33 +1097,60 @@ span.tech-tag:hover {
   border-top: 1px solid var(--line);
 }
 .blog-card {
+  position: relative;
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem 0.5rem;
-  margin: 0 -0.5rem;
+  gap: 1.25rem;
+  /* Quiet rows: dividers carry the structure, hover answers with title
+     + cover-border color only (no wash band). */
+  padding: 1.25rem 0.75rem;
+  margin: 0 -0.75rem;
   border-bottom: 1px solid var(--hair);
   border-radius: 0;
 }
-.blog-card:hover,
-.blog-card:focus-within {
-  background: var(--paper-2);
+@media (max-width: 820px) {
+  /* Tablet step-down: desktop thumb would crowd the narrowed column. */
+  .blog-card-cover {
+    width: 128px;
+    height: 96px;
+  }
 }
 .blog-card-cover {
   flex-shrink: 0;
-  width: 80px;
-  height: 60px;
+  width: 160px;
+  height: 120px;
   aspect-ratio: 4 / 3;
-  border-radius: 0;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--paper-2);
   border: 1px solid var(--line);
   position: relative;
 }
-.read-inline {
-  display: none;
-  color: var(--red);
-  font-weight: 500;
-  font-size: 0.75rem;
+.blog-card:hover .blog-card-cover,
+.blog-card:focus-within .blog-card-cover {
+  border-color: #5EC4B6;
+}
+/* Read / bookmark state bar: a 3px rail on the card's left edge, always
+   visible as a dark track — green segment = read, amber = bookmarked,
+   both light up when both. Read state is painted pre-paint by the sync
+   head script (no flash); saved follows the bookmark button. */
+.state-bar {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.seg {
+  flex: 1;
+  border-radius: 2px;
+  background: #333D4A;
+  transition: background-color 0.25s ease;
+}
+.blog-card:has(.bookmark-btn.bookmarked) .seg-saved {
+  background: #F2B84B;
 }
 .blog-card-cover img {
   width: 100%;
@@ -1423,7 +1163,7 @@ span.tech-tag:hover {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.35rem;
 }
 .blog-card-header {
   display: flex;
@@ -1432,11 +1172,12 @@ span.tech-tag:hover {
   gap: 0.5rem;
 }
 .blog-card-title {
-  font-size: 1rem;
+  font-size: 22px;
   font-weight: 700;
   font-family: var(--font-display);
   margin: 0;
   line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 .blog-card-title a {
   color: var(--ink);
@@ -1444,12 +1185,16 @@ span.tech-tag:hover {
 }
 .blog-card-meta {
   font-size: 0.8125rem;
-  color: var(--brass);
+  color: var(--ink-2);
+}
+.blog-card-meta time {
+  color: #5EC4B6;
+  font-weight: 500;
 }
 .blog-card-excerpt {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--ink-2);
-  line-height: 1.55;
+  line-height: 1.65;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1461,10 +1206,10 @@ span.tech-tag:hover {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--brass);
+  color: var(--ink-2);
   padding: 0.25rem;
-  min-width: 28px;
-  min-height: 28px;
+  min-width: 40px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1491,6 +1236,10 @@ span.tech-tag:hover {
 .blog-card:focus-within .blog-card-title a {
   color: var(--red);
 }
+.blog-card:hover .blog-card-title a mark,
+.blog-card:focus-within .blog-card-title a mark {
+  color: inherit;
+}
 
 .pagination {
   display: flex;
@@ -1498,10 +1247,8 @@ span.tech-tag:hover {
   gap: 8px;
   margin-top: 1.25rem;
 }
-/* Pagination items are lamp-box actions, never underline tags.
-   Explicit 24px minimum (WCAG 2.2 AA) with 44px preferred touch size;
-   kept separate from .tech-tag underline voice so PurgeCSS must retain it
-   (see safelist: pagination-btn is JS-injected). */
+/* Pagination items are boxed 44px actions (WCAG 2.2 AA touch size),
+   visually distinct from the pill tags the JS also puts on them. */
 .pagination-btn,
 a.pagination-btn,
 span.pagination-btn,
@@ -1513,20 +1260,24 @@ button.pagination-btn {
   text-decoration: none;
   font-size: 13px;
   font-family: var(--font-sans);
-  border: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border: 1px solid #4A5667;
   background: transparent;
   color: var(--ink-2);
   padding: 10px 12px;
   min-width: 44px;
   min-height: 44px;
   text-align: center;
-  border-radius: 0;
+  border-radius: 8px;
+}
+.pagination .pagination-btn:hover {
+  border-color: #5EC4B6;
+  color: #5EC4B6;
+  background: none;
 }
 .pagination-active {
-  color: var(--red) !important;
-  border-color: var(--red) !important;
-  background: var(--paper-2) !important;
+  color: #BDEFE7 !important;
+  border-color: #5EC4B6 !important;
+  background: #2C4A4A !important;
   font-weight: 600;
 }
 
@@ -1545,8 +1296,8 @@ button.pagination-btn {
   margin-inline: auto;
 }
 .blog-cover {
-  margin: 0 0 1.75rem;
-  border-radius: 0;
+  margin: 0 0 2rem;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);
   /* Reserve space so the loading cover doesn't shift the article (CLS) */
@@ -1566,30 +1317,92 @@ button.pagination-btn {
 }
 .blog-title {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   color: var(--ink);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+.blog-byline {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+.byline-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #5EC4B6;
+  background: var(--paper-2);
+}
+.byline-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
 }
 .blog-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.8125rem;
-  color: var(--brass);
+  color: var(--ink-2);
   flex-wrap: wrap;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
+}
+.blog-meta time {
+  color: #5EC4B6;
+  font-weight: 500;
 }
 .blog-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
-  margin-bottom: 1rem;
+  gap: 6px;
+  margin-bottom: 1.25rem;
 }
 
-/* Social share */
+/* Author card — closes the article with a face, not a wall of icons. */
+.author-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #1A1F27;
+}
+.author-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #5EC4B6;
+  background: var(--paper-2);
+}
+.author-name {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+.author-card p {
+  margin: 0 0 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.author-card a {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #5EC4B6;
+}
+
+/* Social share — labeled Slate slabs, top and bottom share one voice. */
 .social-share {
   display: flex;
   align-items: center;
@@ -1604,13 +1417,27 @@ button.pagination-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  line-height: 1;
   background: none;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  color: var(--ink-2);
+  border: 1px solid #4A5667;
+  border-radius: 10px;
+  color: var(--ink);
   cursor: pointer;
-  padding: 0.3rem 0.45rem;
-  line-height: 0;
+}
+.share-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.share-btn:hover {
+  border-color: #5EC4B6;
+  color: #5EC4B6;
+  background: rgba(94, 196, 182, .08);
 }
 .share-btn.copied {
   color: var(--teal);
@@ -1627,67 +1454,15 @@ button.pagination-btn {
   flex-wrap: wrap;
 }
 .share-btn-lg {
-  padding: 0.4rem 0.75rem;
-  gap: 0.4rem;
-  font-size: 0.8125rem;
-  font-family: var(--font-sans);
-  line-height: 1;
+  font-size: 14px;
 }
 
-/* ---- footer ---- */
+/* ---- footer (slim colophon; nav + contact live in the rail) ---- */
 footer {
   border-top: 1px solid var(--line);
-  padding: clamp(40px, 6vw, 70px) 0 54px;
-}
-.foot {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 30px;
-}
-.foot h2.foot-heading {
-  margin: 0 0 12px;
-  font-size: 13.5px;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  color: var(--brass);
-}
-.foot ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  font-size: 15px;
-}
-.foot a {
-  text-decoration: none;
-  border-bottom: 1px solid var(--hair);
-  align-self: flex-start;
-}
-.foot ul.social-links {
-  flex-direction: row;
-  gap: 6px;
-}
-.foot .social-links a {
-  border-bottom: none;
-  display: inline-flex;
-  padding: 6px;
-  color: var(--ink-2);
-}
-.foot .social-links a:hover {
-  color: var(--red);
-  border-bottom-color: transparent;
-}
-.foot .social-links svg {
-  width: 22px;
-  height: 22px;
-  display: block;
+  padding: 32px 0 40px;
 }
 .colophon {
-  margin-top: 44px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   gap: 18px;
@@ -1695,29 +1470,33 @@ footer {
   font-size: 13px;
   color: var(--ink-2);
 }
-.colophon .ar {
-  color: var(--red);
-  font-size: 14.5px;
-}
 
 .floating-btn {
   position: fixed;
   z-index: 200;
-  background: var(--paper-2);
-  border: 1px solid var(--line);
-  border-radius: 0;
-  color: var(--ink-2);
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1A1F27;
+  border: 1px solid #5EC4B6;
+  border-radius: 50%;
+  color: #5EC4B6;
   cursor: pointer;
-  padding: 0.625rem 0.75rem;
+  padding: 0;
   line-height: 0;
+  transition: background-color var(--t-base), color var(--t-base), transform
+    var(--t-base);
 }
 .floating-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
+  background: #5EC4B6;
+  color: #0C2B27;
+  border-color: #5EC4B6;
 }
 .floating-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 .back-to-top {
   right: 1.5rem;
@@ -1778,44 +1557,6 @@ footer {
 }
 
 @media (max-width: 760px) {
-  .stack-row {
-    grid-template-columns: 48px 1fr;
-  }
-  /* Header collapses to mark + one scrollable nav row (links + docked
-     toggle) instead of 3–4 wrapped rows eating the viewport. */
-  .masthead .wrap {
-    gap: 10px;
-    min-height: 56px;
-  }
-  .masthead-nav {
-    gap: 4px 16px;
-    flex-wrap: nowrap;
-    align-items: center;
-    overflow-x: auto;
-    max-width: 100%;
-    scrollbar-width: none;
-    padding-bottom: 2px;
-  }
-  .masthead-nav::-webkit-scrollbar {
-    display: none;
-  }
-  .masthead-nav a,
-  .masthead-nav .lamp {
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .masthead-nav a {
-    padding: 6px 0;
-  }
-  .place {
-    padding-top: 20px;
-  }
-  .experience-list {
-    padding-inline-start: 22px;
-  }
-  .experience-item::before {
-    inset-inline-start: -26px;
-  }
   /* Tag picker becomes a sheet pinned to the padded container so it
      can never push past the viewport edge. */
   .blog-search-container {

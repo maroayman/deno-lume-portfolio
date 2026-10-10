@@ -23,6 +23,10 @@ const site = lume({
   src: "./src",
   dest: "./_site",
   location: new URL("https://maroayman.vercel.app"),
+  // Kill Lume's dev-mode debug bar (jsdelivr script + styles injected into
+  // every served page by `lume -s`). Production output never had it; this
+  // keeps local preview identical to production. Live reload still works.
+  server: { debugBar: false },
 });
 
 site.use(vento());
@@ -169,11 +173,16 @@ site.use(purgecss({
     // Classes added dynamically by JS (not present in static HTML) must be
     // safelisted so PurgeCSS does not strip the rules that reference them.
     safelist: {
+      // PurgeCSS cannot match complex selectors, so the :focus-visible
+      // rule (a :where() list) needs a deep safelist to survive.
+      deep: [/focus-visible/],
       standard: [
         /^dark-mode$/, // theme toggle — on <body> and <html>
         /^visible$/, // back-to-top, scroll-triggered visibility
         /^read$/, // blog card visited state (localStorage)
-        /^code-tab/, // :::tabs component (code-tab-btn, code-tab-pane, active)
+        /^code-tab-buttons$/, // :::tabs header (emitted by markdown-tabs)
+        /^code-tab-btn$/, // :::tabs tab button (queried by blog-post.js)
+        /^code-tab-pane$/, // :::tabs pane (queried by blog-post.js)
         /^active$/, // filter tags, view tabs, toc links, pagination
         /^open$/, // tag dropdown, ToC
         /^copied$/, // copy-code button feedback
@@ -188,14 +197,12 @@ site.use(purgecss({
         /^toc-h3$/, // ToC item injected by JS
         /^mark$/, // search highlight injected by JS
         /^kbd$/, // keyboard hints (rare elements, kept deliberately)
-        /^read-inline$/, // read indicator
         /^scrolling$/, // back-to-top visual feedback
         /^suggest-tag$/, // suggested tags in no-results
         /^active-filter-tag$/, // active filter chip — injected by JS (renderActiveFilters)
         /^active-filter-x$/, // × icon inside the chip — injected by JS
         /^code-block-wrapper$/, // code block wrapper injected by JS
         /^copy-code-btn$/, // copy button injected by JS
-        /^share-/, // share button variants
       ],
     },
   },

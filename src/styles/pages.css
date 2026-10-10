@@ -12,9 +12,7 @@
   max-width: 640px;
 }
 
-html.dark-mode .terminal-404,
-body.dark-mode .terminal-404 {
-  background: #0d1117;
+html.dark-mode .terminal-404 {
   border-color: #30363d;
 }
 
@@ -103,113 +101,76 @@ body.dark-mode .terminal-404 {
 }
 
 /* ============================================================
-   RESPONSIVE
+   USES PAGE — dense inventory list
    ============================================================ */
 
-@media (max-width: 400px) {
-  .blog-view-tabs {
-    flex-wrap: wrap;
-  }
+.uses-block {
+  margin-bottom: 2rem;
 }
-
-/* ============================================================
-   USES PAGE
-   ============================================================ */
-
-.uses-group {
+.uses-block:last-child {
   margin-bottom: 0;
-  border: 1px solid var(--line);
+}
+/* Numbered inventory groups (design A): mono indices in terminal voice.
+   CSS counters only — no markup change. NOTE: this used to be scoped
+   `.s-main .sc h2.uses-head`, but `.sc` only exists on the homepage,
+   so the headings never matched and rendered as default h2. Scoped to
+   `.uses-head` (uses-page-only class) instead. */
+section:has(> .uses-block) {
+  counter-reset: uses-group;
+}
+.uses-block {
+  counter-increment: uses-group;
+}
+.uses-head {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5EC4B6;
+  margin: 0 0 4px;
+}
+.uses-head::before {
+  content: counter(uses-group, decimal-leading-zero);
+  margin-right: 0.6rem;
+  color: var(--ink-2);
+}
+.uses-head span {
+  color: var(--ink-2);
+  letter-spacing: 0;
+}
+.uses-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.uses-lines li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.uses-lines li:last-child {
   border-bottom: none;
 }
-
-.uses-group:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.uses-group + .uses-group {
-  border-top: none;
-}
-
-.uses-group-title {
-  font-size: 13.5px;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  color: var(--brass);
-  margin-bottom: 0;
-  padding: 13px 18px;
-  border-bottom: 1px solid var(--hair);
-  background: var(--red-wash);
-}
-/* Groups are collapsible <details> — title is the toggle. */
-summary.uses-group-title {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-summary.uses-group-title::-webkit-details-marker {
-  display: none;
-}
-summary.uses-group-title::before {
-  content: "+";
-  font-size: 14px;
-  line-height: 1;
-  color: var(--red);
-}
-.uses-group[open] summary.uses-group-title::before {
-  content: "–";
-}
-summary.uses-group-title:hover {
+.uses-name {
+  font-weight: 600;
   color: var(--ink);
 }
-.uses-count {
-  font-weight: 400;
+.uses-sep {
+  color: var(--ink-2);
+  padding: 0 2px;
+}
+.uses-desc {
   color: var(--ink-2);
 }
 
-.uses-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+/* Fully static rows: no scroll rise, no hover nudge — plain inventory.
+   The base .uses-name typography above is the only styling. */
 
-.uses-item {
-  display: grid;
-  grid-template-columns: minmax(172px, max-content) minmax(0, 1fr);
-  align-items: center;
-  gap: 0;
-  padding: 0;
-  border-bottom: 1px solid var(--hair);
-}
-
-.uses-item:last-child {
-  border-bottom: none;
-}
-
-.uses-item-name {
-  font-size: 13.5px;
-  font-weight: 400;
-  color: var(--brass);
-  padding: 13px 18px;
-  border-inline-end: 1px solid var(--hair);
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  white-space: nowrap;
-  overflow-wrap: break-word;
-}
-
-.uses-item-desc {
-  font-size: 15px;
-  color: var(--ink-2);
-  line-height: 1.55;
-  padding: 12px 18px;
-  min-width: 0;
-  overflow-wrap: break-word;
-}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 
 @media (max-width: 600px) {
   :root {
@@ -218,10 +179,6 @@ summary.uses-group-title:hover {
 
   .blog-title {
     font-size: 1.375rem;
-  }
-
-  .blog-grid {
-    gap: 0;
   }
 
   .blog-card-cover {
@@ -238,28 +195,11 @@ summary.uses-group-title:hover {
     max-width: 100%;
   }
 
-  /* Adjust lamp / floating button spacing for mobile */
-  .lamp {
-    order: 3;
-  }
+  /* Adjust floating button spacing for mobile */
 
   .back-to-top {
     right: 1rem;
     bottom: 1rem;
-  }
-
-  /* uses overrides stay after their base rules above */
-  .uses-item {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .uses-item-name {
-    border-inline-end: none;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 8px;
-    white-space: normal;
-  }
-  .uses-item-desc {
-    padding-top: 9px;
   }
 }
 
@@ -270,7 +210,7 @@ summary.uses-group-title:hover {
 .toc {
   margin-bottom: 2rem;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -279,19 +219,21 @@ summary.uses-group-title:hover {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-height: 48px;
   padding: 0.75rem 1rem;
-  background: var(--red-wash);
+  background: #1A1F27;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--brass);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
   text-align: left;
 }
 
 .toc-toggle:hover {
-  color: var(--ink);
+  color: #5EC4B6;
   background: var(--paper-2);
 }
 
@@ -306,10 +248,13 @@ summary.uses-group-title:hover {
 
 .toc-list {
   list-style: none;
-  padding: 0.5rem 0;
-  background: var(--paper-2);
+  padding: 0.75rem;
+  background: #1A1F27;
   border-top: 1px solid var(--line);
   counter-reset: toc;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .toc-list li {
@@ -317,28 +262,30 @@ summary.uses-group-title:hover {
 }
 
 .toc-list a {
-  display: block;
-  padding: 0.3rem 1rem;
-  font-size: 0.8125rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
   color: var(--ink-2);
   text-decoration: none;
+  border-radius: 7px;
+  border-left: none;
   transition: color var(--t-base), background-color var(--t-base);
-  border-left: 2px solid transparent;
 }
 
 .toc-list a:hover {
-  color: var(--red);
-  background: var(--red-wash);
+  color: var(--ink);
+  background: var(--paper-2);
 }
 
 .toc-list a.toc-active {
-  color: var(--red);
-  border-left-color: var(--red);
-  background: var(--red-wash);
-  font-weight: 500;
+  color: #BDEFE7;
+  background: #2C4A4A;
+  font-weight: 600;
 }
 
-/* Highlights (h2): ink-strong with brass section numbers. */
+/* Section numbers: teal mono numerals. */
 .toc-list .toc-h2 {
   counter-increment: toc;
 }
@@ -349,32 +296,22 @@ summary.uses-group-title:hover {
 .toc-list .toc-h2 a::before {
   content: counter(toc, decimal-leading-zero);
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 400;
-  color: var(--brass);
-  margin-right: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #5EC4B6;
 }
-.toc-list .toc-h2 a.toc-active::before {
-  color: var(--red);
+.toc-list .toc-h2 a.toc-active {
+  color: #BDEFE7;
 }
 
-/* Sub-highlights (h3): quieter, railed under their parent. */
+/* Sub-headings: indented, quieter, no rail. */
 .toc-list .toc-h3 a {
-  padding-left: 2.75rem;
-  font-size: 0.75rem;
-  position: relative;
+  padding-left: 2.5rem;
+  font-size: 0.8125rem;
 }
 .toc-list .toc-h3 a::before {
-  content: "";
-  position: absolute;
-  left: 1.9rem;
-  top: 0.35rem;
-  bottom: 0.35rem;
-  width: 1px;
-  background: var(--line);
-}
-.toc-list .toc-h3 a.toc-active::before {
-  background: var(--brass);
+  content: "–";
+  color: var(--ink-2);
 }
 
 /* ============================================================
@@ -382,7 +319,6 @@ summary.uses-group-title:hover {
    ============================================================ */
 
 @media print {
-  .lamp,
   .back-to-top,
   .reading-progress,
   .social-share,

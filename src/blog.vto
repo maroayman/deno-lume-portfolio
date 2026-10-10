@@ -11,11 +11,6 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
 <!-- Hide cards until read status is applied, then reveal (progressive enhancement).
      Styles are allowed by style-src 'unsafe-inline'; scripts live in blog-head.js. -->
 <style>
-.blog-card {
-  opacity: 1;
-}
-</style>
-<style>
 .js .blog-card {
   opacity: 0;
 }
@@ -24,9 +19,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
 
 <div class="container">
   <section class="section">
-    {{ comp.back_link() }}
-
-    {{ comp.page_header({ title: "Blog", ar: "المدونة" }) }}
+    {{ comp.page_header({ title: "Blog" }) }}
 
     <p class="page-sub">
       Technical articles about cloud infrastructure, DevOps practices, and lessons learned.
@@ -35,15 +28,14 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     {{# Data preparation lives in TypeScript (plugins/blog-data.ts,
        exposed as Vento filters in _config.ts). This template only
        orchestrates: search UI + view tabs + tag filters + card grid.
-       NOTE: the two search calls below intentionally return different
-       sets (Lume caches per query string; see plugins/blog-data.ts):
-       - ordered query -> the 18 posts (card grid + tag counts),
-       - unordered query -> all 37 type=post pages, i.e. posts plus the
-         generated tag pages (the "All" total). Do not merge them. #}}
+       NOTE: the ordered query below is cache-seeded by tags.page.ts
+       (generator runs first), so it returns the 18 posts — grid,
+       tag counts, and the "All" total all derive from it. Tag pages
+       inherit `type: post` from the /blog cascade but carry no
+       `tags` array, so tagCounts ignores them either way. #}}
     {{ set posts = search.pages("type=post", "date=desc") |> sortPosts }}
-    {{ set allTypePosts = search.pages("type=post") }}
-    {{ set totalPosts = allTypePosts.length }}
-    {{ set counts = allTypePosts |> tagCounts }}
+    {{ set totalPosts = posts.length }}
+    {{ set counts = posts |> tagCounts }}
 
     <!-- Search and Filter -->
     <div class="blog-search-container">

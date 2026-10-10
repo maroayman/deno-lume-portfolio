@@ -25,7 +25,7 @@ jobs:
       # Images first: check:content validates cover thumbnails, which only
       # exist after the GHCR pull (fresh clones need `deno task images:pull`).
       - uses: oras-project/setup-oras@v2
-      - run: oras pull ghcr.io/maroayman/images@sha256:16280f56b9ad9767cc2a2c544262ac810c5e1e6bf4f56d9d55793116ffa76044 -o ./_images-tmp && mkdir -p src/public/images && cp -r ./_images-tmp/src/public/images/. src/public/images/ && rm -rf ./_images-tmp
+      - run: oras pull ghcr.io/maroayman/images@sha256:9a93316f42a2c5af5ce5638d85f04660e602d56ccf758ee0f52d024ab323957a -o ./_images-tmp && mkdir -p src/public/images src/public/profile && cp -r ./_images-tmp/src/public/images/. src/public/images/ && if [ -d ./_images-tmp/src/public/profile ]; then cp -r ./_images-tmp/src/public/profile/. src/public/profile/; fi && rm -rf ./_images-tmp
       - run: |
           IMAGE_COUNT=$(find src/public/images -type f | wc -l)
           if [ "$IMAGE_COUNT" -eq 0 ]; then echo "error: oras pull restored 0 files" >&2; exit 1; fi

@@ -149,10 +149,10 @@ Styles are split by concern:
 
 The design system uses CSS custom properties (variables):
 
-- Colors: paper/ink base with red, brass, and teal accents (`--paper`, `--ink`,
-  `--red`, `--brass`, `--teal`), each with a dark-mode override
-- Typography: Archivo (display), IBM Plex Sans Arabic (body), Reem Kufi (Arabic
-  accents)
+- Colors: Slate dark theme (`--paper`, `--ink`, teal accent `--red`/`--teal`),
+  matching the `d1/` design reference
+- Typography: Albert Sans (variable, vendored) for everything, IBM Plex Mono
+  for code/terminal
 - Spacing: sharp corners and hairline rules throughout
 
 ## Project Structure
@@ -176,7 +176,6 @@ deno-lume-portfolio/
 │   │   ├── experience.yml
 │   │   ├── projects.yml
 │   │   ├── certifications.yml
-│   │   ├── stack.yml
 │   │   └── uses.yml
 │   ├── _includes/
 │   │   ├── layouts/

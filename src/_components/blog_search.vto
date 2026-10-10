@@ -1,15 +1,36 @@
-{{# Blog search input + clear button (wired up by assets/blog-list.js). #}}
+{{# Blog search input + clear button.
+Wired up by assets/blog-list.js (blog index, default ids) or
+assets/tag-filter.js (tag pages, custom ids).
+
+Props (all optional):
+- `id`: input id (default "blogSearch").
+- `clearId`: clear button id (default "searchClear").
+- `type`: input type (default "text").
+- `placeholder`: input placeholder.
+- `label`: input aria-label (default "Search blog posts").
+- `hint`: show the "/" kbd hint (default true).
+- `clear`: show the clear button (default true). #}}
+{{ set inputId = id ?? "blogSearch" }}
+{{ set clearBtnId = clearId ?? "searchClear" }}
+{{ set inputType = type ?? "text" }}
+{{ set inputLabel = label ?? "Search blog posts" }}
 <div class="blog-search-wrapper">
   {{ comp.icon({ name: "search", cls: "blog-search-icon" }) }}
   <input
-    type="text"
-    id="blogSearch"
+    type="{{ inputType }}"
+    id="{{ inputId }}"
     class="blog-search-input"
-    placeholder="Search... (e.g. aws,linux:deploy)"
+    placeholder="{{ placeholder ?? "Search articles… (try aws, linux:deploy, or / to focus)" }}"
     autocomplete="off"
-    aria-label="Search blog posts"
+    spellcheck="false"
+    aria-label="{{ inputLabel }}"
   >
-  <button class="blog-search-clear" id="searchClear" aria-label="Clear search" style="display: none;">
+  {{ if hint ?? true }}
+  <kbd class="blog-search-hint" aria-hidden="true">/</kbd>
+  {{ /if }}
+  {{ if clear ?? true }}
+  <button class="blog-search-clear" id="{{ clearBtnId }}" aria-label="Clear search" style="display: none;">
     {{ comp.icon({ name: "x" }) }}
   </button>
+  {{ /if }}
 </div>

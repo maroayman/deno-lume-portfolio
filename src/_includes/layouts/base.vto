@@ -11,18 +11,20 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#EDE3CF">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1A1F27">
+  <meta name="color-scheme" content="dark">
 
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="{{ title ?? site.author }}">
   <meta property="og:description" content="{{ description ?? site.description }}">
   <meta property="og:site_name" content="{{ site.author }}">
   <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="{{ site.url }}{{ url }}">
+  <meta name="twitter:title" content="{{ title ?? site.author }}">
+  <meta name="twitter:description" content="{{ description ?? site.description }}">
   {{ if type === "post" }}
   {{ set ogImage = cover ? (cover.startsWith("http") ? cover : site.url + cover) : null }}
   <meta property="og:type" content="article">
-  <meta property="og:url" content="{{ site.url }}{{ url }}">
   <meta property="article:published_time" content="{{ date |> date('DATE') }}">
   {{ if ogImage }}
   <meta property="og:image" content="{{ ogImage }}">
@@ -30,20 +32,15 @@
   <meta property="og:image:height" content="630">
   {{ /if }}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ title ?? site.author }}">
-  <meta name="twitter:description" content="{{ description ?? site.description }}">
   {{ if ogImage }}
   <meta name="twitter:image" content="{{ ogImage }}">
   {{ /if }}
   {{ else }}
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}{{ url }}">
   <meta property="og:image" content="{{ site.url }}/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ title ?? site.author }}">
-  <meta name="twitter:description" content="{{ description ?? site.description }}">
   <meta name="twitter:image" content="{{ site.url }}/og-image.png">
   {{ /if }}
   <meta name="author" content="{{ site.author }}">
@@ -59,8 +56,8 @@
     "url": "{{ site.url }}{{ url }}",
     "datePublished": "{{ date |> date('DATE') }}",
     "dateModified": "{{ (updated ?? date) |> date('DATE') }}",
-    {{ if cover }}
-    "image": {{ JSON.stringify(cover) }},
+    {{ if ogImage }}
+    "image": {{ JSON.stringify(ogImage) }},
     {{ /if }}
     "author": {
       "@type": "Person",
@@ -115,20 +112,6 @@
   {{ include "partials/head-prefetch.vto" }}
   </head>
   <body>
-  <!-- Mashrabiya lattice defs — used by the hero lightwash -->
-  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
-    <defs>
-      <pattern id="mash" width="56" height="56" patternUnits="userSpaceOnUse">
-        <g fill="none" stroke="var(--brass)" stroke-width="1.15" opacity="1">
-          <rect x="14" y="14" width="28" height="28"/>
-          <rect x="14" y="14" width="28" height="28" transform="rotate(45 28 28)"/>
-          <path d="M0 28 H8.2 M47.8 28 H56 M28 0 V8.2 M28 47.8 V56"/>
-          <path d="M0 0 L14 14 M56 0 L42 14 M0 56 L14 42 M56 56 L42 42"/>
-        </g>
-      </pattern>
-    </defs>
-  </svg>
-
   {{ if type === "post" }}
   <!-- Reading Progress Bar -->
   <div class="reading-progress" id="readingProgress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
@@ -156,89 +139,47 @@
   </div>
   {{ /if }}
 
-  <!-- Masthead -->
-  <header class="masthead">
-    <div class="wrap">
-      <a class="mark" href="/">MARWAN<b>.</b>AYMAN</a>
-      <nav class="masthead-nav" aria-label="Primary">
+  <!-- Slate shell: sticky sidebar + single-column main.
+       Nav + social render server-side from site data (no client JS,
+       no React runtime). Active link uses aria-current + .on. -->
+  <div class="s">
+    <aside class="r">
+      <img class="avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="192" height="196" fetchpriority="high" decoding="async">
+      <div class="av"><i aria-hidden="true"></i>Open to work</div>
+      <nav class="slate-nav" aria-label="Primary">
         {{ for item of site.navigation }}
         {{ if item.href === "/" }}
-        <a href="/" {{ if url === "/" }}aria-current="page"{{ /if }}>Home</a>
+        <a href="/" {{ if url === "/" }}class="on" aria-current="page"{{ /if }}>Home</a>
         {{ else }}
-        <a href="{{ item.href }}" {{ if url.startsWith(item.href) }}aria-current="page"{{ /if }}>{{ item.label }}</a>
+        <a href="{{ item.href }}" {{ if url.startsWith(item.href) }}class="on" aria-current="page"{{ /if }}>{{ item.label }}</a>
         {{ /if }}
         {{ /for }}
-        <span class="nav-div" aria-hidden="true"></span>
-        <button class="lamp lamp-inline" id="themeToggle" type="button" aria-label="Night, switch to dark mode" aria-pressed="false">
-          {{ comp.icon({ name: "sun", size: 14 }) }}
-          {{ comp.icon({ name: "moon", size: 14, style: "display: none;" }) }}
-          <span class="lamp-label" id="themeLabel">Night</span>
-        </button>
       </nav>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main id="main-content" tabindex="-1">
-    {{ content }}
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div>
-          <h2 class="foot-heading">Elsewhere</h2>
-          <ul class="social-links">
-            <li>
-              <a href="https://github.com/maroayman" aria-label="GitHub">
-                {{ comp.icon({ name: "github", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com/in/maroayman" aria-label="LinkedIn">
-                {{ comp.icon({ name: "linkedin", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="https://gitlab.com/maroayman" aria-label="GitLab">
-                {{ comp.icon({ name: "gitlab", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="foot-heading">Get in touch</h2>
-          <ul class="social-links">
-            <li>
-              <a href="mailto:marwanayman.shawky@gmail.com" aria-label="Email">
-                {{ comp.icon({ name: "mail", size: 22 }) }}
-              </a>
-            </li>
-            <li>
-              <a href="tel:+201122889126" aria-label="Phone: +20 112 288 9126">
-                {{ comp.icon({ name: "phone", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="foot-heading">Résumé</h2>
-          <ul class="social-links">
-            <li>
-              <a href="/resume.pdf" aria-label="Download résumé PDF">
-                {{ comp.icon({ name: "download", size: 22 }) }}
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="so">
+        <a href="https://github.com/maroayman" aria-label="GitHub">{{ comp.icon({ name: "rail-github" }) }}</a>
+        <a href="https://linkedin.com/in/maroayman" aria-label="LinkedIn">{{ comp.icon({ name: "rail-linkedin" }) }}</a>
+        <a href="https://gitlab.com/maroayman" aria-label="GitLab">{{ comp.icon({ name: "rail-gitlab" }) }}</a>
+        <a href="https://linktr.ee/maroayman" aria-label="Linktree">{{ comp.icon({ name: "rail-linktree" }) }}</a>
+        <a href="mailto:marwanayman.shawky@gmail.com" aria-label="Email">{{ comp.icon({ name: "rail-mail" }) }}</a>
       </div>
-      <div class="colophon">
-        <span>© <span id="year"></span> {{ site.author }} — Set in Reem Kufi, Archivo and IBM Plex Sans Arabic. Built with Deno &amp; Lume.</span>
-        <span class="ar" dir="rtl" lang="ar">صُنع في القاهرة</span>
-      </div>
+    </aside>
+
+    <div class="s-main">
+      <!-- Main Content -->
+      <main id="main-content" tabindex="-1">
+        {{ content }}
+      </main>
+
+      <!-- Footer (slim colophon; Elsewhere/Get in touch live in the rail) -->
+      <footer>
+        <div class="wrap">
+          <div class="colophon">
+            <span>© <span id="year"></span> {{ site.author }} — Built with Deno &amp; Lume.</span>
+          </div>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </div>
 
   {{ include "partials/scripts-common.vto" }}
   {{ include "partials/scripts-sw.vto" }}

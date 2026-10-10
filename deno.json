@@ -6,12 +6,10 @@
       "command": "deno run --allow-read --allow-write --allow-net --allow-env --allow-sys lume/cli.ts"
     },
     "check": "deno check _config.ts",
-    "audit": "deno audit",
     "build": {
       "description": "Build the site for production",
       "command": "DENO_ENV=production deno task lume"
     },
-    "build:audit": "deno task audit; deno task build",
     "build:sw": "deno run --allow-read --allow-write --allow-run=git scripts/build-sw.js",
     "build:all": "deno task build && deno task build:sw",
     "css:audit": "deno run --allow-read scripts/audit-css-selectors.ts",
@@ -21,8 +19,8 @@
     "check:all": "deno task check:format && deno task check:lint && deno task check:content && deno task check:pins && deno task check && deno task build",
     "check:pins": "bash scripts/check-pins.sh",
     "images:pull": {
-      "description": "Pull cover images from GHCR (digest-pinned, anonymous)",
-      "command": "rm -rf ./_images-tmp && oras pull ghcr.io/maroayman/images@sha256:16280f56b9ad9767cc2a2c544262ac810c5e1e6bf4f56d9d55793116ffa76044 -o ./_images-tmp && mkdir -p src/public/images && cp -r ./_images-tmp/src/public/images/. src/public/images/ && rm -rf ./_images-tmp"
+      "description": "Pull cover images + profile photo from GHCR (digest-pinned, anonymous)",
+      "command": "rm -rf ./_images-tmp && oras pull ghcr.io/maroayman/images@sha256:9a93316f42a2c5af5ce5638d85f04660e602d56ccf758ee0f52d024ab323957a -o ./_images-tmp && mkdir -p src/public/images src/public/profile && cp -r ./_images-tmp/src/public/images/. src/public/images/ && if [ -d ./_images-tmp/src/public/profile ]; then cp -r ./_images-tmp/src/public/profile/. src/public/profile/; fi && rm -rf ./_images-tmp"
     },
     "images:push": {
       "description": "Push src/public/images to GHCR (-- --pin rewrites the digest pin)",

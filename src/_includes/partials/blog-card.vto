@@ -3,9 +3,10 @@
   data-title="{{ post.title }}"
   data-tags="{{ post.tags ? post.tags.join(',').toLowerCase() : '' }}"
   data-description="{{ post.description }}" {{ /if }}>
+  <span class="state-bar" aria-hidden="true"><span class="seg seg-read"></span><span class="seg seg-saved"></span></span>
   {{ if post.cover }}
   <div class="blog-card-cover">
-    <img src="{{ post.cover |> thumb }}" srcset="{{ post.cover |> thumb }} 320w, {{ post.cover }} 1024w" sizes="80px" alt="" width="80" height="60" loading="lazy" decoding="async">
+    <img src="{{ post.cover |> thumb }}" srcset="{{ post.cover |> thumb }} 320w, {{ post.cover }} 1024w" sizes="(max-width: 600px) 64px, (max-width: 820px) 128px, 160px" alt="" width="160" height="120" loading="lazy" decoding="async">
   </div>
   {{ /if }}
   <div class="blog-card-content">
@@ -24,7 +25,6 @@
       {{ if post.readingTime }}
       <span>· {{ post.readingTime }} min read</span>
       {{ /if }}
-      <span class="read-inline">· ✓ Read</span>
     </div>
     <p class="blog-card-excerpt">{{ post.description }}</p>
     {{ comp.tech_tags({ tags: post.tags, linked: true, paginationItem: paginationItem }) }}

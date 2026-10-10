@@ -14,21 +14,27 @@ layout: layouts/base.vto
 
       <header class="blog-header">
         <h1 class="blog-title">{{ title }}</h1>
-        <div class="blog-meta">
-          <time datetime="{{ date |> date('DATE') }}">{{ date |> date('HUMAN_DATE') }}</time>
-          <span>·</span>
-          <span id="readingTime">{{ readingTime ?? 1 }} min read</span>
-          <span>·</span>
-          <span id="wordCount"></span>
+        <div class="blog-byline">
+          <img class="byline-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="88" height="90" loading="lazy" decoding="async">
+          <div>
+            <div class="byline-name">Marwan Ayman Shawky</div>
+            <div class="blog-meta">
+              <time datetime="{{ date |> date('DATE') }}">{{ date |> date('HUMAN_DATE') }}</time>
+              <span>·</span>
+              <span id="readingTime">{{ readingTime ?? 1 }} min read</span>
+              <span>·</span>
+              <span id="wordCount"></span>
+            </div>
+          </div>
         </div>
         {{ comp.tech_tags({ tags: tags, wrapper: "blog-tags" }) }}
 
         <!-- Social Share Buttons -->
         <div class="social-share">
           <span class="share-label">Share:</span>
-          {{ comp.share_btn({ id: "shareTwitter", label: "Share on Twitter", title: "Share on Twitter", icon: "x-logo", size: 18 }) }}
-          {{ comp.share_btn({ id: "shareLinkedIn", label: "Share on LinkedIn", title: "Share on LinkedIn", icon: "linkedin", size: 18 }) }}
-          {{ comp.share_btn({ id: "shareNative", label: "Share", title: "Share", icon: "share", size: 18 }) }}
+          {{ comp.share_btn({ id: "shareTwitter", label: "Share on Twitter", title: "Share on Twitter", icon: "x-logo", size: 16, text: "Post" }) }}
+          {{ comp.share_btn({ id: "shareLinkedIn", label: "Share on LinkedIn", title: "Share on LinkedIn", icon: "linkedin", size: 16, text: "Share" }) }}
+          {{ comp.share_btn({ id: "shareNative", label: "Share", title: "Share", icon: "share", size: 16, text: "Copy" }) }}
           <span class="visually-hidden" aria-live="polite" id="shareStatus"></span>
         </div>
       </header>
@@ -55,6 +61,15 @@ layout: layouts/base.vto
           {{ comp.share_btn({ id: "shareNativeBottom", label: "Share", icon: "share", size: 20, text: "More", large: true }) }}
         </div>
       </div>
+      <!-- Author card -->
+      <aside class="author-card">
+        <img class="author-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="128" height="131" loading="lazy" decoding="async">
+        <div>
+          <div class="author-name">Marwan Ayman Shawky</div>
+          <p>Cloud &amp; DevOps Engineer in Cairo — pipelines, GitOps, and infrastructure that lives in files.</p>
+          <a href="/">More about me →</a>
+        </div>
+      </aside>
     </article>
 
     <!-- Related Posts -->
@@ -68,7 +83,7 @@ layout: layouts/base.vto
         <a href="{{ post.url }}" class="related-post-card">
           {{ if post.cover }}
           <div class="related-post-cover">
-            <img src="{{ post.cover |> thumb }}" srcset="{{ post.cover |> thumb }} 320w, {{ post.cover }} 1024w" sizes="(max-width: 700px) 100vw, 400px" alt="" width="1200" height="675" loading="lazy" decoding="async">
+            <img src="{{ post.cover |> thumb }}" srcset="{{ post.cover |> thumb }} 320w, {{ post.cover }} 1024w" sizes="(max-width: 600px) 50vw, 320px" alt="" width="640" height="360" loading="lazy" decoding="async">
           </div>
           {{ /if }}
           <div class="related-post-content">

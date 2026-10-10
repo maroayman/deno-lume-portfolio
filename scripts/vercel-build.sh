@@ -19,9 +19,12 @@ echo "oras: $(oras version 2>/dev/null | head -n 1)"
 # Extract into a temp dir first: a hostile or corrupt artifact must never be
 # able to write outside src/public/images via crafted member paths.
 rm -rf ./_images-tmp
-oras pull ghcr.io/maroayman/images@sha256:16280f56b9ad9767cc2a2c544262ac810c5e1e6bf4f56d9d55793116ffa76044 -o ./_images-tmp
-mkdir -p src/public/images
+oras pull ghcr.io/maroayman/images@sha256:9a93316f42a2c5af5ce5638d85f04660e602d56ccf758ee0f52d024ab323957a -o ./_images-tmp
+mkdir -p src/public/images src/public/profile
 cp -r ./_images-tmp/src/public/images/. src/public/images/
+# Profile art only exists in the artifact after the next push+pin — the guard
+# keeps older pins working until then.
+if [ -d ./_images-tmp/src/public/profile ]; then cp -r ./_images-tmp/src/public/profile/. src/public/profile/; fi
 rm -rf ./_images-tmp
 IMAGE_COUNT=$(find src/public/images -type f | wc -l)
 if [ "$IMAGE_COUNT" -eq 0 ]; then

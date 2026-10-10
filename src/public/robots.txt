@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://maroayman.vercel.app/sitemap.xml

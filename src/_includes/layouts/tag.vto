@@ -8,7 +8,7 @@ layout: layouts/base.vto
     <div class="shead">
       <h1 class="page-title tag-page-title">
         Posts tagged <span class="tech-tag" style="font-size: inherit; vertical-align: middle;">{{ tag }}</span>
-      </h1><span class="rule"></span><span class="ar" dir="rtl" lang="ar">وسم</span>
+      </h1>
     </div>
 
     <p class="page-sub"
@@ -16,20 +16,9 @@ layout: layouts/base.vto
       <span id="tagResultCount">{{ posts.length }}</span> article{{ posts.length === 1 ? "" : "s" }}
     </p>
 
-    <!-- Search -->
+    <!-- Search (shared component; wired up by assets/tag-filter.js). -->
     <div class="blog-search-container" style="margin-bottom: 1.5rem;">
-      <div class="blog-search-wrapper">
-        {{ comp.icon({ name: "search", cls: "blog-search-icon" }) }}
-        <input
-          type="search"
-          id="tagSearch"
-          class="blog-search-input"
-          placeholder="Filter articles…"
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Filter articles"
-        >
-      </div>
+      {{ comp.blog_search({ id: "tagSearch", clearId: "tagSearchClear", type: "search", placeholder: "Filter articles…", label: "Filter articles" }) }}
     </div>
 
     <div class="blog-grid" id="tagGrid">

@@ -6,25 +6,20 @@ description: Tools, hardware, and software I use daily as a Cloud & DevOps Engin
 
 <div class="container">
   <section class="section">
-    {{ comp.back_link() }}
-
-    {{ comp.page_header({ title: "Uses", ar: "عُدَّتي" }) }}
+    {{ comp.page_header({ title: "Uses" }) }}
     <p class="page-sub">
       Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--brass); color: var(--brass);">uses.tech</a>.
     </p>
 
-    {{ for index, section of uses }}
-    <details class="uses-group" style="margin-bottom: 0;" name="uses-groups"{{ if index === 0 }} open{{ /if }}>
-      <summary class="uses-group-title">{{ section.group }} <span class="uses-count">({{ section.items.length }})</span></summary>
-      <ul class="uses-list">
+    {{ for section of uses }}
+    <div class="uses-block">
+      <h2 class="uses-head">{{ section.group }} <span>({{ section.items.length }})</span></h2>
+      <ul class="uses-lines">
         {{ for item of section.items }}
-        <li class="uses-item">
-          <div class="uses-item-name">{{ item.name }}</div>
-          <div class="uses-item-desc">{{ item.desc }}</div>
-        </li>
+        <li><span class="uses-name">{{ item.name }}</span> <span class="uses-sep" aria-hidden="true">—</span> <span class="uses-desc">{{ item.desc }}</span></li>
         {{ /for }}
       </ul>
-    </details>
+    </div>
     {{ /for }}
 
   </section>

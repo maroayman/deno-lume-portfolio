@@ -290,6 +290,8 @@
         toggleLabel.textContent = `Table of Contents (${sectionCount})`;
       }
 
+      // Collapsed by default on all viewports — the list is one tap away
+      // and long articles keep a compact header.
       let isOpen = false;
       tocList.style.display = "none";
       tocToggle.setAttribute("aria-expanded", "false");

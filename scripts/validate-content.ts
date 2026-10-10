@@ -44,7 +44,6 @@ const collections = [
     fields: ["title", "period", "summary", "highlights", "tech"],
   },
   { path: "src/_data/certifications.yml", fields: ["title", "issuer", "date"] },
-  { path: "src/_data/stack.yml", fields: ["name", "description", "items"] },
 ];
 
 for (const collection of collections) {

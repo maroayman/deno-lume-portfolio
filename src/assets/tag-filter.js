@@ -4,6 +4,7 @@
 (function () {
   const PER_PAGE = 6;
   const input = document.getElementById("tagSearch");
+  const clearBtn = document.getElementById("tagSearchClear");
   const grid = document.getElementById("tagGrid");
   const noResults = document.getElementById("tagNoResults");
   const countEl = document.getElementById("tagResultCount");
@@ -68,6 +69,32 @@
   }
 
   input.addEventListener("input", () => {
+    applyFilter();
+    if (clearBtn) {
+      clearBtn.style.display = input.value.trim() ? "flex" : "none";
+    }
+  });
+  input.addEventListener("search", applyFilter);
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      input.value = "";
+      clearBtn.style.display = "none";
+      applyFilter();
+      input.focus();
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "/" && document.activeElement !== input) {
+      event.preventDefault();
+      input.focus();
+    }
+    if (event.key === "Escape" && document.activeElement === input) {
+      input.blur();
+    }
+  });
+
+  function applyFilter() {
     const q = input.value.trim().toLowerCase();
     filtered = allCards.filter((card) => {
       if (!q) return true;
@@ -78,7 +105,7 @@
     });
     currentPage = 1;
     render();
-  });
+  }
 
   render();
 })();

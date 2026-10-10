@@ -2,9 +2,20 @@
    Written as flat `.blog-content …` descendants (not `@scope`): older
    browsers ignore `@scope` and would apply these rules GLOBALLY. */
 .blog-content {
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   line-height: 1.8;
-  color: var(--ink-2);
+  color: var(--ink);
+}
+
+/* Drop cap on the opening paragraph — editorial signal, pure CSS. */
+.blog-content > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 800;
+  color: #5EC4B6;
+  padding-right: 0.12em;
+  margin-top: 0.05em;
 }
 
 .blog-content h1,
@@ -12,20 +23,37 @@
 .blog-content h3,
 .blog-content h4 {
   color: var(--ink);
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
 }
 
 .blog-content h2 {
-  font-size: 1.1875rem;
-  font-weight: 600;
-  padding-bottom: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--line);
 }
 
+.blog-content h2::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: #5EC4B6;
+  border-radius: 2px;
+  margin-right: 0.6rem;
+  vertical-align: -0.12em;
+}
+
 .blog-content h3 {
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 600;
+}
+
+.blog-content p,
+.blog-content li {
+  text-wrap: pretty;
 }
 
 .blog-content p {
@@ -36,7 +64,8 @@
   color: var(--red);
   text-decoration: underline;
   text-decoration-color: var(--color-accent-underline);
-  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
   transition: text-decoration-color var(--t-base);
 }
 
@@ -58,7 +87,7 @@
   position: relative;
   padding-left: 1rem;
   margin-bottom: 0.4rem;
-  color: var(--ink-2);
+  color: var(--ink);
 }
 
 .blog-content ul li::before {
@@ -74,17 +103,18 @@
 
 .blog-content ol li {
   margin-bottom: 0.4rem;
-  color: var(--ink-2);
+  color: var(--ink);
 }
 
 .blog-content blockquote {
-  border-left: 2px solid var(--red);
-  margin: 1.5rem 0;
-  padding: 0.625rem 1.25rem;
-  color: var(--ink-2);
-  font-style: italic;
-  background: var(--red-wash);
-  border-radius: 0;
+  border-left: 3px solid #5EC4B6;
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  background: #1A1F27;
+  border-radius: 0 8px 8px 0;
   border-top: 1px solid var(--hair);
   border-right: 1px solid var(--hair);
   border-bottom: 1px solid var(--hair);
@@ -109,7 +139,7 @@
   background: var(--paper-2);
   color: var(--ink);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.875rem;
@@ -187,7 +217,8 @@
   }
 }
 
-/* Code blocks - shared styles outside scope */
+/* Code blocks — dark terminal slabs: rail-dark body, teal top rule,
+   teal language label. */
 code {
   font-family: var(--font-mono);
   font-size: 0.8125em;
@@ -199,9 +230,9 @@ code {
 }
 
 pre {
-  background: var(--paper-2);
-  border: 1px solid var(--line);
-  border-top: 2px solid var(--brass);
+  background: #1A1F27;
+  border: 1px solid #333D4A;
+  border-top: 2px solid #5EC4B6;
   border-radius: 0;
   padding: 0;
   overflow: hidden;
@@ -215,9 +246,9 @@ pre::before {
   padding: 0.6rem 96px 0.6rem 1rem;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  color: var(--brass);
-  background: var(--paper-2);
-  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  background: #20262F;
+  border-bottom: 1px solid #333D4A;
 }
 
 /* Show language name when data-lang is set */
@@ -226,6 +257,7 @@ pre[data-lang]::before {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   font-family: var(--font-mono);
+  color: #5EC4B6;
 }
 
 pre code {
@@ -276,8 +308,8 @@ pre code {
 }
 
 .copy-code-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
+  color: #fff;
+  border-color: #5EC4B6;
 }
 
 .copy-code-btn.copied {
@@ -290,11 +322,11 @@ pre code {
    pre header (tab names stand in for the language label). */
 .code-tabs {
   margin-bottom: 1.25rem;
-  border: 1px solid var(--line);
-  border-top: 2px solid var(--brass);
+  border: 1px solid #333D4A;
+  border-top: 2px solid #5EC4B6;
   border-radius: 0;
   overflow: hidden;
-  background: var(--paper-2);
+  background: #1A1F27;
 }
 
 .code-tab-buttons {
@@ -302,8 +334,8 @@ pre code {
   gap: 6px 20px;
   flex-wrap: wrap;
   align-items: baseline;
-  background: var(--paper-2);
-  border-bottom: 1px solid var(--line);
+  background: #20262F;
+  border-bottom: 1px solid #333D4A;
   padding: 0.6rem 96px 0.6rem 1rem;
 }
 
@@ -313,7 +345,7 @@ pre code {
   font-family: var(--font-mono);
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--ink-2);
   background: none;
   border: none;
   border-radius: 0;
@@ -360,12 +392,7 @@ mark {
   padding: 0 1px;
 }
 
-html.dark-mode mark,
-body.dark-mode mark {
-  background: var(--red-wash);
-}
-
-/* Related posts */
+/* Related posts — flat Slate rows with covers. */
 .related-posts {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -373,21 +400,12 @@ body.dark-mode mark {
 }
 
 .related-posts-title {
-  font-size: 1.28rem;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   font-family: var(--font-display);
   color: var(--ink);
-  letter-spacing: -0.005em;
+  line-height: 1.35;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.related-posts-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
 }
 
 .related-posts-grid {
@@ -406,29 +424,9 @@ body.dark-mode mark {
   border-radius: 0;
   overflow: hidden;
   text-decoration: none;
-  position: relative;
-}
-
-.related-post-card::before,
-.related-post-card::after {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: var(--brass);
-  transform: rotate(45deg);
-}
-.related-post-card::before {
-  top: -4px;
-  inset-inline-start: -4px;
-}
-.related-post-card::after {
-  bottom: -4px;
-  inset-inline-end: -4px;
 }
 
 .related-post-card:hover {
-  border-color: var(--line);
   background: var(--paper-2);
 }
 
@@ -451,21 +449,25 @@ body.dark-mode mark {
   padding: 0.625rem;
 }
 
-.related-post-content h4 {
-  font-size: 0.8125rem;
-  font-weight: 500;
+.related-post-content h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.35;
   margin-bottom: 0.25rem;
 }
 
-.related-post-card:hover .related-post-content h4 {
-  color: var(--red);
+.related-post-card:hover .related-post-content h3 {
+  color: #5EC4B6;
 }
 
 .related-post-meta {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--ink-2);
+}
+.related-post-meta time {
+  color: #5EC4B6;
+  font-weight: 500;
 }
 
 /* Lightbox */
@@ -522,40 +524,42 @@ body.dark-mode mark {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  color: #fff;
+  background: #1A1F27;
+  border: 1px solid #4A5667;
+  border-radius: 8px;
+  color: var(--ink);
   font-size: 1.25rem;
   cursor: pointer;
   padding: 0.25rem 0.6rem;
   line-height: 1.2;
-  transition: background var(--t-base);
+  transition: border-color var(--t-base), color var(--t-base);
 }
 
 .lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  border-color: #5EC4B6;
+  color: #5EC4B6;
 }
 
 .lightbox-nav {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  color: #fff;
+  background: #1A1F27;
+  border: 1px solid #4A5667;
+  border-radius: 8px;
+  color: var(--ink);
   cursor: pointer;
   padding: 0.5rem;
   line-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--t-base);
+  transition: border-color var(--t-base), color var(--t-base);
 }
 
 .lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
+  border-color: #5EC4B6;
+  color: #5EC4B6;
 }
 
 .lightbox-nav svg {
