@@ -6,87 +6,40 @@ description: Cloud & DevOps Engineer passionate about building scalable infrastr
 
 {{ set posts = search.pages("type=post", "date=desc") |> sortPosts }}
 
-<h1>Marwan Ayman Shawky</h1>
-<p
-  class="in">Cloud &amp; DevOps Engineer in Cairo, Egypt, focused on infrastructure automation, GitOps, and reliable systems.</p>
-<div class="k">
-  <a
-    href="https://github.com/maroayman">{{ comp.icon({ name: "rail-github" }) }}GitHub</a>
-  <a
-    href="https://gitlab.com/maroayman">{{ comp.icon({ name: "rail-gitlab" }) }}GitLab</a>
-  <a
-    href="https://linkedin.com/in/maroayman">{{ comp.icon({ name: "rail-linkedin" }) }}LinkedIn</a>
-  <a
-    href="mailto:marwanayman.shawky@gmail.com">{{ comp.icon({ name: "rail-mail" }) }}Email</a>
-  <a
-    class="solid"
-    href="/resume.pdf">{{ comp.icon({ name: "download", cls: "i" }) }}Resume</a>
+<div class="home-hero">
+  <div class="home-kicker"><span class="home-pulse"></span> Cloud infrastructure · Cairo, Egypt</div>
+  <h1>Systems that stay<br><em>calm under pressure.</em></h1>
+  <p class="in">I’m Marwan, a Cloud &amp; DevOps Engineer building reliable platforms, repeatable delivery pipelines, and infrastructure teams can trust.</p>
+  <div class="k">
+    <a class="solid" href="/projects/">Explore the work {{ comp.icon({ name: "arrow-right" }) }}</a>
+    <a href="/resume.pdf">{{ comp.icon({ name: "download", cls: "i" }) }} Resume</a>
+  </div>
 </div>
 
-<article class="e" style="margin-top:32px">
-  <div>
-    <div class="m">About</div>
-    <div class="t">DevOps Engineer in Cairo</div>
-    <div
-      class="m">Hands-on experience building GitOps CI/CD pipelines, automating cloud infrastructure with Terraform, and deploying Kubernetes clusters on AWS and on-premises. Focused on reliable, scalable systems and infrastructure as code.</div>
-  </div>
-</article>
+<div class="home-signal" aria-label="Focus areas">
+  <div><span>01</span><strong>Automate</strong><small>Remove the manual steps.</small></div>
+  <div><span>02</span><strong>Ship</strong><small>Make every release repeatable.</small></div>
+  <div><span>03</span><strong>Scale</strong><small>Design for the next problem.</small></div>
+</div>
 
-<article class="e">
-  <div>
-    <div class="m">Education</div>
-    <div class="t">BSc in Computer Science</div>
-    <div class="m">Helwan University, Cairo</div>
-  </div>
-  <div class="d">2018 – 2023</div>
-</article>
+<section class="home-section" aria-labelledby="about-heading">
+  <div class="home-label"><span id="about-heading">Profile</span><span>01 / 03</span></div>
+  <div class="home-section-copy"><h2>Practical infrastructure<br>with a human edge.</h2><p>Hands-on experience building GitOps CI/CD pipelines, automating cloud infrastructure with Terraform, and deploying Kubernetes clusters on AWS and on-premises. I care about systems that are observable, secure, and easy for the next person to operate.</p></div>
+</section>
 
-{{ for job of experience.slice(0, 1) }}
-<article class="e">
-  <div>
-    <div class="m">Latest role</div>
-    <div class="t">{{ job.title }}</div>
-    <div class="m"><a href="{{ job.companyUrl }}" target="_blank" rel="noopener noreferrer">{{ job.company }}</a> · {{ job.description }}</div>
-    {{ comp.tech_tags({ tags: job.tags.slice(0, 5), wrapper: "tg" }) }}
+<section class="home-section home-work" aria-labelledby="work-heading">
+  <div class="home-label"><span id="work-heading">Selected work</span><span>02 / 03</span></div>
+  <div class="home-projects">
+    {{ for project of projects.slice(0, 3) }}
+    <article class="home-project">
+      <div class="home-project-index">0{{ for.index + 1 }}</div>
+      <div><div class="m">{{ project.role }} · {{ project.period }}</div><h3>{{ if project.link }}<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }} {{ comp.icon({ name: "arrow-up-right" }) }}</a>{{ else }}{{ project.title }}{{ /if }}</h3><p class="m">{{ project.summary }}</p>{{ comp.tech_tags({ tags: project.tech.slice(0, 4), wrapper: "tg" }) }}</div>
+    </article>
+    {{ /for }}
   </div>
-  <div class="d">{{ job.period }}</div>
-</article>
-{{ /for }}
+</section>
 
-{{ for project of projects.slice(0, 1) }}
-<article class="e">
-  <div>
-    <div class="m">Featured project</div>
-    <div class="t">
-      {{ if project.link }}
-      <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
-      {{ else }}
-      {{ project.title }}
-      {{ /if }}
-    </div>
-    <div class="m">{{ project.summary }}</div>
-    {{ comp.tech_tags({ tags: project.tech.slice(0, 5), wrapper: "tg" }) }}
-  </div>
-</article>
-{{ /for }}
-
-{{ for cert of certifications.slice(0, 1) }}
-<article class="e">
-  <div>
-    <div class="m">Latest certification</div>
-    <div class="t">{{ cert.title }}</div>
-    <div class="m">{{ cert.issuer }}</div>
-  </div>
-  <div class="d">{{ cert.date }}</div>
-</article>
-{{ /for }}
-
-{{ for post of posts.slice(0, 1) }}
-<article class="e">
-  <div>
-    <div class="m">Latest post</div>
-    <div class="t"><a href="{{ post.url }}">{{ post.title }}</a></div>
-  </div>
-  <div class="d">{{ post.date |> date('HUMAN_DATE') }}</div>
-</article>
-{{ /for }}
+<section class="home-section home-contact" aria-labelledby="contact-heading">
+  <div class="home-label"><span id="contact-heading">Let&apos;s connect</span><span>03 / 03</span></div>
+  <div><h2>Have a platform<br>problem to solve?</h2><div class="k"><a class="solid" href="mailto:marwanayman.shawky@gmail.com">Start a conversation {{ comp.icon({ name: "arrow-right" }) }}</a><a href="https://linkedin.com/in/maroayman">LinkedIn</a><a href="https://github.com/maroayman">GitHub</a></div></div>
+</section>

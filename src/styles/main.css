@@ -47,16 +47,16 @@
   color-scheme: light;
   /* Dock — lavender desktop, white windows, purple actions.
      Single light theme, no dark mode. */
-  --paper: #C9C4EC;
-  --paper-2: #FFFFFF;
-  --ink: #1F1B3D;
-  --ink-2: #4B4672;
-  --red: #4529B0;
-  --red-wash: rgba(91, 63, 209, .08);
-  --teal: #5B3FD1;
-  --brass: #4B4672;
-  --line: #E7E4F5;
-  --hair: rgba(31, 27, 61, .12);
+  --paper: #f3f1eb;
+  --paper-2: #fffdf8;
+  --ink: #18231f;
+  --ink-2: #59635e;
+  --red: #d4573b;
+  --red-wash: rgba(212, 87, 59, .10);
+  --teal: #176b63;
+  --brass: #b28a4a;
+  --line: #d9ddd5;
+  --hair: rgba(24, 35, 31, .14);
   --wash-op: .13;
 
   /* Standalone accent tint (not a plain alias, so it stays) */
@@ -77,11 +77,11 @@
   --t-base: 0.18s ease;
 
   /* Pale lavender surfaces — all var'd so dark mode flips them at once. */
-  --fill: #F1EFFB;
-  --fill-2: #ECE8FB;
-  --fill-hover: #E2DDF8;
-  --ring: #A9A0DC;
-  --code: #3B2A99;
+  --fill: #e8ebe4;
+  --fill-2: #dde5dc;
+  --fill-hover: #d5e0d5;
+  --ring: #8fa99d;
+  --code: #175b52;
 }
 
 /* Dark mode: same Dock voice, plum-night palette. Toggled on <html>
@@ -1194,7 +1194,7 @@ a.tech-tag:hover {
   border-top: 1px solid var(--line);
 }
 /* Pre-hide cards past page one so first paint already matches the
-   paginated state — the deferred list scripts would otherwise flash
+   paginated state �� the deferred list scripts would otherwise flash
    all cards, then hide the overflow (a full-container shift on slow
    networks). JS adds .js-paged on init and takes over with inline
    styles in the same task (no paint between); no-JS readers are
@@ -1629,6 +1629,69 @@ footer {
   html {
     scroll-behavior: auto !important;
   }
+}
+
+/* Homepage editorial system */
+.home-hero {
+  position: relative;
+  padding: clamp(1rem, 4vw, 2.75rem) 0 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.home-hero::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 1.25rem;
+  width: clamp(7rem, 20vw, 14rem);
+  height: clamp(7rem, 20vw, 14rem);
+  border-radius: 50%;
+  border: 1px solid var(--brass);
+  opacity: .35;
+  box-shadow: 0 0 0 22px transparent, 0 0 0 23px var(--line), 0 0 0 46px transparent, 0 0 0 47px var(--line);
+  pointer-events: none;
+}
+.home-kicker, .home-label, .home-project-index {
+  color: var(--teal);
+  font: 600 .72rem/1.2 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.home-pulse { display: inline-block; width: .5rem; height: .5rem; margin-right: .45rem; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--red-wash); }
+.home-hero h1 { max-width: 720px; margin: 1.75rem 0 1.25rem; font-size: clamp(3rem, 8vw, 6.7rem); line-height: .94; letter-spacing: -.065em; text-wrap: balance; }
+.home-hero h1 em { color: var(--red); font-style: normal; }
+.home-hero .in { max-width: 570px; font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.55; }
+.home-hero .k { margin-top: 1.6rem; }
+.home-hero .k a, .home-contact .k a { border: 1px solid var(--line); background: transparent; }
+.home-hero .k a.solid, .home-contact .k a.solid { border-color: var(--teal); background: var(--teal); color: #fff; }
+.home-signal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 2rem 0 4rem; background: var(--line); border: 1px solid var(--line); }
+.home-signal div { display: flex; flex-direction: column; gap: .3rem; min-height: 8rem; padding: 1.2rem; background: var(--fill); }
+.home-signal span { color: var(--red); font: .75rem var(--font-mono); }
+.home-signal strong { font-size: 1.15rem; }
+.home-signal small { color: var(--ink-2); }
+.home-section { display: grid; grid-template-columns: minmax(8rem, .32fr) 1fr; gap: 2rem; padding: 3rem 0; border-top: 1px solid var(--line); }
+.home-label { display: flex; justify-content: space-between; gap: .5rem; }
+.home-section-copy { max-width: 680px; }
+.home-section h2, .home-contact h2 { margin: 0 0 1.25rem; font-size: clamp(2rem, 4vw, 3.45rem); line-height: 1; letter-spacing: -.05em; }
+.home-section-copy p { max-width: 590px; color: var(--ink-2); font-size: 1.05rem; }
+.home-projects { display: grid; }
+.home-project { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.4rem 0; border-top: 1px solid var(--line); }
+.home-project:first-child { border-top: 0; padding-top: 0; }
+.home-project h3 { margin: .4rem 0 .45rem; font-size: clamp(1.25rem, 2.6vw, 2rem); letter-spacing: -.03em; }
+.home-project h3 a { display: inline-flex; align-items: center; gap: .35rem; }
+.home-project h3 svg { width: 1rem; height: 1rem; color: var(--red); }
+.home-project p { max-width: 580px; margin-bottom: .7rem; }
+.home-contact { padding-bottom: 1rem; }
+.home-contact .k { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.6rem; }
+.home-contact .k a { margin: 0; }
+
+@media (max-width: 760px) {
+  .home-hero::after { right: .5rem; opacity: .22; }
+  .home-signal { grid-template-columns: 1fr; }
+  .home-signal div { min-height: auto; }
+  .home-section { grid-template-columns: 1fr; gap: 1.2rem; padding: 2.4rem 0; }
+  .home-label { max-width: 100%; }
+  .home-project { grid-template-columns: 2.2rem 1fr; }
+  .home-hero h1 { font-size: clamp(3rem, 15vw, 5.2rem); }
 }
 
 @media (max-width: 760px) {
