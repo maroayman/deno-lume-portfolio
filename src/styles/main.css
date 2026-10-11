@@ -951,6 +951,12 @@ a.tech-tag:hover {
   gap: 6px;
   align-items: center;
 }
+/* The dropdown panel is absolutely positioned (no row-height effect),
+   so it must escape the clip above when open. `.open` is PurgeCSS-
+   safelisted, which keeps this complex selector in the output. */
+.quick-tags:has(.tag-dropdown.open) {
+  overflow: visible;
+}
 /* Quick tags are ring pills with a purple-fill active state. */
 .quick-tags .filter-tag {
   display: inline-flex;
