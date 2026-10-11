@@ -12,8 +12,8 @@
   float: left;
   font-size: 3.4em;
   line-height: 0.85;
-  font-weight: 700;
-  color: var(--red);
+  font-weight: 800;
+  color: #5EC4B6;
   padding-right: 0.12em;
   margin-top: 0.05em;
 }
@@ -40,7 +40,7 @@
   display: inline-block;
   width: 3px;
   height: 1em;
-  background: var(--teal);
+  background: #5EC4B6;
   border-radius: 2px;
   margin-right: 0.6rem;
   vertical-align: -0.12em;
@@ -107,14 +107,14 @@
 }
 
 .blog-content blockquote {
-  border-left: 3px solid var(--teal);
+  border-left: 3px solid #5EC4B6;
   margin: 2rem 0;
   padding: 1rem 1.5rem;
   color: var(--ink);
   font-size: 1.15rem;
   line-height: 1.7;
-  background: var(--fill);
-  border-radius: 0 10px 10px 0;
+  background: #1A1F27;
+  border-radius: 0 8px 8px 0;
   border-top: 1px solid var(--hair);
   border-right: 1px solid var(--hair);
   border-bottom: 1px solid var(--hair);
@@ -137,10 +137,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--fill);
+  background: var(--paper-2);
   color: var(--ink);
-  border: 1px solid var(--ring);
-  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.875rem;
@@ -170,7 +170,7 @@
 .blog-content a[href*="github.com/"]:hover {
   border-color: var(--red);
   color: var(--red);
-  background: var(--fill-hover);
+  background: var(--red-wash);
   text-decoration: none;
 }
 
@@ -187,11 +187,11 @@
 .blog-content thead th {
   font-family: var(--font-sans);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 500;
+  color: var(--brass);
   text-align: start;
   padding: 13px 18px;
-  background: var(--fill);
+  background: var(--red-wash);
   border-bottom: 1px solid var(--line);
 }
 
@@ -218,23 +218,22 @@
   }
 }
 
-/* Code blocks — plum-navy slabs in the white window: ink body, purple
-   top rule, lavender language label. All slab-descendant colors are
-   explicit: theme vars resolve dark-on-light and would vanish here. */
+/* Code blocks — dark terminal slabs: rail-dark body, teal top rule,
+   teal language label. */
 code {
   font-family: var(--font-mono);
   font-size: 0.8125em;
-  background: var(--fill-2);
+  background: var(--paper-2);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius);
   padding: 0.1em 0.35em;
-  color: var(--code);
+  color: var(--red);
 }
 
 pre {
-  background: #1F1B3D;
-  border: 1px solid #1F1B3D;
-  border-top: 2px solid var(--teal);
+  background: #1A1F27;
+  border: 1px solid #333D4A;
+  border-top: 2px solid #5EC4B6;
   border-radius: 0;
   padding: 0;
   overflow: hidden;
@@ -248,9 +247,9 @@ pre::before {
   padding: 0.6rem 96px 0.6rem 1rem;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  color: rgba(241, 239, 251, .6);
-  background: rgba(255, 255, 255, .04);
-  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  color: var(--ink-2);
+  background: #20262F;
+  border-bottom: 1px solid #333D4A;
 }
 
 /* Show language name when data-lang is set */
@@ -259,7 +258,7 @@ pre[data-lang]::before {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   font-family: var(--font-mono);
-  color: #B9AEF5;
+  color: #5EC4B6;
 }
 
 pre code {
@@ -268,7 +267,7 @@ pre code {
   border: none;
   padding: 1rem 1.25rem;
   font-size: 0.875rem;
-  color: #F1EFFB;
+  color: var(--ink);
   overflow-x: auto;
   line-height: 1.65;
 }
@@ -287,10 +286,10 @@ pre code {
   gap: 6px;
   font-size: 0.75rem;
   font-family: var(--font-sans);
-  color: rgba(241, 239, 251, .7);
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 6px;
+  color: var(--ink-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0;
   padding: 0.4rem 0.65rem;
   min-height: 28px;
   cursor: pointer;
@@ -311,12 +310,12 @@ pre code {
 
 .copy-code-btn:hover {
   color: #fff;
-  border-color: var(--teal);
+  border-color: #5EC4B6;
 }
 
 .copy-code-btn.copied {
-  color: #B9AEF5;
-  border-color: #B9AEF5;
+  color: var(--teal);
+  border-color: var(--teal);
   opacity: 1;
 }
 
@@ -324,11 +323,11 @@ pre code {
    pre header (tab names stand in for the language label). */
 .code-tabs {
   margin-bottom: 1.25rem;
-  border: 1px solid #1F1B3D;
-  border-top: 2px solid var(--teal);
+  border: 1px solid #333D4A;
+  border-top: 2px solid #5EC4B6;
   border-radius: 0;
   overflow: hidden;
-  background: #1F1B3D;
+  background: #1A1F27;
 }
 
 .code-tab-buttons {
@@ -336,8 +335,8 @@ pre code {
   gap: 6px 20px;
   flex-wrap: wrap;
   align-items: baseline;
-  background: rgba(255, 255, 255, .04);
-  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  background: #20262F;
+  border-bottom: 1px solid #333D4A;
   padding: 0.6rem 96px 0.6rem 1rem;
 }
 
@@ -347,7 +346,7 @@ pre code {
   font-family: var(--font-mono);
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: rgba(241, 239, 251, .6);
+  color: var(--ink-2);
   background: none;
   border: none;
   border-radius: 0;
@@ -356,11 +355,11 @@ pre code {
 }
 
 .code-tab-btn:hover {
-  color: #fff;
+  color: var(--red);
 }
 
 .code-tab-btn.active {
-  color: #B9AEF5;
+  color: var(--red);
   background: none;
   font-weight: 600;
 }
@@ -387,13 +386,14 @@ pre code {
 
 /* Search highlight */
 mark {
-  background: #FFF3BF;
+  background: var(--red-wash);
   color: var(--ink);
+  border-bottom: 1px solid var(--brass);
   border-radius: 0;
   padding: 0 1px;
 }
 
-/* Related posts — hairline-ruled rows with covers. */
+/* Related posts — flat Slate rows with covers. */
 .related-posts {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -428,13 +428,13 @@ mark {
 }
 
 .related-post-card:hover {
-  background: var(--fill);
+  background: var(--paper-2);
 }
 
 .related-post-cover {
   aspect-ratio: 16/9;
   overflow: hidden;
-  background: var(--fill);
+  background: var(--paper-2);
 }
 
 .related-post-cover img {
@@ -459,7 +459,7 @@ mark {
 }
 
 .related-post-card:hover .related-post-content h3 {
-  color: var(--red);
+  color: #5EC4B6;
 }
 
 .related-post-meta {
@@ -467,7 +467,7 @@ mark {
   color: var(--ink-2);
 }
 .related-post-meta time {
-  color: var(--red);
+  color: #5EC4B6;
   font-weight: 500;
 }
 
@@ -476,7 +476,7 @@ mark {
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(31, 27, 61, 0.92);
+  background: rgba(0, 0, 0, 0.9);
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -525,8 +525,8 @@ mark {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background: var(--paper-2);
-  border: 1px solid var(--paper-2);
+  background: #1A1F27;
+  border: 1px solid #4A5667;
   border-radius: 8px;
   color: var(--ink);
   font-size: 1.25rem;
@@ -537,16 +537,16 @@ mark {
 }
 
 .lightbox-close:hover {
-  border-color: var(--teal);
-  color: var(--teal);
+  border-color: #5EC4B6;
+  color: #5EC4B6;
 }
 
 .lightbox-nav {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--paper-2);
-  border: 1px solid var(--paper-2);
+  background: #1A1F27;
+  border: 1px solid #4A5667;
   border-radius: 8px;
   color: var(--ink);
   cursor: pointer;
@@ -559,8 +559,8 @@ mark {
 }
 
 .lightbox-nav:hover {
-  border-color: var(--teal);
-  color: var(--teal);
+  border-color: #5EC4B6;
+  color: #5EC4B6;
 }
 
 .lightbox-nav svg {

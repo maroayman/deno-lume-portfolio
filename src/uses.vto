@@ -4,19 +4,23 @@ title: Uses - Marwan Ayman Shawky
 description: Tools, hardware, and software I use daily as a Cloud & DevOps Engineer
 ---
 
-<h1>Uses</h1>
-    <p class="in">
-      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">uses.tech</a>.
+<div class="container">
+  <section class="section">
+    {{ comp.page_header({ title: "Uses" }) }}
+    <p class="page-sub">
+      Tools and gear I rely on daily. Inspired by <a href="https://uses.tech" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--brass); color: var(--brass);">uses.tech</a>.
     </p>
 
     {{ for section of uses }}
     <div class="uses-block">
-  <h2
-    class="uses-head">{{ section.group }} <span>({{ section.items.length }})</span></h2>
-  <ul class="uses-lines">
+      <h2 class="uses-head">{{ section.group }} <span>({{ section.items.length }})</span></h2>
+      <ul class="uses-lines">
         {{ for item of section.items }}
         <li><span class="uses-name">{{ item.name }}</span> <span class="uses-sep" aria-hidden="true">—</span> <span class="uses-desc">{{ item.desc }}</span></li>
         {{ /for }}
       </ul>
-</div>
+    </div>
     {{ /for }}
+
+  </section>
+</div>

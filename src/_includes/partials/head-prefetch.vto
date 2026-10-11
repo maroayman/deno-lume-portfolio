@@ -3,16 +3,10 @@
      files warn and are never applied. Unlike ld+json, inline
      speculation rules ARE gated by CSP script-src — allowed via
      'inline-speculation-rules' in vercel.json (no unsafe-inline needed).
-     NOTE: headline/body font (Onest, variable) is
+     NOTE: headline/body fonts (Albert Sans + IBM Plex Mono) are
      CSS-discovered via @font-face — no separate preloads.
      NOTE: top-level links use `or` — `and` across href_matches can
-     never match (a URL can't be /blog/* AND /projects at once).
-     NOTE: do NOT add a `not: href_matches` URLPattern here — an
-     unmatchable/invalid href pattern (e.g. the old "/*\?*" query
-     guard) silently kills the whole rule: Chrome fires no prerender
-     at all, with no console error. External-link guards use
-     selector_matches only (verified to trigger).
-     Two entries: `eager` prerenders rail pages when nav is likely (hover/focus) instead of burning bandwidth on load; second `eager` covers blog posts on hover. SPA nav makes taps instant without prerender. Disjoint patterns, no double work. -->
+     never match (a URL can't be /blog/* AND /projects at once). -->
 <script type="speculationrules">
 {
   "prerender": [
@@ -24,24 +18,14 @@
             "or": [
               { "href_matches": "/" },
               { "href_matches": "/blog" },
+              { "href_matches": "/blog/*" },
               { "href_matches": "/projects" },
               { "href_matches": "/experience" },
               { "href_matches": "/certifications" },
-              { "href_matches": "/uses" },
-              { "href_matches": "/links" }
+              { "href_matches": "/uses" }
             ]
           },
-          { "not": { "selector_matches": "[rel~=external]" } },
-          { "not": { "selector_matches": "[target=_blank]" } }
-        ]
-      },
-      "eagerness": "eager"
-    },
-    {
-      "source": "document",
-      "where": {
-        "and": [
-          { "or": [{ "href_matches": "/blog/*" }] },
+          { "not": { "href_matches": "/*\\?*" } },
           { "not": { "selector_matches": "[rel~=external]" } },
           { "not": { "selector_matches": "[target=_blank]" } }
         ]
@@ -51,12 +35,3 @@
   ]
 }
 </script>
-<!-- Prefetch fallback for browsers without speculation rules
-     (Firefox/Safari): warms the HTTP cache for the most-likely next
-     destinations from the homepage so first-tap navigations skip full
-     document fetch. Trimmed to 3 (was 7) to avoid competing with LCP
-     on slow connections — SPA nav fetch-on-click covers the rest.
-     Chrome dedupes these against the prerenders above — no double download. -->
-<link rel="prefetch" href="/">
-<link rel="prefetch" href="/blog">
-<link rel="prefetch" href="/projects">

@@ -53,11 +53,6 @@ they're pulled digest-pinned from `ghcr.io/maroayman/images` at build time:
 - Covers: `src/public/images/covers/<slug>.jpg` → `/images/covers/<slug>.jpg`
 - Inline: `src/public/images/<slug>/image01.png` → `/images/<slug>/image01.png`
 
-Write inline images as plain `![](/images/<slug>/image01.png)` — the build
-reads each file's dimensions (`plugins/image-dims.ts`: WebP, PNG, GIF, JPEG)
-and emits sized `<img width height>` tags so pictures reserve space before
-they load (no layout shift). Files it can't read keep the original Markdown.
-
 Add files, reference the `/images/...` URL, test with `deno task serve`,
 then publish and pin in one step:
 

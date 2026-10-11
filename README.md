@@ -1,15 +1,14 @@
 # Deno Lume Portfolio
 
 A portfolio website built with Deno and the Lume static site generator, styled
-in the Dock direction: a lavender desktop with a menu bar, a centered white
-window with traffic-light title bar, and a frosted bottom dock nav — Onest
-type throughout and purple accents.
+in a Cairo direction: paper/ink tones with red, brass, and teal accents,
+bilingual Latin/Arabic typography, and hairline-ruled sections.
 
 ## Features
 
 ### Core
 
-- 🎨 Dock visual direction, light + dark mode (menubar toggle)
+- 🎨 Cairo visual direction with light/dark mode
 - 📱 Fully responsive design
 - ⚡ Fast performance with static site generation
 - 🔍 SEO optimized with sitemap
@@ -150,13 +149,11 @@ Styles are split by concern:
 
 The design system uses CSS custom properties (variables):
 
-- Colors: Dock light theme (`--paper` #C9C4EC, `--ink` #1F1B3D, purple
-  actions `--teal`/`--red`), plum-night `html.dark-mode` overrides,
-  matching the `Dock · Interactive site` mock
-- Typography: Onest variable (vendored) for everything; system mono
+- Colors: Slate dark theme (`--paper`, `--ink`, teal accent `--red`/`--teal`),
+  matching the `d1/` design reference
+- Typography: Albert Sans (variable, vendored) for everything, IBM Plex Mono
   for code/terminal
-- Spacing: 12px window radius, hairline row rules, 920px centered column,
-  frosted sticky dock
+- Spacing: sharp corners and hairline rules throughout
 
 ## Project Structure
 

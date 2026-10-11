@@ -1,13 +1,19 @@
 ---
 layout: layouts/base.vto
 ---
+<div class="container">
+  <section class="section">
     {{ comp.back_link({ href: "/blog", label: "Back to Blog" }) }}
 
-    <h1>{{ tag }}</h1>
+    <div class="shead">
+      <h1 class="page-title tag-page-title">
+        Posts tagged <span class="tech-tag" style="font-size: inherit; vertical-align: middle;">{{ tag }}</span>
+      </h1>
+    </div>
 
-    <p class="in"
-  role="status" aria-live="polite" aria-atomic="true">
-      <span id="tagResultCount">{{ posts.length }}</span> article{{ posts.length === 1 ? "" : "s" }} tagged here
+    <p class="page-sub"
+      role="status" aria-live="polite" aria-atomic="true">
+      <span id="tagResultCount">{{ posts.length }}</span> article{{ posts.length === 1 ? "" : "s" }}
     </p>
 
     <!-- Search (shared component; wired up by assets/tag-filter.js). -->
@@ -22,18 +28,16 @@ layout: layouts/base.vto
     </div>
 
     <p id="tagNoResults"
-  style="display:none; color: var(--ink-2); margin-top: 1.5rem;"
-  role="status" aria-live="polite">
+      style="display:none; color: var(--ink-2); margin-top: 1.5rem;"
+      role="status" aria-live="polite">
       No articles match your search.
     </p>
 
     <nav aria-label="Tag pagination">
-  <div class="pagination" id="tagPagination"></div>
-</nav>
-
-<!-- Without JS there is no pagination to page through: undo the
-     pre-hide (see .blog-grid rule) and show every card. -->
-<noscript><style>.blog-grid > :nth-child(n+7){display:block !important}</style></noscript>
+      <div class="pagination" id="tagPagination"></div>
+    </nav>
+  </section>
+</div>
 
 <!-- Tag filter + pagination (external for CSP script-src 'self'). -->
 <script src="/assets/tag-filter.js" defer></script>

@@ -16,7 +16,6 @@ import {
   tagCounts,
   thumb,
 } from "./plugins/blog-data.ts";
-import { imageDims } from "./plugins/image-dims.ts";
 
 const isProduction = Deno.env.get("DENO_ENV") === "production";
 
@@ -71,8 +70,6 @@ site.use(date());
 // NOTE: fonts used to come from the googleFonts plugin (network fetch per
 // build). The @font-face rules + woff2 files are now vendored:
 // CSS lives at the top of src/styles/main.css, files in src/public/fonts/.
-// p15 set: Be Vietnam Pro (400/500/600, body) + Syne (700-800, display).
-// Dock set: Onest variable (400-700), single file + fallback.
 site.use(slugifyUrls());
 
 /**
@@ -134,10 +131,6 @@ site.data("type", "post", "/blog");
  * 2. Reading-time: strips Markdown syntax from the raw source, counts words at
  *    200 wpm, and exposes the result as `page.data.readingTime` (number, minutes,
  *    minimum 1). Templates can render it directly without any client-side JS.
- *
- * NOTE: at preprocess time the Markdown body lives in `page.data.content`
- * (`page.content` is still undefined — it is assigned during render), so
- * both reading and rewriting must go through `page.data.content`.
  */
 site.preprocess([".md"], (pages) => {
   for (const page of pages) {
@@ -147,8 +140,8 @@ site.preprocess([".md"], (pages) => {
     }
 
     // --- reading time ---
-    // page.data.content holds the raw Markdown source string at preprocess time.
-    const rawContent = page.data.content as unknown;
+    // page.content holds the raw Markdown source string at preprocess time.
+    const rawContent = page.content;
     if (typeof rawContent === "string") {
       // Strip fenced code blocks, inline code, HTML tags, images, links,
       // heading markers, blockquote markers, and horizontal rules so that
@@ -168,65 +161,6 @@ site.preprocess([".md"], (pages) => {
         w.length > 0
       ).length;
       page.data.readingTime = Math.max(1, Math.ceil(words / 200));
-      page.data.wordCount = words.toLocaleString("en-US");
-
-      // --- image dimensions (CLS) ---
-      // Sized <img> reserves layout space before the file arrives, so
-      // image-heavy posts don't shift as each picture loads. Only local
-      // /images/ Markdown images are rewritten (fenced code blocks are
-      // skipped so syntax examples survive); anything unreadable keeps
-      // its original Markdown.
-      page.data.content = rawContent.split(/(```[\s\S]*?```)/g).map(
-        (part, i) => {
-          if (i % 2 === 1) return part;
-          return part.replace(
-            /!\[([^\]]*)\]\((\/images\/[^)\s]+)(?:\s+"[^"]*")?\)/g,
-            (m: string, alt: string, src: string) => {
-              const dims = imageDims(`src/public${src}`);
-              if (!dims) return m;
-              const escAlt = alt.replace(/"/g, "&quot;");
-              return `<img src="${src}" alt="${escAlt}" width="${
-                dims[0]
-              }" height="${dims[1]}" loading="lazy" decoding="async">`;
-            },
-          );
-        },
-      ).join("");
-
-      // --- table of contents data (CLS) ---
-      // The TOC nav is server-rendered in layouts/blog.vto so it never
-      // pops in after load; the client only syncs hrefs and toggles.
-      // Mirror of assets/blog-post.js: ATX h2/h3 outside fenced code,
-      // slugified identically, shown when there are at least 3.
-      const toc: { level: number; text: string; id: string }[] = [];
-      for (
-        const part of rawContent.split(/(```[\s\S]*?```)/g).filter((_, i) =>
-          i % 2 === 0
-        )
-      ) {
-        for (const line of part.split("\n")) {
-          const m = line.match(/^(#{2,3})\s+(.*)$/);
-          if (!m) continue;
-          const text = m[2]
-            .replace(/\s+#+$/, "")
-            .replace(/`([^`]*)`/g, "$1")
-            .replace(/\*\*([^*]*)\*\*/g, "$1")
-            .replace(/(^|\W)\*([^*]+)\*/g, "$1$2")
-            .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
-            .replace(/<[^>]+>/g, "")
-            .trim();
-          if (!text) continue;
-          const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
-            /^-|-$/g,
-            "",
-          );
-          toc.push({ level: m[1].length, text, id });
-        }
-      }
-      if (toc.length >= 3) {
-        page.data.toc = toc;
-        page.data.tocSections = toc.filter((t) => t.level === 2).length;
-      }
     }
   }
 });
@@ -243,8 +177,7 @@ site.use(purgecss({
       // rule (a :where() list) needs a deep safelist to survive.
       deep: [/focus-visible/],
       standard: [
-        /^dark-mode$/, // theme toggle — on <html>
-        /^js-paged$/, // pagination handoff — added by blog-list/tag-filter at init
+        /^dark-mode$/, // theme toggle — on <body> and <html>
         /^visible$/, // back-to-top, scroll-triggered visibility
         /^read$/, // blog card visited state (localStorage)
         /^code-tab-buttons$/, // :::tabs header (emitted by markdown-tabs)

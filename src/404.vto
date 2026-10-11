@@ -4,32 +4,36 @@ title: 404 - Page Not Found
 description: The page you're looking for doesn't exist
 ---
 
-<h1>Not found</h1>
+<div class="container">
+  <section class="section" aria-labelledby="notfound-title">
+    {{ comp.page_header({ title: "Not found", id: "notfound-title" }) }}
     <p
-  class="in">That address is not on the map. Head back home or pick a section from the dock.</p>
+      class="page-sub">That address is not on the map. Head back home or pick a section from the rail.</p>
     <div class="terminal-404" role="presentation">
-  <div class="terminal-header" aria-hidden="true">
-    <span class="terminal-dot red" aria-hidden="true"></span>
-    <span class="terminal-dot yellow" aria-hidden="true"></span>
-    <span class="terminal-dot green" aria-hidden="true"></span>
-    <span class="terminal-title">bash</span>
-  </div>
-  <div class="terminal-body">
-    <p><span class="terminal-prompt">$</span> curl https://maroayman.vercel.app<span class="terminal-path">/404</span></p>
-    <p class="terminal-output"></p>
-    <p class="terminal-error">HTTP/1.1 404 Not Found</p>
-    <p class="terminal-output"></p>
-    <p class="terminal-json">{</p>
+      <div class="terminal-header" aria-hidden="true">
+        <span class="terminal-dot red" aria-hidden="true"></span>
+        <span class="terminal-dot yellow" aria-hidden="true"></span>
+        <span class="terminal-dot green" aria-hidden="true"></span>
+        <span class="terminal-title">bash</span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="terminal-prompt">$</span> curl https://maroayman.vercel.app<span class="terminal-path">/404</span></p>
+        <p class="terminal-output"></p>
+        <p class="terminal-error">HTTP/1.1 404 Not Found</p>
+        <p class="terminal-output"></p>
+        <p class="terminal-json">{</p>
         <p class="terminal-json">  "error": "Page not found",</p>
         <p class="terminal-json">  "status": 404,</p>
         <p class="terminal-json">  "suggestion": "Try the homepage"</p>
         <p class="terminal-json">}</p>
-    <p class="terminal-output"></p>
-    <p><span class="terminal-prompt">$</span> <span class="terminal-cursor">_</span></p>
-  </div>
-</div>
+        <p class="terminal-output"></p>
+        <p><span class="terminal-prompt">$</span> <span class="terminal-cursor">_</span></p>
+      </div>
+    </div>
 
     <div style="margin-top: 2rem;">
-  <a href="/"
-    class="b b2"><span aria-hidden="true">←</span> Back home</a>
+      <a href="/"
+        class="b b2"><span aria-hidden="true">←</span> Back home</a>
+    </div>
+  </section>
 </div>
