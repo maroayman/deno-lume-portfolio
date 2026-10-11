@@ -13,6 +13,10 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#1A1F27">
   <meta name="color-scheme" content="dark">
+  <!-- Cross-document view transitions (Chrome/Edge 126+, Safari 18+):
+       same-origin MPA navigations crossfade instead of flashing white,
+       which is the main source of perceived delay on fast static pages. -->
+  <meta name="view-transition" content="same-origin">
 
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="{{ title ?? site.author }}">

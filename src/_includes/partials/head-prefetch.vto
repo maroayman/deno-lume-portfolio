@@ -4,7 +4,9 @@
      speculation rules ARE gated by CSP script-src — allowed via
      'inline-speculation-rules' in vercel.json (no unsafe-inline needed).
      NOTE: headline/body fonts (Albert Sans + IBM Plex Mono) are
-     CSS-discovered via @font-face — no separate preloads. -->
+     CSS-discovered via @font-face — no separate preloads.
+     NOTE: top-level links use `or` — `and` across href_matches can
+     never match (a URL can't be /blog/* AND /projects at once). -->
 <script type="speculationrules">
 {
   "prerender": [
@@ -12,16 +14,23 @@
       "source": "document",
       "where": {
         "and": [
-          { "href_matches": "/blog/*" },
-          { "href_matches": "/projects" },
-          { "href_matches": "/experience" },
-          { "href_matches": "/certifications" },
+          {
+            "or": [
+              { "href_matches": "/" },
+              { "href_matches": "/blog" },
+              { "href_matches": "/blog/*" },
+              { "href_matches": "/projects" },
+              { "href_matches": "/experience" },
+              { "href_matches": "/certifications" },
+              { "href_matches": "/uses" }
+            ]
+          },
           { "not": { "href_matches": "/*\\?*" } },
           { "not": { "selector_matches": "[rel~=external]" } },
           { "not": { "selector_matches": "[target=_blank]" } }
         ]
       },
-      "eagerness": "conservative"
+      "eagerness": "eager"
     }
   ]
 }

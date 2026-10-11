@@ -101,7 +101,10 @@ function getStrategy(request) {
   const url = new URL(request.url);
   
   if (request.mode === 'navigate') {
-    return { type: 'network-first', ...CACHE_STRATEGIES.pages };
+    // Stale-while-revalidate: serve the cached shell instantly so
+    // clicks feel immediate, revalidate in the background. Offline
+    // with no cache falls through to the /404.html fallback below.
+    return { type: 'stale-while-revalidate', ...CACHE_STRATEGIES.pages };
   }
   if (request.destination === 'image') {
     return { type: 'cache-first', ...CACHE_STRATEGIES.images };
@@ -153,25 +156,6 @@ async function trimCache(cacheName, maxEntries) {
   const excess = keys.length - maxEntries;
   for (let i = 0; i < excess; i++) {
     await cache.delete(keys[i]);
-  }
-}
-
-// Helper: Network First strategy
-async function networkFirst(request, cacheName, maxEntries) {
-  const cache = await caches.open(cacheName);
-  try {
-    const networkResponse = await fetch(request);
-    if (networkResponse.ok) {
-      await safePut(cache, request, networkResponse.clone());
-      await trimCache(cacheName, maxEntries);
-    }
-    return networkResponse;
-  } catch (error) {
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    throw error;
   }
 }
 
@@ -243,8 +227,6 @@ self.addEventListener('fetch', (event) => {
     (async () => {
       try {
         switch (strategy.type) {
-          case 'network-first':
-            return await networkFirst(event.request, strategy.cacheName, strategy.maxEntries);
           case 'cache-first':
             return await cacheFirst(event.request, strategy.cacheName, strategy.maxAge, strategy.maxEntries);
           case 'stale-while-revalidate':

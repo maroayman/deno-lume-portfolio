@@ -28,6 +28,25 @@
   font-display: swap;
 }
 
+/* Cross-document view transitions for MPA navigations (paired with
+   <meta name="view-transition" content="same-origin"> in base.vto).
+   Keep it to a short crossfade: no slide/scale, so no layout cost and
+   nothing to break. Reduced-motion users get an instant swap. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-group(*) {
+  animation-duration: 0.18s;
+  animation-timing-function: ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 :root {
   color-scheme: dark;
   /* Slate (d1) — single dark theme, no light mode. */
@@ -349,6 +368,27 @@ figcaption {
 .hero-cta {
   margin-top: 32px;
 }
+/* Slate contact row (d1 `.k`): homepage Get-in-touch + any sibling links.
+   Same bordered-slab voice as .b2 so the section reads as one family. */
+.k {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.k a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #4A5667;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.k a:hover {
+  border-color: #5EC4B6;
+  color: #5EC4B6;
+}
 /* Slate entry rows (d1 `.e`): experience / projects / certifications.
    Data loops, pagination hooks, and <details> expanders are unchanged —
    only the row-box presentation is Slate. */
@@ -595,18 +635,26 @@ section {
 .resume-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
   font-size: 14px;
-  font-weight: 400;
-  color: var(--brass);
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 8px 16px;
-  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--ink);
   background: transparent;
+  border: 1px solid #4A5667;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
 }
-/* Shared "raised paper" hover for buttons and filter chips */
-.resume-button:hover,
+/* Slate slab hover (teal edge + wash) for the reload button. */
+.resume-button:hover {
+  color: #5EC4B6;
+  border-color: #5EC4B6;
+  background: rgba(94, 196, 182, .08);
+}
+/* Shared "raised paper" hover for filter chips and controls */
 .quick-tags .filter-tag:hover,
 .tag-dropdown-trigger.filter-btn:hover,
 .active-filter-tag:hover,
