@@ -4,11 +4,9 @@ title: Experience - Marwan Ayman Shawky
 description: DevOps training and internships focused on cloud automation
 ---
 
-<div class="container">
-  <section class="section">
-    {{ comp.page_header({ title: "Experience" }) }}
-    <p
-      class="page-sub">Where the on-prem lessons came from — bare metal, self-hosted GitOps, and no managed control plane to hide behind.</p>
+<h1>Experience</h1>
+<p
+  class="in">Where the on-prem lessons came from — bare metal, self-hosted GitOps, and no managed control plane to hide behind.</p>
 
     <div id="pagination-container">
       {{ for index, job of experience }}
@@ -32,6 +30,3 @@ description: DevOps training and internships focused on cloud automation
         <div class="d">{{ job.period }}</div>
       </div>
       {{ /for }}
-    </div>
-  </section>
-</div>

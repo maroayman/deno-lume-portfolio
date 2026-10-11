@@ -15,13 +15,10 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
   opacity: 0;
 }
 </style>
-<noscript><style>.blog-card{opacity:1 !important}</style></noscript>
+<noscript><style>.blog-card{opacity:1 !important}.blog-grid > :nth-child(n+7){display:block !important}</style></noscript>
 
-<div class="container">
-  <section class="section">
-    {{ comp.page_header({ title: "Blog" }) }}
-
-    <p class="page-sub">
+<h1>Blog</h1>
+    <p class="in">
       Technical articles about cloud infrastructure, DevOps practices, and lessons learned.
     </p>
 
@@ -47,14 +44,14 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
     </div>
 
     <div class="blog-result-count" id="resultCount" style="display: none;"
-      role="status" aria-live="polite" aria-atomic="true">
-      <span id="resultCountText"></span>
-    </div>
+  role="status" aria-live="polite" aria-atomic="true">
+  <span id="resultCountText"></span>
+</div>
 
     <div class="blog-no-results" id="noResults" style="display: none;"
-      role="status" aria-live="polite">
-      <p>No posts found matching your search.</p>
-    </div>
+  role="status" aria-live="polite">
+  <p>No posts found matching your search.</p>
+</div>
 
     <div class="blog-grid" id="pagination-container">
       {{ for post of posts }}
@@ -64,9 +61,7 @@ description: Technical articles about Cloud, DevOps, Infrastructure, and Softwar
 
     <!-- Pagination Controls -->
     <nav aria-label="Blog pagination">
-      <div id="pagination-controls" class="pagination"></div>
-    </nav>
-  </section>
-</div>
+  <div id="pagination-controls" class="pagination"></div>
+</nav>
 
 <script src="/assets/blog-list.js" defer></script>

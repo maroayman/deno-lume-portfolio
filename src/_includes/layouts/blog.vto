@@ -1,21 +1,13 @@
 ---
 layout: layouts/base.vto
 ---
-<div class="container">
-  <section class="section">
     {{ comp.back_link({ href: "/blog", label: "Back to Blog" }) }}
 
     <article class="blog-article">
-      {{ if cover }}
-      <figure class="blog-cover" data-lightbox>
-        <img src="{{ cover }}" alt="{{ title }} cover image" width="1200" height="675" loading="eager" fetchpriority="high" decoding="async">
-      </figure>
-      {{ /if }}
-
       <header class="blog-header">
         <h1 class="blog-title">{{ title }}</h1>
         <div class="blog-byline">
-          <img class="byline-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="88" height="90" loading="lazy" decoding="async">
+          <picture><source srcset="/profile/profile.avif" type="image/avif"><source srcset="/profile/profile.webp" type="image/webp"><img class="byline-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="88" height="90" loading="lazy" decoding="async"></picture>
           <div>
             <div class="byline-name">Marwan Ayman Shawky</div>
             <div class="blog-meta">
@@ -23,7 +15,7 @@ layout: layouts/base.vto
               <span>·</span>
               <span id="readingTime">{{ readingTime ?? 1 }} min read</span>
               <span>·</span>
-              <span id="wordCount"></span>
+              <span id="wordCount">{{ wordCount }} words</span>
             </div>
           </div>
         </div>
@@ -39,7 +31,24 @@ layout: layouts/base.vto
         </div>
       </header>
 
-      <!-- Table of Contents (injected by JS if enough headings) -->
+      <!-- Table of Contents: server-rendered when the post has 3+
+           headings (see the preprocess hook) so it never pops in after
+           load; blog-post.js only syncs hrefs and toggles. Collapsed by
+           default — the list is one tap away. Without toc data the nav
+           stays hidden and the script falls back to building it. -->
+      {{ if toc }}
+      <nav class="toc" id="toc" aria-label="Table of contents">
+        <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocList">
+          <span>Table of Contents ({{ tocSections }})</span>
+          {{ comp.icon({ name: "chevron-down", size: 14, cls: "toc-toggle-icon", a11y: false }) }}
+        </button>
+        <ul class="toc-list" id="tocList" style="display:none">
+          {{ for index, item of toc }}
+          <li class="{{ item.level === 3 ? "toc-h3" : "toc-h2" }}"><a href="#{{ item.id }}" data-idx="{{ index }}">{{ item.text }}</a></li>
+          {{ /for }}
+        </ul>
+      </nav>
+      {{ else }}
       <nav class="toc" id="toc" aria-label="Table of contents" style="display:none;">
         <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocList">
           <span>Table of Contents</span>
@@ -47,6 +56,7 @@ layout: layouts/base.vto
         </button>
         <ul class="toc-list" id="tocList"></ul>
       </nav>
+      {{ /if }}
 
       <div class="blog-content">
         {{ content }}
@@ -63,7 +73,7 @@ layout: layouts/base.vto
       </div>
       <!-- Author card -->
       <aside class="author-card">
-        <img class="author-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="128" height="131" loading="lazy" decoding="async">
+        <picture><source srcset="/profile/profile.avif" type="image/avif"><source srcset="/profile/profile.webp" type="image/webp"><img class="author-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="128" height="131" loading="lazy" decoding="async"></picture>
         <div>
           <div class="author-name">Marwan Ayman Shawky</div>
           <p>Cloud &amp; DevOps Engineer in Cairo — pipelines, GitOps, and infrastructure that lives in files.</p>
@@ -77,8 +87,8 @@ layout: layouts/base.vto
     {{ set relatedPosts = search.pages("type=post") |> relatedPosts(url, tags, 3) }}
     {{ if relatedPosts.length > 0 }}
     <section class="related-posts" aria-labelledby="related-title">
-      <h2 class="related-posts-title" id="related-title">Related Articles</h2>
-      <div class="related-posts-grid">
+  <h2 class="related-posts-title" id="related-title">Related Articles</h2>
+  <div class="related-posts-grid">
         {{ for post of relatedPosts }}
         <a href="{{ post.url }}" class="related-post-card">
           {{ if post.cover }}
@@ -95,10 +105,8 @@ layout: layouts/base.vto
         </a>
         {{ /for }}
       </div>
-    </section>
+</section>
     {{ /if }}
     {{ /if }}
-  </section>
-</div>
 
 <script src="/assets/blog-post.js" defer></script>

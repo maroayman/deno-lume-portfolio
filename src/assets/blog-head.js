@@ -16,7 +16,7 @@
       const e = document.createElement("style");
       e.id = "read-indicator-styles",
         e.textContent = t.map((r) =>
-          `.blog-card[data-url="${r}"] .seg-read,.blog-card[data-url="${r}/"] .seg-read{background:#4ADE80}`
+          `.blog-card[data-url="${r}"] .seg-read,.blog-card[data-url="${r}/"] .seg-read{background:#5B3FD1}`
         ).join(""),
         document.head.insertBefore(e, document.head.firstChild);
     }

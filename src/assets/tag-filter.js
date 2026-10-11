@@ -10,6 +10,10 @@
   const countEl = document.getElementById("tagResultCount");
   const pagination = document.getElementById("tagPagination");
   if (!input || !grid || !noResults || !countEl || !pagination) return;
+  // CSS pre-hides cards past page one (see .blog-grid rule) so first
+  // paint already matches the paginated state. Claim management here —
+  // same task as the render below, so no paint happens between.
+  grid.classList.add("js-paged");
   const allCards = Array.from(grid.querySelectorAll(".blog-card"));
 
   let filtered = allCards.slice();

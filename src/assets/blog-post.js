@@ -28,9 +28,11 @@
   }
 
   // ========== DYNAMIC WORD COUNT ==========
+  // Server-rendered by the preprocess hook; only compute when empty
+  // (keeps the meta line stable instead of growing after load).
   const blogContent = document.querySelector(".blog-content");
   const wordCountEl = document.getElementById("wordCount");
-  if (blogContent && wordCountEl) {
+  if (blogContent && wordCountEl && !wordCountEl.textContent.trim()) {
     const text = blogContent.innerText || blogContent.textContent || "";
     const words = text.trim().split(/\s+/).filter((w) => w.length > 0).length;
     wordCountEl.textContent = words.toLocaleString() + " words";
@@ -145,7 +147,7 @@
     const lightboxPrev = document.getElementById("lightboxPrev");
     const lightboxNext = document.getElementById("lightboxNext");
     const imageList = Array.from(
-      document.querySelectorAll(".blog-content img, .blog-cover img"),
+      document.querySelectorAll(".blog-content img"),
     );
     let currentImageIndex = 0;
     let lastFocused = null;
@@ -264,25 +266,39 @@
         h.setAttribute("tabindex", "-1");
       });
 
-      headings.forEach((h) => {
-        const li = document.createElement("li");
-        li.className = h.tagName === "H3" ? "toc-h3" : "toc-h2";
-        const a = document.createElement("a");
-        a.href = "#" + h.id;
-        a.textContent = h.textContent;
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const behavior = prefersReducedMotion() ? "instant" : "smooth";
-          h.scrollIntoView({ behavior, block: "start" });
-          history.pushState(null, "", "#" + h.id);
-          h.focus({ preventScroll: true });
+      // Server-rendered anchors carry data-idx: point them at the real
+      // heading ids (covers any slugger drift) without rebuilding —
+      // rebuilding or revealing here would shift the article (CLS).
+      const serverAnchors = Array.from(
+        tocList.querySelectorAll("a[data-idx]"),
+      );
+      if (serverAnchors.length === headings.length) {
+        serverAnchors.forEach((a) => {
+          const h = headings[Number(a.getAttribute("data-idx"))];
+          if (h) a.href = "#" + h.id;
         });
-        li.appendChild(a);
-        tocList.appendChild(li);
-      });
+      } else {
+        serverAnchors.forEach((a) => a.closest("li")?.remove());
+        headings.forEach((h) => {
+          const li = document.createElement("li");
+          li.className = h.tagName === "H3" ? "toc-h3" : "toc-h2";
+          const a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.textContent = h.textContent;
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const behavior = prefersReducedMotion() ? "instant" : "smooth";
+            h.scrollIntoView({ behavior, block: "start" });
+            history.pushState(null, "", "#" + h.id);
+            h.focus({ preventScroll: true });
+          });
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
 
-      toc.style.display = "";
+        toc.style.display = "";
+      }
 
       const sectionCount = headings.filter((h) => h.tagName === "H2").length;
       const toggleLabel = tocToggle.querySelector("span");

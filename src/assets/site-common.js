@@ -1,3 +1,36 @@
+// ========== THEME TOGGLE ==========
+// The pre-paint flash script owns the initial class; this syncs the
+// button + meta to it and handles clicks (persisted, shell persists
+// across SPA swaps so this binds exactly once).
+(function () {
+  const LIGHT_META = "#C9C4EC";
+  const DARK_META = "#141021";
+  const btn = document.getElementById("themeToggle");
+  const meta = document.querySelector('meta[name="theme-color"]');
+  function paint(dark) {
+    document.documentElement.classList.toggle("dark-mode", dark);
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch {
+      // Private mode — theme simply doesn't persist.
+    }
+    if (btn) {
+      btn.setAttribute("aria-pressed", String(dark));
+      btn.setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode",
+      );
+    }
+    if (meta) meta.setAttribute("content", dark ? DARK_META : LIGHT_META);
+  }
+  paint(document.documentElement.classList.contains("dark-mode"));
+  if (btn) {
+    btn.addEventListener("click", () => {
+      paint(!document.documentElement.classList.contains("dark-mode"));
+    });
+  }
+})();
+
 // ========== FOOTER YEAR ==========
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
