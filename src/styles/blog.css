@@ -126,6 +126,7 @@
 
 .blog-content img {
   max-width: 100%;
+  height: auto;
   border-radius: var(--radius);
   border: 1px solid var(--line);
   cursor: pointer;
