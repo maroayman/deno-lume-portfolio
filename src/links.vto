@@ -1,0 +1,31 @@
+---
+layout: layouts/base.vto
+title: Links - Marwan Ayman Shawky
+description: All my links in one place — contact, profiles, portfolio, and freelancing
+---
+
+  <section class="links-page">
+    <div class="links-profile">
+      <picture><source srcset="/profile/profile.avif" type="image/avif"><source srcset="/profile/profile.webp" type="image/webp"><img class="links-avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="96" height="96" fetchpriority="high" decoding="async"></picture>
+      <h1 class="links-name">Marwan Ayman Shawky</h1>
+      <p class="links-bio">Cloud &amp; DevOps Engineer — all my links in one place.</p>
+    </div>
+
+    {{ for group of links }}
+    {{ if group.title }}
+    <h2 class="links-head">{{ group.title }}</h2>
+    {{ /if }}
+    <ul class="links-list">
+      {{ for item of group.items }}
+      <li>
+        <a class="links-btn" href="{{ item.href }}"{{ if item.href.startsWith("http") }} target="_blank" rel="noopener noreferrer"{{ /if }}>
+          {{ if item.icon }}{{ comp.icon({ name: item.icon, size: 18 }) }}{{ /if }}
+          <span class="links-text">
+            <span class="links-label">{{ item.label }}</span>
+            {{ if item.desc }}<span class="links-desc">{{ item.desc }}</span>{{ /if }}
+          </span>
+        </a>
+      </li>
+      {{ /for }}
+    </ul>
+    {{ /for }}

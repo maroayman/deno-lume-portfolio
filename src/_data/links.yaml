@@ -1,0 +1,42 @@
+# Links page (src/links.vto) — linktr.ee-style hub, Dock voice.
+# Mirrors https://linktr.ee/maroayman. Groups render in order;
+# a null title renders no header (top block). Icons reference
+# src/_components/icon.vto names. External URLs open in a new tab.
+- title: Contact
+  items:
+    - label: Email
+      href: mailto:marwanayman.shawky@gmail.com
+      desc: marwanayman.shawky@gmail.com
+      icon: mail
+    - label: Phone
+      href: tel:+201122889126
+      desc: "+20 112 288 9126"
+      icon: phone
+- title: Social
+  items:
+    - label: LinkedIn
+      href: https://www.linkedin.com/in/maroayman/
+      desc: linkedin.com/in/maroayman
+      icon: linkedin
+    - label: GitHub
+      href: https://github.com/maroayman
+      desc: github.com/maroayman
+      icon: github
+    - label: GitLab
+      href: https://gitlab.com/maroayman
+      desc: gitlab.com/maroayman
+      icon: gitlab
+    - label: Linktree
+      href: https://linktr.ee/maroayman
+      desc: linktr.ee/maroayman
+      icon: rail-linktree
+- title: Freelancing
+  items:
+    - label: Upwork
+      href: https://www.upwork.com/freelancers/~0142a1533e4a586cfb
+      desc: Hire me on Upwork
+      icon: upwork
+    - label: Freelancer
+      href: https://www.freelancer.com/u/maroayman2000
+      desc: Hire me on Freelancer
+      icon: freelancer
