@@ -1,31 +1,27 @@
 @font-face {
-  font-family: "Albert Sans";
+  font-family: "Onest";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400 700;
   font-display: swap;
-  src: url("/fonts/albert-sans-latin.woff2") format("woff2");
+  src: url("/fonts/onest-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Metric-matched fallback: Onest runs within ~2% of system sans widths
+   (canvas-calibrated: 99–102%), so a single 101% fallback keeps lines
+   from rewrapping during the swap window. Preloads (see base.vto) keep
+   the window itself tiny; this covers the remainder. */
 @font-face {
-  font-family: IBM Plex Mono;
+  font-family: "Onest-FB";
   font-style: normal;
-  font-weight: 400;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexmono-normal-400-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  font-weight: 400 700;
   font-display: swap;
-}
-@font-face {
-  font-family: IBM Plex Mono;
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: 100%;
-  src: url("/fonts/ibm-plexmono-normal-500-latin.woff2")format("woff2");
-  unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-  font-display: swap;
+  src: local("Segoe UI"), local("Roboto"), local("Helvetica Neue"),
+    local("Arial"), local("DejaVu Sans"), local("Liberation Sans"),
+    local("Noto Sans");
+  size-adjust: 101%;
 }
 
 /* Cross-document view transitions for MPA navigations (paired with
@@ -48,36 +44,109 @@
 }
 
 :root {
-  color-scheme: dark;
-  /* Slate (d1) — single dark theme, no light mode. */
-  --paper: #20262F;
-  --paper-2: #262D38;
-  --ink: #E9EDF2;
-  --ink-2: #B4BFCC;
-  --red: #5EC4B6;
-  --red-wash: rgba(94, 196, 182, .12);
-  --teal: #5EC4B6;
-  --brass: #9FB0C0;
-  --line: #333D4A;
-  --hair: rgba(180, 191, 204, .16);
+  color-scheme: light;
+  /* Dock — lavender desktop, white windows, purple actions.
+     Single light theme, no dark mode. */
+  --paper: #C9C4EC;
+  --paper-2: #FFFFFF;
+  --ink: #1F1B3D;
+  --ink-2: #4B4672;
+  --red: #4529B0;
+  --red-wash: rgba(91, 63, 209, .08);
+  --teal: #5B3FD1;
+  --brass: #4B4672;
+  --line: #E7E4F5;
+  --hair: rgba(31, 27, 61, .12);
   --wash-op: .13;
 
   /* Standalone accent tint (not a plain alias, so it stays) */
-  --color-accent-underline: rgba(94, 196, 182, .45);
+  --color-accent-underline: rgba(69, 41, 176, .45);
 
-  --icon-github: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
+  --icon-github: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.465-2.38 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.805 5.625-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
 
-  --font-sans: "Albert Sans", system-ui, sans-serif;
-  --font-display: "Albert Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  --font-sans: "Onest", "Onest-FB", system-ui, sans-serif;
+  --font-display: "Onest", "Onest-FB", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 
   --font-size-base: 17px;
-  --line-height: 1.65;
+  --line-height: 1.6;
 
   --max-width: 1140px;
-  --radius: 0;
+  --radius: 10px;
 
   --t-base: 0.18s ease;
+
+  /* Pale lavender surfaces — all var'd so dark mode flips them at once. */
+  --fill: #F1EFFB;
+  --fill-2: #ECE8FB;
+  --fill-hover: #E2DDF8;
+  --ring: #A9A0DC;
+  --code: #3B2A99;
+}
+
+/* Dark mode: same Dock voice, plum-night palette. Toggled on <html>
+   by the menubar button (persisted, OS default, pre-paint flash
+   script). `dark-mode` stays in the PurgeCSS safelist — the class
+   only exists at runtime. */
+html.dark-mode {
+  color-scheme: dark;
+  --paper: #141021;
+  --paper-2: #1F1933;
+  --ink: #EDE9FB;
+  --ink-2: #B3A9D6;
+  --red: #B9AEF5;
+  --red-wash: rgba(185, 174, 245, .12);
+  --teal: #6A58D6;
+  --brass: #B3A9D6;
+  --line: #37315A;
+  --hair: rgba(237, 233, 251, .14);
+  --color-accent-underline: rgba(185, 174, 245, .5);
+  --fill: #29224A;
+  --fill-2: #332A5C;
+  --fill-hover: #3D3368;
+  --ring: #5A4D99;
+  --code: #CFC5F7;
+}
+html.dark-mode :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline-color: #B9AEF5;
+}
+/* Fixed surfaces the vars don't reach. */
+html.dark-mode .mb {
+  background: #1C1633;
+}
+html.dark-mode .dk {
+  background: rgba(31, 25, 51, .85);
+}
+html.dark-mode mark {
+  background: rgba(242, 184, 75, .35);
+  color: var(--ink);
+}
+/* White-text hovers that use --red fills: lavender-red fails white
+   contrast in dark, so they ride --teal there (light is unaffected). */
+html.dark-mode .b1:hover,
+html.dark-mode .suggest-tag:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+/* Code/terminal slabs go deeper than the window so they read as slabs. */
+html.dark-mode pre,
+html.dark-mode .code-tabs {
+  background: #141021;
+  border-color: #141021;
+  border-top-color: var(--teal);
+}
+html.dark-mode pre::before,
+html.dark-mode .code-tab-buttons {
+  background: rgba(255, 255, 255, .03);
+  border-bottom-color: rgba(255, 255, 255, .12);
+}
+html.dark-mode .terminal-404 {
+  background: #141021;
+  border-color: #141021;
+}
+html.dark-mode .terminal-header {
+  background: rgba(255, 255, 255, .03);
+  border-bottom-color: rgba(255, 255, 255, .12);
 }
 
 *,
@@ -98,7 +167,7 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 3px solid #F2B84B;
+  outline: 3px solid #5B3FD1;
   outline-offset: 3px;
 }
 main:focus {
@@ -108,8 +177,7 @@ main:focus {
   scroll-margin-top: 5rem;
 }
 .blog-content h2,
-.blog-content h3,
-.page-title {
+.blog-content h3 {
   scroll-margin-top: 5rem;
 }
 
@@ -167,9 +235,9 @@ small {
   font-size: 0.8125rem;
 }
 
-/* Text selection — teal slab everywhere. */
+/* Text selection — purple slab everywhere. */
 ::selection {
-  background: #2C4A4A;
+  background: #5B3FD1;
   color: #fff;
 }
 
@@ -179,15 +247,15 @@ kbd {
   font-size: 0.75rem;
   color: var(--ink);
   background: var(--paper-2);
-  border: 1px solid var(--line);
+  border: 1px solid var(--ring);
   border-bottom-width: 2px;
-  border-radius: 0;
+  border-radius: 6px;
   padding: 1px 6px;
   white-space: nowrap;
 }
 mark {
-  background: var(--red-wash);
-  color: var(--red);
+  background: #FFF3BF;
+  color: var(--ink);
   padding: 0 2px;
 }
 
@@ -223,184 +291,212 @@ figcaption {
   padding: 0 clamp(18px, 4vw, 44px);
 }
 
-/* ---- Slate shell (d1): sticky rail + single-column main ----
-   Rail keeps fixed Slate-dark paint in BOTH modes so the mock
-   matches on first paint; main column follows theme vars. */
+/* ---- Dock shell: menu bar + centered window + bottom dock ---- */
 .s {
-  display: grid;
-  grid-template-columns: 272px minmax(0, 1fr);
-  background: var(--paper);
-  color: var(--ink);
-}
-.r {
-  position: sticky;
-  top: 0;
-  align-self: start;
+  position: relative;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding: 40px 24px;
-  box-sizing: border-box;
-  background: #1A1F27;
-  border-right: 1px solid #333D4A;
-  color: #E9EDF2;
+  background: var(--paper);
+  color: var(--ink);
 }
-.avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
+/* Menu bar. */
+.mb {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 6px 24px;
+  background: #E6E3F7;
+  font-size: 15px;
+}
+.mb b {
+  font-weight: 700;
+}
+.mb-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Theme toggle: moon in light, sun in dark. */
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--ink);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.theme-btn:hover {
+  background: var(--fill-hover);
+}
+.theme-btn .sun-icon {
+  display: none;
+}
+html.dark-mode .theme-btn .moon-icon {
+  display: none;
+}
+html.dark-mode .theme-btn .sun-icon {
   display: block;
-  border: 2px solid #5EC4B6;
-  background: #262D38;
 }
 .av {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: #B4BFCC;
+  gap: 8px;
 }
 .av i {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #4ADE80;
+  background: var(--av, #22C55E);
+  box-shadow: 0 0 6px var(--av-glow, rgba(34, 197, 94, .55));
   flex-shrink: 0;
 }
-.slate-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.slate-nav a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 14px;
-  border-left: 3px solid transparent;
-  color: #B4BFCC;
-  font-weight: 500;
-}
-.slate-nav a:hover {
-  color: #fff;
-  background: #262D38;
-}
-.slate-nav a.on {
-  border-left-color: #5EC4B6;
-  color: #fff;
-  background: #262D38;
-  font-weight: 600;
-}
-.so {
-  display: flex;
-  gap: 4px;
-  margin-top: auto;
-}
-.so a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  color: #B4BFCC;
-  border-bottom: none;
-}
-.so a:hover {
-  background: #262D38;
-  color: #5EC4B6;
-}
-.s-main {
+/* Centered column. Bottom air lets the last rows scroll clear of the
+   sticky dock instead of sliding under it. */
+.wd {
+  flex: 1;
+  width: 100%;
+  max-width: 920px;
+  margin: 32px auto 0;
+  padding: 0 16px 120px;
+  box-sizing: border-box;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
-.s-main > main {
-  flex: 1;
+/* The window. */
+.win {
+  border-radius: 12px;
+  background: var(--paper-2);
+  box-shadow: 0 24px 60px #2a1f6a38, 0 0 0 1px #2a1f6a18;
+  overflow: hidden;
 }
-/* Slate content column: 800px + 56px gutters (mock `main`). */
-.s-main .wrap,
-.s-main .container {
-  max-width: 800px;
-  margin: 0;
-  padding: 0 56px;
-  box-sizing: border-box;
+/* Traffic-light title bar. */
+.tb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--fill);
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
 }
-.s-main section,
-.s-main .section {
-  padding: 64px 0;
-  border-top: 1px solid var(--line);
+.tb .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FF6058;
+  flex-shrink: 0;
 }
-.s-main section.hero,
-.s-main section:first-child {
-  border-top: none;
+.tb .dot + .dot {
+  background: #FFC130;
 }
-/* Slate hero buttons — fixed paint in both modes (mock values). */
+.tb .dot + .dot + .dot {
+  background: #27CA40;
+}
+.tb span:last-child {
+  margin-left: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.bdy {
+  padding: 40px 48px 48px;
+  min-height: 560px;
+}
+.bdy h1 {
+  margin: 0 0 12px;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+/* Standfirst under each h1. */
+.in {
+  max-width: 560px;
+  margin: 0 0 28px;
+  font-size: 19px;
+  color: var(--ink-2);
+}
+.in a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* Action buttons. */
 .b {
   display: inline-flex;
   align-items: center;
   min-height: 48px;
-  padding: 0 24px;
+  padding: 0 22px;
   margin: 0 8px 8px 0;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   border-bottom: none;
+  cursor: pointer;
 }
 .b1 {
-  background: #5EC4B6;
-  color: #0C2B27;
+  background: var(--teal);
+  color: #fff;
 }
 .b1:hover {
-  background: #86D8CC;
-  color: #0C2B27;
+  background: var(--red);
+  color: #fff;
 }
 .b2 {
-  border: 1px solid #4A5667;
-  color: inherit;
+  border: 1px solid var(--ring);
+  color: var(--ink);
 }
 .b2:hover {
-  border-color: currentColor;
-  color: inherit;
+  border-color: var(--ink);
+  color: var(--ink);
 }
-.hero-cta {
-  margin-top: 32px;
-}
-/* Slate contact row (d1 `.k`): homepage Get-in-touch + any sibling links.
-   Same bordered-slab voice as .b2 so the section reads as one family. */
+/* Chip links (socials, contact, row links). */
 .k {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 20px;
 }
 .k a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid #4A5667;
-  border-radius: 8px;
-  font-weight: 600;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--fill);
+  font-weight: 500;
 }
 .k a:hover {
-  border-color: #5EC4B6;
-  color: #5EC4B6;
+  background: var(--fill-hover);
+  color: var(--red);
 }
-/* Slate entry rows (d1 `.e`): experience / projects / certifications.
-   Data loops, pagination hooks, and <details> expanders are unchanged —
-   only the row-box presentation is Slate. */
+.k a.solid {
+  background: var(--teal);
+  color: #fff;
+}
+.k a.solid:hover {
+  background: var(--red);
+  color: #fff;
+}
+/* Entry rows: hairline top rules, display titles, muted meta. */
 .e {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 4px 24px;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--hair);
-}
-.e:first-child {
+  padding: 20px 0;
   border-top: 1px solid var(--line);
 }
 .e > div:first-child {
@@ -437,21 +533,25 @@ figcaption {
 .e details {
   margin-top: 8px;
 }
-.d,
+/* Side dates: quiet, no chip box. */
+.d {
+  white-space: nowrap;
+  align-self: flex-start;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  padding-top: 2px;
+}
+/* Certification meta chips: pale pills, wrapping whole. */
 .chip {
   white-space: nowrap;
   align-self: flex-start;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #5EC4B6;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--code);
+  background: var(--fill-2);
+  border-radius: 6px;
+  padding: 2px 10px;
 }
-/* Certification meta chips: issuer / expiry / credential ID share the
-   date-chip voice, wrapping as whole chips on narrow screens. */
 .m.cert-meta {
   display: flex;
   flex-wrap: wrap;
@@ -459,73 +559,57 @@ figcaption {
   margin-top: 8px;
   max-width: none;
 }
-/* Slate tag pills (d1 `.tg`): fixed paint in both modes. */
+/* Tag pills. */
 .tg {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
-/* Slate hero type: single-line display name, 40–64px. */
-.s-main .name-lat {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(40px, 5.4vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-transform: none;
+/* The dock: frosted, sticky, icon + label pills. */
+.dk {
+  position: sticky;
+  bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  margin: 24px auto 16px;
+  padding: 8px;
+  border-radius: 20px;
+  background: #ffffffd9;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px #2a1f6a30;
+  z-index: 100;
+}
+.dk a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 72px;
+  min-height: 44px;
+  justify-content: center;
+  padding: 8px 6px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.dk a:hover {
+  background: var(--fill-2);
   color: var(--ink);
 }
-.s-main .hero {
-  padding: 112px 0 88px;
-  border-bottom: none;
+.dk a.on {
+  background: var(--teal);
+  color: #fff;
 }
-.s-main .hero .wrap {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.s-main .hero p {
-  max-width: 560px;
-  font-size: 20px;
-}
-/* Slate section heads: 28px semibold (mock `h2`). Inner pages use h1
-   titles — same size. */
-.s-main h1.page-title,
-.s-main .shead h2,
-.s-main h2.page-title,
-.s-main .sc h2 {
-  font-size: 28px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-/* Slate section header with a view-all link (home highlights). */
-.sec-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px 24px;
-  margin-bottom: 32px;
-}
-.sec-head h2 {
-  margin: 0;
-}
-.sec-head a {
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ink-2);
-}
-.sec-head a:hover {
-  color: #5EC4B6;
-}
-/* Slate uses grid (mock `.u`). */
-.u {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-}
-/* Slate rail/social stroke icons. */
+/* Dock/rail stroke icons. */
 svg.i {
   width: 20px;
   height: 20px;
@@ -536,21 +620,20 @@ svg.i {
   stroke-linejoin: round;
 }
 /* Linktree glyph is fill-based (brand path), not a stroke icon. */
-.so svg.lt {
+.so svg.lt,
+.k svg.lt {
   fill: currentColor;
   stroke: none;
 }
-@media (max-width: 820px) {
-  .s {
-    grid-template-columns: 1fr;
+@media (max-width: 640px) {
+  .bdy {
+    padding: 28px 20px 32px;
   }
-  .r {
-    position: static;
-    min-height: 0;
+  .wd {
+    margin-top: 16px;
   }
-  .s-main .wrap,
-  .s-main .container {
-    padding: 0 24px;
+  .dk a {
+    min-width: 60px;
   }
 }
 
@@ -559,45 +642,16 @@ main {
 }
 
 section {
-  padding: clamp(32px, 5vw, 60px) 0;
+  padding: 0;
 }
 .section {
-  padding-top: clamp(22px, 4vw, 38px);
-  padding-bottom: clamp(32px, 5vw, 60px);
+  padding: 0;
 }
-/* Below-fold sections skip rendering until near the viewport (render
-   cost optimization). `auto` remembers real size so the scrollbar
-   doesn't jump; content stays findable (unlike `hidden`). */
-.s-main section:not(.hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 640px;
-}
+/* NOTE: below-fold sections deliberately avoid content-visibility —
+   the intrinsic-size estimate snapped short pages on first paint
+   (a CLS hit outweighing the render saving on these small pages). */
 
-/* ---- section heads (Slate: plain 28px headings) ---- */
-.shead {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  gap: 18px;
-  margin: 0 0 26px;
-}
-.page-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  letter-spacing: -0.025em;
-  line-height: 0.98;
-  color: var(--ink);
-  margin: 0;
-}
-
-.page-sub {
-  color: var(--ink-2);
-  max-width: 62ch;
-  margin-bottom: 1.75rem;
-}
-
+/* ---- back link (post/tag footers) ---- */
 .back-link {
   margin-bottom: 1.5rem;
 }
@@ -613,25 +667,6 @@ section {
   border-bottom-color: var(--red);
 }
 
-/* ---- hero (Slate: type + CTA only) ---- */
-.hero {
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  padding: 0;
-}
-.nameplate {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.role {
-  margin: 0.7em 0 0;
-  font-size: clamp(1rem, 1.7vw, 1.22rem);
-  font-weight: 400;
-  color: var(--ink-2);
-  max-width: 32ch;
-}
 .resume-button {
   display: inline-flex;
   align-items: center;
@@ -643,26 +678,25 @@ section {
   font-family: var(--font-sans);
   color: var(--ink);
   background: transparent;
-  border: 1px solid #4A5667;
-  border-radius: 8px;
+  border: 1px solid var(--ring);
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
 }
-/* Slate slab hover (teal edge + wash) for the reload button. */
 .resume-button:hover {
-  color: #5EC4B6;
-  border-color: #5EC4B6;
-  background: rgba(94, 196, 182, .08);
+  color: var(--red);
+  border-color: var(--red);
+  background: var(--fill);
 }
-/* Shared "raised paper" hover for filter chips and controls */
+/* Shared hover for filter chips and controls */
 .quick-tags .filter-tag:hover,
 .tag-dropdown-trigger.filter-btn:hover,
 .active-filter-tag:hover,
 .pagination-btn:hover,
 .share-btn:hover {
-  color: var(--ink);
-  border-color: var(--brass);
-  background: var(--paper-2);
+  color: var(--red);
+  border-color: var(--teal);
+  background: var(--fill);
 }
 
 .tech-tags,
@@ -676,21 +710,19 @@ section {
   display: inline-block;
   max-width: 100%;
   overflow-wrap: anywhere;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--ink-2);
-  background: #1A1F27;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 4px 10px;
+  color: var(--code);
+  background: var(--fill-2);
+  border-radius: 6px;
+  padding: 2px 10px;
   font-family: var(--font-sans);
   text-decoration: none;
-  transition: color var(--t-base), border-color var(--t-base);
+  transition: color var(--t-base), background-color var(--t-base);
 }
 a.tech-tag:hover {
-  color: #5EC4B6;
-  border-color: #5EC4B6;
-  background: #1A1F27;
+  color: #fff;
+  background: var(--teal);
 }
 
 .visually-hidden {
@@ -730,7 +762,7 @@ a.tech-tag:hover {
   content: "–";
   position: absolute;
   left: 0;
-  color: var(--brass);
+  color: var(--ink-2);
 }
 
 .responsibilities {
@@ -740,7 +772,7 @@ a.tech-tag:hover {
 .highlights-title {
   font-size: 13px;
   font-weight: 500;
-  color: var(--brass);
+  color: var(--ink-2);
   margin-bottom: 0.375rem;
   cursor: pointer;
   list-style: none;
@@ -774,45 +806,46 @@ a.tech-tag:hover {
 
 /* ---- blog list ---- */
 .blog-search-container {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   border: none;
   background: none;
   padding: 0;
+  max-width: 620px;
 }
 .blog-search-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: #1A1F27;
-  border: 1px solid #4A5667;
-  border-radius: 10px;
-  padding: 0 0.75rem 0 1rem;
-  min-height: 52px;
+  gap: 10px;
+  background: var(--fill);
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 0 0.65rem 0 0.9rem;
+  min-height: 46px;
 }
 .blog-search-wrapper:focus-within {
-  border-color: #5EC4B6;
-  box-shadow: 0 0 0 3px rgba(94, 196, 182, .18);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(91, 63, 209, .18);
 }
 .blog-search-icon {
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  color: #5EC4B6;
+  width: 16px;
+  height: 16px;
+  color: var(--teal);
   pointer-events: none;
 }
 .blog-search-input {
   flex: 1;
   min-width: 0;
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.9375rem;
   color: var(--ink);
   background: none;
   border: none;
   border-radius: 0;
-  padding: 0.7rem 0;
+  padding: 0.55rem 0;
   outline: none;
 }
 .blog-search-input::placeholder {
@@ -822,8 +855,8 @@ a.tech-tag:hover {
   outline: none;
   border: none;
 }
-/* The wrapper already draws a teal focus ring — suppress the global
-   amber outline here so keyboard and mouse focus show ONE ring. */
+/* The wrapper already draws a purple focus ring — suppress the global
+   outline here so keyboard and mouse focus show ONE ring. */
 .blog-search-input:focus-visible {
   outline: none;
 }
@@ -850,41 +883,44 @@ a.tech-tag:hover {
   color: var(--ink);
 }
 
-/* View tabs as a segmented control. */
+/* View tabs as a compact segmented pill control. Content-sized (not
+   stretched) so the control hugs its labels inside the narrow column. */
 .blog-view-tabs {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  background: #1A1F27;
-  border: 1px solid #333D4A;
-  border-radius: 10px;
-  padding: 4px;
+  align-self: flex-start;
+  max-width: 100%;
+  background: var(--fill);
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 3px;
 }
 .view-tab {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-height: 44px;
-  padding: 0 16px;
-  font-size: 14.5px;
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 13.5px;
   font-family: var(--font-sans);
   font-weight: 600;
   color: var(--ink-2);
   background: none;
   border: none;
-  border-radius: 7px;
+  border-radius: 999px;
   cursor: pointer;
   white-space: nowrap;
 }
 .view-tab:hover {
   color: var(--ink);
-  background: var(--paper-2);
+  background: var(--fill-hover);
 }
 .view-tab.active {
-  color: #BDEFE7;
-  background: #2C4A4A;
+  color: #fff;
+  background: var(--teal);
   font-weight: 600;
 }
 .view-tab.active .bookmark-count {
@@ -899,52 +935,58 @@ a.tech-tag:hover {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  padding: 14px 18px;
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+  background: var(--paper-2);
+  padding: 10px 12px;
 }
 .quick-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
+  /* Single line from first paint (never wraps): row height is
+     font-independent, so the fonts.ready refit in blog-list.js can only
+     change horizontal fill — never shove the grid below (CLS). Excess
+     clips instead of wrapping; hidden tags stay in the dropdown. */
+  flex-wrap: nowrap;
+  overflow: hidden;
+  gap: 6px;
   align-items: center;
 }
-/* Quick tags are pills in the segmented-control voice (7px radius,
-   teal-fill active) — deliberately distinct from the boxed pagination
-   actions below the grid. */
+/* Quick tags are ring pills with a purple-fill active state. */
 .quick-tags .filter-tag {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 38px;
   font-size: 13px;
   font-family: var(--font-sans);
-  font-weight: 500;
-  color: var(--ink-2);
+  font-weight: 600;
+  color: var(--ink);
   background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 4px 12px;
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 0 13px;
   cursor: pointer;
   white-space: nowrap;
   transition: color var(--t-base), border-color var(--t-base), background-color
     var(--t-base);
 }
 .filter-tag.active {
-  color: #BDEFE7;
-  border-color: #2C4A4A;
-  background: #2C4A4A;
+  color: #fff;
+  border-color: var(--teal);
+  background: var(--teal);
   font-weight: 600;
 }
 .tag-count {
-  color: var(--ink-2);
-  font-size: 0.7rem;
+  color: inherit;
+  font-size: 0.75rem;
+  opacity: 0.7;
 }
 .filter-tag.active .tag-count {
-  color: inherit;
+  color: #fff;
+  opacity: 1;
 }
 /* .filter-tag.weight-1..5 are still emitted by blog.vto as grouping hooks,
-   but intentionally carry no styles: the old graded opacity failed contrast
-   (flattened in 96fea69). Do not "restore" without re-checking a11y. */
+   but intentionally carry no styles: the old graded opacity failed contrast.
+   Do not "restore" without re-checking a11y. */
 .tag-dropdown {
   position: relative;
   display: inline-flex;
@@ -953,16 +995,16 @@ a.tech-tag:hover {
 .tag-dropdown-trigger.filter-btn {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 38px;
   gap: 0.25rem;
   font-size: 13px;
   font-family: var(--font-sans);
-  font-weight: 500;
-  color: var(--ink-2);
+  font-weight: 600;
+  color: var(--ink);
   background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 4px 12px;
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 0 13px;
   cursor: pointer;
   white-space: nowrap;
   transition: color var(--t-base), border-color var(--t-base), background-color
@@ -975,8 +1017,9 @@ a.tech-tag:hover {
   left: 0;
   z-index: 50;
   background: var(--paper-2);
-  border: 1px solid var(--line);
-  border-radius: 0;
+  border: 1px solid var(--ring);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px #2a1f6a30;
   min-width: 200px;
   max-width: min(320px, calc(100vw - 2rem));
   max-height: 280px;
@@ -1022,12 +1065,12 @@ a.tech-tag:hover {
 }
 .tag-dropdown-item:hover,
 .tag-dropdown-item.focused {
-  background: var(--red-wash);
+  background: var(--fill-2);
   color: var(--ink);
 }
 .tag-dropdown-item.selected {
   color: var(--red);
-  background: var(--red-wash);
+  background: var(--fill-2);
   border-inline-start: 2px solid var(--red);
   font-weight: 500;
 }
@@ -1051,7 +1094,7 @@ a.tech-tag:hover {
 }
 .active-filters-label {
   font-size: 13px;
-  color: var(--brass);
+  color: var(--ink-2);
 }
 .active-filters-tags {
   display: flex;
@@ -1064,20 +1107,20 @@ a.tech-tag:hover {
   gap: 0.375rem;
   font-size: 13px;
   font-family: var(--font-sans);
-  color: #BDEFE7;
-  background: #2C4A4A;
-  border: 1px solid #2C4A4A;
-  border-radius: 7px;
+  color: #fff;
+  background: var(--teal);
+  border: 1px solid var(--teal);
+  border-radius: 999px;
   padding: 4px 10px;
   cursor: pointer;
   font-weight: 600;
 }
 /* Filled chip keeps its fill on hover (overrides the shared
-   raised-paper hover above, which would wash it out). */
+   hover above, which would wash it out). */
 .active-filter-tag:hover {
-  color: #BDEFE7;
-  background: #2C4A4A;
-  border-color: #5EC4B6;
+  color: #fff;
+  background: var(--teal);
+  border-color: var(--red);
 }
 .active-filter-x {
   display: inline-flex;
@@ -1108,9 +1151,9 @@ a.tech-tag:hover {
   padding: 3rem 1rem;
   text-align: center;
   color: var(--ink-2);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #1A1F27;
+  border: 1px solid var(--ring);
+  border-radius: 16px;
+  background: var(--fill);
 }
 .blog-result-count {
   padding: 0.75rem 0;
@@ -1127,14 +1170,14 @@ a.tech-tag:hover {
   color: var(--red);
   background: var(--paper-2);
   border: 1px solid var(--red);
-  border-radius: 0;
+  border-radius: 6px;
   padding: 0.1rem 0.45rem;
   cursor: pointer;
   margin: 0 0.2rem;
 }
 .suggest-tag:hover {
   background: var(--red);
-  color: var(--paper);
+  color: #fff;
 }
 
 .blog-grid {
@@ -1143,6 +1186,15 @@ a.tech-tag:hover {
   gap: 0;
   margin-bottom: 1.5rem;
   border-top: 1px solid var(--line);
+}
+/* Pre-hide cards past page one so first paint already matches the
+   paginated state — the deferred list scripts would otherwise flash
+   all cards, then hide the overflow (a full-container shift on slow
+   networks). JS adds .js-paged on init and takes over with inline
+   styles in the same task (no paint between); no-JS readers are
+   restored by the <noscript> override in blog.vto / tag.vto. */
+.blog-grid:not(.js-paged) > :nth-child(n+7) {
+  display: none;
 }
 .blog-card {
   position: relative;
@@ -1155,11 +1207,11 @@ a.tech-tag:hover {
   border-bottom: 1px solid var(--hair);
   border-radius: 0;
 }
-@media (max-width: 820px) {
-  /* Tablet step-down: desktop thumb would crowd the narrowed column. */
+@media (max-width: 640px) {
+  /* Small screens: tighter thumbs for the narrowed window. */
   .blog-card-cover {
-    width: 128px;
-    height: 96px;
+    width: 96px;
+    height: 72px;
   }
 }
 .blog-card-cover {
@@ -1169,16 +1221,16 @@ a.tech-tag:hover {
   aspect-ratio: 4 / 3;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--paper-2);
+  background: var(--fill);
   border: 1px solid var(--line);
   position: relative;
 }
 .blog-card:hover .blog-card-cover,
 .blog-card:focus-within .blog-card-cover {
-  border-color: #5EC4B6;
+  border-color: var(--teal);
 }
 /* Read / bookmark state bar: a 3px rail on the card's left edge, always
-   visible as a dark track — green segment = read, amber = bookmarked,
+   visible as a pale track — purple segment = read, amber = bookmarked,
    both light up when both. Read state is painted pre-paint by the sync
    head script (no flash); saved follows the bookmark button. */
 .state-bar {
@@ -1194,7 +1246,7 @@ a.tech-tag:hover {
 .seg {
   flex: 1;
   border-radius: 2px;
-  background: #333D4A;
+  background: var(--line);
   transition: background-color 0.25s ease;
 }
 .blog-card:has(.bookmark-btn.bookmarked) .seg-saved {
@@ -1236,7 +1288,7 @@ a.tech-tag:hover {
   color: var(--ink-2);
 }
 .blog-card-meta time {
-  color: #5EC4B6;
+  color: var(--red);
   font-weight: 500;
 }
 .blog-card-excerpt {
@@ -1295,6 +1347,11 @@ a.tech-tag:hover {
   gap: 8px;
   margin-top: 1.25rem;
 }
+/* Empty until the deferred scripts render buttons — collapse so the
+   container doesn't reserve (then release) margin. */
+.pagination:empty {
+  display: none;
+}
 /* Pagination items are boxed 44px actions (WCAG 2.2 AA touch size),
    visually distinct from the pill tags the JS also puts on them. */
 .pagination-btn,
@@ -1308,24 +1365,25 @@ button.pagination-btn {
   text-decoration: none;
   font-size: 13px;
   font-family: var(--font-sans);
-  border: 1px solid #4A5667;
+  font-weight: 600;
+  border: 1px solid var(--ring);
   background: transparent;
-  color: var(--ink-2);
+  color: var(--ink);
   padding: 10px 12px;
   min-width: 44px;
   min-height: 44px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 .pagination .pagination-btn:hover {
-  border-color: #5EC4B6;
-  color: #5EC4B6;
+  border-color: var(--red);
+  color: var(--red);
   background: none;
 }
 .pagination-active {
-  color: #BDEFE7 !important;
-  border-color: #5EC4B6 !important;
-  background: #2C4A4A !important;
+  color: #fff !important;
+  border-color: var(--teal) !important;
+  background: var(--teal) !important;
   font-weight: 600;
 }
 
@@ -1334,7 +1392,7 @@ button.pagination-btn {
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--red);
+  background: var(--teal);
   z-index: 300;
   width: 0;
 }
@@ -1343,21 +1401,6 @@ button.pagination-btn {
   max-width: min(100%, 740px);
   margin-inline: auto;
 }
-.blog-cover {
-  margin: 0 0 2rem;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  /* Reserve space so the loading cover doesn't shift the article (CLS) */
-  aspect-ratio: 16 / 9;
-  background: var(--paper-2);
-}
-.blog-cover img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
 .blog-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
@@ -1365,10 +1408,10 @@ button.pagination-btn {
 }
 .blog-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   color: var(--ink);
   margin-bottom: 1.25rem;
   text-wrap: balance;
@@ -1385,8 +1428,8 @@ button.pagination-btn {
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  border: 2px solid #5EC4B6;
-  background: var(--paper-2);
+  border: 2px solid var(--teal);
+  background: var(--fill);
 }
 .byline-name {
   font-size: 0.9375rem;
@@ -1403,7 +1446,7 @@ button.pagination-btn {
   margin-bottom: 0;
 }
 .blog-meta time {
-  color: #5EC4B6;
+  color: var(--red);
   font-weight: 500;
 }
 .blog-tags {
@@ -1421,8 +1464,8 @@ button.pagination-btn {
   margin-top: 2.5rem;
   padding: 1.25rem;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #1A1F27;
+  border-radius: 12px;
+  background: var(--fill);
 }
 .author-avatar {
   width: 64px;
@@ -1430,7 +1473,7 @@ button.pagination-btn {
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  border: 2px solid #5EC4B6;
+  border: 2px solid var(--teal);
   background: var(--paper-2);
 }
 .author-name {
@@ -1447,10 +1490,10 @@ button.pagination-btn {
 .author-card a {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #5EC4B6;
+  color: var(--red);
 }
 
-/* Social share — labeled Slate slabs, top and bottom share one voice. */
+/* Social share — ring pills, top and bottom share one voice. */
 .social-share {
   display: flex;
   align-items: center;
@@ -1473,8 +1516,8 @@ button.pagination-btn {
   font-family: var(--font-sans);
   line-height: 1;
   background: none;
-  border: 1px solid #4A5667;
-  border-radius: 10px;
+  border: 1px solid var(--ring);
+  border-radius: 999px;
   color: var(--ink);
   cursor: pointer;
 }
@@ -1483,13 +1526,13 @@ button.pagination-btn {
   height: 16px;
 }
 .share-btn:hover {
-  border-color: #5EC4B6;
-  color: #5EC4B6;
-  background: rgba(94, 196, 182, .08);
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--fill);
 }
 .share-btn.copied {
-  color: var(--teal);
-  border-color: var(--teal);
+  color: var(--red);
+  border-color: var(--red);
 }
 .social-share-bottom {
   margin-top: 2.5rem;
@@ -1505,14 +1548,16 @@ button.pagination-btn {
   font-size: 14px;
 }
 
-/* ---- footer (slim colophon; nav + contact live in the rail) ---- */
+/* ---- footer (slim colophon inside the window) ---- */
 footer {
   border-top: 1px solid var(--line);
-  padding: 32px 0 40px;
+  margin-top: 2.5rem;
+  padding: 20px 0 8px;
 }
 .colophon {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   gap: 18px;
   flex-wrap: wrap;
   font-size: 13px;
@@ -1527,10 +1572,12 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #1A1F27;
-  border: 1px solid #5EC4B6;
+  background: #ffffffd9;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--teal);
   border-radius: 50%;
-  color: #5EC4B6;
+  color: var(--teal);
   cursor: pointer;
   padding: 0;
   line-height: 0;
@@ -1538,9 +1585,9 @@ footer {
     var(--t-base);
 }
 .floating-btn:hover {
-  background: #5EC4B6;
-  color: #0C2B27;
-  border-color: #5EC4B6;
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
 }
 .floating-btn svg {
   width: 20px;
@@ -1563,32 +1610,6 @@ footer {
 .back-to-top.scrolling {
   transform: translateY(0) scale(0.92);
   opacity: 0.7;
-}
-
-/* ---- fluid scroll reveals: opacity + transform only (compositor
-   thread, zero layout/main-thread cost, CLS-exempt). No JS.
-   Unsupported browsers simply get static content — nothing hides. ---- */
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    /* Homepage sections only: article/project `.section` wrappers are
-       far too tall — a cover-range fade would sit half-transparent
-       through most of the scroll and read as a dimmed page. */
-    main > section:not(.hero):not(.section) {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 25%;
-    }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

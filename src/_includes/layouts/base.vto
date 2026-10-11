@@ -11,8 +11,19 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#1A1F27">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#C9C4EC">
+  <meta name="color-scheme" content="light">
+  <!-- Avatar is the LCP image only on the links page: preload it there so
+       it doesn't wait for body discovery. Scoped to /links/ on purpose —
+       every other page would log "preloaded but not used". Post bylines
+       are loading="lazy", so they need no preload. imagesrcset (not href)
+       is required: the avatar is served via <picture>/<source srcset>,
+       and Chrome only matches srcset-driven fetches against imagesrcset. -->
+  {{ if url === "/links/" }}<link rel="preload" as="image" imagesrcset="/profile/profile.avif" type="image/avif" fetchpriority="high">{{ /if }}
+  <!-- Type is the LCP element (window title + h1): preload the single
+       vendored Onest variable face so first paint already uses it.
+       Same-origin, so CSP font-src 'self' covers it. -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/onest-latin.woff2" fetchpriority="high">
   <!-- Cross-document view transitions (Chrome/Edge 126+, Safari 18+):
        same-origin MPA navigations crossfade instead of flashing white,
        which is the main source of perceived delay on fast static pages. -->
@@ -107,7 +118,7 @@
   <!-- Styles (inlined for performance; blog/pages CSS only where used
        to keep non-blog HTML small for FCP/LCP) -->
   <link rel="stylesheet" href="/styles/main.css" inline>
-  {{ if type === "post" || url.startsWith("/blog") || url === "/uses/" || url === "/404.html" }}
+  {{ if type === "post" || url.startsWith("/blog") || url === "/uses/" || url === "/links/" || url === "/404.html" }}
   <link rel="stylesheet" href="/styles/blog.css" inline>
   <link rel="stylesheet" href="/styles/pages.css" inline>
   {{ /if }}
@@ -143,45 +154,60 @@
   </div>
   {{ /if }}
 
-  <!-- Slate shell: sticky sidebar + single-column main.
-       Nav + social render server-side from site data (no client JS,
-       no React runtime). Active link uses aria-current + .on. -->
+  <!-- Dock shell: menu bar + centered window + bottom dock.
+       The title bar names the page; content keeps its own h1s.
+       Nav renders server-side (no client JS); active link uses
+       aria-current + .on, repainted by spa-nav.js after each swap.
+       winTitle is synced the same way. -->
+  {{ if word }}
+  {{ set wt = word }}
+  {{ else if tag }}
+  {{ set wt = tag }}
+  {{ else if url === "/" }}
+  {{ set wt = "Home" }}
+  {{ else if url.startsWith("/experience") }}
+  {{ set wt = "Experience" }}
+  {{ else if url.startsWith("/projects") }}
+  {{ set wt = "Projects" }}
+  {{ else if url.startsWith("/certifications") }}
+  {{ set wt = "Certifications" }}
+  {{ else if url.startsWith("/blog") }}
+  {{ set wt = "Blog" }}
+  {{ else if url.startsWith("/uses") }}
+  {{ set wt = "Uses" }}
+  {{ else if url.startsWith("/links") }}
+  {{ set wt = "Links" }}
+  {{ else }}
+  {{ set wt = "Not found" }}
+  {{ /if }}
   <div class="s">
-    <aside class="r">
-      <img class="avatar" src="/profile/profile.jpg" alt="Marwan Ayman Shawky" width="192" height="196" fetchpriority="high" decoding="async">
-      <div class="av"><i aria-hidden="true"></i>Open to work</div>
-      <nav class="slate-nav" aria-label="Primary">
+    <div class="mb"><b>Marwan Ayman Shawky</b><div class="mb-right">{{ if site.availability === "selective" }}{{ set avLabel = "Selectively Available" }}{{ set avColor = "#EAB308" }}{{ set avGlow = "rgba(234, 179, 8, .55)" }}{{ else if site.availability === "unavailable" }}{{ set avLabel = "Unavailable" }}{{ set avColor = "#EF4444" }}{{ set avGlow = "rgba(239, 68, 68, .55)" }}{{ else }}{{ set avLabel = "Open to Work" }}{{ set avColor = "#22C55E" }}{{ set avGlow = "rgba(34, 197, 94, .55)" }}{{ /if }}<div class="av"><i aria-hidden="true" style="--av: {{ avColor }}; --av-glow: {{ avGlow }}"></i>{{ avLabel }}</div><button id="themeToggle" class="theme-btn" aria-label="Switch to dark mode" aria-pressed="false">{{ comp.icon({ name: "moon", size: 18 }) }}{{ comp.icon({ name: "sun", size: 18 }) }}</button></div></div>
+    <div class="wd">
+      <div class="win">
+        <div class="tb"><span class="dot" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span><span id="winTitle">{{ wt }}</span></div>
+        <div class="bdy">
+          <!-- Main Content -->
+          <main id="main-content" tabindex="-1">
+            {{ content }}
+          </main>
+
+          <!-- Footer (slim colophon inside the window) -->
+          <footer>
+            <div class="colophon">
+              <span>© <span id="year"></span> {{ site.author }} — Built with Deno &amp; Lume.</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <nav class="dk" aria-label="Primary">
         {{ for item of site.navigation }}
         {{ if item.href === "/" }}
-        <a href="/" {{ if url === "/" }}class="on" aria-current="page"{{ /if }}>Home</a>
+        <a href="/" {{ if url === "/" }}class="on" aria-current="page"{{ /if }}>{{ comp.icon({ name: item.icon }) }}Home</a>
         {{ else }}
-        <a href="{{ item.href }}" {{ if url.startsWith(item.href) }}class="on" aria-current="page"{{ /if }}>{{ item.label }}</a>
+        <a href="{{ item.href }}" {{ if url.startsWith(item.href) }}class="on" aria-current="page"{{ /if }}>{{ comp.icon({ name: item.icon }) }}{{ item.label }}</a>
         {{ /if }}
         {{ /for }}
       </nav>
-      <div class="so">
-        <a href="https://github.com/maroayman" aria-label="GitHub">{{ comp.icon({ name: "rail-github" }) }}</a>
-        <a href="https://linkedin.com/in/maroayman" aria-label="LinkedIn">{{ comp.icon({ name: "rail-linkedin" }) }}</a>
-        <a href="https://gitlab.com/maroayman" aria-label="GitLab">{{ comp.icon({ name: "rail-gitlab" }) }}</a>
-        <a href="https://linktr.ee/maroayman" aria-label="Linktree">{{ comp.icon({ name: "rail-linktree" }) }}</a>
-        <a href="mailto:marwanayman.shawky@gmail.com" aria-label="Email">{{ comp.icon({ name: "rail-mail" }) }}</a>
-      </div>
-    </aside>
-
-    <div class="s-main">
-      <!-- Main Content -->
-      <main id="main-content" tabindex="-1">
-        {{ content }}
-      </main>
-
-      <!-- Footer (slim colophon; Elsewhere/Get in touch live in the rail) -->
-      <footer>
-        <div class="wrap">
-          <div class="colophon">
-            <span>© <span id="year"></span> {{ site.author }} — Built with Deno &amp; Lume.</span>
-          </div>
-        </div>
-      </footer>
     </div>
   </div>
 

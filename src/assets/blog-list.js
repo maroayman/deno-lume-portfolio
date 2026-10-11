@@ -28,6 +28,11 @@
 
   if (!searchInput || !cardsContainer) return;
 
+  // CSS pre-hides cards past page one (see .blog-grid rule) so first
+  // paint already matches the paginated state. Claim management here —
+  // same task as the render below, so no paint happens between.
+  cardsContainer.classList.add("js-paged");
+
   let selectedTags = [];
   let currentView = "all";
   let currentPage = 1;
@@ -597,6 +602,7 @@
       currentView = tab.dataset.view;
       paintViewTabs();
       tagFiltersBox.style.display = currentView === "all" ? "" : "none";
+      fitQuickTags();
       syncHash();
       resetPageAndRender();
     });
@@ -661,6 +667,37 @@
     }
   });
 
+  // Keep the quick-tag row on one line: "More tags" stays beside the
+  // pills, and trailing pills that don't fit are hidden instead of
+  // wrapping. Every tag remains listed in the dropdown panel, so nothing
+  // becomes unreachable. Uses an inline style (no new class) so there is
+  // nothing for PurgeCSS to strip.
+  const quickTagsRow = document.querySelector(".quick-tags");
+  function fitQuickTags() {
+    if (!quickTagsRow || !quickTagsRow.offsetParent) return;
+    quickTagsRow.style.flexWrap = "nowrap";
+    const pills = [...quickTagsRow.querySelectorAll(
+      '.filter-tag:not([data-tag="all"])',
+    )];
+    pills.forEach((pill) => pill.style.display = "");
+    let index = pills.length - 1;
+    while (
+      index >= 0 && quickTagsRow.scrollWidth > quickTagsRow.clientWidth + 1
+    ) {
+      pills[index].style.display = "none";
+      index--;
+    }
+  }
+  let fitTimer = 0;
+  globalThis.addEventListener("resize", () => {
+    globalThis.clearTimeout(fitTimer);
+    fitTimer = globalThis.setTimeout(fitQuickTags, 150);
+  });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => fitQuickTags());
+  }
+
   restoreState();
   renderCards();
+  fitQuickTags();
 })();
