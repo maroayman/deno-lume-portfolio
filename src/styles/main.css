@@ -304,19 +304,31 @@ figcaption {
 /* Menu bar. */
 .mb {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 4px 16px;
-  padding: 6px 24px;
+  gap: 10px 16px;
+  padding: 10px 24px;
   background: #E6E3F7;
-  font-size: 15px;
+  font-size: 14px;
 }
-.mb b {
+.mb-name {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
   font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mb-right {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  font-size: 0.95rem;
   gap: 12px;
 }
 /* Theme toggle: moon in light, sun in dark. */
@@ -358,6 +370,27 @@ html.dark-mode .theme-btn .sun-icon {
   background: var(--av, #22C55E);
   box-shadow: 0 0 6px var(--av-glow, rgba(34, 197, 94, .55));
   flex-shrink: 0;
+}
+@media (max-width: 680px) {
+  .mb {
+    padding: 8px 14px;
+    gap: 8px 10px;
+  }
+  .mb-name {
+    font-size: 0.95rem;
+  }
+  .mb-right {
+    gap: 8px;
+    font-size: 0.875rem;
+  }
+  .av {
+    gap: 6px;
+  }
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
 }
 /* Centered column. Bottom air lets the last rows scroll clear of the
    sticky dock instead of sliding under it. */
