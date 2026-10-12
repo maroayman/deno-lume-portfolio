@@ -46,7 +46,8 @@
 :root {
   color-scheme: light;
   /* Dock — lavender desktop, white windows, purple actions.
-     Single light theme, no dark mode. */
+     Light palette only; the dark overrides live in `html.dark-mode`
+     below, which mirrors these tokens one-for-one. */
   --paper: #C9C4EC;
   --paper-2: #FFFFFF;
   --ink: #1F1B3D;
@@ -301,10 +302,12 @@ figcaption {
   background: var(--paper);
   color: var(--ink);
 }
-/* Menu bar. */
+/* Menu bar. Never wraps: below ~386px the status cluster absorbs the
+   shortfall instead, so the name + toggle stay put (a wrapped row drops
+   to flex-start and the bar stops reading as a menu bar at all). */
 .mb {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
   gap: 4px 16px;
   padding: 6px 24px;
@@ -313,19 +316,39 @@ figcaption {
 }
 .mb b {
   font-weight: 700;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
+/* The status cluster is the elastic item: flex-shrink far above the
+   name's default 1, so when the bar runs out of room flexbox gives up
+   the label's characters rather than the person's name. The dot and
+   the toggle opt out entirely (flex-shrink: 0), so the label is the
+   only thing that ever compresses — and at 340px the label drops out
+   altogether (see the media query below). */
 .mb-right {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 1000;
+  min-width: 0;
 }
-/* Theme toggle: moon in light, sun in dark. */
+.av {
+  min-width: 0;
+}
+.av-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Theme toggle: moon in light, sun in dark. 44px = touch-target floor. */
 .theme-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   background: none;
   border: none;
@@ -350,6 +373,7 @@ html.dark-mode .theme-btn .sun-icon {
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 .av i {
   width: 8px;
@@ -626,6 +650,22 @@ svg.i {
   stroke: none;
 }
 @media (max-width: 640px) {
+  /* Menu bar: reclaim width from padding and gaps, not from the name.
+     A phone's bar has ~350px to spend and the name needs ~164 of it at
+     14px; the old 13px step below existed only because the gaps here
+     were left generous. Spending those instead keeps the name at the
+     same size as the status text beside it. */
+  .mb {
+    padding: 6px 14px;
+    gap: 4px 10px;
+    font-size: 14px;
+  }
+  .mb-right {
+    gap: 6px;
+  }
+  .av {
+    gap: 6px;
+  }
   .bdy {
     padding: 28px 20px 32px;
   }
@@ -634,6 +674,17 @@ svg.i {
   }
   .dk a {
     min-width: 60px;
+  }
+}
+/* 320px class (iPhone SE 1st gen, Fold cover screens). Below this the
+   status label and the full name can't both hold at a readable size, so
+   the label goes and the coloured dot carries the status — the name is
+   what the bar exists to show. The dot's colour is the only signal for
+   sighted users either way, and `role="img"` + aria-label on .av
+   (base.vto) keeps the text for screen readers. */
+@media (max-width: 340px) {
+  .av-label {
+    display: none;
   }
 }
 
@@ -951,6 +1002,15 @@ a.tech-tag:hover {
   gap: 6px;
   align-items: center;
 }
+/* Sticky pinning only; the trigger's backdrop and fade mask live with
+   its own block further down (they need to beat `.tag-dropdown-trigger
+   .filter-btn` on source order to win the background). */
+.quick-tags .tag-dropdown {
+  position: sticky;
+  right: 0;
+  flex-shrink: 0;
+  z-index: 1;
+}
 /* The dropdown panel is absolutely positioned (no row-height effect),
    so it must escape the clip above when open. `.open` is PurgeCSS-
    safelisted, which keeps this complex selector in the output. */
@@ -1015,6 +1075,31 @@ a.tech-tag:hover {
   white-space: nowrap;
   transition: color var(--t-base), border-color var(--t-base), background-color
     var(--t-base);
+}
+/* The trigger is the only route to the tags that don't fit on one line,
+   so `.quick-tags { overflow: hidden }` must never be what makes it
+   unreachable — and blog-list.js can't guarantee that, since its first
+   fit waits on document.fonts.ready, so a cold load can paint the
+   fallback-font row, clipped, for as long as the font fetch takes. The
+   opaque backdrop and fade mask the surplus pills sliding underneath
+   (which is all they are: surplus, since the dropdown still lists
+   every tag). Placed after the trigger's own block so it wins on source
+   order and can override its `background: transparent`. */
+.tag-dropdown-trigger.filter-btn {
+  background: var(--paper-2);
+}
+.tag-dropdown::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  /* 24px until blog-list.js has confirmed the row fits, then 0 — a
+     permanent mask would nibble the border of the last fitted pill
+     even with nothing underneath it. */
+  width: var(--quick-tags-mask, 24px);
+  background: linear-gradient(to left, var(--paper-2) 62%, transparent);
+  pointer-events: none;
 }
 .tag-dropdown-panel {
   display: none;

@@ -667,15 +667,15 @@
     }
   });
 
-  // Keep the quick-tag row on one line: "More tags" stays beside the
-  // pills, and trailing pills that don't fit are hidden instead of
-  // wrapping. Every tag remains listed in the dropdown panel, so nothing
-  // becomes unreachable. Uses an inline style (no new class) so there is
-  // nothing for PurgeCSS to strip.
+  // Keep the quick-tag row tidy: "More tags" stays beside the pills and
+  // trailing pills that don't fit are hidden instead of overlapping it.
+  // This is a polish pass, not a correctness one — `.tag-dropdown` is
+  // sticky in CSS, so the trigger stays reachable even before this runs.
+  // Every tag remains listed in the dropdown panel regardless. Uses an
+  // inline style (no new class) so there is nothing for PurgeCSS to strip.
   const quickTagsRow = document.querySelector(".quick-tags");
   function fitQuickTags() {
     if (!quickTagsRow || !quickTagsRow.offsetParent) return;
-    quickTagsRow.style.flexWrap = "nowrap";
     const pills = [...quickTagsRow.querySelectorAll(
       '.filter-tag:not([data-tag="all"])',
     )];
@@ -687,6 +687,13 @@
       pills[index].style.display = "none";
       index--;
     }
+    // Collapse the trigger's fade mask once the row fits: it's there to
+    // hide surplus pills sliding underneath, and with nothing underneath
+    // it would only clip the last visible pill's border.
+    quickTagsRow.style.setProperty(
+      "--quick-tags-mask",
+      quickTagsRow.scrollWidth > quickTagsRow.clientWidth + 1 ? "24px" : "0px",
+    );
   }
   let fitTimer = 0;
   globalThis.addEventListener("resize", () => {
