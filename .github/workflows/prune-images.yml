@@ -19,6 +19,7 @@ on:
 
 jobs:
   prune:
+    if: false # Disabled
     runs-on: ubuntu-latest
     permissions:
       packages: write
